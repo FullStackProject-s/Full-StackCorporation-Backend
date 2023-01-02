@@ -3,3 +3,4 @@ envCorporation
 __pycache__
 migrations
 .env
+.envDeveloper
