@@ -1,0 +1,11 @@
+services:
+ postgres:
+    container_name: postgresCorporation
+    image: postgres:latest
+    restart: on-failure
+    ports:
+      - 5431:5432
+    env_file:
+      - ./core/.envDeveloper
+    volumes:
+      - /usr/app/:/var/lib/postgresql/data
