@@ -1,17 +1,22 @@
 from django.db import models
 
-# Create your models here.
+
 class Team(models.Model):
     team_name = models.CharField(
         max_length=200,
         unique=True
     )
     team_lead = models.ForeignKey(
-        Developer,
-        on_delete=models.CASCADE
+        'employee.Developer',
+        on_delete=models.CASCADE,
+        related_name='team_lead'
     )
     project_manager = models.ForeignKey(
-        ProjectManager,
-        on_delete=models.CASCADE
+        'employee.ProjectManager',
+        on_delete=models.CASCADE,
+        related_name='project_manager'
     )
-    developers = models.ManyToManyField(Developer)
+    developers = models.ManyToManyField(
+        'employee.Developer',
+        related_name='developers'
+    )
