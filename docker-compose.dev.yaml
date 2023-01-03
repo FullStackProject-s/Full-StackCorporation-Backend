@@ -7,5 +7,3 @@ services:
       - 5431:5432
     env_file:
       - ./core/.envDeveloper
-    volumes:
-      - /usr/app/:/var/lib/postgresql/data
