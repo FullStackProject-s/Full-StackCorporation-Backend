@@ -1,3 +1,5 @@
+from drf_spectacular.utils import extend_schema, extend_schema_view
+
 from user.models.profile import Profile
 from rest_framework import generics
 from user.serializers.profile import ProfileSerializer

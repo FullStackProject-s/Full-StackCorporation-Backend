@@ -7,12 +7,6 @@ class BaseEmployeeMixin(models.Model):
         Profile,
         on_delete=models.CASCADE
     )
-    team = models.ForeignKey(
-        'project.Team',
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True
-    )
 
     class Meta:
         abstract = True
