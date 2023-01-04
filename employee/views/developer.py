@@ -1,10 +1,15 @@
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
-from employee.models.employees import Developer
+
+from employee.models import (
+    Developer,
+    Technologies
+)
 from employee.serializers.developer import (
     DeveloperSerializer,
-    DeveloperSerializerChangeTeam
+    DeveloperChangeTeamSerializer,
+    DeveloperAddStackTechnologiesSerializer
 )
 from project.models.team import Team
 
@@ -34,11 +39,13 @@ class DeveloperUpdateAPIView(generics.UpdateAPIView):
 
 
 class DeveloperChangeTeamAPIView(generics.UpdateAPIView):
-    serializer_class = DeveloperSerializerChangeTeam
+    serializer_class = DeveloperChangeTeamSerializer
     queryset = Developer.objects.all()
 
-    def update(self, request, *args, **kwargs):
-        dev = Developer.objects.get(pk=kwargs.pop('pk'))
+    def post(self, request, *args, **kwargs):
+
+        dev = self.get_object()
+
         if x := Team.objects.filter(team_name=request.data['team']):
             dev.team = x.first()
             dev.save()
@@ -46,9 +53,64 @@ class DeveloperChangeTeamAPIView(generics.UpdateAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
+        if request.data['team'] == '':
+            dev.team = None
+            dev.save()
+            return Response(
+                {
+                    "message": "Team from this developer NULL."
+                },
+                status=status.HTTP_200_OK
+            )
         return Response(
-            {"error": "This team name is invalid"},
-            status=status.HTTP_400_BAD_REQUEST
+            {
+                "error": "This team name is invalid"
+            },
+            status=status.HTTP_404_NOT_FOUND
         )
-#
-# class DeveloperUpdate
+
+
+class DeveloperAddStackTechnologies(generics.GenericAPIView):
+    serializer_class = DeveloperAddStackTechnologiesSerializer
+
+    def post(self, request, *args, **kwargs):
+        dev = self.get_object()
+
+        tech = Technologies.objects.filter(
+            technology_name=request.data['technology_name']
+        )
+        if tech:
+            dev.append_technologies([tech.first()])
+            return Response(
+                DeveloperSerializer(dev).data,
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            {
+                "error": "This tech is invalid"
+            },
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+
+class DeveloperRemoveTechnologies(generics.GenericAPIView):
+    serializer_class = DeveloperAddStackTechnologiesSerializer
+
+    def post(self, request, *args, **kwargs):
+        dev = self.get_object()
+
+        tech = Technologies.objects.filter(
+            technology_name=request.data['technology_name']
+        )
+        if tech:
+            dev.remove_technologies(tech.first())
+            return Response(
+                DeveloperSerializer(dev).data,
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            {
+                "error": "This tech is invalid"
+            },
+            status=status.HTTP_404_NOT_FOUND
+        )

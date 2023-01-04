@@ -61,9 +61,17 @@ class DeveloperSerializer(
 
 
 @developer_change_team
-class DeveloperSerializerChangeTeam(serializers.ModelSerializer):
+class DeveloperChangeTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Developer
         fields = (
             'team',
+        )
+
+
+class DeveloperAddStackTechnologiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Technologies
+        fields = (
+            'technology_name',
         )

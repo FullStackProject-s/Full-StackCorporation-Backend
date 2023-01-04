@@ -26,6 +26,10 @@ class Developer(BaseEmployeeMixin):
         self.stack.add(*tech_list)
         self.save()
 
+    def remove_technologies(self, tech):
+        self.stack.remove(tech)
+        self.save()
+
     def __str__(self):
         return f'{self.specialty} - {self.profile.user} - {self.pk}'
 
