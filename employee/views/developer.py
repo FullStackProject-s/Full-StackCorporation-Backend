@@ -6,11 +6,12 @@ from employee.models import (
     Developer,
     Technologies
 )
-from employee.serializers.developer import (
+from employee.serializers import (
     DeveloperSerializer,
     DeveloperChangeTeamSerializer,
     DeveloperAddStackTechnologiesSerializer
 )
+from employee.views.service.developer_post import DeveloperPostNotFound
 from project.models.team import Team
 
 
@@ -62,12 +63,7 @@ class DeveloperChangeTeamAPIView(generics.UpdateAPIView):
                 },
                 status=status.HTTP_200_OK
             )
-        return Response(
-            {
-                "error": "This team name is invalid"
-            },
-            status=status.HTTP_404_NOT_FOUND
-        )
+        return DeveloperPostNotFound.not_found_response('Team not found')
 
 
 class DeveloperAddStackTechnologies(generics.GenericAPIView):
@@ -85,12 +81,7 @@ class DeveloperAddStackTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return Response(
-            {
-                "error": "This tech is invalid"
-            },
-            status=status.HTTP_404_NOT_FOUND
-        )
+        return DeveloperPostNotFound.not_found_response('Tech not found')
 
 
 class DeveloperRemoveTechnologies(generics.GenericAPIView):
@@ -108,9 +99,5 @@ class DeveloperRemoveTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return Response(
-            {
-                "error": "This tech is invalid"
-            },
-            status=status.HTTP_404_NOT_FOUND
-        )
+        return DeveloperPostNotFound.not_found_response('Tech not found')
+

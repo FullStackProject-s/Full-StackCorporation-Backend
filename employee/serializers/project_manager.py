@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from employee.models.employees import ProjectManager
+from employee.models import ProjectManager
+
 from user.serializers.profile import ProfileSerializer
 
 

@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from employee.models.technologies import Technologies
-from employee.serializers.technologies import TechnologiesSerializer
+from employee.models import Technologies
+from employee.serializers import TechnologiesSerializer
 
 
 class AllTechnologiesListAPIView(generics.ListAPIView):

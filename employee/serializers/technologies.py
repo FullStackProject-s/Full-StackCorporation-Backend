@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from employee.models.technologies import Technologies
+from employee.models import Technologies
 
 
 class TechnologiesSerializer(serializers.ModelSerializer):
