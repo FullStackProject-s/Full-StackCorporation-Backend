@@ -10,5 +10,6 @@ class ProjectManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectManager
         fields = (
+            'pk',
             'profile',
         )

@@ -12,6 +12,7 @@ class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = (
+            'pk',
             'team_name',
             'team_lead',
             'project_manager',

@@ -18,6 +18,8 @@ class ProfileSerializer(
     class Meta:
         model = Profile
         fields = (
+            'pk',
+
             'user',
             'photo_url',
             'about_user'

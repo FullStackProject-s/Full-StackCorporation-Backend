@@ -27,6 +27,7 @@ class DeveloperSerializer(
     class Meta:
         model = Developer
         fields = (
+            'pk',
             'profile',
             'specialty',
             'stack',
@@ -65,6 +66,7 @@ class DeveloperChangeTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Developer
         fields = (
+            'pk',
             'team',
         )
 
@@ -73,5 +75,6 @@ class DeveloperAddStackTechnologiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Technologies
         fields = (
+            'pk',
             'technology_name',
         )
