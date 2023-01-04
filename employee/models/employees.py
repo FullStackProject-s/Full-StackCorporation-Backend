@@ -48,4 +48,5 @@ class ProjectManager(BaseEmployeeMixin):
 
 
 class Administrator(BaseEmployeeMixin):
-    pass
+    def __str__(self):
+        return f'{self.profile.user} - {self.pk}'

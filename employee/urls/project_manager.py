@@ -17,11 +17,11 @@ urlpatterns_manager = [
          name='technology'
          ),
     path('create-manager/',
-         ProjectManagerDestroyAPIView.as_view(),
+         ProjectManagerCreateAPIView.as_view(),
          name='create-manager'
          ),
     path('delete-manager/<int:pk>/',
-         ProjectManagerCreateAPIView.as_view(),
+         ProjectManagerDestroyAPIView.as_view(),
          name='delete-manager'
          ),
     path('update-manager/<int:pk>/',
