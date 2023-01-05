@@ -5,11 +5,13 @@ from rest_framework import serializers
 
 from employee.models.employees import Developer
 from employee.models.technologies import Technologies
-from employee.serializers.mixins import ProfileUpdateSerializerMixin
-from employee.serializers.schemas.developer import developer_change_team
 from employee.serializers.technologies import TechnologiesSerializer
+from employee.serializers.mixins import (
+    ProfileUpdateSerializerMixin,
+    StaffCreateSerializerMixin
+)
+from employee.serializers.schemas.developer import developer_change_team
 
-from user.models import Permissions, CustomUser
 from user.serializers.profile import ProfileSerializer
 from user.serializers.mixins import CreateCustomUserSerializerMixin
 
@@ -17,7 +19,8 @@ from user.serializers.mixins import CreateCustomUserSerializerMixin
 class DeveloperSerializer(
     serializers.ModelSerializer,
     ProfileUpdateSerializerMixin,
-    CreateCustomUserSerializerMixin
+    CreateCustomUserSerializerMixin,
+    StaffCreateSerializerMixin
 ):
     pk = serializers.IntegerField(read_only=True)
     profile = ProfileSerializer()
@@ -44,22 +47,12 @@ class DeveloperSerializer(
 
     def create(self, validated_data):
         with transaction.atomic():
-            speciality = validated_data.pop('get_specialty_display')
-            _profile = self._create_profile(validated_data.pop('profile'))
-
-            dev = Developer.objects.create(
-                **validated_data,
-                profile=_profile,
-                specialty=speciality
+            specialty = validated_data.pop('get_specialty_display')
+            return self._staff_create(
+                validated_data,
+                'dev',
+                specialty=specialty
             )
-            permission, created_ = Permissions.objects.get_or_create(
-                role_name='dev'
-            )
-            c = CustomUser.objects.get(username=dev.profile.user.username)
-            c.staff_role = permission
-            c.save()
-            dev.profile.user.staff_role = permission
-            return dev
 
     def update(self, instance, validated_data):
         self._profile_update(instance, validated_data)

@@ -17,3 +17,4 @@ class CreateCustomUserSerializerMixin:
         _user = self._create_user(validated_data.pop('user'))
         _profile = Profile.objects.create(**validated_data, user=_user)
         return _profile
+

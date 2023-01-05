@@ -1,1 +1,2 @@
-from .updateSerializer import ProfileUpdateSerializerMixin
+from .updateSerializerMethod import ProfileUpdateSerializerMixin
+from .createSerializerMethod import StaffCreateSerializerMixin
