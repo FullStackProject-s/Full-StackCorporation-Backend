@@ -49,7 +49,7 @@ class CustomUserSerializer(
     class Meta(BaseCustomUserSerializer.Meta):
         model = User
         fields = (
-            *BaseCustomUserSerializer.fields,
+            *BaseCustomUserSerializer.Meta.fields,
             'permission'
         )
 

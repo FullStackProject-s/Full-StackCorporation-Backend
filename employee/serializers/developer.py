@@ -20,6 +20,7 @@ class DeveloperSerializer(
     serializers.ModelSerializer,
     CreateCustomUserSerializerMixin
 ):
+    pk = serializers.IntegerField(read_only=True)
     profile = ProfileSerializer()
     stack = TechnologiesSerializer(many=True, required=False)
     team = serializers.SerializerMethodField(read_only=True)
@@ -37,11 +38,13 @@ class DeveloperSerializer(
     def create(self, validated_data):
         with transaction.atomic():
             _profile = self._create_profile(validated_data.pop('profile'))
-            tech_list = []
-            for item in validated_data.pop('stack'):
-                tech_list.append(Technologies.objects.create(**item))
+            _stack = validated_data.pop('stack', None)
             dev = Developer.objects.create(**validated_data, profile=_profile)
-            dev.append_technologies(tech_list)
+            if _stack:
+                tech_list = []
+                for item in validated_data.pop('stack'):
+                    tech_list.append(Technologies.objects.create(**item))
+                dev.append_technologies(tech_list)
             return dev
 
     def update(self, instance, validated_data):

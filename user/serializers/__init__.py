@@ -1,10 +1,10 @@
-from .profile import (
-    ProfileSerializer
-)
-from .permission import (
+from user.serializers.permission import (
     PermissionSerializer
 )
-from .user import (
+from user.serializers.user import (
     CustomUserCreateSerializer,
     CustomUserSerializer
+)
+from user.serializers.profile import (
+    ProfileSerializer
 )

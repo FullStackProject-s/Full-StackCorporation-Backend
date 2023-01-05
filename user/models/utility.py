@@ -22,6 +22,7 @@ class Permissions(models.Model):
     role_name = models.CharField(
         choices=STAFF_ROLE_SET,
         max_length=200,
+        unique=True
     )
 
     def __str__(self):

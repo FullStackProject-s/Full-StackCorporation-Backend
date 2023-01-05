@@ -1,6 +1,5 @@
 from django.db import models
-from django.db.models.signals import post_save, pre_save
-from django.dispatch import receiver
+
 
 
 class Team(models.Model):
@@ -26,7 +25,6 @@ class Team(models.Model):
         'employee.Developer',
         related_name='developers',
         blank=True,
-        null=True
     )
 
     def __str__(self):
