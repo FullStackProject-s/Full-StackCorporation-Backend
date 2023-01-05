@@ -15,8 +15,10 @@ from employee.views.service.teamChangeDelete import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin
 )
-from general.services import PostResponse
-from general.schemas import (
+
+from general import (
+    ViewsSerializerValidateRequestMixin,
+    PostResponse,
     response_true_message,
     response_true_request_false_message
 )
@@ -48,16 +50,15 @@ class DeveloperUpdateAPIView(generics.UpdateAPIView):
 
 class DeveloperChangeTeamAPIView(
     generics.GenericAPIView,
-    ChangePersonalTeamViewMixin
+    ChangePersonalTeamViewMixin,
+    ViewsSerializerValidateRequestMixin
 ):
     queryset = Developer.objects.all()
     serializer_class = TeamChangeSerializer
 
     @response_true_message
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        team_name = serializer.data['team']
+        team_name = self._validate_request(request).data['team']
 
         return self._post_change_team(
             f'Team for this developer now \'{team_name}\'',
