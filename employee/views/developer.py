@@ -11,13 +11,15 @@ from employee.serializers import (
     DeveloperAddStackTechnologiesSerializer
 )
 from employee.serializers import TeamChangeSerializer
-from employee.views.service.developer_post import DeveloperPostResponse
 from employee.views.service.teamChangeDelete import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin
 )
-from general.schemas import response_only_message
-
+from general.services import PostResponse
+from general.schemas import (
+    response_true_message,
+    response_true_request_false_message
+)
 
 
 class AllDeveloperListAPIView(generics.ListAPIView):
@@ -51,11 +53,14 @@ class DeveloperChangeTeamAPIView(
     queryset = Developer.objects.all()
     serializer_class = TeamChangeSerializer
 
+    @response_true_message
     def post(self, request, *args, **kwargs):
-        self.serializer_class(data=request.data).is_valid(raise_exception=True)
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        team_name = serializer.data['team']
         return self._post_change_team(
-            request,
-            f'Team for this developer now \'{request.data["team"]}\''
+            f'Team for this developer now \'{team_name}\'',
+            team_name
         )
 
 
@@ -66,7 +71,7 @@ class DeveloperDeleteTeamAPIView(
     serializer_class = DeveloperSerializer
     queryset = Developer.objects.all()
 
-    @response_only_message
+    @response_true_request_false_message
     def post(self, request, *args, **kwargs):
         return self._post_delete_team('Team for this developer now NULL')
 
@@ -87,7 +92,7 @@ class DeveloperAddStackTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return DeveloperPostResponse.not_found_response('Tech not found')
+        return PostResponse.not_found_response('Tech not found')
 
 
 class DeveloperRemoveTechnologies(generics.GenericAPIView):
@@ -106,4 +111,4 @@ class DeveloperRemoveTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return DeveloperPostResponse.not_found_response('Tech not found')
+        return PostResponse.not_found_response('Tech not found')

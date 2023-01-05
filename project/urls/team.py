@@ -4,6 +4,7 @@ from project.views.team import (
     TeamCreateAPIView,
     TeamChangeNameAPIView,
     TeamRetrieveAPIView,
+    TeamUpdateTeamLeadAPIView
 )
 
 urlpatterns_team = [
@@ -22,5 +23,9 @@ urlpatterns_team = [
     path('change-team-name/<int:pk>/',
          TeamChangeNameAPIView.as_view(),
          name='team-change-name',
-         )
+         ),
+    path('team-update-team-lead/<int:pk>/',
+         TeamUpdateTeamLeadAPIView.as_view(),
+         name='team-update-team-lead'
+    )
 ]

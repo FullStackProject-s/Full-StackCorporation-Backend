@@ -9,7 +9,10 @@ from employee.views.service.teamChangeDelete import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin,
 )
-from general.schemas import response_only_message
+from general.schemas import (
+    response_true_message,
+    response_true_request_false_message
+)
 
 
 class AllProjectManagerListAPIView(generics.ListAPIView):
@@ -43,12 +46,14 @@ class ProjectManagerChangeTeamAPIView(
     queryset = ProjectManager.objects.all()
     serializer_class = TeamChangeSerializer
 
+    @response_true_message
     def post(self, request, *args, **kwargs):
-        self.serializer_class(data=request.data).is_valid(raise_exception=True)
-
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        team_name = serializer.data['team']
         return self._post_change_team(
-            request,
-            f'Team for this project manager now \'{request.data["team"]}\''
+            f'Team for this project manager now \'{team_name}\'',
+            team_name
         )
 
 
@@ -59,6 +64,6 @@ class ProjectManagerDeleteTeamAPIView(
     serializer_class = ProjectManagerSerializer
     queryset = ProjectManager.objects.all()
 
-    @response_only_message
+    @response_true_request_false_message
     def post(self, request, *args, **kwargs):
         return self._post_delete_team("Team for this project manager None")

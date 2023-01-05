@@ -26,3 +26,12 @@ class TeamNameSerializer(serializers.ModelSerializer):
         fields = (
             'team_name',
         )
+
+
+class TeamTeamLeadSerializer(serializers.Serializer):
+    team_lead = serializers.CharField()
+
+    class Meta:
+        fields = (
+            'team_lead'
+        )

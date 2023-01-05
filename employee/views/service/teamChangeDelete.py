@@ -1,4 +1,4 @@
-from employee.views.service.developer_post import DeveloperPostResponse
+from general.services import PostResponse
 from project.models import Team
 
 
@@ -8,19 +8,23 @@ class DeletePersonalTeamViewMixin:
         dev = self.get_object()
         dev.team = None
         dev.save()
-        return DeveloperPostResponse.response_ok({
+        return PostResponse.response_ok({
             "message": message
         })
 
 
 class ChangePersonalTeamViewMixin:
-    def _post_change_team(self, request, message):
+    def _post_change_team(
+            self,
+            message,
+            team_name
+    ):
         dev = self.get_object()
 
-        if x := Team.objects.filter(team_name=request.data['team']):
+        if x := Team.objects.filter(team_name=team_name):
             dev.team = x.first()
             dev.save()
-            return DeveloperPostResponse.response_ok({
+            return PostResponse.response_ok({
                 "message": message
             })
-        return DeveloperPostResponse.not_found_response('Team not found')
+        return PostResponse.not_found_response('Team not found')

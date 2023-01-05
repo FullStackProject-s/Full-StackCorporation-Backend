@@ -59,6 +59,5 @@ class DeveloperAddStackTechnologiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Technologies
         fields = (
-            'pk',
             'technology_name',
         )
