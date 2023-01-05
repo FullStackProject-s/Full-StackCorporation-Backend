@@ -39,7 +39,7 @@ class DeveloperUpdateAPIView(generics.UpdateAPIView):
     queryset = Developer.objects.all()
 
 
-class DeveloperChangeTeamAPIView(generics.UpdateAPIView):
+class DeveloperChangeTeamAPIView(generics.GenericAPIView):
     serializer_class = DeveloperChangeTeamSerializer
     queryset = Developer.objects.all()
 
@@ -68,6 +68,7 @@ class DeveloperChangeTeamAPIView(generics.UpdateAPIView):
 
 class DeveloperAddStackTechnologies(generics.GenericAPIView):
     serializer_class = DeveloperAddStackTechnologiesSerializer
+    queryset = Developer.objects.all()
 
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
@@ -86,6 +87,7 @@ class DeveloperAddStackTechnologies(generics.GenericAPIView):
 
 class DeveloperRemoveTechnologies(generics.GenericAPIView):
     serializer_class = DeveloperAddStackTechnologiesSerializer
+    queryset = Developer.objects.all()
 
     def post(self, request, *args, **kwargs):
         dev = self.get_object()

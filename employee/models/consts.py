@@ -1,5 +1,5 @@
 SPECIALTY_SET = [
-    ('Front', 'frontend'),
-    ('Back', 'backend'),
+    ('Front', 'Frontend'),
+    ('Back', 'Backend'),
     ('DevOps', 'Development & Operations')
 ]

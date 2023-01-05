@@ -1,0 +1,1 @@
+from .updateSerializer import ProfileUpdateSerializerMixin

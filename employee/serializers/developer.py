@@ -5,17 +5,18 @@ from rest_framework import serializers
 
 from employee.models.employees import Developer
 from employee.models.technologies import Technologies
+from employee.serializers.mixins import ProfileUpdateSerializerMixin
 from employee.serializers.schemas.developer import developer_change_team
 from employee.serializers.technologies import TechnologiesSerializer
 
 from user.models import Permissions, CustomUser
 from user.serializers.profile import ProfileSerializer
-from user.serializers.mixins.create_custom_user import \
-    CreateCustomUserSerializerMixin
+from user.serializers.mixins import CreateCustomUserSerializerMixin
 
 
 class DeveloperSerializer(
     serializers.ModelSerializer,
+    ProfileUpdateSerializerMixin,
     CreateCustomUserSerializerMixin
 ):
     pk = serializers.IntegerField(read_only=True)
@@ -29,6 +30,7 @@ class DeveloperSerializer(
         read_only=True,
         required=False
     )
+    specialty = serializers.CharField(source='get_specialty_display')
 
     class Meta:
         model = Developer
@@ -42,28 +44,25 @@ class DeveloperSerializer(
 
     def create(self, validated_data):
         with transaction.atomic():
+            speciality = validated_data.pop('get_specialty_display')
             _profile = self._create_profile(validated_data.pop('profile'))
+
             dev = Developer.objects.create(
                 **validated_data,
-                profile=_profile
+                profile=_profile,
+                specialty=speciality
             )
             permission, created_ = Permissions.objects.get_or_create(
                 role_name='dev'
             )
             c = CustomUser.objects.get(username=dev.profile.user.username)
             c.staff_role = permission
-            dev.profile.user.staff_role = permission
             c.save()
+            dev.profile.user.staff_role = permission
             return dev
 
     def update(self, instance, validated_data):
-
-        profile_serializer = self.fields['profile']
-        stack_serializer = self.fields['stack']
-        if data := validated_data.pop('profile', None):
-            profile_serializer.update(instance.profile, data)
-        if data := validated_data.pop('stack', None):
-            stack_serializer.update(instance.stack, data)
+        self._profile_update(instance, validated_data)
         return super().update(instance, validated_data)
 
     @extend_schema_field(OpenApiTypes.STR)

@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from user.models import Permissions, Profile
+from user.models import Profile
 
 User = get_user_model()
 
