@@ -9,12 +9,9 @@ from user.serializers.permission import PermissionSerializer
 User = get_user_model()
 
 
-class CustomUserSerializer(
+class BaseCustomUserSerializer(
     serializers.ModelSerializer,
-    CreateCustomUserSerializerMixin,
 ):
-    permission = PermissionSerializer(source='staff_role')
-
     class Meta:
         model = User
         fields = (
@@ -26,11 +23,7 @@ class CustomUserSerializer(
             'create_at',
             'update_at',
             'password',
-            'permission'
         )
-
-    def create(self, validated_data):
-        return self._create_user(validated_data)
 
     def update(self, instance: User, validated_data):
         password = validated_data.pop('password', None)
@@ -46,3 +39,25 @@ class CustomUserSerializer(
             setattr(instance, field, value)
         instance.save()
         return instance
+
+
+class CustomUserSerializer(
+    BaseCustomUserSerializer,
+):
+    permission = PermissionSerializer(source='staff_role')
+
+    class Meta(BaseCustomUserSerializer.Meta):
+        model = User
+        fields = (
+            *BaseCustomUserSerializer.fields,
+            'permission'
+        )
+
+
+class CustomUserCreateSerializer(
+    BaseCustomUserSerializer,
+    CreateCustomUserSerializerMixin
+):
+
+    def create(self, validated_data):
+        return self._create_user(validated_data)

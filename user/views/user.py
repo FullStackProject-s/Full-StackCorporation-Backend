@@ -1,7 +1,10 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 
-from user.serializers.profile import CustomUserSerializer
+from user.serializers import (
+    CustomUserSerializer,
+    CustomUserCreateSerializer
+)
 
 User = get_user_model()
 
@@ -17,7 +20,7 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 
 
 class UserCreateAPIView(generics.CreateAPIView):
-    serializer_class = CustomUserSerializer
+    serializer_class = CustomUserCreateSerializer
 
 
 class UserDestroyAPIView(generics.DestroyAPIView):

@@ -8,15 +8,9 @@ User = get_user_model()
 class CreateCustomUserSerializerMixin:
 
     def _create_user(self, validated_data):
-        print(validated_data)
-        _permission = Permissions.objects.create(
-            **validated_data.pop('staff_role')
-        )
         user = User.objects.create_user(
             **validated_data,
         )
-        user.staff_role = _permission
-        user.save()
         return user
 
     def _create_profile(self, validated_data):
