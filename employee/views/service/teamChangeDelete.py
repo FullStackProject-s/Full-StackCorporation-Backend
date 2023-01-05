@@ -8,9 +8,7 @@ class DeletePersonalTeamViewMixin:
         dev = self.get_object()
         dev.team = None
         dev.save()
-        return PostResponse.response_ok({
-            "message": message
-        })
+        return PostResponse.response_ok(message)
 
 
 class ChangePersonalTeamViewMixin:
@@ -24,7 +22,5 @@ class ChangePersonalTeamViewMixin:
         if x := Team.objects.filter(team_name=team_name):
             dev.team = x.first()
             dev.save()
-            return PostResponse.response_ok({
-                "message": message
-            })
+            return PostResponse.response_ok(message)
         return PostResponse.not_found_response('Team not found')

@@ -35,3 +35,12 @@ class TeamTeamLeadSerializer(serializers.Serializer):
         fields = (
             'team_lead'
         )
+
+
+class TeamProjectManagerSerializer(serializers.Serializer):
+    project_manager = serializers.CharField()
+
+    class Meta:
+        fields = (
+            'project_manager'
+        )

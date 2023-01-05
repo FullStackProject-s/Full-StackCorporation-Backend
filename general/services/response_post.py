@@ -13,8 +13,8 @@ class PostResponse:
         )
 
     @staticmethod
-    def response_ok(message_dict):
+    def response_ok(message_text):
         return Response(
-            message_dict,
+            {"message": message_text},
             status=status.HTTP_200_OK
         )

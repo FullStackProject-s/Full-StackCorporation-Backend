@@ -58,6 +58,7 @@ class DeveloperChangeTeamAPIView(
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         team_name = serializer.data['team']
+
         return self._post_change_team(
             f'Team for this developer now \'{team_name}\'',
             team_name

@@ -1,14 +1,19 @@
 from rest_framework import generics
 
-from employee.models import Developer
+from employee.models import Developer, ProjectManager
 
-from general.schemas import response_true_message
+from general.schemas import (
+    response_true_message,
+    response_true_request_false_message
+)
+
 from general.services import PostResponse
 
 from project.serializer import (
     TeamSerializer,
     TeamNameSerializer,
-    TeamTeamLeadSerializer
+    TeamTeamLeadSerializer,
+    TeamProjectManagerSerializer
 )
 from project.models.team import Team
 
@@ -48,4 +53,55 @@ class TeamUpdateTeamLeadAPIView(generics.GenericAPIView):
         team.save()
         return PostResponse.response_ok(
             f"Team lead for this team \'{team_lead}\'"
+        )
+
+
+class TeamRemoveTeamLeadAPIView(generics.GenericAPIView):
+    serializer_class = TeamTeamLeadSerializer
+    queryset = Team.objects.all()
+
+    @response_true_request_false_message
+    def post(self, request, *args, **kwargs):
+        team = self.get_object()
+
+        team.team_lead = None
+        team.save()
+        return PostResponse.response_ok(
+            f"Team lead for this team NULL"
+        )
+
+
+class TeamUpdateProjectManagerAPIView(generics.GenericAPIView):
+    serializer_class = TeamProjectManagerSerializer
+    queryset = Team.objects.all()
+
+    @response_true_message
+    def post(self, request, *args, **kwargs):
+        team = self.get_object()
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        project_manager = serializer.data['project_manager']
+        project_manager = ProjectManager.objects.get(
+            profile__user__username=project_manager
+        )
+        team.project_manager = project_manager
+        team.save()
+        return PostResponse.response_ok(
+            f"Project manager for this team \'{project_manager}\'"
+        )
+
+
+class TeamRemoveProjectManagerAPIView(generics.GenericAPIView):
+    serializer_class = TeamProjectManagerSerializer
+    queryset = Team.objects.all()
+
+    @response_true_request_false_message
+    def post(self, request, *args, **kwargs):
+        team = self.get_object()
+
+        team.project_manager = None
+        team.save()
+        return PostResponse.response_ok(
+            f"Project manager for this team NULL"
         )
