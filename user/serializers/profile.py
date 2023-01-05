@@ -19,7 +19,6 @@ class ProfileSerializer(
         model = Profile
         fields = (
             'pk',
-
             'user',
             'photo_url',
             'about_user'

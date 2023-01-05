@@ -4,6 +4,14 @@ from user.models.utility import Permissions
 
 
 class PermissionSerializer(serializers.ModelSerializer):
+    role_name = serializers.CharField(
+        source='get_role_name_display',
+        read_only=True
+    )
+
     class Meta:
         model = Permissions
-        fields = '__all__'
+        fields = (
+            'pk',
+            'role_name',
+        )

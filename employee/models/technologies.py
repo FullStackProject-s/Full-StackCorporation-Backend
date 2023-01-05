@@ -1,15 +1,12 @@
 from django.db import models
-from employee.models.consts import SPECIALTY_SET
+from employee.models.consts import TechnologiesStack
 
 
 class Technologies(models.Model):
-    TECHNOLOGIES_STACK = [
-        *SPECIALTY_SET,
-        ('Gen tech', 'General technologies')
-    ]
+
     technology_name = models.CharField(max_length=200, unique=True)
     technology_category = models.CharField(
-        choices=TECHNOLOGIES_STACK,
+        choices=TechnologiesStack.choices,
         max_length=200
     )
 

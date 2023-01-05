@@ -8,11 +8,20 @@ from employee.models import (
 )
 from employee.serializers import (
     DeveloperSerializer,
-    DeveloperChangeTeamSerializer,
     DeveloperAddStackTechnologiesSerializer
 )
-from employee.views.service.developer_post import DeveloperPostNotFound
-from project.models.team import Team
+from employee.serializers import TeamChangeSerializer
+from employee.views.service.teamChangeDelete import (
+    ChangePersonalTeamViewMixin,
+    DeletePersonalTeamViewMixin
+)
+
+from general import (
+    ViewsSerializerValidateRequestMixin,
+    PostResponse,
+    response_true_message,
+    response_true_request_false_message
+)
 
 
 class AllDeveloperListAPIView(generics.ListAPIView):
@@ -39,35 +48,39 @@ class DeveloperUpdateAPIView(generics.UpdateAPIView):
     queryset = Developer.objects.all()
 
 
-class DeveloperChangeTeamAPIView(generics.UpdateAPIView):
-    serializer_class = DeveloperChangeTeamSerializer
+class DeveloperChangeTeamAPIView(
+    generics.GenericAPIView,
+    ChangePersonalTeamViewMixin,
+    ViewsSerializerValidateRequestMixin
+):
+    queryset = Developer.objects.all()
+    serializer_class = TeamChangeSerializer
+
+    @response_true_message
+    def post(self, request, *args, **kwargs):
+        team_name = self._validate_request(request).data['team']
+
+        return self._post_change_team(
+            f'Team for this developer now \'{team_name}\'',
+            team_name
+        )
+
+
+class DeveloperDeleteTeamAPIView(
+    generics.GenericAPIView,
+    DeletePersonalTeamViewMixin
+):
+    serializer_class = DeveloperSerializer
     queryset = Developer.objects.all()
 
+    @response_true_request_false_message
     def post(self, request, *args, **kwargs):
-
-        dev = self.get_object()
-
-        if x := Team.objects.filter(team_name=request.data['team']):
-            dev.team = x.first()
-            dev.save()
-            return Response(
-                DeveloperSerializer(dev).data,
-                status=status.HTTP_200_OK
-            )
-        if request.data['team'] == '':
-            dev.team = None
-            dev.save()
-            return Response(
-                {
-                    "message": "Team from this developer NULL."
-                },
-                status=status.HTTP_200_OK
-            )
-        return DeveloperPostNotFound.not_found_response('Team not found')
+        return self._post_delete_team('Team for this developer now NULL')
 
 
 class DeveloperAddStackTechnologies(generics.GenericAPIView):
     serializer_class = DeveloperAddStackTechnologiesSerializer
+    queryset = Developer.objects.all()
 
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
@@ -81,11 +94,12 @@ class DeveloperAddStackTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return DeveloperPostNotFound.not_found_response('Tech not found')
+        return PostResponse.not_found_response('Tech not found')
 
 
 class DeveloperRemoveTechnologies(generics.GenericAPIView):
     serializer_class = DeveloperAddStackTechnologiesSerializer
+    queryset = Developer.objects.all()
 
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
@@ -99,5 +113,4 @@ class DeveloperRemoveTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return DeveloperPostNotFound.not_found_response('Tech not found')
-
+        return PostResponse.not_found_response('Tech not found')

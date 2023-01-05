@@ -11,9 +11,14 @@ User = get_user_model()
 
 class CustomUserSerializer(
     serializers.ModelSerializer,
-    CreateCustomUserSerializerMixin,
+    CreateCustomUserSerializerMixin
+
 ):
-    permission = PermissionSerializer(source='staff_role')
+    permission = PermissionSerializer(
+        source='staff_role',
+        required=False,
+        read_only=True
+    )
 
     class Meta:
         model = User
@@ -27,6 +32,7 @@ class CustomUserSerializer(
             'update_at',
             'password',
             'permission'
+
         )
 
     def create(self, validated_data):
@@ -46,3 +52,4 @@ class CustomUserSerializer(
             setattr(instance, field, value)
         instance.save()
         return instance
+

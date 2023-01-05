@@ -29,6 +29,7 @@ class CustomUser(
     staff_role = models.ForeignKey(
         Permissions,
         on_delete=models.CASCADE,
+        blank=True,
         null=True
     )
 

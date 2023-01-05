@@ -9,6 +9,6 @@ urlpatterns = [
     path('technologies/', include(urlpatterns_techno)),
     path('developers/', include(urlpatterns_developers)),
     path('project-manager/', include(urlpatterns_manager)),
-    path('admin/', include(urlpatterns_admin))
+    path('administrator/', include(urlpatterns_admin))
 
 ]
