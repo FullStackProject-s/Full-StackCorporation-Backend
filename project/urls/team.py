@@ -19,7 +19,7 @@ urlpatterns_team = [
          TeamCreateAPIView.as_view(),
          name='create-team'
          ),
-    path('team-change-name/<int:pk>/',
+    path('change-team-name/<int:pk>/',
          TeamChangeNameAPIView.as_view(),
          name='team-change-name',
          )

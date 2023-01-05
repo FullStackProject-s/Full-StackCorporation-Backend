@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class Team(models.Model):
     team_name = models.CharField(
         max_length=200,
@@ -30,4 +29,5 @@ class Team(models.Model):
     def __str__(self):
         return f'Team name: {self.team_name} - ' \
                f'Team lead: {self.team_lead} - ' \
-               f'Prod Manager: {self.project_manager}'
+               f'Prod Manager: {self.project_manager} - ' \
+               f'Pk : {self.pk}'

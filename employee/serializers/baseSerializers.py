@@ -33,3 +33,12 @@ class BaseManagerDeveloperSerializer(BaseStaffSerializer):
         if obj.team:
             return obj.team.team_name
         return "unknown"
+
+
+class TeamChangeSerializer(serializers.Serializer):
+    team = serializers.CharField()
+
+    class Meta:
+        fields = (
+            'team',
+        )

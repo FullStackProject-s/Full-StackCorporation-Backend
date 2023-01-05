@@ -23,3 +23,11 @@ class TeamCreateAPIView(generics.CreateAPIView):
 class TeamChangeNameAPIView(generics.UpdateAPIView):
     serializer_class = TeamNameSerializer
     queryset = Team.objects.all()
+
+
+class TeamNewTeamLeadAPIView(generics.GenericAPIView):
+    serializer_class = TeamSerializer
+    queryset = Team.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        team = self.get_object()

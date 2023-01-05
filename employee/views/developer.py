@@ -10,15 +10,14 @@ from employee.serializers import (
     DeveloperSerializer,
     DeveloperAddStackTechnologiesSerializer
 )
-from employee.views.schemas import (
-    change_team,
-    delete_team
-)
+from employee.serializers import TeamChangeSerializer
 from employee.views.service.developer_post import DeveloperPostResponse
-from employee.views.service.teamChangeDelete import \
-    ChangePersonalTeamViewMixin, DeletePersonalTeamViewMixin
+from employee.views.service.teamChangeDelete import (
+    ChangePersonalTeamViewMixin,
+    DeletePersonalTeamViewMixin
+)
+from general.schemas import response_only_message
 
-from project.models.team import Team
 
 
 class AllDeveloperListAPIView(generics.ListAPIView):
@@ -50,10 +49,10 @@ class DeveloperChangeTeamAPIView(
     ChangePersonalTeamViewMixin
 ):
     queryset = Developer.objects.all()
-    serializer_class = DeveloperSerializer
+    serializer_class = TeamChangeSerializer
 
-    @change_team
     def post(self, request, *args, **kwargs):
+        self.serializer_class(data=request.data).is_valid(raise_exception=True)
         return self._post_change_team(
             request,
             f'Team for this developer now \'{request.data["team"]}\''
@@ -67,7 +66,7 @@ class DeveloperDeleteTeamAPIView(
     serializer_class = DeveloperSerializer
     queryset = Developer.objects.all()
 
-    @delete_team
+    @response_only_message
     def post(self, request, *args, **kwargs):
         return self._post_delete_team('Team for this developer now NULL')
 
