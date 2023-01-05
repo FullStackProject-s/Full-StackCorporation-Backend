@@ -1,34 +1,31 @@
-from django.db import transaction
-from rest_framework import serializers
-
 from employee.models import ProjectManager
+from employee.serializers.baseSerializers import BaseManagerDeveloperSerializer
 from employee.serializers.mixins import (
     ProfileUpdateSerializerMixin,
     StaffCreateSerializerMixin
 )
 
+from user.models.consts import StaffRole
 from user.serializers.mixins import CreateCustomUserSerializerMixin
-from user.serializers.profile import ProfileSerializer
 
 
 class ProjectManagerSerializer(
-    serializers.ModelSerializer,
+    BaseManagerDeveloperSerializer,
     ProfileUpdateSerializerMixin,
     CreateCustomUserSerializerMixin,
     StaffCreateSerializerMixin
 ):
-    profile = ProfileSerializer()
-
     class Meta:
         model = ProjectManager
         fields = (
-            'pk',
-            'profile',
+            *BaseManagerDeveloperSerializer.Meta.fields,
         )
 
     def create(self, validated_data):
-        with transaction.atomic():
-            return self._staff_create(validated_data, 'prod manager')
+        return self._staff_create(
+            validated_data,
+            StaffRole.PRODUCT_MANAGER
+        )
 
     def update(self, instance, validated_data):
         self._profile_update(instance, validated_data)

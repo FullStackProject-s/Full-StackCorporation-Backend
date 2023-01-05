@@ -1,13 +1,13 @@
 from django.db import models
 
 from employee.models.mixins.baseEmployee import BaseEmployeeMixin
-from employee.models.consts import SPECIALTY_SET
+from employee.models.consts import Specialty
 from employee.models.technologies import Technologies
 
 
 class Developer(BaseEmployeeMixin):
     specialty = models.CharField(
-        choices=SPECIALTY_SET,
+        choices=Specialty.choices,
         max_length=200
     )
     stack = models.ManyToManyField(
@@ -50,6 +50,3 @@ class ProjectManager(BaseEmployeeMixin):
 class Administrator(BaseEmployeeMixin):
     def __str__(self):
         return f'{self.profile.user} - {self.pk}'
-
-
-

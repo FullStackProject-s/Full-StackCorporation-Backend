@@ -1,34 +1,31 @@
-from django.db import transaction
-from rest_framework import serializers
-
 from employee.models import Administrator
+from employee.serializers.baseSerializers import BaseStaffSerializer
 from employee.serializers.mixins import (
     ProfileUpdateSerializerMixin,
     StaffCreateSerializerMixin
 )
 
+from user.models.consts import StaffRole
 from user.serializers.mixins import CreateCustomUserSerializerMixin
-from user.serializers.profile import ProfileSerializer
 
 
 class AdministratorSerializer(
-    serializers.ModelSerializer,
+    BaseStaffSerializer,
     CreateCustomUserSerializerMixin,
     ProfileUpdateSerializerMixin,
     StaffCreateSerializerMixin
 ):
-    profile = ProfileSerializer()
-
     class Meta:
         model = Administrator
         fields = (
-            'pk',
-            'profile',
+            *BaseStaffSerializer.Meta.fields,
         )
 
     def create(self, validated_data):
-        with transaction.atomic():
-            return self._staff_create(validated_data, 'admin')
+        return self._staff_create(
+            validated_data,
+            StaffRole.ADMIN
+        )
 
     def update(self, instance, validated_data):
         self._profile_update(instance, validated_data)
