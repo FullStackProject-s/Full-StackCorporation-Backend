@@ -5,14 +5,14 @@ from rest_framework import serializers
 from user.models.profile import Profile
 from user.serializers.mixins.create_custom_user import \
     CreateCustomUserSerializerMixin
-from user.serializers.user import CustomUserCreateSerializer
+from user.serializers.user import CustomUserSerializer
 
 
 class ProfileSerializer(
     serializers.ModelSerializer,
     CreateCustomUserSerializerMixin
 ):
-    user = CustomUserCreateSerializer()
+    user = CustomUserSerializer()
     photo_url = serializers.SerializerMethodField()
 
     class Meta:

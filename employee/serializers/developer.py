@@ -1,6 +1,6 @@
 from django.db import transaction
 from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema_field, extend_schema_serializer
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from employee.models.employees import Developer
@@ -8,22 +8,27 @@ from employee.models.technologies import Technologies
 from employee.serializers.schemas.developer import developer_change_team
 from employee.serializers.technologies import TechnologiesSerializer
 
+from user.models import Permissions, CustomUser
 from user.serializers.profile import ProfileSerializer
 from user.serializers.mixins.create_custom_user import \
     CreateCustomUserSerializerMixin
 
 
-@extend_schema_serializer(
-    exclude_fields=('team',)
-)
 class DeveloperSerializer(
     serializers.ModelSerializer,
     CreateCustomUserSerializerMixin
 ):
     pk = serializers.IntegerField(read_only=True)
     profile = ProfileSerializer()
-    stack = TechnologiesSerializer(many=True, required=False)
-    team = serializers.SerializerMethodField(read_only=True)
+    stack = TechnologiesSerializer(
+        many=True,
+        required=False,
+        read_only=True
+    )
+    team = serializers.SerializerMethodField(
+        read_only=True,
+        required=False
+    )
 
     class Meta:
         model = Developer
@@ -38,13 +43,17 @@ class DeveloperSerializer(
     def create(self, validated_data):
         with transaction.atomic():
             _profile = self._create_profile(validated_data.pop('profile'))
-            _stack = validated_data.pop('stack', None)
-            dev = Developer.objects.create(**validated_data, profile=_profile)
-            if _stack:
-                tech_list = []
-                for item in validated_data.pop('stack'):
-                    tech_list.append(Technologies.objects.create(**item))
-                dev.append_technologies(tech_list)
+            dev = Developer.objects.create(
+                **validated_data,
+                profile=_profile
+            )
+            permission, created_ = Permissions.objects.get_or_create(
+                role_name='dev'
+            )
+            c = CustomUser.objects.get(username=dev.profile.user.username)
+            c.staff_role = permission
+            dev.profile.user.staff_role = permission
+            c.save()
             return dev
 
     def update(self, instance, validated_data):

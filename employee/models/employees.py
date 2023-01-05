@@ -1,11 +1,8 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 from employee.models.mixins.baseEmployee import BaseEmployeeMixin
 from employee.models.consts import SPECIALTY_SET
 from employee.models.technologies import Technologies
-from user.models.utility import Permissions
 
 
 class Developer(BaseEmployeeMixin):
@@ -55,14 +52,4 @@ class Administrator(BaseEmployeeMixin):
         return f'{self.profile.user} - {self.pk}'
 
 
-@receiver(post_save, sender=Developer)
-def create_or_set_permission_on_developer(
-        sender,
-        instance: Developer,
-        created,
-        **kwargs
-):
-    if created:
-        obj, created_ = Permissions.objects.get_or_create(role_name='dev')
-        instance.profile.user.staff_role = obj
-        instance.save()
+

@@ -26,4 +26,4 @@ class Permissions(models.Model):
     )
 
     def __str__(self):
-        return f'{self.role_name}'
+        return f'{self.role_name} - {self.pk}'
