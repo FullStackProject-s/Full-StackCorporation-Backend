@@ -4,7 +4,9 @@ from employee.views.project_manager import (
     ProjectManagerRetrieveAPIView,
     ProjectManagerDestroyAPIView,
     ProjectManagerCreateAPIView,
-    ProjectManagerUpdateAPIView
+    ProjectManagerUpdateAPIView,
+    ProjectManagerDeleteTeamAPIView,
+    ProjectManagerChangeTeamAPIView
 )
 
 urlpatterns_manager = [
@@ -28,5 +30,13 @@ urlpatterns_manager = [
          ProjectManagerUpdateAPIView.as_view(),
          name='update-manager'
          ),
+    path('update-manager-team/<int:pk>/',
+         ProjectManagerChangeTeamAPIView.as_view(),
+         name='update-manager-team',
+         ),
+    path('delete-manager-team/<int:pk>/',
+         ProjectManagerDeleteTeamAPIView.as_view(),
+         name='delete-manager-team',
+         )
 
 ]

@@ -8,7 +8,6 @@ from employee.serializers.mixins import (
     ProfileUpdateSerializerMixin,
     StaffCreateSerializerMixin
 )
-from employee.serializers.schemas.developer import developer_change_team
 from user.models.consts import StaffRole
 from user.serializers.mixins import CreateCustomUserSerializerMixin
 
@@ -47,7 +46,6 @@ class DeveloperSerializer(
         return super().update(instance, validated_data)
 
 
-@developer_change_team
 class DeveloperChangeTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Developer

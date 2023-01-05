@@ -8,10 +8,16 @@ from employee.models import (
 )
 from employee.serializers import (
     DeveloperSerializer,
-    DeveloperChangeTeamSerializer,
     DeveloperAddStackTechnologiesSerializer
 )
-from employee.views.service.developer_post import DeveloperPostNotFound
+from employee.views.schemas import (
+    change_team,
+    delete_team
+)
+from employee.views.service.developer_post import DeveloperPostResponse
+from employee.views.service.teamChangeDelete import \
+    ChangePersonalTeamViewMixin, DeletePersonalTeamViewMixin
+
 from project.models.team import Team
 
 
@@ -39,31 +45,31 @@ class DeveloperUpdateAPIView(generics.UpdateAPIView):
     queryset = Developer.objects.all()
 
 
-class DeveloperChangeTeamAPIView(generics.GenericAPIView):
-    serializer_class = DeveloperChangeTeamSerializer
+class DeveloperChangeTeamAPIView(
+    generics.GenericAPIView,
+    ChangePersonalTeamViewMixin
+):
+    queryset = Developer.objects.all()
+    serializer_class = DeveloperSerializer
+
+    @change_team
+    def post(self, request, *args, **kwargs):
+        return self._post_change_team(
+            request,
+            f'Team for this developer now \'{request.data["team"]}\''
+        )
+
+
+class DeveloperDeleteTeamAPIView(
+    generics.GenericAPIView,
+    DeletePersonalTeamViewMixin
+):
+    serializer_class = DeveloperSerializer
     queryset = Developer.objects.all()
 
+    @delete_team
     def post(self, request, *args, **kwargs):
-
-        dev = self.get_object()
-
-        if x := Team.objects.filter(team_name=request.data['team']):
-            dev.team = x.first()
-            dev.save()
-            return Response(
-                DeveloperSerializer(dev).data,
-                status=status.HTTP_200_OK
-            )
-        if request.data['team'] == '':
-            dev.team = None
-            dev.save()
-            return Response(
-                {
-                    "message": "Team from this developer NULL."
-                },
-                status=status.HTTP_200_OK
-            )
-        return DeveloperPostNotFound.not_found_response('Team not found')
+        return self._post_delete_team('Team for this developer now NULL')
 
 
 class DeveloperAddStackTechnologies(generics.GenericAPIView):
@@ -82,7 +88,7 @@ class DeveloperAddStackTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return DeveloperPostNotFound.not_found_response('Tech not found')
+        return DeveloperPostResponse.not_found_response('Tech not found')
 
 
 class DeveloperRemoveTechnologies(generics.GenericAPIView):
@@ -101,5 +107,4 @@ class DeveloperRemoveTechnologies(generics.GenericAPIView):
                 DeveloperSerializer(dev).data,
                 status=status.HTTP_200_OK
             )
-        return DeveloperPostNotFound.not_found_response('Tech not found')
-
+        return DeveloperPostResponse.not_found_response('Tech not found')

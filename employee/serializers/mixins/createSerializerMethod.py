@@ -1,6 +1,5 @@
 from django.db import transaction
 
-from employee.models import Developer
 from employee.serializers.services import SetUserPermission
 from user.models import Permissions
 
