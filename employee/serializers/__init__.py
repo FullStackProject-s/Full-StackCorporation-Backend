@@ -1,7 +1,7 @@
 from employee.serializers.developer import (
     DeveloperSerializer,
     DeveloperChangeTeamSerializer,
-    DeveloperAddStackTechnologiesSerializer
+    DeveloperStackTechnologiesSerializer
 )
 from employee.serializers.technologies import TechnologiesSerializer
 from employee.serializers.project_manager import ProjectManagerSerializer

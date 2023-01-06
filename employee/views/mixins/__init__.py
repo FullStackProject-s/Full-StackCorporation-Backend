@@ -1,0 +1,2 @@
+from .administrator import BaseConfigurationAdministratorsViewMixin
+from .technologies import BaseConfigurationTechnologiesViewMixin

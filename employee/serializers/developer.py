@@ -55,9 +55,10 @@ class DeveloperChangeTeamSerializer(serializers.ModelSerializer):
         )
 
 
-class DeveloperAddStackTechnologiesSerializer(serializers.ModelSerializer):
+class DeveloperStackTechnologiesSerializer(serializers.Serializer):
+    technology_name = serializers.CharField()
+
     class Meta:
-        model = Technologies
         fields = (
             'technology_name',
         )

@@ -1,28 +1,38 @@
 from rest_framework import generics
 
-from employee.models import Technologies
-from employee.serializers import TechnologiesSerializer
+from employee.views.mixins import BaseConfigurationTechnologiesViewMixin
 
 
-class AllTechnologiesListAPIView(generics.ListAPIView):
-    serializer_class = TechnologiesSerializer
-    queryset = Technologies.objects.all()
+class AllTechnologiesListAPIView(
+    BaseConfigurationTechnologiesViewMixin,
+    generics.ListAPIView
+):
+    pass
 
 
-class TechnologiesRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = TechnologiesSerializer
-    queryset = Technologies.objects.all()
+class TechnologiesRetrieveAPIView(
+    BaseConfigurationTechnologiesViewMixin,
+    generics.ListAPIView
+):
+    pass
 
 
-class TechnologiesCreateAPIView(generics.CreateAPIView):
-    serializer_class = TechnologiesSerializer
+class TechnologiesCreateAPIView(
+    BaseConfigurationTechnologiesViewMixin,
+    generics.ListAPIView
+):
+    pass
 
 
-class TechnologiesDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = TechnologiesSerializer
-    queryset = Technologies.objects.all()
+class TechnologiesDestroyAPIView(
+    BaseConfigurationTechnologiesViewMixin,
+    generics.ListAPIView
+):
+    pass
 
 
-class TechnologiesUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = TechnologiesSerializer
-    queryset = Technologies.objects.all()
+class TechnologiesUpdateAPIView(
+    BaseConfigurationTechnologiesViewMixin,
+    generics.ListAPIView
+):
+    pass

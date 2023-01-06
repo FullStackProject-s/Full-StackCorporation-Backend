@@ -8,7 +8,7 @@ from employee.models import (
 )
 from employee.serializers import (
     DeveloperSerializer,
-    DeveloperAddStackTechnologiesSerializer
+    DeveloperStackTechnologiesSerializer
 )
 from employee.serializers import TeamChangeSerializer
 from employee.views.service.teamChangeDelete import (
@@ -78,39 +78,45 @@ class DeveloperDeleteTeamAPIView(
         return self._post_delete_team('Team for this developer now NULL')
 
 
-class DeveloperAddStackTechnologies(generics.GenericAPIView):
-    serializer_class = DeveloperAddStackTechnologiesSerializer
+class DeveloperAddStackTechnologies(
+    generics.GenericAPIView,
+    ViewsSerializerValidateRequestMixin
+):
+    serializer_class = DeveloperStackTechnologiesSerializer
     queryset = Developer.objects.all()
 
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
 
-        tech = Technologies.objects.filter(
-            technology_name=request.data['technology_name']
-        )
-        if tech:
-            dev.append_technologies([tech.first()])
-            return Response(
-                DeveloperSerializer(dev).data,
-                status=status.HTTP_200_OK
+        if tech := Technologies.objects.filter(
+                technology_name=self._validate_request(request).data[
+                    'technology_name'
+                ]
+        ).first():
+            dev.append_technologies(tech.first())
+            return PostResponse.response_ok(
+                f"{tech.technology_name} for this developer set"
             )
         return PostResponse.not_found_response('Tech not found')
 
 
-class DeveloperRemoveTechnologies(generics.GenericAPIView):
-    serializer_class = DeveloperAddStackTechnologiesSerializer
+class DeveloperRemoveTechnologies(
+    generics.GenericAPIView,
+    ViewsSerializerValidateRequestMixin
+):
+    serializer_class = DeveloperStackTechnologiesSerializer
     queryset = Developer.objects.all()
 
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
 
-        tech = Technologies.objects.filter(
-            technology_name=request.data['technology_name']
-        )
-        if tech:
-            dev.remove_technologies(tech.first())
-            return Response(
-                DeveloperSerializer(dev).data,
-                status=status.HTTP_200_OK
+        if tech := Technologies.objects.filter(
+                technology_name=self._validate_request(request).data[
+                    'technology_name'
+                ]
+        ).first():
+            dev.remove_technologies(tech)
+            return PostResponse.response_ok(
+                f"{tech.technology_name} for this developer unset"
             )
         return PostResponse.not_found_response('Tech not found')
