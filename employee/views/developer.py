@@ -2,24 +2,22 @@ from rest_framework import generics
 
 from .generics import BaseConfigurationDevelopersViewGeneric
 
-from employee.models import (
-    Technologies
-)
+from employee.models import Technologies
 from employee.serializers import (
-    DeveloperStackTechnologiesSerializer
+    DeveloperStackTechnologiesSerializer,
+    TeamChangeSerializer
 )
-from employee.serializers import TeamChangeSerializer
-from employee.views.service.teamChangeDelete import (
+from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin
 )
 
 from general import (
     ViewsSerializerValidateRequestMixin,
-    PostResponse,
     response_true_message_schema,
     response_true_request_false_message_schema
 )
+from .service import developer_technologies_response
 
 
 class AllDeveloperListAPIView(
@@ -95,17 +93,20 @@ class DeveloperAddStackTechnologies(
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
+        tech_list = []
 
-        if tech := Technologies.objects.filter(
-                technology_name=self._validate_request(request).data[
-                    'technology_name'
-                ]
-        ).first():
-            dev.append_technologies(tech.first())
-            return PostResponse.response_ok(
-                f"{tech.technology_name} for this developer set"
-            )
-        return PostResponse.not_found_response('Tech not found')
+        for tech_name in self._validate_request(request).data[
+            'technology_names'
+        ]:
+            if tech := Technologies.objects.filter(
+                    technology_name=tech_name
+            ).first():
+                dev.append_technologies(tech)
+                tech_list.append(tech.technology_name)
+        return developer_technologies_response(
+            tech_list,
+            f"[{' '.join(tech_list)}] for this developer set"
+        )
 
 
 class DeveloperRemoveTechnologies(
@@ -118,14 +119,17 @@ class DeveloperRemoveTechnologies(
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
+        tech_list = []
 
-        if tech := Technologies.objects.filter(
-                technology_name=self._validate_request(request).data[
-                    'technology_name'
-                ]
-        ).first():
-            dev.remove_technologies(tech)
-            return PostResponse.response_ok(
-                f"{tech.technology_name} for this developer unset"
-            )
-        return PostResponse.not_found_response('Tech not found')
+        for tech_name in self._validate_request(request).data[
+            'technology_names'
+        ]:
+            if tech := Technologies.objects.filter(
+                    technology_name=tech_name
+            ).first():
+                dev.remove_technologies(tech)
+                tech_list.append(tech.technology_name)
+        return developer_technologies_response(
+            tech_list,
+            f"[{', '.join(tech_list)}] for this developer unset"
+        )

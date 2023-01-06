@@ -4,7 +4,7 @@ from employee.serializers import (
     TeamChangeSerializer,
 )
 from employee.views.generics import BaseConfigurationProjectManagersViewGeneric
-from employee.views.service.teamChangeDelete import (
+from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin,
 )
