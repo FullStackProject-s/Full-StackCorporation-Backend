@@ -1,13 +1,9 @@
 from rest_framework import generics
 
 from employee.models import Developer, ProjectManager
+
 from general import ViewsSerializerValidateRequestMixin
-
-from general.schemas import (
-    response_true_message_schema,
-    response_true_request_false_message_schema
-)
-
+from general.schemas import response_true_message_schema
 from general.services import PostResponse
 
 from project.serializer import (
@@ -17,6 +13,10 @@ from project.serializer import (
     TeamProjectManagerSerializer
 )
 from project.models.team import Team
+from project.views.generics import (
+    TeamGenericRemovePersonal,
+    TeamGenericUpdatePersonal
+)
 
 
 class AllTeamListAPIView(generics.ListAPIView):
@@ -40,96 +40,74 @@ class TeamChangeNameAPIView(generics.UpdateAPIView):
 
 class TeamUpdateTeamLeadAPIView(
     generics.GenericAPIView,
-    ViewsSerializerValidateRequestMixin
+    ViewsSerializerValidateRequestMixin,
+    TeamGenericUpdatePersonal
 ):
     serializer_class = TeamTeamLeadSerializer
     queryset = Team.objects.all()
 
+    personal_model = Developer
+    personal_relation_name = 'team_lead'
+
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
-        team = self.get_object()
-
-        team_lead = self._validate_request(request).data['team_lead']
-
-        if dev := Developer.objects.filter(
-                profile__user__username=team_lead
-        ).first():
-            team.team_lead = dev
-            dev.team = team
-
-            dev.save()
-            team.save()
-            return PostResponse.response_ok(
-                f"Team lead for this team \'{team_lead}\'"
-            )
-        return PostResponse.not_found_response('Not found team lead')
+        return self._update_personal(
+            request,
+            'Team lead for this team set\'s'
+        )
 
 
-class TeamRemoveTeamLeadAPIView(generics.GenericAPIView):
+class TeamRemoveTeamLeadAPIView(
+    generics.GenericAPIView,
+    ViewsSerializerValidateRequestMixin,
+    TeamGenericRemovePersonal
+):
     serializer_class = TeamTeamLeadSerializer
-    queryset = Team.objects.select_related('team_lead').all()
+    queryset = Team.objects.all()
 
-    @response_true_request_false_message_schema
+    personal_relation_name = 'team_lead'
+    personal_model = Developer
+
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
-        team: Team = self.get_object()
-        if developer := Developer.objects.filter(
-                profile__user__username=team.team_lead.profile.user.username
-        ):
-            developer.team = None
-            developer.save()
-            
-        team.team_lead = None
-        team.save()
-
-        return PostResponse.response_ok(
-            f"Team lead for this team NULL"
+        return self._remove_personal(
+            request,
+            'Team lead for this team removed'
         )
 
 
 class TeamUpdateProjectManagerAPIView(
     generics.GenericAPIView,
-    ViewsSerializerValidateRequestMixin
+    ViewsSerializerValidateRequestMixin,
+    TeamGenericUpdatePersonal
 ):
     serializer_class = TeamProjectManagerSerializer
     queryset = Team.objects.all()
 
+    personal_model = ProjectManager
+    personal_relation_name = 'project_manager'
+
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
-        team = self.get_object()
-
-        project_manager_username = self._validate_request(request).data[
-            'project_manager'
-        ]
-        if project_manager := ProjectManager.objects.filter(
-                profile__user__username=project_manager_username
-        ).first():
-            team.project_manager = project_manager
-            project_manager.team = team
-
-            project_manager.save()
-            team.save()
-            return PostResponse.response_ok(
-                f"Project manager for this team \'{project_manager}\'"
-            )
-        return PostResponse.not_found_response('Not found project manager')
+        return self._update_personal(
+            request,
+            'Project manager for this team set\'s'
+        )
 
 
-class TeamRemoveProjectManagerAPIView(generics.GenericAPIView):
+class TeamRemoveProjectManagerAPIView(
+    generics.GenericAPIView,
+    TeamGenericRemovePersonal
+):
     serializer_class = TeamProjectManagerSerializer
-    queryset = Team.objects.select_related('project_manager').all()
+    queryset = Team.objects.all()
 
-    @response_true_request_false_message_schema
+    personal_relation_name = 'project_manager'
+    personal_model = ProjectManager
+
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
-        team = self.get_object()
-
-        if project_manager := ProjectManager.objects.get(
-                profile__user__username=team.project_manager.profile.user.username
-        ):
-            project_manager.team = None
-            project_manager.save()
-
-        team.project_manager = None
-        team.save()
-        return PostResponse.response_ok(
-            f"Project manager for this team NULL"
+        return self._remove_personal(
+            request,
+            'Project manager for this team removed'
         )
