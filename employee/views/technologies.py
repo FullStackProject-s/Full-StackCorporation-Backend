@@ -1,38 +1,38 @@
 from rest_framework import generics
 
-from employee.views.mixins import BaseConfigurationTechnologiesViewMixin
+from employee.views.generics import BaseConfigurationTechnologiesViewGeneric
 
 
 class AllTechnologiesListAPIView(
-    BaseConfigurationTechnologiesViewMixin,
+    BaseConfigurationTechnologiesViewGeneric,
     generics.ListAPIView
 ):
     pass
 
 
 class TechnologiesRetrieveAPIView(
-    BaseConfigurationTechnologiesViewMixin,
+    BaseConfigurationTechnologiesViewGeneric,
     generics.RetrieveAPIView
 ):
     pass
 
 
 class TechnologiesCreateAPIView(
-    BaseConfigurationTechnologiesViewMixin,
+    BaseConfigurationTechnologiesViewGeneric,
     generics.CreateAPIView
 ):
     pass
 
 
 class TechnologiesDestroyAPIView(
-    BaseConfigurationTechnologiesViewMixin,
+    BaseConfigurationTechnologiesViewGeneric,
     generics.DestroyAPIView
 ):
     pass
 
 
 class TechnologiesUpdateAPIView(
-    BaseConfigurationTechnologiesViewMixin,
+    BaseConfigurationTechnologiesViewGeneric,
     generics.UpdateAPIView
 ):
     pass

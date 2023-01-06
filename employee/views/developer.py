@@ -1,6 +1,6 @@
 from rest_framework import generics
 
-from .mixins import BaseConfigurationDevelopersViewMixin
+from .generics import BaseConfigurationDevelopersViewGeneric
 
 from employee.models import (
     Technologies
@@ -23,42 +23,42 @@ from general import (
 
 
 class AllDeveloperListAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.ListAPIView
 ):
     pass
 
 
 class DeveloperRetrieveAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.RetrieveAPIView
 ):
     pass
 
 
 class DeveloperCreateAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.CreateAPIView
 ):
     pass
 
 
 class DeveloperDestroyAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.DestroyAPIView
 ):
     pass
 
 
 class DeveloperUpdateAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.UpdateAPIView
 ):
     pass
 
 
 class DeveloperUpdateTeamAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
     ChangePersonalTeamViewMixin,
     ViewsSerializerValidateRequestMixin
@@ -76,7 +76,7 @@ class DeveloperUpdateTeamAPIView(
 
 
 class DeveloperDeleteTeamAPIView(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
@@ -86,7 +86,7 @@ class DeveloperDeleteTeamAPIView(
 
 
 class DeveloperAddStackTechnologies(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
     ViewsSerializerValidateRequestMixin
 ):
@@ -109,7 +109,7 @@ class DeveloperAddStackTechnologies(
 
 
 class DeveloperRemoveTechnologies(
-    BaseConfigurationDevelopersViewMixin,
+    BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
     ViewsSerializerValidateRequestMixin
 ):

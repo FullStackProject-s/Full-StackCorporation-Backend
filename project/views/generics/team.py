@@ -1,7 +1,11 @@
-from project.views.mixins import (
-    TeamRemoveMainPersonalViewMixin,
-    TeamUpdateMainPersonalViewMixin
+from rest_framework import generics
+
+from employee.models import (
+    ProjectManager,
+    Developer
 )
+from project.models import Team
+from project.serializer import TeamSerializer
 
 
 class TeamBaseGenericRemoveUpdateMainPersonal:
@@ -9,15 +13,20 @@ class TeamBaseGenericRemoveUpdateMainPersonal:
     personal_relation_name = None
 
 
-class TeamGenericRemovePersonal(
-    TeamBaseGenericRemoveUpdateMainPersonal,
-    TeamRemoveMainPersonalViewMixin
-):
-    pass
+class TeamBaseGenericView(generics.GenericAPIView):
+    serializer_class = TeamSerializer
+    queryset = Team.objects.all()
 
 
-class TeamGenericUpdatePersonal(
-    TeamBaseGenericRemoveUpdateMainPersonal,
-    TeamUpdateMainPersonalViewMixin
+class TeamProjectManagerRemoveUpdateBase(
+    TeamBaseGenericRemoveUpdateMainPersonal
 ):
-    pass
+    personal_relation_name = 'project_manager'
+    personal_model = ProjectManager
+
+
+class TeamTeamLeadRemoveUpdateBase(
+    TeamBaseGenericRemoveUpdateMainPersonal
+):
+    personal_relation_name = 'team_lead'
+    personal_model = Developer

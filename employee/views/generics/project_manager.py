@@ -2,6 +2,6 @@ from employee.models import ProjectManager
 from employee.serializers import ProjectManagerSerializer
 
 
-class BaseConfigurationProjectManagersViewMixin:
+class BaseConfigurationProjectManagersViewGeneric:
     serializer_class = ProjectManagerSerializer
     queryset = ProjectManager.objects.all()

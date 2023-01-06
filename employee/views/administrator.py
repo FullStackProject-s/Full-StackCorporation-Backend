@@ -1,38 +1,38 @@
 from rest_framework import generics
 
-from .mixins import BaseConfigurationAdministratorsViewMixin
+from .generics import BaseConfigurationAdministratorsViewGeneric
 
 
 class AllAdministratorsListAPIView(
-    BaseConfigurationAdministratorsViewMixin,
+    BaseConfigurationAdministratorsViewGeneric,
     generics.ListAPIView
 ):
     pass
 
 
 class AdministratorRetrieveAPIView(
-    BaseConfigurationAdministratorsViewMixin,
+    BaseConfigurationAdministratorsViewGeneric,
     generics.RetrieveAPIView
 ):
     pass
 
 
 class AdministratorCreateAPIView(
-    BaseConfigurationAdministratorsViewMixin,
+    BaseConfigurationAdministratorsViewGeneric,
     generics.CreateAPIView
 ):
     pass
 
 
 class AdministratorDestroyAPIView(
-    BaseConfigurationAdministratorsViewMixin,
+    BaseConfigurationAdministratorsViewGeneric,
     generics.DestroyAPIView
 ):
     pass
 
 
 class AdministratorUpdateAPIView(
-    BaseConfigurationAdministratorsViewMixin,
+    BaseConfigurationAdministratorsViewGeneric,
     generics.UpdateAPIView
 ):
     pass

@@ -1,53 +1,60 @@
 from rest_framework import generics
 
-from employee.models import Developer, ProjectManager
-
 from general import ViewsSerializerValidateRequestMixin
 from general.schemas import response_true_message_schema
-from general.services import PostResponse
 
 from project.serializer import (
-    TeamSerializer,
     TeamNameSerializer,
     TeamTeamLeadSerializer,
     TeamProjectManagerSerializer
 )
-from project.models.team import Team
+from project.views.generics.team import TeamBaseGenericView
+
+from project.views.mixins import (
+    TeamRemoveMainPersonalViewMixin,
+    TeamUpdateMainPersonalViewMixin
+)
 from project.views.generics import (
-    TeamGenericRemovePersonal,
-    TeamGenericUpdatePersonal
+    TeamProjectManagerRemoveUpdateBase,
+    TeamTeamLeadRemoveUpdateBase
 )
 
 
-class AllTeamListAPIView(generics.ListAPIView):
-    serializer_class = TeamSerializer
-    queryset = Team.objects.all()
+class AllTeamListAPIView(
+    TeamBaseGenericView,
+    generics.ListAPIView
+):
+    pass
 
 
-class TeamRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = TeamSerializer
-    queryset = Team.objects.all()
+class TeamRetrieveAPIView(
+    TeamBaseGenericView,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class TeamCreateAPIView(generics.CreateAPIView):
+class TeamCreateAPIView(
+    TeamBaseGenericView,
+    generics.CreateAPIView
+):
     serializer_class = TeamNameSerializer
 
 
-class TeamChangeNameAPIView(generics.UpdateAPIView):
+class TeamChangeNameAPIView(
+    TeamBaseGenericView,
+    generics.UpdateAPIView
+):
     serializer_class = TeamNameSerializer
-    queryset = Team.objects.all()
 
 
 class TeamUpdateTeamLeadAPIView(
-    generics.GenericAPIView,
+    TeamBaseGenericView,
     ViewsSerializerValidateRequestMixin,
-    TeamGenericUpdatePersonal
+    TeamTeamLeadRemoveUpdateBase,
+    TeamUpdateMainPersonalViewMixin
 ):
     serializer_class = TeamTeamLeadSerializer
-    queryset = Team.objects.all()
-
-    personal_model = Developer
-    personal_relation_name = 'team_lead'
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
@@ -58,15 +65,12 @@ class TeamUpdateTeamLeadAPIView(
 
 
 class TeamRemoveTeamLeadAPIView(
-    generics.GenericAPIView,
+    TeamBaseGenericView,
     ViewsSerializerValidateRequestMixin,
-    TeamGenericRemovePersonal
+    TeamTeamLeadRemoveUpdateBase,
+    TeamRemoveMainPersonalViewMixin
 ):
     serializer_class = TeamTeamLeadSerializer
-    queryset = Team.objects.all()
-
-    personal_relation_name = 'team_lead'
-    personal_model = Developer
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
@@ -77,15 +81,12 @@ class TeamRemoveTeamLeadAPIView(
 
 
 class TeamUpdateProjectManagerAPIView(
-    generics.GenericAPIView,
+    TeamBaseGenericView,
     ViewsSerializerValidateRequestMixin,
-    TeamGenericUpdatePersonal
+    TeamProjectManagerRemoveUpdateBase,
+    TeamUpdateMainPersonalViewMixin
 ):
     serializer_class = TeamProjectManagerSerializer
-    queryset = Team.objects.all()
-
-    personal_model = ProjectManager
-    personal_relation_name = 'project_manager'
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
@@ -96,14 +97,12 @@ class TeamUpdateProjectManagerAPIView(
 
 
 class TeamRemoveProjectManagerAPIView(
-    generics.GenericAPIView,
-    TeamGenericRemovePersonal
+    TeamBaseGenericView,
+    ViewsSerializerValidateRequestMixin,
+    TeamProjectManagerRemoveUpdateBase,
+    TeamRemoveMainPersonalViewMixin
 ):
     serializer_class = TeamProjectManagerSerializer
-    queryset = Team.objects.all()
-
-    personal_relation_name = 'project_manager'
-    personal_model = ProjectManager
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):

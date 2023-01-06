@@ -1,4 +1,4 @@
 from .team import (
-    TeamGenericRemovePersonal,
-    TeamGenericUpdatePersonal
+    TeamProjectManagerRemoveUpdateBase,
+    TeamTeamLeadRemoveUpdateBase
 )

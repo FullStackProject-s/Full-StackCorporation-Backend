@@ -3,7 +3,7 @@ from rest_framework import generics
 from employee.serializers import (
     TeamChangeSerializer,
 )
-from employee.views.mixins import BaseConfigurationProjectManagersViewMixin
+from employee.views.generics import BaseConfigurationProjectManagersViewGeneric
 from employee.views.service.teamChangeDelete import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin,
@@ -16,42 +16,42 @@ from general import (
 
 
 class AllProjectManagerListAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.ListAPIView
 ):
     pass
 
 
 class ProjectManagerRetrieveAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.RetrieveAPIView
 ):
     pass
 
 
 class ProjectManagerCreateAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.CreateAPIView
 ):
     pass
 
 
 class ProjectManagerDestroyAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.DestroyAPIView
 ):
     pass
 
 
 class ProjectManagerUpdateAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.UpdateAPIView
 ):
     pass
 
 
 class ProjectManagerChangeTeamAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.GenericAPIView,
     ChangePersonalTeamViewMixin,
     ViewsSerializerValidateRequestMixin
@@ -69,7 +69,7 @@ class ProjectManagerChangeTeamAPIView(
 
 
 class ProjectManagerDeleteTeamAPIView(
-    BaseConfigurationProjectManagersViewMixin,
+    BaseConfigurationProjectManagersViewGeneric,
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
