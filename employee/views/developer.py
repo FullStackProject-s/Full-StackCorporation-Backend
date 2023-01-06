@@ -3,7 +3,6 @@ from rest_framework import generics
 from .mixins import BaseConfigurationDevelopersViewMixin
 
 from employee.models import (
-    Developer,
     Technologies
 )
 from employee.serializers import (
@@ -18,8 +17,8 @@ from employee.views.service.teamChangeDelete import (
 from general import (
     ViewsSerializerValidateRequestMixin,
     PostResponse,
-    response_true_message,
-    response_true_request_false_message
+    response_true_message_schema,
+    response_true_request_false_message_schema
 )
 
 
@@ -66,7 +65,7 @@ class DeveloperUpdateTeamAPIView(
 ):
     serializer_class = TeamChangeSerializer
 
-    @response_true_message
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         team_name = self._validate_request(request).data['team']
 
@@ -81,7 +80,7 @@ class DeveloperDeleteTeamAPIView(
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
-    @response_true_request_false_message
+    @response_true_request_false_message_schema
     def post(self, request, *args, **kwargs):
         return self._post_delete_team('Team for this developer now NULL')
 
@@ -93,7 +92,7 @@ class DeveloperAddStackTechnologies(
 ):
     serializer_class = DeveloperStackTechnologiesSerializer
 
-    @response_true_message
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
 
@@ -116,7 +115,7 @@ class DeveloperRemoveTechnologies(
 ):
     serializer_class = DeveloperStackTechnologiesSerializer
 
-    @response_true_message
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
 
