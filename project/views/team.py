@@ -111,4 +111,5 @@ class TeamRemoveProjectManagerAPIView(
             'Project manager for this team removed'
         )
 
-class TeamRemoveDevelopers:...
+
+class TeamRemoveDevelopersAPIView: ...
