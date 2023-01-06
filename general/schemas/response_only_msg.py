@@ -10,7 +10,7 @@ def response_true_message(view_method_name):
             OpenApiExample(
                 'Valid example 1',
                 value={
-                    'Message': 'string',
+                    'message': 'string',
                 },
                 response_only=True
             ),

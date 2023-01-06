@@ -1,2 +1,4 @@
 from .administrator import BaseConfigurationAdministratorsViewMixin
 from .technologies import BaseConfigurationTechnologiesViewMixin
+from .developer import BaseConfigurationDevelopersViewMixin
+from .project_manager import BaseConfigurationProjectManagersViewMixin

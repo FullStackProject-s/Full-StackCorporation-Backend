@@ -1,13 +1,12 @@
 from rest_framework import generics
-from rest_framework import status
-from rest_framework.response import Response
+
+from .mixins import BaseConfigurationDevelopersViewMixin
 
 from employee.models import (
     Developer,
     Technologies
 )
 from employee.serializers import (
-    DeveloperSerializer,
     DeveloperStackTechnologiesSerializer
 )
 from employee.serializers import TeamChangeSerializer
@@ -24,36 +23,47 @@ from general import (
 )
 
 
-class AllDeveloperListAPIView(generics.ListAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class AllDeveloperListAPIView(
+    BaseConfigurationDevelopersViewMixin,
+    generics.ListAPIView
+):
+    pass
 
 
-class DeveloperRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class DeveloperRetrieveAPIView(
+    BaseConfigurationDevelopersViewMixin,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class DeveloperCreateAPIView(generics.CreateAPIView):
-    serializer_class = DeveloperSerializer
+class DeveloperCreateAPIView(
+    BaseConfigurationDevelopersViewMixin,
+    generics.CreateAPIView
+):
+    pass
 
 
-class DeveloperDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class DeveloperDestroyAPIView(
+    BaseConfigurationDevelopersViewMixin,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class DeveloperUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class DeveloperUpdateAPIView(
+    BaseConfigurationDevelopersViewMixin,
+    generics.UpdateAPIView
+):
+    pass
 
 
-class DeveloperChangeTeamAPIView(
+class DeveloperUpdateTeamAPIView(
+    BaseConfigurationDevelopersViewMixin,
     generics.GenericAPIView,
     ChangePersonalTeamViewMixin,
     ViewsSerializerValidateRequestMixin
 ):
-    queryset = Developer.objects.all()
     serializer_class = TeamChangeSerializer
 
     @response_true_message
@@ -67,24 +77,23 @@ class DeveloperChangeTeamAPIView(
 
 
 class DeveloperDeleteTeamAPIView(
+    BaseConfigurationDevelopersViewMixin,
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
-
     @response_true_request_false_message
     def post(self, request, *args, **kwargs):
         return self._post_delete_team('Team for this developer now NULL')
 
 
 class DeveloperAddStackTechnologies(
+    BaseConfigurationDevelopersViewMixin,
     generics.GenericAPIView,
     ViewsSerializerValidateRequestMixin
 ):
     serializer_class = DeveloperStackTechnologiesSerializer
-    queryset = Developer.objects.all()
 
+    @response_true_message
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
 
@@ -101,12 +110,13 @@ class DeveloperAddStackTechnologies(
 
 
 class DeveloperRemoveTechnologies(
+    BaseConfigurationDevelopersViewMixin,
     generics.GenericAPIView,
     ViewsSerializerValidateRequestMixin
 ):
     serializer_class = DeveloperStackTechnologiesSerializer
-    queryset = Developer.objects.all()
 
+    @response_true_message
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
 

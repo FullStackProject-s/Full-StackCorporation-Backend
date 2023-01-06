@@ -5,6 +5,7 @@ from employee.serializers import (
     ProjectManagerSerializer,
     TeamChangeSerializer,
 )
+from employee.views.mixins import BaseConfigurationProjectManagersViewMixin
 from employee.views.service.teamChangeDelete import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin,
@@ -16,36 +17,47 @@ from general import (
 )
 
 
-class AllProjectManagerListAPIView(generics.ListAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class AllProjectManagerListAPIView(
+    BaseConfigurationProjectManagersViewMixin,
+    generics.ListAPIView
+):
+    pass
 
 
-class ProjectManagerRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class ProjectManagerRetrieveAPIView(
+    BaseConfigurationProjectManagersViewMixin,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class ProjectManagerCreateAPIView(generics.CreateAPIView):
-    serializer_class = ProjectManagerSerializer
+class ProjectManagerCreateAPIView(
+    BaseConfigurationProjectManagersViewMixin,
+    generics.CreateAPIView
+):
+    pass
 
 
-class ProjectManagerDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class ProjectManagerDestroyAPIView(
+    BaseConfigurationProjectManagersViewMixin,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class ProjectManagerUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class ProjectManagerUpdateAPIView(
+    BaseConfigurationProjectManagersViewMixin,
+    generics.UpdateAPIView
+):
+    pass
 
 
 class ProjectManagerChangeTeamAPIView(
+    BaseConfigurationProjectManagersViewMixin,
     generics.GenericAPIView,
     ChangePersonalTeamViewMixin,
     ViewsSerializerValidateRequestMixin
 ):
-    queryset = ProjectManager.objects.all()
     serializer_class = TeamChangeSerializer
 
     @response_true_message
@@ -59,11 +71,10 @@ class ProjectManagerChangeTeamAPIView(
 
 
 class ProjectManagerDeleteTeamAPIView(
+    BaseConfigurationProjectManagersViewMixin,
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
 
     @response_true_request_false_message
     def post(self, request, *args, **kwargs):

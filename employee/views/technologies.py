@@ -12,27 +12,27 @@ class AllTechnologiesListAPIView(
 
 class TechnologiesRetrieveAPIView(
     BaseConfigurationTechnologiesViewMixin,
-    generics.ListAPIView
+    generics.RetrieveAPIView
 ):
     pass
 
 
 class TechnologiesCreateAPIView(
     BaseConfigurationTechnologiesViewMixin,
-    generics.ListAPIView
+    generics.CreateAPIView
 ):
     pass
 
 
 class TechnologiesDestroyAPIView(
     BaseConfigurationTechnologiesViewMixin,
-    generics.ListAPIView
+    generics.DestroyAPIView
 ):
     pass
 
 
 class TechnologiesUpdateAPIView(
     BaseConfigurationTechnologiesViewMixin,
-    generics.ListAPIView
+    generics.UpdateAPIView
 ):
     pass
