@@ -1,6 +1,5 @@
 envCorporation
 .idea
 __pycache__
-migrations
 .env
 .dev.env

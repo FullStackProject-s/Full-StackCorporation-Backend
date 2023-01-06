@@ -5,7 +5,7 @@ from employee.views.developer import (
     DeveloperDestroyAPIView,
     DeveloperCreateAPIView,
     DeveloperUpdateAPIView,
-    DeveloperChangeTeamAPIView,
+    DeveloperUpdateTeamAPIView,
     DeveloperDeleteTeamAPIView,
     DeveloperAddStackTechnologies,
     DeveloperRemoveTechnologies,
@@ -33,7 +33,7 @@ urlpatterns_developers = [
          name='update-developer'
          ),
     path('update-developer-team/<int:pk>/',
-         DeveloperChangeTeamAPIView.as_view(),
+         DeveloperUpdateTeamAPIView.as_view(),
          name='update-developer-team'
          ),
     path('remove-developer-team/<int:pk>/',

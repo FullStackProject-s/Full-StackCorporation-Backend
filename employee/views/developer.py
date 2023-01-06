@@ -1,62 +1,69 @@
 from rest_framework import generics
-from rest_framework import status
-from rest_framework.response import Response
 
-from employee.models import (
-    Developer,
-    Technologies
-)
+from .generics import BaseConfigurationDevelopersViewGeneric
+
+from employee.models import Technologies
 from employee.serializers import (
-    DeveloperSerializer,
-    DeveloperAddStackTechnologiesSerializer
+    DeveloperStackTechnologiesSerializer,
+    TeamChangeSerializer
 )
-from employee.serializers import TeamChangeSerializer
-from employee.views.service.teamChangeDelete import (
+from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin
 )
 
 from general import (
     ViewsSerializerValidateRequestMixin,
-    PostResponse,
-    response_true_message,
-    response_true_request_false_message
+    response_true_message_schema,
+    response_true_request_false_message_schema
 )
+from .service import developer_technologies_response
 
 
-class AllDeveloperListAPIView(generics.ListAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class AllDeveloperListAPIView(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.ListAPIView
+):
+    pass
 
 
-class DeveloperRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class DeveloperRetrieveAPIView(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class DeveloperCreateAPIView(generics.CreateAPIView):
-    serializer_class = DeveloperSerializer
+class DeveloperCreateAPIView(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.CreateAPIView
+):
+    pass
 
 
-class DeveloperDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class DeveloperDestroyAPIView(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class DeveloperUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
+class DeveloperUpdateAPIView(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.UpdateAPIView
+):
+    pass
 
 
-class DeveloperChangeTeamAPIView(
+class DeveloperUpdateTeamAPIView(
+    BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
     ChangePersonalTeamViewMixin,
     ViewsSerializerValidateRequestMixin
 ):
-    queryset = Developer.objects.all()
     serializer_class = TeamChangeSerializer
 
-    @response_true_message
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         team_name = self._validate_request(request).data['team']
 
@@ -67,50 +74,62 @@ class DeveloperChangeTeamAPIView(
 
 
 class DeveloperDeleteTeamAPIView(
+    BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
-    serializer_class = DeveloperSerializer
-    queryset = Developer.objects.all()
-
-    @response_true_request_false_message
+    @response_true_request_false_message_schema
     def post(self, request, *args, **kwargs):
         return self._post_delete_team('Team for this developer now NULL')
 
 
-class DeveloperAddStackTechnologies(generics.GenericAPIView):
-    serializer_class = DeveloperAddStackTechnologiesSerializer
-    queryset = Developer.objects.all()
+class DeveloperAddStackTechnologies(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.GenericAPIView,
+    ViewsSerializerValidateRequestMixin
+):
+    serializer_class = DeveloperStackTechnologiesSerializer
 
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
+        tech_list = []
 
-        tech = Technologies.objects.filter(
-            technology_name=request.data['technology_name']
+        for tech_name in self._validate_request(request).data[
+            'technology_names'
+        ]:
+            if tech := Technologies.objects.filter(
+                    technology_name=tech_name
+            ).first():
+                dev.append_technologies(tech)
+                tech_list.append(tech.technology_name)
+        return developer_technologies_response(
+            tech_list,
+            f"[{' '.join(tech_list)}] for this developer set"
         )
-        if tech:
-            dev.append_technologies([tech.first()])
-            return Response(
-                DeveloperSerializer(dev).data,
-                status=status.HTTP_200_OK
-            )
-        return PostResponse.not_found_response('Tech not found')
 
 
-class DeveloperRemoveTechnologies(generics.GenericAPIView):
-    serializer_class = DeveloperAddStackTechnologiesSerializer
-    queryset = Developer.objects.all()
+class DeveloperRemoveTechnologies(
+    BaseConfigurationDevelopersViewGeneric,
+    generics.GenericAPIView,
+    ViewsSerializerValidateRequestMixin
+):
+    serializer_class = DeveloperStackTechnologiesSerializer
 
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
+        tech_list = []
 
-        tech = Technologies.objects.filter(
-            technology_name=request.data['technology_name']
+        for tech_name in self._validate_request(request).data[
+            'technology_names'
+        ]:
+            if tech := Technologies.objects.filter(
+                    technology_name=tech_name
+            ).first():
+                dev.remove_technologies(tech)
+                tech_list.append(tech.technology_name)
+        return developer_technologies_response(
+            tech_list,
+            f"[{', '.join(tech_list)}] for this developer unset"
         )
-        if tech:
-            dev.remove_technologies(tech.first())
-            return Response(
-                DeveloperSerializer(dev).data,
-                status=status.HTTP_200_OK
-            )
-        return PostResponse.not_found_response('Tech not found')

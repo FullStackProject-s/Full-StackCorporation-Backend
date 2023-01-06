@@ -1,27 +1,38 @@
-from user.models.profile import Profile
 from rest_framework import generics
-from user.serializers import ProfileSerializer
+
+from user.views.generics import BaseConfigurationProfilesViewGeneric
 
 
-class AllProfileListAPIView(generics.ListAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
+class AllProfileListAPIView(
+    BaseConfigurationProfilesViewGeneric,
+    generics.ListAPIView
+):
+    pass
 
 
-class ProfileRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
+class ProfileRetrieveAPIView(
+    BaseConfigurationProfilesViewGeneric,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class ProfileCreateAPIView(generics.CreateAPIView):
-    serializer_class = ProfileSerializer
+class ProfileCreateAPIView(
+    BaseConfigurationProfilesViewGeneric,
+    generics.CreateAPIView
+):
+    pass
 
 
-class ProfileDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
+class ProfileDestroyAPIView(
+    BaseConfigurationProfilesViewGeneric,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class ProfileUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
+class ProfileUpdateAPIView(
+    BaseConfigurationProfilesViewGeneric,
+    generics.UpdateAPIView
+):
+    pass

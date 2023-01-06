@@ -1,0 +1,21 @@
+services:
+ web-django:
+   container_name: BackendAPI
+   restart: always
+   build:
+     context: .
+     dockerfile: ./Dockerfile
+   command: bash -c
+     "python manage.py migrate && python manage.py test && python manage.py runserver 0.0.0.0:8000"
+   ports:
+     - 7999:8000
+   env_file:
+     - ./core/.env
+   depends_on:
+     - postgres
+ postgres:
+    container_name: postgresProduction
+    image: postgres:latest
+    restart: on-failure
+    env_file:
+      - ./core/.env

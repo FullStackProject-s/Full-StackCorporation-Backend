@@ -1,28 +1,38 @@
 from rest_framework import generics
 
-from employee.models import Administrator
-from employee.serializers import AdministratorSerializer
+from .generics import BaseConfigurationAdministratorsViewGeneric
 
 
-class AllAdministratorsListAPIView(generics.ListAPIView):
-    serializer_class = AdministratorSerializer
-    queryset = Administrator.objects.all()
+class AllAdministratorsListAPIView(
+    BaseConfigurationAdministratorsViewGeneric,
+    generics.ListAPIView
+):
+    pass
 
 
-class AdministratorRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = AdministratorSerializer
-    queryset = Administrator.objects.all()
+class AdministratorRetrieveAPIView(
+    BaseConfigurationAdministratorsViewGeneric,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class AdministratorCreateAPIView(generics.CreateAPIView):
-    serializer_class = AdministratorSerializer
+class AdministratorCreateAPIView(
+    BaseConfigurationAdministratorsViewGeneric,
+    generics.CreateAPIView
+):
+    pass
 
 
-class AdministratorDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = AdministratorSerializer
-    queryset = Administrator.objects.all()
+class AdministratorDestroyAPIView(
+    BaseConfigurationAdministratorsViewGeneric,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class AdministratorUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = AdministratorSerializer
-    queryset = Administrator.objects.all()
+class AdministratorUpdateAPIView(
+    BaseConfigurationAdministratorsViewGeneric,
+    generics.UpdateAPIView
+):
+    pass

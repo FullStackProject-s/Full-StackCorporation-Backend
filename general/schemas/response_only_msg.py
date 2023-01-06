@@ -4,13 +4,13 @@ from drf_spectacular.utils import (
 )
 
 
-def response_true_message(view_method_name):
+def response_true_message_schema(view_method_name):
     return extend_schema(
         examples=[
             OpenApiExample(
                 'Valid example 1',
                 value={
-                    'Message': 'string',
+                    'message': 'string',
                 },
                 response_only=True
             ),
@@ -18,7 +18,7 @@ def response_true_message(view_method_name):
     )(view_method_name)
 
 
-def response_true_request_false_message(view_method_name):
+def response_true_request_false_message_schema(view_method_name):
     return extend_schema(
         examples=[
             OpenApiExample(

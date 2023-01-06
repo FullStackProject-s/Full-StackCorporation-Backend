@@ -1,32 +1,39 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 
-from user.serializers import (
-    CustomUserSerializer
-)
-
-User = get_user_model()
+from user.views.generics import BaseConfigurationUsersViewGeneric
 
 
-class AllUsersListAPIView(generics.ListAPIView):
-    serializer_class = CustomUserSerializer
-    queryset = User.objects.all()
+class AllUsersListAPIView(
+    BaseConfigurationUsersViewGeneric,
+    generics.ListAPIView
+):
+    pass
 
 
-class UserRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = CustomUserSerializer
-    queryset = User.objects.all()
+class UserRetrieveAPIView(
+    BaseConfigurationUsersViewGeneric,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class UserCreateAPIView(generics.CreateAPIView):
-    serializer_class = CustomUserSerializer
+class UserCreateAPIView(
+    BaseConfigurationUsersViewGeneric,
+    generics.CreateAPIView
+):
+    pass
 
 
-class UserDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = CustomUserSerializer
-    queryset = User.objects.all()
+class UserDestroyAPIView(
+    BaseConfigurationUsersViewGeneric,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class UserUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = CustomUserSerializer
-    queryset = User.objects.all()
+class UserUpdateAPIView(
+    BaseConfigurationUsersViewGeneric,
+    generics.UpdateAPIView
+):
+    pass

@@ -1,54 +1,64 @@
 from rest_framework import generics
 
-from employee.models import ProjectManager
 from employee.serializers import (
-    ProjectManagerSerializer,
     TeamChangeSerializer,
 )
-from employee.views.service.teamChangeDelete import (
+from employee.views.generics import BaseConfigurationProjectManagersViewGeneric
+from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin,
 )
 from general import (
     ViewsSerializerValidateRequestMixin,
-    response_true_message,
-    response_true_request_false_message
+    response_true_message_schema,
+    response_true_request_false_message_schema
 )
 
 
-class AllProjectManagerListAPIView(generics.ListAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class AllProjectManagerListAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
+    generics.ListAPIView
+):
+    pass
 
 
-class ProjectManagerRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class ProjectManagerRetrieveAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class ProjectManagerCreateAPIView(generics.CreateAPIView):
-    serializer_class = ProjectManagerSerializer
+class ProjectManagerCreateAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
+    generics.CreateAPIView
+):
+    pass
 
 
-class ProjectManagerDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class ProjectManagerDestroyAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class ProjectManagerUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
+class ProjectManagerUpdateAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
+    generics.UpdateAPIView
+):
+    pass
 
 
 class ProjectManagerChangeTeamAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
     generics.GenericAPIView,
     ChangePersonalTeamViewMixin,
     ViewsSerializerValidateRequestMixin
 ):
-    queryset = ProjectManager.objects.all()
     serializer_class = TeamChangeSerializer
 
-    @response_true_message
+    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         team_name = self._validate_request(request).data['team']
 
@@ -59,12 +69,11 @@ class ProjectManagerChangeTeamAPIView(
 
 
 class ProjectManagerDeleteTeamAPIView(
+    BaseConfigurationProjectManagersViewGeneric,
     generics.GenericAPIView,
     DeletePersonalTeamViewMixin
 ):
-    serializer_class = ProjectManagerSerializer
-    queryset = ProjectManager.objects.all()
 
-    @response_true_request_false_message
+    @response_true_request_false_message_schema
     def post(self, request, *args, **kwargs):
         return self._post_delete_team("Team for this project manager None")

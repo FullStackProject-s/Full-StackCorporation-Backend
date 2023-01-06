@@ -22,8 +22,8 @@ class Developer(BaseEmployeeMixin):
         null=True
     )
 
-    def append_technologies(self, tech_list):
-        self.stack.add(*tech_list)
+    def append_technologies(self, tech: Technologies):
+        self.stack.add(tech)
         self.save()
 
     def remove_technologies(self, tech):
