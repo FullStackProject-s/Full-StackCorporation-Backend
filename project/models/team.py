@@ -26,6 +26,14 @@ class Team(models.Model):
         blank=True,
     )
 
+    def append_developer(self, developer):
+        self.developers.add(developer)
+        self.save()
+
+    def remove_developer(self, developer):
+        self.developers.remove(developer)
+        self.save()
+
     def __str__(self):
         return f'Team name: {self.team_name} - ' \
                f'Team lead: {self.team_lead} - ' \

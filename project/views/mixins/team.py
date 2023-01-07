@@ -1,4 +1,4 @@
-from general import PostResponse
+from general.services import PostResponse
 
 
 class TeamRemoveMainPersonalViewMixin:

@@ -6,13 +6,11 @@ from employee.serializers.mixins import (
 )
 
 from user.models.consts import StaffRole
-from user.serializers.mixins import CreateCustomUserSerializerMixin
 
 
 class ProjectManagerSerializer(
     BaseManagerDeveloperSerializer,
     ProfileUpdateSerializerMixin,
-    CreateCustomUserSerializerMixin,
     StaffCreateSerializerMixin
 ):
     class Meta:
@@ -22,9 +20,11 @@ class ProjectManagerSerializer(
         )
 
     def create(self, validated_data):
+        specialty = validated_data.pop('get_specialty_display')
         return self._staff_create(
             validated_data,
-            StaffRole.PRODUCT_MANAGER
+            StaffRole.PRODUCT_MANAGER,
+            specialty=specialty
         )
 
     def update(self, instance, validated_data):

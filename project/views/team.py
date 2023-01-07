@@ -1,12 +1,16 @@
 from rest_framework import generics
 
-from general import ViewsSerializerValidateRequestMixin
+from employee.models import Developer
+
+from general.mixins import ViewsSerializerValidateRequestMixin
 from general.schemas import response_true_message_schema
+from general.services import response_many_to_many_api_views
 
 from project.serializer import (
     TeamNameSerializer,
     TeamTeamLeadSerializer,
-    TeamProjectManagerSerializer
+    TeamProjectManagerSerializer,
+    TeamDevelopersSerializer
 )
 from project.views.generics.team import TeamBaseGenericView
 
@@ -112,4 +116,59 @@ class TeamRemoveProjectManagerAPIView(
         )
 
 
-class TeamRemoveDevelopersAPIView: ...
+class TeamUpdateDevelopersAPIView(
+    TeamBaseGenericView,
+    ViewsSerializerValidateRequestMixin,
+):
+    serializer_class = TeamDevelopersSerializer
+
+    @response_true_message_schema
+    def post(self, request, *args, **kwargs):
+        team = self.get_object()
+        developer_list = []
+        developers_names = self._validate_request(request).data['developers']
+
+        for developer_name in developers_names:
+            if developer := Developer.objects.filter(
+                    profile__user__username=developer_name
+            ).first():
+                team.append_developer(developer)
+                developer_list.append(developer)
+                developer.team = team
+
+                team.save()
+                developer.save()
+        return response_many_to_many_api_views(
+            developer_list,
+            f"Developers for this team set",
+            'Developers not found'
+        )
+
+
+class TeamRemoveDevelopersAPIView(
+    TeamBaseGenericView,
+    ViewsSerializerValidateRequestMixin,
+):
+    serializer_class = TeamDevelopersSerializer
+
+    @response_true_message_schema
+    def post(self, request, *args, **kwargs):
+        team = self.get_object()
+        developer_list = []
+        developers_names = self._validate_request(request).data['developers']
+
+        for developer_name in developers_names:
+            if developer := Developer.objects.filter(
+                    profile__user__username=developer_name
+            ).first():
+                team.remove_developer(developer)
+                developer_list.append(developer)
+                developer.team = None
+
+                team.save()
+                developer.save()
+        return response_many_to_many_api_views(
+            developer_list,
+            f"Developers for this team unset",
+            'Developers not found'
+        )

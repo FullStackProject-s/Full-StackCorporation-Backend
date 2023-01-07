@@ -18,3 +18,15 @@ class PostResponse:
             {"message": message_text},
             status=status.HTTP_200_OK
         )
+
+
+def response_many_to_many_api_views(
+        models_list,
+        message_ok,
+        message_bad
+):
+    if models_list:
+        return PostResponse.response_ok(
+            message_ok
+        )
+    return PostResponse.not_found_response(message_bad)
