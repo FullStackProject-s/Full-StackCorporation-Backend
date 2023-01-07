@@ -2,14 +2,13 @@ from rest_framework import generics
 
 from .generics import BaseConfigurationDevelopersViewGeneric
 
-from employee.models import Technologies
 from employee.serializers import (
     DeveloperStackTechnologiesSerializer,
     TeamChangeSerializer
 )
 from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
-    DeletePersonalTeamViewMixin
+    DeletePersonalTeamViewMixin, DeveloperTechnologiesRemoveUpdate
 )
 
 from general.schemas import (
@@ -19,7 +18,6 @@ from general.schemas import (
 from general.mixins import (
     ViewsSerializerValidateRequestMixin,
 )
-from general.services import response_many_to_many_api_views
 
 
 class AllDeveloperListAPIView(
@@ -88,52 +86,34 @@ class DeveloperDeleteTeamAPIView(
 class DeveloperAddStackTechnologies(
     BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
-    ViewsSerializerValidateRequestMixin
+    ViewsSerializerValidateRequestMixin,
+    DeveloperTechnologiesRemoveUpdate
 ):
     serializer_class = DeveloperStackTechnologiesSerializer
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
-        tech_list = []
-
-        for tech_name in self._validate_request(request).data[
-            'technology_names'
-        ]:
-            if tech := Technologies.objects.filter(
-                    technology_name=tech_name
-            ).first():
-                dev.append_technologies(tech)
-                tech_list.append(tech.technology_name)
-        return response_many_to_many_api_views(
-            tech_list,
-            f"Tech for this developer set",
-            'Tech not found'
+        return self._change_technologies(
+            request,
+            "Tech for this developer set",
+            dev.append_technologies
         )
 
 
 class DeveloperRemoveTechnologies(
     BaseConfigurationDevelopersViewGeneric,
     generics.GenericAPIView,
-    ViewsSerializerValidateRequestMixin
+    ViewsSerializerValidateRequestMixin,
+    DeveloperTechnologiesRemoveUpdate
 ):
     serializer_class = DeveloperStackTechnologiesSerializer
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
         dev = self.get_object()
-        tech_list = []
-
-        for tech_name in self._validate_request(request).data[
-            'technology_names'
-        ]:
-            if tech := Technologies.objects.filter(
-                    technology_name=tech_name
-            ).first():
-                dev.remove_technologies(tech)
-                tech_list.append(tech.technology_name)
-        return response_many_to_many_api_views(
-            tech_list,
-            f"Tech for this developer unset",
-            'Tech not found'
+        return self._change_technologies(
+            request,
+            "Tech for this developer unset",
+            dev.remove_technologies
         )
