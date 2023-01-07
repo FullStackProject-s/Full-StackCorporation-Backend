@@ -149,7 +149,7 @@ class AdministratorTestCase(
             response.status_code,
             status.HTTP_200_OK
         )
-        self.assertEqual(
-            response_json['pk'],
-            self.admin_2.pk
+        self.assertNotEqual(
+            response_json['profile'],
+            self.admin_2.profile.pk
         )

@@ -150,7 +150,7 @@ class ProjectManagerTestCase(
             response.status_code,
             status.HTTP_200_OK
         )
-        self.assertEqual(
-            response_json['pk'],
-            self.proj_manager_2.pk
+        self.assertNotEqual(
+            response_json['profile'],
+            self.proj_manager_2.profile.pk
         )

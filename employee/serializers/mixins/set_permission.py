@@ -6,6 +6,7 @@ from user.models import Permissions, Profile
 
 
 class StaffPermissionsSetSerializerMixin:
+
     def _set_permissions(self, obj, role_name):
         with transaction.atomic():
             permission, created_ = Permissions.objects.get_or_create(

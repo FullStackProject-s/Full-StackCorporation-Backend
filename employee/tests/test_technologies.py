@@ -26,14 +26,14 @@ class TechnologiesTestCase(APITestCase):
 
     @classmethod
     def setUpTestData(cls):
-        for index, profile in enumerate(
-                create_technologies(),
+        for index, tech in enumerate(
+                create_technologies(start=1),
                 start=1
         ):
             cls.count_all_tech += 1
             setattr(cls,
                     f'tech_{index}',
-                    profile
+                    tech
                     )
         _keyword = 'technologies'
 
