@@ -1,9 +1,5 @@
 from rest_framework import serializers
 
-from employee.models.consts import (
-    Specialty,
-    SkillLevel
-)
 from employee.models.employees import Developer
 from employee.serializers.baseSerializers import BaseManagerDeveloperSerializer
 from employee.serializers.technologies import TechnologiesSerializer
@@ -38,16 +34,6 @@ class DeveloperSerializer(
             obj,
             StaffRole.DEVELOPER,
         )
-
-
-class DeveloperChangeTeamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Developer
-        fields = (
-            'pk',
-            'team',
-        )
-
 
 class DeveloperStackTechnologiesSerializer(serializers.Serializer):
     technology_names = serializers.ListField(
