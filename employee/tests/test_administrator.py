@@ -4,14 +4,18 @@ from rest_framework import status
 from django.urls import reverse
 
 from employee.models import Administrator
-from employee.tests.utils.administrator import create_administrators
+from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
+from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 
 from user.tests.utils import create_profiles
 from user.models import CustomUser
 
 
-class AdministratorTestCase(APITestCase):
+class AdministratorTestCase(
+    APITestCase,
+    CreateUpdateEmployeeTestCaseMixin
+):
     """
     Test Cases for :model:`employee.Administrator`.
     """
@@ -79,14 +83,9 @@ class AdministratorTestCase(APITestCase):
         )
 
     def test_admins_create(self):
-        profile_pk = self.administrator_count + abs(hash("create"))
-        profile = create_profiles(profile_pk, start=profile_pk)[0]
-        json = {
-            'profile': profile.pk
-        }
-        response = self.client.post(
-            self.create_admin_url,
-            data=json
+        response = self._create_employee_response(
+            self.administrator_count,
+            self.create_admin_url
         )
         response_json = response.json()
         pk = response_json['pk']
@@ -120,18 +119,12 @@ class AdministratorTestCase(APITestCase):
         )
 
     def test_put_admin(self):
-        profile_pk = self.administrator_count + abs(hash("put"))
-        profile = create_profiles(profile_pk, start=profile_pk)[0]
-        pk = self.admin_2.pk
-        json = {
-            "profile": profile.pk,
-        }
-        response = self.client.put(
+        response = self._put_employee_response(
+            self.administrator_count,
             reverse(
                 self.update_admin,
-                kwargs={'pk': pk}
-            ),
-            data=json
+                kwargs={'pk': self.admin_2.pk}
+            )
         )
         response_json = response.json()
         self.assertEqual(
@@ -140,22 +133,16 @@ class AdministratorTestCase(APITestCase):
         )
         self.assertEqual(
             response_json['pk'],
-            pk
+            self.admin_2.pk
         )
 
     def test_patch_admin(self):
-        profile_pk = self.administrator_count + abs(hash("patch"))
-        profile = create_profiles(profile_pk, start=profile_pk)[0]
-        pk = self.admin_2.pk
-        json = {
-            "profile": profile.pk,
-        }
-        response = self.client.patch(
+        response = self._patch_employee_response(
+            self.administrator_count,
             reverse(
                 self.update_admin,
-                kwargs={'pk': pk}
-            ),
-            data=json
+                kwargs={'pk': self.admin_2.pk}
+            )
         )
         response_json = response.json()
         self.assertEqual(
@@ -164,5 +151,5 @@ class AdministratorTestCase(APITestCase):
         )
         self.assertEqual(
             response_json['pk'],
-            pk
+            self.admin_2.pk
         )
