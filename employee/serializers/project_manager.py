@@ -2,7 +2,7 @@ from employee.models import ProjectManager
 from employee.serializers.baseSerializers import BaseManagerDeveloperSerializer
 from employee.serializers.mixins import (
     ProfileUpdateSerializerMixin,
-    StaffCreateSerializerMixin
+    StaffPermissionsSetSerializerMixin
 )
 
 from user.models.consts import StaffRole
@@ -11,7 +11,7 @@ from user.models.consts import StaffRole
 class ProjectManagerSerializer(
     BaseManagerDeveloperSerializer,
     ProfileUpdateSerializerMixin,
-    StaffCreateSerializerMixin
+    StaffPermissionsSetSerializerMixin
 ):
     class Meta:
         model = ProjectManager
@@ -20,11 +20,11 @@ class ProjectManagerSerializer(
         )
 
     def create(self, validated_data):
-        specialty = validated_data.pop('get_specialty_display')
-        return self._staff_create(
-            validated_data,
+        obj = super().create(validated_data)
+
+        return self._set_permissions(
+            obj,
             StaffRole.PRODUCT_MANAGER,
-            specialty=specialty
         )
 
     def update(self, instance, validated_data):

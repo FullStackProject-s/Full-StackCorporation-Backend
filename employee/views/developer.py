@@ -5,7 +5,7 @@ from .generics import BaseConfigurationDevelopersViewGeneric
 from employee.models import Technologies
 from employee.serializers import (
     DeveloperStackTechnologiesSerializer,
-    TeamChangeSerializer, DevProjectManagerCreateOnlySerializer,
+    TeamChangeSerializer
 )
 from employee.views.mixins import (
     ChangePersonalTeamViewMixin,

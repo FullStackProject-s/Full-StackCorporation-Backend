@@ -1,6 +1,6 @@
 from django.db import models
 
-from employee.models.mixins.baseEmployee import BaseEmployeeMixin
+from employee.models.baseEmployee import BaseEmployeeMixin
 from employee.models.consts import Specialty
 from employee.models.technologies import Technologies
 
@@ -21,6 +21,10 @@ class Developer(BaseEmployeeMixin):
         blank=True,
         null=True
     )
+
+    def set_specialty(self, spec: Specialty.choices):
+        self.specialty = spec
+        self.save()
 
     def append_technologies(self, tech: Technologies):
         self.stack.add(tech)

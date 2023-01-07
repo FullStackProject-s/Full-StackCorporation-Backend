@@ -12,6 +12,4 @@ from employee.serializers.administrator import (
 )
 from employee.serializers.baseSerializers import (
     TeamChangeSerializer,
-    BaseCreatOnlySerializer,
-    DevProjectManagerCreateOnlySerializer
 )

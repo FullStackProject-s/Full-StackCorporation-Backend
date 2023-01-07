@@ -1,11 +1,12 @@
 from rest_framework import serializers
 
+from employee.models.consts import Specialty
 from employee.models.employees import Developer
 from employee.serializers.baseSerializers import BaseManagerDeveloperSerializer
 from employee.serializers.technologies import TechnologiesSerializer
 from employee.serializers.mixins import (
     ProfileUpdateSerializerMixin,
-    StaffCreateSerializerMixin
+    StaffPermissionsSetSerializerMixin
 )
 from user.models.consts import StaffRole
 
@@ -13,7 +14,7 @@ from user.models.consts import StaffRole
 class DeveloperSerializer(
     BaseManagerDeveloperSerializer,
     ProfileUpdateSerializerMixin,
-    StaffCreateSerializerMixin
+    StaffPermissionsSetSerializerMixin
 ):
     stack = TechnologiesSerializer(
         many=True,
@@ -30,12 +31,19 @@ class DeveloperSerializer(
             'stack',
         )
 
+    def validate(self, attrs):
+        if attrs.get('get_specialty_display', None) not in Specialty.values:
+            raise serializers.ValidationError("Incorrect specialty")
+        return super().validate(attrs)
+
     def create(self, validated_data):
         specialty = validated_data.pop('get_specialty_display')
-        return self._staff_create(
-            validated_data,
+        obj = super().create(validated_data)
+        obj.set_specialty(specialty)
+
+        return self._set_permissions(
+            obj,
             StaffRole.DEVELOPER,
-            specialty=specialty
         )
 
     def update(self, instance, validated_data):

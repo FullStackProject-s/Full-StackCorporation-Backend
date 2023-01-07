@@ -5,15 +5,9 @@ from employee.serializers.services import SetUserPermission
 from user.models import Permissions, Profile
 
 
-class StaffCreateSerializerMixin:
-    def _staff_create(self, validated_data, role_name, **kwargs):
-        _profile = validated_data.pop('profile')
+class StaffPermissionsSetSerializerMixin:
+    def _set_permissions(self, obj, role_name):
         with transaction.atomic():
-            obj = self.Meta.model.objects.create(
-                **validated_data,
-                profile=_profile,
-                **kwargs
-            )
             permission, created_ = Permissions.objects.get_or_create(
                 role_name=f'{role_name}'
             )
@@ -23,4 +17,3 @@ class StaffCreateSerializerMixin:
             )
             obj.profile.user.staff_role = permission
             return obj
-
