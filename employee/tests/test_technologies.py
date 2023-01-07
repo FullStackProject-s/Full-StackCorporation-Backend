@@ -3,8 +3,11 @@ from rest_framework import status
 
 from django.urls import reverse
 
+from employee.models import Technologies
 from employee.serializers import TechnologiesSerializer
 from employee.tests.utils import create_technologies
+from employee.models.consts import TechnologiesStack
+
 from user.models import CustomUser
 
 
@@ -13,7 +16,12 @@ class TechnologiesTestCase(APITestCase):
     Test Cases for :model:`employee.Technologies`.
     """
     all_tech_url = reverse('all-tech')
-    create_profile_url = reverse('create-profile')
+    create_tech_url = reverse('create-tech')
+
+    retrieve_tech = 'technology'
+    delete_tech = 'delete-tech'
+    update_tech = 'update-tech'
+
     count_all_tech = 0
 
     @classmethod
@@ -54,7 +62,7 @@ class TechnologiesTestCase(APITestCase):
     def test_technologies_retrieve(self):
         pk = self.tech_1.pk
         response = self.client.get(
-            reverse('technology', kwargs={'pk': pk})
+            reverse(self.retrieve_tech, kwargs={'pk': pk})
         )
         response_json = response.json()
         self.assertEqual(
@@ -72,97 +80,85 @@ class TechnologiesTestCase(APITestCase):
 
     def test_technologies_create(self):
         json = {
-            "user": {
-                "username": "string",
-                "email": "user@example.com",
-                "first_name": "string",
-                "last_name": "string",
-                "password": "string"
-            },
-            "about_user": "string"
+            "technology_name": f'tech_create',
+            "technology_category": TechnologiesStack.FRONT
         }
         response = self.client.post(
-            self.create_profile_url,
-            data=json,
-            format='json'
+            self.create_tech_url,
+            data=json
         )
         response_json = response.json()
-        pk = response_json['pk']
+        name = response_json['technology_name']
         self.assertEqual(
             response.status_code,
             status.HTTP_201_CREATED
         )
         self.assertEqual(
             response_json,
-            ProfileSerializer(Profile.objects.get(pk=pk)).data
+            TechnologiesSerializer(
+                Technologies.objects.get(technology_name=name)
+            ).data
         )
 
-    # def test_delete_profile(self):
-    #     pk = self.profile_1.pk
-    #
-    #     response = self.client.delete(
-    #         reverse(
-    #             'delete-profile',
-    #             kwargs={'pk': pk}
-    #         )
-    #     )
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_204_NO_CONTENT
-    #     )
-    #     self.assertEqual(
-    #         Profile.objects.filter(pk=pk).exists(),
-    #         False
-    #     )
-    #
-    # def test_put_profile(self):
-    #     pk = self.profile_2.pk
-    #     json = {
-    #         "user": {
-    #             "username": f'{self.profile_2.user.username}_1',
-    #             "email": f'1{self.profile_2.user.email}',
-    #             "first_name": self.profile_2.user.first_name,
-    #             "last_name": self.profile_2.user.last_name,
-    #             "password": f'{self.profile_2.user.password}'
-    #         },
-    #         "about_user": "123string123"
-    #     }
-    #     response = self.client.put(
-    #         reverse(
-    #             'update-profile',
-    #             kwargs={'pk': pk}
-    #         ),
-    #         data=json,
-    #         format='json'
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     self.assertEqual(
-    #         response_json['about_user'],
-    #         json['about_user'],
-    #     )
-    #
-    # def test_patch_profile(self):
-    #     pk = self.profile_2.pk
-    #     json = {
-    #         "about_user": "string123",
-    #     }
-    #     response = self.client.patch(
-    #         reverse(
-    #             'update-profile',
-    #             kwargs={'pk': pk}
-    #         ),
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     self.assertEqual(
-    #         response_json['about_user'],
-    #         json['about_user'],
-    #     )
+    def test_delete_profile(self):
+        pk = self.tech_1.pk
+
+        response = self.client.delete(
+            reverse(
+                self.delete_tech,
+                kwargs={'pk': pk}
+            )
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_204_NO_CONTENT
+        )
+        self.assertEqual(
+            Technologies.objects.filter(pk=pk).exists(),
+            False
+        )
+
+    def test_put_technologies(self):
+        pk = self.tech_2.pk
+        json = {
+            "technology_name": f'{self.tech_2}_2',
+            "technology_category": TechnologiesStack.FRONT
+        }
+        response = self.client.put(
+            reverse(
+                self.update_tech,
+                kwargs={'pk': pk}
+            ),
+            data=json
+        )
+        response_json = response.json()
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response_json['technology_name'],
+            json['technology_name'],
+        )
+
+    def test_patch_profile(self):
+        pk = self.tech_2.pk
+        json = {
+            "technology_category": TechnologiesStack.FRONT
+        }
+        response = self.client.patch(
+            reverse(
+                self.update_tech,
+                kwargs={'pk': pk}
+            ),
+            data=json
+        )
+        response_json = response.json()
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response_json['technology_category'],
+            json['technology_category'],
+        )

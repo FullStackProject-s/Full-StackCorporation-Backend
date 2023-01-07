@@ -15,6 +15,10 @@ class ProfileTestCase(APITestCase):
     all_profiles_url = reverse('all-profiles')
     create_profile_url = reverse('create-profile')
 
+    retrieve_profile = 'profile'
+    delete_profile = 'delete-profile'
+    update_profile = 'update-profile'
+
     number_of_profiles = 4
 
     @classmethod
@@ -46,7 +50,7 @@ class ProfileTestCase(APITestCase):
     def test_profiles_retrieve(self):
         pk = self.profile_1.pk
         response = self.client.get(
-            reverse('profile', kwargs={'pk': pk})
+            reverse(self.retrieve_profile, kwargs={'pk': pk})
         )
         self.assertEqual(
             response.status_code,
@@ -94,7 +98,7 @@ class ProfileTestCase(APITestCase):
 
         response = self.client.delete(
             reverse(
-                'delete-profile',
+                self.delete_profile,
                 kwargs={'pk': pk}
             )
         )
@@ -121,7 +125,7 @@ class ProfileTestCase(APITestCase):
         }
         response = self.client.put(
             reverse(
-                'update-profile',
+                self.update_profile,
                 kwargs={'pk': pk}
             ),
             data=json,
@@ -144,7 +148,7 @@ class ProfileTestCase(APITestCase):
         }
         response = self.client.patch(
             reverse(
-                'update-profile',
+                self.update_profile,
                 kwargs={'pk': pk}
             ),
             data=json

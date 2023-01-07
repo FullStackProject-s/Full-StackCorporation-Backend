@@ -17,6 +17,10 @@ class CustomUserTestCase(APITestCase):
     all_users_url = reverse('all-users')
     create_user_url = reverse('create-user')
 
+    retrieve_user = 'user'
+    delete_user = 'delete-user'
+    update_user = 'update-user'
+
     number_of_users = 4
 
     @classmethod
@@ -47,7 +51,7 @@ class CustomUserTestCase(APITestCase):
 
     def test_user_retrieve(self):
         response = self.client.get(
-            reverse('user', kwargs={'pk': self.user_2.pk})
+            reverse(self.retrieve_user, kwargs={'pk': self.user_2.pk})
         )
         self.assertEqual(
             response.status_code,
@@ -89,7 +93,7 @@ class CustomUserTestCase(APITestCase):
     def test_delete_user(self):
         pk = self.user_1.pk
         response = self.client.delete(
-            reverse('delete-user', kwargs={'pk': pk})
+            reverse(self.delete_user, kwargs={'pk': pk})
         )
         self.assertEqual(
             response.status_code,
@@ -111,7 +115,7 @@ class CustomUserTestCase(APITestCase):
             'last_name': f'second_{pk}',
         }
         response = self.client.put(
-            reverse('update-user', kwargs={'pk': pk}),
+            reverse(self.update_user, kwargs={'pk': pk}),
             data=json
         )
         response_json = response.json()
@@ -131,7 +135,7 @@ class CustomUserTestCase(APITestCase):
             'first_name': f'first_{pk}',
         }
         response = self.client.patch(
-            reverse('update-user', kwargs={'pk': pk}),
+            reverse(self.update_user, kwargs={'pk': pk}),
             data=json
         )
         response_json = response.json()
