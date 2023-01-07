@@ -1,6 +1,10 @@
 from rest_framework import generics
 
+from general.schemas import create_only_employee_schema
 from .generics import BaseConfigurationAdministratorsViewGeneric
+from employee.serializers import (
+    BaseCreatOnlySerializer,
+)
 
 
 class AllAdministratorsListAPIView(
@@ -17,11 +21,12 @@ class AdministratorRetrieveAPIView(
     pass
 
 
+# @create_only_employee_schema
 class AdministratorCreateAPIView(
     BaseConfigurationAdministratorsViewGeneric,
     generics.CreateAPIView
 ):
-    pass
+    serializer_request_class = BaseCreatOnlySerializer
 
 
 class AdministratorDestroyAPIView(

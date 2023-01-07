@@ -13,7 +13,11 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
-    about_user = models.TextField(max_length=10_000)
+    about_user = models.TextField(
+        max_length=10_000,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
-        return f'{self.user.username}'
+        return f'{self.user.username} - {self.pk}'

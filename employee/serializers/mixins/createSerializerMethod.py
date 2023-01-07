@@ -1,14 +1,14 @@
 from django.db import transaction
+from rest_framework import serializers
 
 from employee.serializers.services import SetUserPermission
-from user.models import Permissions
+from user.models import Permissions, Profile
 
 
 class StaffCreateSerializerMixin:
     def _staff_create(self, validated_data, role_name, **kwargs):
+        _profile = validated_data.pop('profile')
         with transaction.atomic():
-            _profile = self._create_profile(validated_data.pop('profile'))
-
             obj = self.Meta.model.objects.create(
                 **validated_data,
                 profile=_profile,
@@ -23,3 +23,4 @@ class StaffCreateSerializerMixin:
             )
             obj.profile.user.staff_role = permission
             return obj
+

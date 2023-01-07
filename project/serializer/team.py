@@ -44,3 +44,14 @@ class TeamProjectManagerSerializer(serializers.Serializer):
         fields = (
             'project_manager'
         )
+
+
+class TeamDevelopersSerializer(serializers.Serializer):
+    developers = serializers.ListField(
+        child=serializers.CharField()
+    )
+
+    class Meta:
+        fields = (
+            'developers',
+        )

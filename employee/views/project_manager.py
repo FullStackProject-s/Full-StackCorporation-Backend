@@ -1,18 +1,18 @@
 from rest_framework import generics
 
 from employee.serializers import (
-    TeamChangeSerializer,
+    TeamChangeSerializer, DevProjectManagerCreateOnlySerializer,
 )
 from employee.views.generics import BaseConfigurationProjectManagersViewGeneric
 from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin,
 )
-from general import (
-    ViewsSerializerValidateRequestMixin,
+from general.schemas import (
     response_true_message_schema,
-    response_true_request_false_message_schema
+    response_true_request_false_message_schema, create_only_employee_schema
 )
+from general.mixins import ViewsSerializerValidateRequestMixin
 
 
 class AllProjectManagerListAPIView(
@@ -29,11 +29,12 @@ class ProjectManagerRetrieveAPIView(
     pass
 
 
+@create_only_employee_schema
 class ProjectManagerCreateAPIView(
     BaseConfigurationProjectManagersViewGeneric,
     generics.CreateAPIView
 ):
-    pass
+    serializer_request_class = DevProjectManagerCreateOnlySerializer
 
 
 class ProjectManagerDestroyAPIView(

@@ -5,19 +5,21 @@ from .generics import BaseConfigurationDevelopersViewGeneric
 from employee.models import Technologies
 from employee.serializers import (
     DeveloperStackTechnologiesSerializer,
-    TeamChangeSerializer
+    TeamChangeSerializer, DevProjectManagerCreateOnlySerializer,
 )
 from employee.views.mixins import (
     ChangePersonalTeamViewMixin,
     DeletePersonalTeamViewMixin
 )
 
-from general import (
-    ViewsSerializerValidateRequestMixin,
+from general.schemas import (
     response_true_message_schema,
     response_true_request_false_message_schema
 )
-from .service import developer_technologies_response
+from general.mixins import (
+    ViewsSerializerValidateRequestMixin,
+)
+from general.services import response_many_to_many_api_views
 
 
 class AllDeveloperListAPIView(
@@ -103,9 +105,10 @@ class DeveloperAddStackTechnologies(
             ).first():
                 dev.append_technologies(tech)
                 tech_list.append(tech.technology_name)
-        return developer_technologies_response(
+        return response_many_to_many_api_views(
             tech_list,
-            f"[{' '.join(tech_list)}] for this developer set"
+            f"Tech for this developer set",
+            'Tech not found'
         )
 
 
@@ -129,7 +132,8 @@ class DeveloperRemoveTechnologies(
             ).first():
                 dev.remove_technologies(tech)
                 tech_list.append(tech.technology_name)
-        return developer_technologies_response(
+        return response_many_to_many_api_views(
             tech_list,
-            f"[{', '.join(tech_list)}] for this developer unset"
+            f"Tech for this developer unset",
+            'Tech not found'
         )

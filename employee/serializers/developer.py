@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from employee.models.employees import Developer
-from employee.models.technologies import Technologies
 from employee.serializers.baseSerializers import BaseManagerDeveloperSerializer
 from employee.serializers.technologies import TechnologiesSerializer
 from employee.serializers.mixins import (
@@ -9,13 +8,11 @@ from employee.serializers.mixins import (
     StaffCreateSerializerMixin
 )
 from user.models.consts import StaffRole
-from user.serializers.mixins import CreateCustomUserSerializerMixin
 
 
 class DeveloperSerializer(
     BaseManagerDeveloperSerializer,
     ProfileUpdateSerializerMixin,
-    CreateCustomUserSerializerMixin,
     StaffCreateSerializerMixin
 ):
     stack = TechnologiesSerializer(

@@ -7,7 +7,6 @@ from user.serializers import ProfileSerializer
 
 class BaseStaffSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(read_only=True)
-    profile = ProfileSerializer()
 
     class Meta:
         fields = (
@@ -42,3 +41,4 @@ class TeamChangeSerializer(serializers.Serializer):
         fields = (
             'team',
         )
+

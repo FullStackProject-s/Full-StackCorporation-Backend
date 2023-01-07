@@ -7,7 +7,9 @@ from project.views.team import (
     TeamUpdateTeamLeadAPIView,
     TeamRemoveTeamLeadAPIView,
     TeamUpdateProjectManagerAPIView,
-    TeamRemoveProjectManagerAPIView
+    TeamRemoveProjectManagerAPIView,
+    TeamUpdateDevelopersAPIView,
+    TeamRemoveDevelopersAPIView
 )
 
 urlpatterns_team = [
@@ -43,6 +45,14 @@ urlpatterns_team = [
     path('team-remove-project-manager/<int:pk>/',
          TeamRemoveProjectManagerAPIView.as_view(),
          name='team-remove-project-manager'
+         ),
+    path('team-update-developers/<int:pk>/',
+         TeamUpdateDevelopersAPIView.as_view(),
+         name='team-update-developer'
+         ),
+    path('team-remove-developers/<int:pk>/',
+         TeamRemoveDevelopersAPIView.as_view(),
+         name='team-remove-developer'
          ),
 
 ]
