@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-def create_users_list(user_numbers: int) -> list[User]:
+def create_users_list(user_numbers: int, start=1) -> list[User]:
     return [
         User.objects.create_user(
             username=f'user_{i}',
@@ -11,5 +11,5 @@ def create_users_list(user_numbers: int) -> list[User]:
             password=f'user_{i}',
             first_name=f'first_{i}',
             last_name=f'last_{i}',
-        ) for i in range(1, user_numbers + 1)
+        ) for i in range(start, user_numbers + 1)
     ]

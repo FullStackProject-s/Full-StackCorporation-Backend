@@ -3,39 +3,38 @@ from rest_framework import status
 
 from django.urls import reverse
 
-from employee.models import Technologies
-from employee.serializers import TechnologiesSerializer
-from employee.tests.utils import create_technologies
-from employee.models.consts import TechnologiesStack
+from employee.models import Administrator
+from employee.tests.utils.administrator import create_administrators
+from employee.serializers import AdministratorSerializer
 
+from user.tests.utils import create_profiles
 from user.models import CustomUser
 
 
-class TechnologiesTestCase(APITestCase):
+class AdministratorTestCase(APITestCase):
     """
-    Test Cases for :model:`employee.Technologies`.
+    Test Cases for :model:`employee.Administrator`.
     """
-    all_tech_url = reverse('all-tech')
-    create_tech_url = reverse('create-tech')
+    all_admins_url = reverse('all-admins')
+    create_admin_url = reverse('create-admin')
 
-    retrieve_tech = 'technology'
-    delete_tech = 'delete-tech'
-    update_tech = 'update-tech'
+    retrieve_admin = 'admin'
+    delete_admin = 'delete-admin'
+    update_admin = 'update-admin'
 
-    count_all_tech = 0
+    administrator_count = 4
 
     @classmethod
     def setUpTestData(cls):
-        for index, profile in enumerate(
-                create_technologies(),
+        for index, admin in enumerate(
+                create_administrators(cls.administrator_count),
                 start=1
         ):
-            cls.count_all_tech += 1
             setattr(cls,
-                    f'tech_{index}',
-                    profile
+                    f'admin_{index}',
+                    admin
                     )
-        _keyword = 'technologies'
+        _keyword = 'administrator'
 
         cls.login_user = CustomUser.objects.create_user(
             username=f'user_{_keyword}',
@@ -48,64 +47,66 @@ class TechnologiesTestCase(APITestCase):
     def setUp(self):
         self.client.force_login(self.login_user)
 
-    def test_get_all_technologies(self):
-        response = self.client.get(self.all_tech_url)
+    def test_get_all_admins(self):
+        response = self.client.get(self.all_admins_url)
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
         )
         self.assertEqual(
             len(response.json()),
-            self.count_all_tech
+            self.administrator_count
         )
 
-    def test_technologies_retrieve(self):
-        pk = self.tech_1.pk
+    def test_admin_retrieve(self):
+        pk = self.admin_1.pk
         response = self.client.get(
-            reverse(self.retrieve_tech, kwargs={'pk': pk})
+            reverse(self.retrieve_admin, kwargs={'pk': pk})
         )
         response_json = response.json()
+
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
         )
         self.assertEqual(
-            response_json['technology_name'],
-            self.tech_1.technology_name
+            response_json['profile'],
+            self.admin_1.profile.pk
         )
         self.assertEqual(
             response_json,
-            TechnologiesSerializer(self.tech_1).data
+            AdministratorSerializer(self.admin_1).data
         )
 
-    def test_technologies_create(self):
+    def test_admins_create(self):
+        profile_pk = self.administrator_count + abs(hash("create"))
+        profile = create_profiles(profile_pk, start=profile_pk)[0]
         json = {
-            "technology_name": f'tech_create',
-            "technology_category": TechnologiesStack.FRONT
+            'profile': profile.pk
         }
         response = self.client.post(
-            self.create_tech_url,
+            self.create_admin_url,
             data=json
         )
         response_json = response.json()
-        name = response_json['technology_name']
+        pk = response_json['pk']
         self.assertEqual(
             response.status_code,
             status.HTTP_201_CREATED
         )
         self.assertEqual(
             response_json,
-            TechnologiesSerializer(
-                Technologies.objects.get(technology_name=name)
+            AdministratorSerializer(
+                Administrator.objects.get(pk=pk)
             ).data
         )
 
-    def test_delete_technologies(self):
-        pk = self.tech_1.pk
+    def test_delete_admin(self):
+        pk = self.admin_1.pk
 
         response = self.client.delete(
             reverse(
-                self.delete_tech,
+                self.delete_admin,
                 kwargs={'pk': pk}
             )
         )
@@ -114,19 +115,20 @@ class TechnologiesTestCase(APITestCase):
             status.HTTP_204_NO_CONTENT
         )
         self.assertEqual(
-            Technologies.objects.filter(pk=pk).exists(),
+            Administrator.objects.filter(pk=pk).exists(),
             False
         )
 
-    def test_put_technologies(self):
-        pk = self.tech_2.pk
+    def test_put_admin(self):
+        profile_pk = self.administrator_count + abs(hash("put"))
+        profile = create_profiles(profile_pk, start=profile_pk)[0]
+        pk = self.admin_2.pk
         json = {
-            "technology_name": f'{self.tech_2}_2',
-            "technology_category": TechnologiesStack.FRONT
+            "profile": profile.pk,
         }
         response = self.client.put(
             reverse(
-                self.update_tech,
+                self.update_admin,
                 kwargs={'pk': pk}
             ),
             data=json
@@ -137,18 +139,20 @@ class TechnologiesTestCase(APITestCase):
             status.HTTP_200_OK
         )
         self.assertEqual(
-            response_json['technology_name'],
-            json['technology_name'],
+            response_json['pk'],
+            pk
         )
 
-    def test_patch_profile(self):
-        pk = self.tech_2.pk
+    def test_patch_admin(self):
+        profile_pk = self.administrator_count + abs(hash("patch"))
+        profile = create_profiles(profile_pk, start=profile_pk)[0]
+        pk = self.admin_2.pk
         json = {
-            "technology_category": TechnologiesStack.FRONT
+            "profile": profile.pk,
         }
         response = self.client.patch(
             reverse(
-                self.update_tech,
+                self.update_admin,
                 kwargs={'pk': pk}
             ),
             data=json
@@ -159,6 +163,6 @@ class TechnologiesTestCase(APITestCase):
             status.HTTP_200_OK
         )
         self.assertEqual(
-            response_json['technology_category'],
-            json['technology_category'],
+            response_json['pk'],
+            pk
         )
