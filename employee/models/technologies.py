@@ -3,7 +3,6 @@ from employee.models.consts import TechnologiesStack
 
 
 class Technologies(models.Model):
-
     technology_name = models.CharField(max_length=200, unique=True)
     technology_category = models.CharField(
         choices=TechnologiesStack.choices,

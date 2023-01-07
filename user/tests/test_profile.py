@@ -2,30 +2,18 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from django.urls import reverse
+
+from user.serializers import ProfileSerializer
 from user.models import Profile
 from user.tests.utils import create_profiles
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 class ProfileTestCase(APITestCase):
     """
     Test Cases for :model:`user.Profile`.
     """
-    delete_profile_pk = 1
-    update_profile_pk = 2
     all_profiles_url = reverse('all-profiles')
-    user_url = reverse('profile', kwargs={'pk': 2})
     create_profile_url = reverse('create-profile')
-    delete_profile_url = reverse(
-        'delete-profile',
-        kwargs={'pk': delete_profile_pk}
-    )
-    update_profile_url = reverse(
-        'update-profile',
-        kwargs={'pk': update_profile_pk}
-    )
 
     number_of_profiles = 4
 
@@ -39,121 +27,134 @@ class ProfileTestCase(APITestCase):
                     f'profile_{index}',
                     profile
                     )
-        print(User.objects.all())
 
-        # cls.user_1 = User.objects.create_user(
-        #     username=f'user_1',
-        #     email=f'user1@example.com',
-        #     password=f'user_1',
-        #     first_name=f'first_1',
-        #     last_name=f'last_1'
-        # )
+    def setUp(self) -> None:
+        self.client.force_login(self.profile_1.user)
 
-#     def setUp(self) -> None:
-#         self.client.force_login(self.user_1)
-#
-    def test_get_all_users(self):
-        # print(User.objects.all())
-        pass
-        # response = self.client.get(self.all_profiles_url)
+    def test_get_all_profiles(self):
+        response = self.client.get(self.all_profiles_url)
 
-#         self.assertEqual(
-#             response.status_code,
-#             status.HTTP_200_OK
-#         )
-#         self.assertEqual(
-#             len(response.json()),
-#             self.number_of_profiles
-#         )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            len(response.json()),
+            self.number_of_profiles
+        )
 
-    # def test_user_retrieve(self):
-    #     response = self.client.get(self.user_url)
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response_json['username'],
-    #         self.user_2.username
-    #     )
-    #     self.assertEqual(
-    #         response_json,
-    #         CustomUserSerializer(self.user_2).data
-    #     )
-    #
-    # def test_user_create(self):
-    #     json = {
-    #         'username': "create_user",
-    #         'email': 'create@user.com',
-    #         'first_name': "create_first",
-    #         "last_name": "create_last",
-    #         "password": "123"
-    #     }
-    #     response = self.client.post(
-    #         self.create_user_url,
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     pk = response_json['pk']
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_201_CREATED
-    #     )
-    #     self.assertEqual(
-    #         response_json,
-    #         CustomUserSerializer(CustomUser.objects.get(pk=pk)).data
-    #     )
-    #
-    # def test_delete_user(self):
-    #     response = self.client.delete(
-    #         self.delete_user_url
-    #     )
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_204_NO_CONTENT
-    #     )
-    #     self.assertEqual(
-    #         CustomUser.objects.filter(pk=self.delete_user_pk).exists(),
-    #         False
-    #     )
-    #
-    # def test_put_user(self):
-    #     json = {
-    #         'username': f'user_{self.update_user_pk}',
-    #         'email': f'user{self.update_user_pk}@example.com',
-    #         'password': f'user_{self.update_user_pk}',
-    #         'first_name': f'first_{self.update_user_pk}',
-    #         'last_name': f'second_{self.update_user_pk}',
-    #     }
-    #     response = self.client.put(
-    #         self.update_user_url,
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     self.assertEqual(
-    #         response_json['last_name'],
-    #         json['last_name'],
-    #     )
-    #
-    # def test_patch_user(self):
-    #     json = {
-    #         'first_name': f'first_{self.update_user_pk}',
-    #     }
-    #     response = self.client.patch(
-    #         self.update_user_url,
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     self.assertEqual(
-    #         response_json['first_name'],
-    #         json['first_name'],
-    #     )
+    def test_profiles_retrieve(self):
+        pk = self.profile_1.pk
+        response = self.client.get(
+            reverse('profile', kwargs={'pk': pk})
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        response_json = response.json()
+        self.assertEqual(
+            response_json['about_user'],
+            self.profile_1.about_user
+        )
+        self.assertEqual(
+            response_json,
+            ProfileSerializer(self.profile_1).data
+        )
+
+    def test_profile_create(self):
+        json = {
+            "user": {
+                "username": "string",
+                "email": "user@example.com",
+                "first_name": "string",
+                "last_name": "string",
+                "password": "string"
+            },
+            "about_user": "string"
+        }
+        response = self.client.post(
+            self.create_profile_url,
+            data=json,
+            format='json'
+        )
+        response_json = response.json()
+        pk = response_json['pk']
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_201_CREATED
+        )
+        self.assertEqual(
+            response_json,
+            ProfileSerializer(Profile.objects.get(pk=pk)).data
+        )
+
+    def test_delete_profile(self):
+        pk = self.profile_1.pk
+
+        response = self.client.delete(
+            reverse(
+                'delete-profile',
+                kwargs={'pk': pk}
+            )
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_204_NO_CONTENT
+        )
+        self.assertEqual(
+            Profile.objects.filter(pk=pk).exists(),
+            False
+        )
+
+    def test_put_profile(self):
+        pk = self.profile_2.pk
+        json = {
+            "user": {
+                "username": f'{self.profile_2.user.username}_1',
+                "email": f'1{self.profile_2.user.email}',
+                "first_name": self.profile_2.user.first_name,
+                "last_name": self.profile_2.user.last_name,
+                "password": f'{self.profile_2.user.password}'
+            },
+            "about_user": "123string123"
+        }
+        response = self.client.put(
+            reverse(
+                'update-profile',
+                kwargs={'pk': pk}
+            ),
+            data=json,
+            format='json'
+        )
+        response_json = response.json()
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response_json['about_user'],
+            json['about_user'],
+        )
+
+    def test_patch_profile(self):
+        pk = self.profile_2.pk
+        json = {
+            "about_user": "string123",
+        }
+        response = self.client.patch(
+            reverse(
+                'update-profile',
+                kwargs={'pk': pk}
+            ),
+            data=json
+        )
+        response_json = response.json()
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response_json['about_user'],
+            json['about_user'],
+        )

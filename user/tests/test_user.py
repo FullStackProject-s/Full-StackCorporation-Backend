@@ -13,13 +13,9 @@ class CustomUserTestCase(APITestCase):
     """
     Test Cases for :model:`user.CustomUser`.
     """
-    delete_user_pk = 1
-    update_user_pk = 2
+
     all_users_url = reverse('all-users')
-    user_url = reverse('user', kwargs={'pk': 2})
     create_user_url = reverse('create-user')
-    delete_user_url = reverse('delete-user', kwargs={'pk': delete_user_pk})
-    update_user_url = reverse('update-user', kwargs={'pk': update_user_pk})
 
     number_of_users = 4
 
@@ -50,7 +46,9 @@ class CustomUserTestCase(APITestCase):
         )
 
     def test_user_retrieve(self):
-        response = self.client.get(self.user_url)
+        response = self.client.get(
+            reverse('user', kwargs={'pk': self.user_2.pk})
+        )
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
@@ -89,28 +87,31 @@ class CustomUserTestCase(APITestCase):
         )
 
     def test_delete_user(self):
+        pk = self.user_1.pk
         response = self.client.delete(
-            self.delete_user_url
+            reverse('delete-user', kwargs={'pk': pk})
         )
         self.assertEqual(
             response.status_code,
             status.HTTP_204_NO_CONTENT
         )
         self.assertEqual(
-            User.objects.filter(pk=self.delete_user_pk).exists(),
+            User.objects.filter(pk=pk).exists(),
             False
         )
 
     def test_put_user(self):
+        pk = self.user_4.pk
+
         json = {
-            'username': f'user_{self.update_user_pk}',
-            'email': f'user{self.update_user_pk}@example.com',
-            'password': f'user_{self.update_user_pk}',
-            'first_name': f'first_{self.update_user_pk}',
-            'last_name': f'second_{self.update_user_pk}',
+            'username': f'user_{pk}',
+            'email': f'user{pk}@example.com',
+            'password': f'user_{pk}',
+            'first_name': f'first_{pk}',
+            'last_name': f'second_{pk}',
         }
         response = self.client.put(
-            self.update_user_url,
+            reverse('update-user', kwargs={'pk': pk}),
             data=json
         )
         response_json = response.json()
@@ -124,11 +125,13 @@ class CustomUserTestCase(APITestCase):
         )
 
     def test_patch_user(self):
+        pk = self.user_4.pk
+
         json = {
-            'first_name': f'first_{self.update_user_pk}',
+            'first_name': f'first_{pk}',
         }
         response = self.client.patch(
-            self.update_user_url,
+            reverse('update-user', kwargs={'pk': pk}),
             data=json
         )
         response_json = response.json()

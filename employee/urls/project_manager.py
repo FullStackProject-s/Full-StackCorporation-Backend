@@ -16,7 +16,7 @@ urlpatterns_manager = [
          ),
     path('<int:pk>/',
          ProjectManagerRetrieveAPIView.as_view(),
-         name='technology'
+         name='project-manager'
          ),
     path('create-manager/',
          ProjectManagerCreateAPIView.as_view(),
