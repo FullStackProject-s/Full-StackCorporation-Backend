@@ -1,7 +1,7 @@
 from django.db import models
 
 from employee.models.baseEmployee import BaseEmployeeMixin
-from employee.models.consts import Specialty
+from employee.models.consts import Specialty, SkillLevel
 from employee.models.technologies import Technologies
 
 
@@ -21,10 +21,11 @@ class Developer(BaseEmployeeMixin):
         blank=True,
         null=True
     )
-
-    def set_specialty(self, spec: Specialty.choices):
-        self.specialty = spec
-        self.save()
+    skill_level = models.CharField(
+        choices=SkillLevel.choices,
+        max_length=200,
+        default=SkillLevel.junior
+    )
 
     def append_technologies(self, tech: Technologies):
         self.stack.add(tech)

@@ -4,7 +4,7 @@ from rest_framework import status
 
 from django.urls import reverse
 from user.serializers import CustomUserSerializer
-from user.models import CustomUser
+from user.tests.utils import create_users_list
 
 User = get_user_model()
 
@@ -25,16 +25,12 @@ class CustomUserTestCase(APITestCase):
 
     @classmethod
     def setUpTestData(cls):
-        for i in range(1, cls.number_of_users + 1):
-            user = User.objects.create_user(
-                username=f'user_{i}',
-                email=f'user{i}@example.com',
-                password=f'user_{i}',
-                first_name=f'first_{i}',
-                last_name=f'last_{i}',
-            )
+        for index, user in enumerate(
+                create_users_list(cls.number_of_users),
+                start=1
+        ):
             setattr(cls,
-                    f'user_{i}',
+                    f'user_{index}',
                     user
                     )
 
@@ -89,7 +85,7 @@ class CustomUserTestCase(APITestCase):
         )
         self.assertEqual(
             response_json,
-            CustomUserSerializer(CustomUser.objects.get(pk=pk)).data
+            CustomUserSerializer(User.objects.get(pk=pk)).data
         )
 
     def test_delete_user(self):
@@ -101,7 +97,7 @@ class CustomUserTestCase(APITestCase):
             status.HTTP_204_NO_CONTENT
         )
         self.assertEqual(
-            CustomUser.objects.filter(pk=self.delete_user_pk).exists(),
+            User.objects.filter(pk=self.delete_user_pk).exists(),
             False
         )
 

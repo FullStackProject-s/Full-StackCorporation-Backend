@@ -1,2 +1,1 @@
-from .update_serializer_method import ProfileUpdateSerializerMixin
 from .set_permission import StaffPermissionsSetSerializerMixin
