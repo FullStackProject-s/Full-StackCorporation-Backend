@@ -7,7 +7,8 @@ from employee.models.technologies import Technologies
 
 class Developer(BaseEmployeeMixin):
     specialty = models.ManyToManyField(
-        'employee.DeveloperOrganizationSpecialty'
+        'employee.DeveloperOrganizationSpecialty',
+        blank=True,
     )
     stack = models.ManyToManyField(
         Technologies,

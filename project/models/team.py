@@ -28,6 +28,11 @@ class Team(TimeStampModelMixin):
         related_name='developers',
         blank=True,
     )
+    organization = models.ForeignKey(
+        'organization.Organization',
+        on_delete=models.CASCADE,
+        null=True
+    )
 
     def append_developer(self, developer):
         self.developers.add(developer)
@@ -42,5 +47,3 @@ class Team(TimeStampModelMixin):
                f'Team lead: {self.team_lead} - ' \
                f'Prod Manager: {self.project_manager} - ' \
                f'pk : {self.pk}'
-
-

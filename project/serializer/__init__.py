@@ -5,5 +5,7 @@ from .team import (
     TeamProjectManagerSerializer,
     TeamDevelopersSerializer
 )
-
+from .project import (
+    ProjectSerializer
+)
 
