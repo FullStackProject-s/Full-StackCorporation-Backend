@@ -8,10 +8,11 @@ class Organization(TimeStampModelMixin):
         max_length=200,
         unique=True,
     )
-    owners = models.ManyToManyField(
+    owner = models.ForeignKey(
         'user.CustomUser',
-        related_name='org_owners',
-        blank=True
+        on_delete=models.CASCADE,
+        related_name='org_owner',
+        null=True
     )
     projects = models.ManyToManyField(
         'project.Project',
@@ -23,3 +24,7 @@ class Organization(TimeStampModelMixin):
         related_name='org_members',
         blank=True
     )
+
+    def add_owner(self, owner):
+        self.owners.add(owner)
+        self.save()
