@@ -6,7 +6,7 @@ from employee.models.technologies import Technologies
 
 
 class Developer(BaseEmployeeMixin):
-    specialty = models.ManyToManyField(
+    specialties = models.ManyToManyField(
         'employee.DeveloperOrganizationSpecialty',
         blank=True,
     )
@@ -36,7 +36,7 @@ class Developer(BaseEmployeeMixin):
         self.save()
 
     def __str__(self):
-        return f'{self.specialty} - {self.profile.user} - {self.pk}'
+        return f'{self.profile.user} - {self.pk}'
 
 
 class ProjectManager(BaseEmployeeMixin):

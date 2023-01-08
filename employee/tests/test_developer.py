@@ -81,10 +81,7 @@ class DeveloperTestCase(
             response.status_code,
             status.HTTP_200_OK
         )
-        self.assertEqual(
-            response_json['specialty'],
-            dev.specialty
-        )
+
         self.assertEqual(
             response_json['skill_level'],
             dev.skill_level
@@ -98,7 +95,6 @@ class DeveloperTestCase(
         response = self._create_employee_response(
             self.developer_count,
             self.create_developer_url,
-            specialty=Specialty.FULLSTACK,
             skill_level=SkillLevel.senior
         )
 
@@ -134,7 +130,7 @@ class DeveloperTestCase(
             False
         )
 
-    def test_put_project_manager(self):
+    def test_put_developer(self):
         pk = self.dev_2.pk
         response = self._put_employee_response(
             self.developer_count,
@@ -151,15 +147,11 @@ class DeveloperTestCase(
             status.HTTP_200_OK
         )
         self.assertEqual(
-            response_json['specialty'],
-            Specialty.FULLSTACK
-        )
-        self.assertEqual(
             response_json['skill_level'],
             SkillLevel.senior
         )
 
-    def test_patch_project_manager(self):
+    def test_patch_developer(self):
         dev = self.dev_2
         response = self._patch_employee_response(
             self.developer_count,
@@ -178,10 +170,6 @@ class DeveloperTestCase(
         self.assertNotEqual(
             response_json['profile'],
             dev.profile.pk
-        )
-        self.assertNotEqual(
-            response_json['specialty'],
-            Specialty.FRONT.name
         )
 
     def test_add_technologies_to_developer(self):

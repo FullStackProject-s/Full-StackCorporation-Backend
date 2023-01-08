@@ -30,3 +30,8 @@ class DeveloperOrganizationSpecialty(models.Model):
         'organization.Organization',
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f'{self.organization_developer} - ' \
+               f'{self.organization} - ' \
+               f'{self.specialty}'
