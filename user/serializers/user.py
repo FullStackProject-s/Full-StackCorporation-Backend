@@ -29,7 +29,6 @@ class CustomUserSerializer(
             'first_name',
             'last_name',
             'create_at',
-            'update_at',
             'password',
             'permission'
 

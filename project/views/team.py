@@ -1,10 +1,7 @@
 from rest_framework import generics
 
-from employee.models import Developer
-
 from general.mixins import ViewsSerializerValidateRequestMixin
 from general.schemas import response_true_message_schema
-from general.services import response_many_to_many_api_views
 
 from project.serializer import (
     TeamNameSerializer,
@@ -16,7 +13,7 @@ from project.views.generics.team import TeamBaseGenericView
 
 from project.views.mixins import (
     TeamRemoveMainPersonalViewMixin,
-    TeamUpdateMainPersonalViewMixin
+    TeamUpdateMainPersonalViewMixin, TeamRemoveUpdateDeveloper
 )
 from project.views.generics import (
     TeamProjectManagerRemoveUpdateBase,
@@ -34,6 +31,13 @@ class AllTeamListAPIView(
 class TeamRetrieveAPIView(
     TeamBaseGenericView,
     generics.RetrieveAPIView
+):
+    pass
+
+
+class TeamDestroyAPIView(
+    TeamBaseGenericView,
+    generics.DestroyAPIView
 ):
     pass
 
@@ -119,56 +123,34 @@ class TeamRemoveProjectManagerAPIView(
 class TeamUpdateDevelopersAPIView(
     TeamBaseGenericView,
     ViewsSerializerValidateRequestMixin,
+    TeamRemoveUpdateDeveloper
 ):
     serializer_class = TeamDevelopersSerializer
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
-        team = self.get_object()
-        developer_list = []
-        developers_names = self._validate_request(request).data['developers']
-
-        for developer_name in developers_names:
-            if developer := Developer.objects.filter(
-                    profile__user__username=developer_name
-            ).first():
-                team.append_developer(developer)
-                developer_list.append(developer)
-                developer.team = team
-
-                team.save()
-                developer.save()
-        return response_many_to_many_api_views(
-            developer_list,
-            f"Developers for this team set",
-            'Developers not found'
+        return self._change_developers(
+            team := self.get_object(),
+            request,
+            "Developers for this team set",
+            team.append_developer,
+            team
         )
 
 
 class TeamRemoveDevelopersAPIView(
     TeamBaseGenericView,
     ViewsSerializerValidateRequestMixin,
+    TeamRemoveUpdateDeveloper
 ):
     serializer_class = TeamDevelopersSerializer
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
-        team = self.get_object()
-        developer_list = []
-        developers_names = self._validate_request(request).data['developers']
-
-        for developer_name in developers_names:
-            if developer := Developer.objects.filter(
-                    profile__user__username=developer_name
-            ).first():
-                team.remove_developer(developer)
-                developer_list.append(developer)
-                developer.team = None
-
-                team.save()
-                developer.save()
-        return response_many_to_many_api_views(
-            developer_list,
-            f"Developers for this team unset",
-            'Developers not found'
+        return self._change_developers(
+            team := self.get_object(),
+            request,
+            "Developers for this team unset",
+            team.remove_developer,
+            None
         )

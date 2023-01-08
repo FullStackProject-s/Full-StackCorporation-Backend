@@ -4,7 +4,7 @@ from user.models.user import CustomUser
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         CustomUser,
         on_delete=models.CASCADE,
     )

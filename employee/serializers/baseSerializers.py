@@ -31,14 +31,6 @@ class BaseManagerDeveloperSerializer(BaseStaffSerializer):
     def get_team(self, obj):
         if obj.team:
             return obj.team.team_name
-        return "unknown"
+        return None
 
-
-class TeamChangeSerializer(serializers.Serializer):
-    team = serializers.CharField()
-
-    class Meta:
-        fields = (
-            'team',
-        )
 
