@@ -15,7 +15,6 @@ class TeamSerializer(serializers.ModelSerializer):
             'pk',
             'team_name',
             'team_lead',
-            'organization',
             'project_manager',
             'developers',
             'create_at'
@@ -28,7 +27,6 @@ class TeamCreateSerializer(serializers.ModelSerializer):
         model = Team
         fields = (
             'team_name',
-            'organization'
         )
 
 

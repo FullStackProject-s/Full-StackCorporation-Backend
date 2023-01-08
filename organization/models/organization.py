@@ -14,6 +14,7 @@ class Organization(TimeStampModelMixin):
         related_name='org_owner',
         null=True
     )
+    organization_avatar = models.ImageField(blank=True, null=True)
     projects = models.ManyToManyField(
         'project.Project',
         related_name='org_projects',

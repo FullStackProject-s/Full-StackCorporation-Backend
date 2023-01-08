@@ -18,6 +18,6 @@ def create_developers(developer_number, start=1):
         Developer.objects.create(
             profile=profile,
             skill_level=skill_level_val[randint(0, _min)],
-            specialty=specialty_val[randint(0, _min)],
+            # specialty=specialty_val[randint(0, _min)],
         ) for profile in profiles_list
     ]
