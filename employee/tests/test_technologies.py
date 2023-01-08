@@ -1,7 +1,8 @@
+from django.urls import reverse
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from django.urls import reverse
 
 from employee.models import Technologies
 from employee.serializers import TechnologiesSerializer
@@ -60,7 +61,8 @@ class TechnologiesTestCase(APITestCase):
         )
 
     def test_technologies_retrieve(self):
-        pk = self.tech_1.pk
+        tech = self.tech_1
+        pk = tech.pk
         response = self.client.get(
             reverse(self.retrieve_tech, kwargs={'pk': pk})
         )
@@ -71,11 +73,11 @@ class TechnologiesTestCase(APITestCase):
         )
         self.assertEqual(
             response_json['technology_name'],
-            self.tech_1.technology_name
+            tech.technology_name
         )
         self.assertEqual(
             response_json,
-            TechnologiesSerializer(self.tech_1).data
+            TechnologiesSerializer(tech).data
         )
 
     def test_technologies_create(self):
@@ -119,9 +121,10 @@ class TechnologiesTestCase(APITestCase):
         )
 
     def test_put_technologies(self):
-        pk = self.tech_2.pk
+        tech = self.tech_2
+        pk = tech.pk
         json = {
-            "technology_name": f'{self.tech_2}_2',
+            "technology_name": f'{tech}_2',
             "technology_category": TechnologiesStack.FRONT
         }
         response = self.client.put(
@@ -142,7 +145,8 @@ class TechnologiesTestCase(APITestCase):
         )
 
     def test_patch_profile(self):
-        pk = self.tech_2.pk
+        tech = self.tech_2
+        pk = tech.pk
         json = {
             "technology_category": TechnologiesStack.FRONT
         }

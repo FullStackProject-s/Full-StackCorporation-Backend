@@ -50,8 +50,9 @@ class CustomUserTestCase(APITestCase):
         )
 
     def test_user_retrieve(self):
+        user = self.user_2
         response = self.client.get(
-            reverse(self.retrieve_user, kwargs={'pk': self.user_2.pk})
+            reverse(self.retrieve_user, kwargs={'pk': user.pk})
         )
         self.assertEqual(
             response.status_code,
@@ -60,11 +61,11 @@ class CustomUserTestCase(APITestCase):
         response_json = response.json()
         self.assertEqual(
             response_json['username'],
-            self.user_2.username
+            user.username
         )
         self.assertEqual(
             response_json,
-            CustomUserSerializer(self.user_2).data
+            CustomUserSerializer(user).data
         )
 
     def test_user_create(self):

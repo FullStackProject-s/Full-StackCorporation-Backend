@@ -1,14 +1,14 @@
+from django.urls import reverse
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from django.urls import reverse
 
 from employee.models import Administrator
 from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
 from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 
-from user.tests.utils import create_profiles
 from user.models import CustomUser
 
 
@@ -63,7 +63,8 @@ class AdministratorTestCase(
         )
 
     def test_admin_retrieve(self):
-        pk = self.admin_1.pk
+        admin = self.admin_1
+        pk = admin.pk
         response = self.client.get(
             reverse(self.retrieve_admin, kwargs={'pk': pk})
         )
@@ -75,11 +76,11 @@ class AdministratorTestCase(
         )
         self.assertEqual(
             response_json['profile'],
-            self.admin_1.profile.pk
+            admin.profile.pk
         )
         self.assertEqual(
             response_json,
-            AdministratorSerializer(self.admin_1).data
+            AdministratorSerializer(admin).data
         )
 
     def test_admins_create(self):
@@ -119,11 +120,12 @@ class AdministratorTestCase(
         )
 
     def test_put_admin(self):
+        admin = self.admin_2
         response = self._put_employee_response(
             self.administrator_count,
             reverse(
                 self.update_admin,
-                kwargs={'pk': self.admin_2.pk}
+                kwargs={'pk': admin.pk}
             )
         )
         response_json = response.json()
@@ -133,15 +135,16 @@ class AdministratorTestCase(
         )
         self.assertEqual(
             response_json['pk'],
-            self.admin_2.pk
+            admin.pk
         )
 
     def test_patch_admin(self):
+        admin = self.admin_2
         response = self._patch_employee_response(
             self.administrator_count,
             reverse(
                 self.update_admin,
-                kwargs={'pk': self.admin_2.pk}
+                kwargs={'pk': admin.pk}
             )
         )
         response_json = response.json()
@@ -151,5 +154,5 @@ class AdministratorTestCase(
         )
         self.assertNotEqual(
             response_json['profile'],
-            self.admin_2.profile.pk
+            admin.profile.pk
         )
