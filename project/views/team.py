@@ -4,7 +4,7 @@ from general.mixins import ViewsSerializerValidateRequestMixin
 from general.schemas import response_true_message_schema
 
 from project.serializer import (
-    TeamNameSerializer,
+    TeamCreateSerializer,
     TeamTeamLeadSerializer,
     TeamProjectManagerSerializer,
     TeamDevelopersSerializer
@@ -46,14 +46,14 @@ class TeamCreateAPIView(
     TeamBaseGenericView,
     generics.CreateAPIView
 ):
-    serializer_class = TeamNameSerializer
+    serializer_class = TeamCreateSerializer
 
 
-class TeamChangeNameAPIView(
+class TeamUpdateAPIView(
     TeamBaseGenericView,
     generics.UpdateAPIView
 ):
-    serializer_class = TeamNameSerializer
+    serializer_class = TeamCreateSerializer
 
 
 class TeamUpdateTeamLeadAPIView(

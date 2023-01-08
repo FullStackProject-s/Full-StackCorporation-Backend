@@ -8,5 +8,6 @@ class OrganizationSerializer(serializers.ModelSerializer):
         model = Organization
         fields = (
             'organization_name',
+            'owners'
 
         )

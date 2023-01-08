@@ -10,13 +10,16 @@ class Organization(TimeStampModelMixin):
     )
     owners = models.ManyToManyField(
         'user.CustomUser',
-        related_name='org_owners'
+        related_name='org_owners',
+        blank=True
     )
     projects = models.ManyToManyField(
         'project.Project',
-        related_name='org_projects'
+        related_name='org_projects',
+        blank=True
     )
     members = models.ManyToManyField(
         'user.CustomUser',
-        related_name='org_members'
+        related_name='org_members',
+        blank=True
     )

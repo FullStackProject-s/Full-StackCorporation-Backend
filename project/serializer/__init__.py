@@ -1,6 +1,6 @@
 from .team import (
     TeamSerializer,
-    TeamNameSerializer,
+    TeamCreateSerializer,
     TeamTeamLeadSerializer,
     TeamProjectManagerSerializer,
     TeamDevelopersSerializer

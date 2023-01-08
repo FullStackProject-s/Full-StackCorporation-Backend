@@ -3,7 +3,7 @@ from project.views.team import (
     AllTeamListAPIView,
     TeamCreateAPIView,
     TeamDestroyAPIView,
-    TeamChangeNameAPIView,
+    TeamUpdateAPIView,
     TeamRetrieveAPIView,
     TeamUpdateTeamLeadAPIView,
     TeamRemoveTeamLeadAPIView,
@@ -31,7 +31,7 @@ urlpatterns_team = [
          name='delete-team'
          ),
     path('change-team-name/<int:pk>/',
-         TeamChangeNameAPIView.as_view(),
+         TeamUpdateAPIView.as_view(),
          name='team-change-name',
          ),
     path('team-update-team-lead/<int:pk>/',
