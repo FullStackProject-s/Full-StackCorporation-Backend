@@ -31,6 +31,6 @@ class BaseManagerDeveloperSerializer(BaseStaffSerializer):
     def get_team(self, obj):
         if obj.team:
             return obj.team.team_name
-        return "unknown"
+        return None
 
 

@@ -30,7 +30,7 @@ class ProfileSerializer(
         if obj.avatar:
             photo_url = obj.avatar.url
             return request.build_absolute_uri(photo_url)
-        return 'unknown/'
+        return None
 
     def create(self, validated_data):
         return self._create_profile(validated_data)

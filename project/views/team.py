@@ -1,6 +1,5 @@
 from rest_framework import generics
 
-
 from general.mixins import ViewsSerializerValidateRequestMixin
 from general.schemas import response_true_message_schema
 
@@ -32,6 +31,13 @@ class AllTeamListAPIView(
 class TeamRetrieveAPIView(
     TeamBaseGenericView,
     generics.RetrieveAPIView
+):
+    pass
+
+
+class TeamDestroyAPIView(
+    TeamBaseGenericView,
+    generics.DestroyAPIView
 ):
     pass
 
@@ -123,7 +129,6 @@ class TeamUpdateDevelopersAPIView(
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
-
         return self._change_developers(
             team := self.get_object(),
             request,
@@ -142,7 +147,6 @@ class TeamRemoveDevelopersAPIView(
 
     @response_true_message_schema
     def post(self, request, *args, **kwargs):
-
         return self._change_developers(
             team := self.get_object(),
             request,

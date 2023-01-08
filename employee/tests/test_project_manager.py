@@ -74,7 +74,7 @@ class ProjectManagerTestCase(
         )
         self.assertEqual(
             response_json['team'],
-            'unknown'
+            None
         )
         self.assertEqual(
             response_json,

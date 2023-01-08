@@ -35,6 +35,7 @@ class DeveloperSerializer(
             StaffRole.DEVELOPER,
         )
 
+
 class DeveloperStackTechnologiesSerializer(serializers.Serializer):
     technology_names = serializers.ListField(
         child=serializers.CharField()

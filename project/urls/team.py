@@ -2,6 +2,7 @@ from django.urls import path
 from project.views.team import (
     AllTeamListAPIView,
     TeamCreateAPIView,
+    TeamDestroyAPIView,
     TeamChangeNameAPIView,
     TeamRetrieveAPIView,
     TeamUpdateTeamLeadAPIView,
@@ -24,6 +25,10 @@ urlpatterns_team = [
     path('team-create/',
          TeamCreateAPIView.as_view(),
          name='create-team'
+         ),
+    path('delete-team/<int:pk>/',
+         TeamDestroyAPIView.as_view(),
+         name='delete-team'
          ),
     path('change-team-name/<int:pk>/',
          TeamChangeNameAPIView.as_view(),
@@ -48,11 +53,11 @@ urlpatterns_team = [
          ),
     path('team-update-developers/<int:pk>/',
          TeamUpdateDevelopersAPIView.as_view(),
-         name='team-update-developer'
+         name='team-update-developers'
          ),
     path('team-remove-developers/<int:pk>/',
          TeamRemoveDevelopersAPIView.as_view(),
-         name='team-remove-developer'
+         name='team-remove-developers'
          ),
 
 ]
