@@ -1,5 +1,5 @@
 from employee.models import ProjectManager
-from employee.serializers.baseSerializers import BaseManagerDeveloperSerializer
+from employee.serializers.generics import BaseManagerDeveloperSerializer
 from employee.serializers.mixins import StaffPermissionsSetSerializerMixin
 
 

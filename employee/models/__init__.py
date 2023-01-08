@@ -1,12 +1,10 @@
 from .technologies import (
     Technologies,
-    DeveloperOrganizationSpecialty
+    DeveloperOrganizationSpecialty,
 )
 from .employees import (
     ProjectManager,
     Developer,
     Administrator
 )
-
-
 

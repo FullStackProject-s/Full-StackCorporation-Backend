@@ -144,7 +144,7 @@ class TechnologiesTestCase(APITestCase):
             json['technology_name'],
         )
 
-    def test_patch_profile(self):
+    def test_patch_technologies(self):
         tech = self.tech_2
         pk = tech.pk
         json = {

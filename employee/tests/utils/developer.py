@@ -8,7 +8,7 @@ from user.tests.utils import create_profiles
 from random import randint
 
 
-def create_developers(developer_number, start=1):
+def create_developers(developer_number, start=1) -> list[Developer]:
     skill_level_val = SkillLevel.values
 
     _min = len(skill_level_val) - 1

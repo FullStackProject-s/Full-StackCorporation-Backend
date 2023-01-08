@@ -1,8 +1,7 @@
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
-from user.serializers import ProfileSerializer
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 
 
 class BaseStaffSerializer(serializers.ModelSerializer):
@@ -32,5 +31,3 @@ class BaseManagerDeveloperSerializer(BaseStaffSerializer):
         if obj.team:
             return obj.team.team_name
         return None
-
-
