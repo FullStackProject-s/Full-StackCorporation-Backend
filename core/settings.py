@@ -39,7 +39,8 @@ PROJECT_APPS = [
     'employee',
     'project',
     'general',
-    'message'
+    'message',
+    'organization'
 ]
 
 INSTALLED_APPS = [

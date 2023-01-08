@@ -1,14 +1,13 @@
 from django.db import models
 
 from employee.models.baseEmployee import BaseEmployeeMixin
-from employee.models.consts import Specialty, SkillLevel
+from employee.models.consts import SkillLevel
 from employee.models.technologies import Technologies
 
 
 class Developer(BaseEmployeeMixin):
-    specialty = models.CharField(
-        choices=Specialty.choices,
-        max_length=200
+    specialty = models.ManyToManyField(
+        'employee.DeveloperOrganizationSpecialty'
     )
     stack = models.ManyToManyField(
         Technologies,

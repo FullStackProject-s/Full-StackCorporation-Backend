@@ -8,4 +8,7 @@ class Task(MessageBase):
 
 class CompletedTasks(MessageBase):
     checked = models.BooleanField(default=False)
-
+    task = models.ManyToManyField(
+        Task,
+        related_name='task'
+    )

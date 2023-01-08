@@ -44,14 +44,3 @@ class Team(TimeStampModelMixin):
                f'pk : {self.pk}'
 
 
-class Project(TimeStampModelMixin):
-    name = models.CharField(
-        max_length=200,
-        unique=True
-    )
-
-    teams = models.ManyToManyField(
-        to=Team,
-        related_name='teams'
-    )
-    deadline = models.DateField(default=timezone.now)

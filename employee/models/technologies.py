@@ -1,5 +1,8 @@
 from django.db import models
-from employee.models.consts import TechnologiesStack
+from employee.models.consts import (
+    TechnologiesStack,
+    Specialty
+)
 
 
 class Technologies(models.Model):
@@ -11,3 +14,19 @@ class Technologies(models.Model):
 
     def __str__(self):
         return f'{self.technology_category} - {self.technology_name}'
+
+
+class DeveloperOrganizationSpecialty(models.Model):
+    specialty = models.CharField(
+        choices=Specialty.choices,
+        max_length=200,
+    )
+    organization_developer = models.ForeignKey(
+        'employee.Developer',
+        on_delete=models.CASCADE,
+    )
+
+    organization = models.ForeignKey(
+        'organization.Organization',
+        on_delete=models.CASCADE,
+    )

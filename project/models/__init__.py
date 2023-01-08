@@ -1,4 +1,2 @@
-from .team import (
-    Team,
-    Project
-)
+from .team import Team
+from .project import Project
