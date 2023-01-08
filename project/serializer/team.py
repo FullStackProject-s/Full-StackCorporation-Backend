@@ -17,6 +17,7 @@ class TeamSerializer(serializers.ModelSerializer):
             'team_lead',
             'project_manager',
             'developers',
+            'create_at'
         )
 
 
