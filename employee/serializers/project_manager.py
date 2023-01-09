@@ -1,25 +1,21 @@
 from employee.models import ProjectManager
 from employee.serializers.generics import BaseManagerDeveloperSerializer
-from employee.serializers.mixins import StaffPermissionsSetSerializerMixin
+
+from user.serializers import ProfileShowSerializer
 
 
-from user.models.consts import StaffRole
-
-
-class ProjectManagerSerializer(
-    BaseManagerDeveloperSerializer,
-    StaffPermissionsSetSerializerMixin
-):
+class BaseProjectManagerSerializer(BaseManagerDeveloperSerializer):
     class Meta:
         model = ProjectManager
         fields = (
             *BaseManagerDeveloperSerializer.Meta.fields,
         )
 
-    def create(self, validated_data):
-        obj = super().create(validated_data)
 
-        return self._set_permissions(
-            obj,
-            StaffRole.PRODUCT_MANAGER,
-        )
+class ProjectManagerShowSerializer(BaseProjectManagerSerializer):
+    profile = ProfileShowSerializer(required=False, read_only=True)
+
+
+class ProjectManagerSerializer(BaseProjectManagerSerializer):
+    def to_representation(self, instance):
+        return ProjectManagerShowSerializer(instance).data

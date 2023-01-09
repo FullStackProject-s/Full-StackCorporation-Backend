@@ -3,9 +3,10 @@ from rest_framework import serializers
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema_field
 
+from user.serializers import CustomUserShowSerializer
+
 
 class BaseStaffSerializer(serializers.ModelSerializer):
-
     class Meta:
         fields = (
             'pk',

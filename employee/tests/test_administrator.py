@@ -73,10 +73,14 @@ class AdministratorTestCase(
         response = self.client.get(
             reverse(self.retrieve_admin, kwargs={'pk': pk})
         )
-
+        response_json = response.json()
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response_json,
+            AdministratorSerializer(admin).data
         )
 
     def test_admins_create(self):
