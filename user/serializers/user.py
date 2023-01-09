@@ -9,17 +9,10 @@ from user.serializers.permission import PermissionSerializer
 User = get_user_model()
 
 
-class CustomUserSerializer(
+class BaseCustomUserSerializer(
     serializers.ModelSerializer,
     CreateCustomUserSerializerMixin
-
 ):
-    permission = PermissionSerializer(
-        source='staff_role',
-        required=False,
-        read_only=True
-    )
-
     class Meta:
         model = User
         fields = (
@@ -30,25 +23,36 @@ class CustomUserSerializer(
             'last_name',
             'create_at',
             'password',
-            'permission'
+            'staff_role'
 
         )
+        extra_kwargs = {'staff_role': {'required': False}}
 
-    def create(self, validated_data):
-        return self._create_user(validated_data)
 
-    def update(self, instance: User, validated_data):
-        password = validated_data.pop('password', None)
-        _perm = validated_data.pop('staff_role', None)
-        if _perm is not None:
-            perm = Permissions.objects.get(role_name=_perm['role_name'])
-            setattr(instance, 'staff_role', perm)
+class CustomUserShowSerializer(BaseCustomUserSerializer):
+    staff_role = PermissionSerializer(
+        required=False,
+        read_only=True
+    )
 
-        if password is not None:
-            instance.set_password(password)
 
-        for field, value in validated_data.items():
-            setattr(instance, field, value)
-        instance.save()
-        return instance
-
+class CustomUserSerializer(BaseCustomUserSerializer):
+    def to_representation(self, data):
+        return CustomUserShowSerializer(data).data
+    # def create(self, validated_data):
+    #     return self._create_user(validated_data)
+    #
+    # def update(self, instance: User, validated_data):
+    #     password = validated_data.pop('password', None)
+    #     _perm = validated_data.pop('staff_role', None)
+    #     if _perm is not None:
+    #         perm = Permissions.objects.get(role_name=_perm['role_name'])
+    #         setattr(instance, 'staff_role', perm)
+    #
+    #     if password is not None:
+    #         instance.set_password(password)
+    #
+    #     for field, value in validated_data.items():
+    #         setattr(instance, field, value)
+    #     instance.save()
+    #     return instance

@@ -3,7 +3,6 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-
 from user.serializers import ProfileSerializer
 from user.models import Profile
 from user.tests.utils import create_profiles
@@ -66,6 +65,33 @@ class ProfileTestCase(APITestCase):
         self.assertEqual(
             response_json,
             ProfileSerializer(profile).data
+        )
+
+    def test_profile_create(self):
+        json = {
+            "user": {
+                "username": "string",
+                "email": "user@example.com",
+                "first_name": "string",
+                "last_name": "string",
+                "password": "string"
+            },
+            "about_user": "string"
+        }
+        response = self.client.post(
+            self.create_profile_url,
+            data=json,
+            format='json'
+        )
+        response_json = response.json()
+        pk = response_json['pk']
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_201_CREATED
+        )
+        self.assertEqual(
+            response_json,
+            ProfileSerializer(Profile.objects.get(pk=pk)).data
         )
 
     def test_profile_create(self):

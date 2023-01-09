@@ -1,10 +1,12 @@
+from django.urls import reverse
 from django.contrib.auth import get_user_model
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from django.urls import reverse
 from user.serializers import CustomUserSerializer
-from user.tests.utils import create_users_list
+from user.tests.utils import create_users_list, create_permissions
+from user.models.profile import Profile
 
 User = get_user_model()
 
@@ -69,12 +71,14 @@ class CustomUserTestCase(APITestCase):
         )
 
     def test_user_create(self):
+        staff_role = create_permissions()[0]
         json = {
             'username': "create_user",
             'email': 'create@user.com',
             'first_name': "create_first",
             "last_name": "create_last",
-            "password": "123"
+            "password": "123",
+            'staff_role': staff_role.pk
         }
         response = self.client.post(
             self.create_user_url,
@@ -89,6 +93,31 @@ class CustomUserTestCase(APITestCase):
         self.assertEqual(
             response_json,
             CustomUserSerializer(User.objects.get(pk=pk)).data
+        )
+
+    def test_profile_create_signal_from_user(self):
+        staff_role = create_permissions()[0]
+        json = {
+            'username': "create_user_signal",
+            'email': 'create_user_signal@user.com',
+            'first_name': "create_first",
+            "last_name": "create_last",
+            "password": "123",
+            'staff_role': staff_role.pk
+        }
+        response = self.client.post(
+            self.create_user_url,
+            data=json
+        )
+        response_json = response.json()
+        pk = response_json['pk']
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_201_CREATED
+        )
+        self.assertEqual(
+            Profile.objects.filter(user_id=pk).exists(),
+            True
         )
 
     def test_delete_user(self):
@@ -115,11 +144,13 @@ class CustomUserTestCase(APITestCase):
             'first_name': f'first_{pk}',
             'last_name': f'second_{pk}',
         }
+
         response = self.client.put(
             reverse(self.update_user, kwargs={'pk': pk}),
             data=json
         )
         response_json = response.json()
+
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
