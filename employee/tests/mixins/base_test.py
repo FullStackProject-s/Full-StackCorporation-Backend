@@ -6,9 +6,10 @@ class CreateEmployeesTestCaseMixin:
             self,
             employee_count,
             employee_url,
+            keyword='create',
             **kwargs
     ):
-        profile_pk = employee_count + abs(hash("create"))
+        profile_pk = employee_count + abs(hash(keyword))
         profile = create_profiles(profile_pk, start=profile_pk)[0]
         json = {
             'profile': profile.pk,

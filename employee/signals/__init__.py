@@ -1,0 +1,1 @@
+from .permissions_employee import set_admin_permission

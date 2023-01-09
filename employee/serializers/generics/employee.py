@@ -5,7 +5,6 @@ from drf_spectacular.utils import extend_schema_field
 
 
 class BaseStaffSerializer(serializers.ModelSerializer):
-    pk = serializers.IntegerField(read_only=True)
 
     class Meta:
         fields = (
