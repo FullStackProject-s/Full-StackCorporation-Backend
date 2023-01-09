@@ -1,1 +1,0 @@
-from .create_custom_user import CreateCustomUserSerializerMixin

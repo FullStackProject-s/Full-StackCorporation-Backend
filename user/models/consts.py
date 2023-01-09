@@ -3,7 +3,6 @@ from django.db import models
 
 
 class StaffRole(models.TextChoices):
-    ADMIN = 'Admin', _('Administrator')
-    PRODUCT_MANAGER = 'Prod manager', _('Product manager')
-    DEVELOPER = 'Dev', _('Developer')
-
+    ADMIN = 'Administrator', _('Administrator')
+    PRODUCT_MANAGER = 'Product manager', _('Product manager')
+    DEVELOPER = 'Developer', _('Developer')
