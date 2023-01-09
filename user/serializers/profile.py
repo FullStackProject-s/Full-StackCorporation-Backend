@@ -1,43 +1,25 @@
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from user.models.profile import Profile
-from user.serializers.mixins.create_custom_user import \
-    CreateCustomUserSerializerMixin
-from user.serializers.user import CustomUserSerializer
+from user.serializers.user import CustomUserShowSerializer
 
 
-class ProfileSerializer(
-    serializers.ModelSerializer,
-    CreateCustomUserSerializerMixin
-):
-    user = CustomUserSerializer()
-    photo_url = serializers.SerializerMethodField()
-
+class BaseProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = (
             'pk',
             'user',
-            'photo_url',
+            'profile_avatar',
             'about_user'
         )
+        extra_kwargs = {'profile_avatar': {'read_only': True}}
 
-    @extend_schema_field(OpenApiTypes.URI)
-    def get_photo_url(self, obj):
-        request = self.context.get('request')
-        if obj.avatar:
-            photo_url = obj.avatar.url
-            return request.build_absolute_uri(photo_url)
-        return None
 
-    def create(self, validated_data):
-        return self._create_profile(validated_data)
+class ProfileShowSerializer(BaseProfileSerializer):
+    user = CustomUserShowSerializer(required=False, read_only=True)
 
-    def update(self, instance, validated_data):
-        _user_data = validated_data.pop('user', None)
-        user_serializer = self.fields['user']
-        if _user_data:
-            user_serializer.update(instance.user, _user_data)
-        return super().update(instance, validated_data)
+
+class ProfileSerializer(BaseProfileSerializer):
+    def to_representation(self, instance):
+        return ProfileShowSerializer(instance).data

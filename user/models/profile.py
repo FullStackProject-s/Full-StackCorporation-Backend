@@ -6,7 +6,7 @@ class Profile(models.Model):
         'user.CustomUser',
         on_delete=models.CASCADE,
     )
-    avatar = models.ImageField(
+    profile_avatar = models.ImageField(
         upload_to='user_avatar',
         blank=True,
         null=True

@@ -5,7 +5,7 @@ from rest_framework import status
 
 from user.serializers import ProfileSerializer
 from user.models import Profile
-from user.tests.utils import create_profiles
+from user.tests.utils import create_profiles, create_users_list
 
 
 class ProfileTestCase(APITestCase):
@@ -68,41 +68,12 @@ class ProfileTestCase(APITestCase):
         )
 
     def test_profile_create(self):
-        json = {
-            "user": {
-                "username": "string",
-                "email": "user@example.com",
-                "first_name": "string",
-                "last_name": "string",
-                "password": "string"
-            },
-            "about_user": "string"
-        }
-        response = self.client.post(
-            self.create_profile_url,
-            data=json,
-            format='json'
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            response_json,
-            ProfileSerializer(Profile.objects.get(pk=pk)).data
-        )
+        start = abs(hash('test_profile_create'))
+        user = create_users_list(start, start=start)[0]
 
-    def test_profile_create(self):
+        Profile.objects.get(user=user).delete()
         json = {
-            "user": {
-                "username": "string",
-                "email": "user@example.com",
-                "first_name": "string",
-                "last_name": "string",
-                "password": "string"
-            },
+            "user": user.pk,
             "about_user": "string"
         }
         response = self.client.post(
@@ -111,6 +82,7 @@ class ProfileTestCase(APITestCase):
             format='json'
         )
         response_json = response.json()
+
         pk = response_json['pk']
         self.assertEqual(
             response.status_code,
@@ -140,16 +112,15 @@ class ProfileTestCase(APITestCase):
         )
 
     def test_put_profile(self):
+        start = abs(hash('test_put_profile'))
+        user = create_users_list(start, start=start)[0]
+
+        Profile.objects.get(user=user).delete()
+
         profile = self.profile_2
         pk = profile.pk
         json = {
-            "user": {
-                "username": f'{profile.user.username}_1',
-                "email": f'1{profile.user.email}',
-                "first_name": profile.user.first_name,
-                "last_name": profile.user.last_name,
-                "password": f'{profile.user.password}'
-            },
+            "user": user.pk,
             "about_user": "123string123"
         }
         response = self.client.put(
@@ -168,6 +139,10 @@ class ProfileTestCase(APITestCase):
         self.assertEqual(
             response_json['about_user'],
             json['about_user'],
+        )
+        self.assertEqual(
+            response_json,
+            ProfileSerializer(Profile.objects.get(pk=pk)).data
         )
 
     def test_patch_profile(self):

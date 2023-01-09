@@ -24,4 +24,8 @@ urlpatterns_profile = [
          ProfileDestroyAPIView.as_view(),
          name='delete-profile',
          ),
+    path('update-profile/<int:pk>',
+         ProfileUpdateAPIView.as_view(),
+         name='update-profile',
+         ),
 ]

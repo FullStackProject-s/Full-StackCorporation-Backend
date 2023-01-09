@@ -1,18 +1,12 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
 
-from user.models.utility import Permissions
-from user.serializers.mixins.create_custom_user import \
-    CreateCustomUserSerializerMixin
 from user.serializers.permission import PermissionSerializer
 
 User = get_user_model()
 
 
-class BaseCustomUserSerializer(
-    serializers.ModelSerializer,
-    CreateCustomUserSerializerMixin
-):
+class BaseCustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
@@ -39,20 +33,3 @@ class CustomUserShowSerializer(BaseCustomUserSerializer):
 class CustomUserSerializer(BaseCustomUserSerializer):
     def to_representation(self, data):
         return CustomUserShowSerializer(data).data
-    # def create(self, validated_data):
-    #     return self._create_user(validated_data)
-    #
-    # def update(self, instance: User, validated_data):
-    #     password = validated_data.pop('password', None)
-    #     _perm = validated_data.pop('staff_role', None)
-    #     if _perm is not None:
-    #         perm = Permissions.objects.get(role_name=_perm['role_name'])
-    #         setattr(instance, 'staff_role', perm)
-    #
-    #     if password is not None:
-    #         instance.set_password(password)
-    #
-    #     for field, value in validated_data.items():
-    #         setattr(instance, field, value)
-    #     instance.save()
-    #     return instance
