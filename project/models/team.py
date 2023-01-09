@@ -1,7 +1,10 @@
 from django.db import models
+from django.utils import timezone
+
+from general.models import TimeStampModelMixin
 
 
-class Team(models.Model):
+class Team(TimeStampModelMixin):
     team_name = models.CharField(
         max_length=200,
         unique=True
@@ -38,4 +41,4 @@ class Team(models.Model):
         return f'Team name: {self.team_name} - ' \
                f'Team lead: {self.team_lead} - ' \
                f'Prod Manager: {self.project_manager} - ' \
-               f'Pk : {self.pk}'
+               f'pk : {self.pk}'

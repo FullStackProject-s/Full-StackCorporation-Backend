@@ -1,7 +1,8 @@
+from django.urls import reverse
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from django.urls import reverse
 
 from user.serializers import ProfileSerializer
 from user.models import Profile
@@ -48,7 +49,8 @@ class ProfileTestCase(APITestCase):
         )
 
     def test_profiles_retrieve(self):
-        pk = self.profile_1.pk
+        profile = self.profile_1
+        pk = profile.pk
         response = self.client.get(
             reverse(self.retrieve_profile, kwargs={'pk': pk})
         )
@@ -59,11 +61,11 @@ class ProfileTestCase(APITestCase):
         response_json = response.json()
         self.assertEqual(
             response_json['about_user'],
-            self.profile_1.about_user
+            profile.about_user
         )
         self.assertEqual(
             response_json,
-            ProfileSerializer(self.profile_1).data
+            ProfileSerializer(profile).data
         )
 
     def test_profile_create(self):
@@ -112,14 +114,15 @@ class ProfileTestCase(APITestCase):
         )
 
     def test_put_profile(self):
-        pk = self.profile_2.pk
+        profile = self.profile_2
+        pk = profile.pk
         json = {
             "user": {
-                "username": f'{self.profile_2.user.username}_1',
-                "email": f'1{self.profile_2.user.email}',
-                "first_name": self.profile_2.user.first_name,
-                "last_name": self.profile_2.user.last_name,
-                "password": f'{self.profile_2.user.password}'
+                "username": f'{profile.user.username}_1',
+                "email": f'1{profile.user.email}',
+                "first_name": profile.user.first_name,
+                "last_name": profile.user.last_name,
+                "password": f'{profile.user.password}'
             },
             "about_user": "123string123"
         }

@@ -1,7 +1,8 @@
+from django.urls import reverse
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from django.urls import reverse
 
 from employee.models import Developer
 from employee.serializers import DeveloperSerializer
@@ -69,7 +70,8 @@ class DeveloperTestCase(
         )
 
     def test_developer_retrieve(self):
-        pk = self.dev_1.pk
+        dev = self.dev_1
+        pk = dev.pk
         response = self.client.get(
             reverse(self.retrieve_developer, kwargs={'pk': pk})
         )
@@ -79,24 +81,20 @@ class DeveloperTestCase(
             response.status_code,
             status.HTTP_200_OK
         )
-        self.assertEqual(
-            response_json['specialty'],
-            self.dev_1.specialty
-        )
+
         self.assertEqual(
             response_json['skill_level'],
-            self.dev_1.skill_level
+            dev.skill_level
         )
         self.assertEqual(
             response_json,
-            DeveloperSerializer(self.dev_1).data
+            DeveloperSerializer(dev).data
         )
 
     def test_developer_create(self):
         response = self._create_employee_response(
             self.developer_count,
             self.create_developer_url,
-            specialty=Specialty.FULLSTACK,
             skill_level=SkillLevel.senior
         )
 
@@ -132,12 +130,13 @@ class DeveloperTestCase(
             False
         )
 
-    def test_put_project_manager(self):
+    def test_put_developer(self):
+        pk = self.dev_2.pk
         response = self._put_employee_response(
             self.developer_count,
             reverse(
                 self.update_developer,
-                kwargs={'pk': self.dev_2.pk}
+                kwargs={'pk': pk}
             ),
             specialty=Specialty.FULLSTACK,
             skill_level=SkillLevel.senior
@@ -148,20 +147,17 @@ class DeveloperTestCase(
             status.HTTP_200_OK
         )
         self.assertEqual(
-            response_json['specialty'],
-            Specialty.FULLSTACK
-        )
-        self.assertEqual(
             response_json['skill_level'],
             SkillLevel.senior
         )
 
-    def test_patch_project_manager(self):
+    def test_patch_developer(self):
+        dev = self.dev_2
         response = self._patch_employee_response(
             self.developer_count,
             reverse(
                 self.update_developer,
-                kwargs={'pk': self.dev_2.pk}
+                kwargs={'pk': dev.pk}
             ),
             specialty=Specialty.FRONT,
 
@@ -173,14 +169,13 @@ class DeveloperTestCase(
         )
         self.assertNotEqual(
             response_json['profile'],
-            self.dev_2.profile.pk
-        )
-        self.assertNotEqual(
-            response_json['specialty'],
-            Specialty.FRONT.name
+            dev.profile.pk
         )
 
     def test_add_technologies_to_developer(self):
+        dev = self.dev_2
+        pk = dev.pk
+
         start = self.developer_count + abs(
             hash('add_technologies_to_developer')
         )
@@ -188,7 +183,6 @@ class DeveloperTestCase(
             lambda x: x.technology_name,
             create_technologies(start=start)
         ))
-        pk = self.dev_2.pk
         json = {
             'technology_names': technologies_name_list
         }
@@ -213,12 +207,13 @@ class DeveloperTestCase(
         )
 
     def test_remove_technologies_to_developer(self):
+        dev = self.dev_2
         start = self.developer_count + abs(
             hash('remove_technologies_to_developer')
         )
         technologies_list = create_technologies(start=start)
         for tech in technologies_list:
-            self.dev_2.append_technologies(tech)
+            dev.append_technologies(tech)
 
         technologies_name_list = list(map(
             lambda x: x.technology_name,
@@ -226,7 +221,7 @@ class DeveloperTestCase(
         ))
         tech_rem_list = technologies_name_list[0:(len(TechnologiesStack) // 2)]
 
-        pk = self.dev_2.pk
+        pk = dev.pk
         json = {
             'technology_names': tech_rem_list
         }

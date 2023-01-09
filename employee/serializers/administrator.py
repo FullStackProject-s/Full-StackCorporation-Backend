@@ -1,5 +1,5 @@
 from employee.models import Administrator
-from employee.serializers.baseSerializers import BaseStaffSerializer
+from employee.serializers.generics import BaseStaffSerializer
 from employee.serializers.mixins import StaffPermissionsSetSerializerMixin
 
 

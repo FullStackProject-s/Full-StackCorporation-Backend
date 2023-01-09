@@ -1,7 +1,8 @@
+from django.urls import reverse
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from django.urls import reverse
 
 from employee.models import ProjectManager
 from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
@@ -62,7 +63,8 @@ class ProjectManagerTestCase(
         )
 
     def test_project_manager_retrieve(self):
-        pk = self.proj_manager_1.pk
+        proj_manager = self.proj_manager_1
+        pk = proj_manager.pk
         response = self.client.get(
             reverse(self.retrieve_project_manager, kwargs={'pk': pk})
         )
@@ -78,7 +80,7 @@ class ProjectManagerTestCase(
         )
         self.assertEqual(
             response_json,
-            ProjectManagerSerializer(self.proj_manager_1).data
+            ProjectManagerSerializer(proj_manager).data
         )
 
     def test_project_manager_create(self):
@@ -118,11 +120,13 @@ class ProjectManagerTestCase(
         )
 
     def test_put_project_manager(self):
+        proj_manager = self.proj_manager_2
+
         response = self._put_employee_response(
             self.project_manager_count,
             reverse(
                 self.update_project_manager,
-                kwargs={'pk': self.proj_manager_2.pk}
+                kwargs={'pk': proj_manager.pk}
             )
         )
         response_json = response.json()
@@ -133,16 +137,17 @@ class ProjectManagerTestCase(
         self.assertEqual(
             response_json['team'],
             ProjectManagerSerializer(
-                self.proj_manager_2
+                proj_manager
             ).data['team']
         )
 
     def test_patch_project_manager(self):
+        proj_manager = self.proj_manager_2
         response = self._patch_employee_response(
             self.project_manager_count,
             reverse(
                 self.update_project_manager,
-                kwargs={'pk': self.proj_manager_2.pk}
+                kwargs={'pk': proj_manager.pk}
             )
         )
         response_json = response.json()
@@ -152,5 +157,5 @@ class ProjectManagerTestCase(
         )
         self.assertNotEqual(
             response_json['profile'],
-            self.proj_manager_2.profile.pk
+            proj_manager.profile.pk
         )

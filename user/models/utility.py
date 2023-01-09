@@ -3,13 +3,6 @@ from django.db import models
 from user.models.consts import StaffRole
 
 
-class TimeStampModelMixin(models.Model):
-    create_at = models.DateField(auto_now_add=True)
-
-    class Meta:
-        abstract = True
-
-
 class Permissions(models.Model):
     """
     Model for custom staff role.
