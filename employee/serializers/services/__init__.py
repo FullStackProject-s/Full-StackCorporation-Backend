@@ -1,1 +1,0 @@
-from .setPermissions import SetUserPermission
