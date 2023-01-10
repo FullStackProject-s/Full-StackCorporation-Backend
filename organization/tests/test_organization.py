@@ -6,10 +6,14 @@ from rest_framework import status
 from organization.models import Organization
 from organization.serializers import OrganizationSerializer
 from organization.tests.utils import create_organizations
+
+from project.models import Project
+from project.tests.utils import create_projects
+
 from user.tests.utils import create_users_list
 
 
-class ProfileTestCase(APITestCase):
+class OrganizationTestCase(APITestCase):
     """
     Test Cases for :model:`organization.Organization`.
     """
@@ -162,4 +166,86 @@ class ProfileTestCase(APITestCase):
         self.assertNotEqual(
             response_json['organization_name'],
             org.organization_name,
+        )
+
+    def test_project_organization_signal(self):
+        org = self.org_2
+        name = 'test_project_organization_signal'
+        start = abs(hash(name))
+
+        proj_1, proj_2, proj_3, proj_4 = create_projects(
+            start + 3,
+            start=start
+        )
+
+        json = {
+            "projects": [
+                proj_1.pk,
+                proj_2.pk
+            ],
+        }
+        response = self.client.patch(
+            reverse(
+                self.update_organization,
+                kwargs={'pk': org.pk}
+            ),
+            data=json,
+        )
+        response_json = response.json()
+        pk = response_json['pk']
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            list(Organization.objects.get(pk=pk).projects.all()),
+            [proj_1, proj_2]
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_1.pk).organization,
+            org
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_2.pk).organization,
+            org
+        )
+
+        json = {
+            "projects": [
+                proj_3.pk,
+                proj_4.pk
+            ],
+        }
+        response = self.client.patch(
+            reverse(
+                self.update_organization,
+                kwargs={'pk': org.pk}
+            ),
+            data=json,
+        )
+        response_json = response.json()
+        pk = response_json['pk']
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            list(Organization.objects.get(pk=pk).projects.all()),
+            [proj_3, proj_4]
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_3.pk).organization,
+            org
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_4.pk).organization,
+            org
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_1.pk).organization,
+            None
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_2.pk).organization,
+            None
         )

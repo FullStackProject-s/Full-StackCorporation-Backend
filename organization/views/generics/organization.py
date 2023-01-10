@@ -7,6 +7,7 @@ from organization.serializers import (
     OrganizationShowSerializer
 )
 
+
 @extend_schema(responses=OrganizationShowSerializer)
 class BaseConfigurationOrganizationViewGeneric(generics.GenericAPIView):
     serializer_class = OrganizationSerializer

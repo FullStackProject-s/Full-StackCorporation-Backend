@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from user.models.utility import Permissions
+from user.models.permission import Permissions
 
 
 class PermissionSerializer(serializers.ModelSerializer):

@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 
 from general.models import BaseTimeStampModel
 
-from user.models.utility import Permissions
+from user.models.permission import Permissions
 from user.managers import UserManager
 
 

@@ -1,8 +1,6 @@
 from employee.models import Developer
-from employee.models.consts import (
-    SkillLevel,
-    Specialty
-)
+from employee.models.consts import SkillLevel
+
 from user.tests.utils import create_profiles
 
 from random import randint

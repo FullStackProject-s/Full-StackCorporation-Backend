@@ -7,11 +7,8 @@ from employee.models import Developer, ProjectManager
 from employee.tests.utils import create_developers, create_project_managers
 
 from project.models import Team
-from project.serializer import (
-    TeamSerializer,
-    # TeamTeamLeadSerializer,
-    # TeamProjectManagerSerializer
-)
+from project.serializer import TeamSerializer
+
 from project.tests.utils import create_teams
 
 from user.models import CustomUser
