@@ -1,6 +1,6 @@
 from employee.serializers.developer import (
     DeveloperSerializer,
-    DeveloperStackTechnologiesSerializer,
+    DeveloperShowSerializer,
 )
 from employee.serializers.specialty import (
     DeveloperOrgSpecialtyPOSTSerializer,

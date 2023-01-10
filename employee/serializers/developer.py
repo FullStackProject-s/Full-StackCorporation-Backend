@@ -7,22 +7,11 @@ from rest_framework import serializers
 from employee.models.employees import Developer
 from employee.serializers.generics import BaseManagerDeveloperSerializer
 from employee.serializers.technologies import TechnologiesSerializer
-from employee.serializers.mixins import StaffPermissionsSetSerializerMixin
 
-from user.models.consts import StaffRole
+from user.serializers import ProfileShowSerializer
 
 
-class DeveloperSerializer(
-    BaseManagerDeveloperSerializer,
-    StaffPermissionsSetSerializerMixin
-):
-    stack = TechnologiesSerializer(
-        many=True,
-        required=False,
-        read_only=True
-    )
-    specialties = serializers.SerializerMethodField()
-
+class BaseDeveloperSerializer(BaseManagerDeveloperSerializer):
     class Meta(BaseManagerDeveloperSerializer.Meta):
         model = Developer
         fields = (
@@ -32,13 +21,15 @@ class DeveloperSerializer(
             'stack',
         )
 
-    def create(self, validated_data):
-        obj = super().create(validated_data)
 
-        return self._set_permissions(
-            obj,
-            StaffRole.DEVELOPER,
-        )
+class DeveloperShowSerializer(BaseDeveloperSerializer):
+    stack = TechnologiesSerializer(
+        many=True,
+        required=False,
+        read_only=True
+    )
+    specialties = serializers.SerializerMethodField()
+    profile = ProfileShowSerializer(read_only=True)
 
     @extend_schema_field(build_array_type(build_basic_type(OpenApiTypes.STR)))
     def get_specialties(self, obj: Developer):
@@ -51,12 +42,6 @@ class DeveloperSerializer(
         return None
 
 
-class DeveloperStackTechnologiesSerializer(serializers.Serializer):
-    technology_names = serializers.ListField(
-        child=serializers.CharField()
-    )
-
-    class Meta:
-        fields = (
-            'technology_names',
-        )
+class DeveloperSerializer(BaseDeveloperSerializer):
+    def to_representation(self, instance):
+        return DeveloperShowSerializer(instance).data

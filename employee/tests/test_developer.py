@@ -1,20 +1,21 @@
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-
 from employee.models import Developer
 from employee.serializers import DeveloperSerializer
 from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
-from employee.tests.utils import create_developers, create_technologies
+from employee.tests.utils import create_developers
 from employee.models.consts import (
     Specialty,
     SkillLevel,
-    TechnologiesStack
 )
 
-from user.models import CustomUser
+from user.models.consts import StaffRole
+
+User = get_user_model()
 
 
 class DeveloperTestCase(
@@ -30,8 +31,6 @@ class DeveloperTestCase(
     retrieve_developer = 'developer'
     delete_developer = 'delete-developer'
     update_developer = 'update-developer'
-    add_developer_tech = 'add-developer-tech'
-    remove_developer_tech = 'remove-developer-tech'
 
     developer_count = 4
 
@@ -47,7 +46,7 @@ class DeveloperTestCase(
                     )
         _keyword = 'developer'
 
-        cls.login_user = CustomUser.objects.create_user(
+        cls.login_user = User.objects.create_user(
             username=f'user_{_keyword}',
             email=f'user{_keyword}@example.com',
             password=f'user_{_keyword}',
@@ -89,6 +88,10 @@ class DeveloperTestCase(
         self.assertEqual(
             response_json,
             DeveloperSerializer(dev).data
+        )
+        self.assertEqual(
+            dev.profile.user.staff_role.role_name,
+            StaffRole.DEVELOPER
         )
 
     def test_developer_create(self):
@@ -138,7 +141,6 @@ class DeveloperTestCase(
                 self.update_developer,
                 kwargs={'pk': pk}
             ),
-            specialty=Specialty.FULLSTACK,
             skill_level=SkillLevel.senior
         )
         response_json = response.json()
@@ -171,77 +173,3 @@ class DeveloperTestCase(
             response_json['profile'],
             dev.profile.pk
         )
-
-    def test_add_technologies_to_developer(self):
-        dev = self.dev_2
-        pk = dev.pk
-
-        start = self.developer_count + abs(
-            hash('add_technologies_to_developer')
-        )
-        technologies_name_list = list(map(
-            lambda x: x.technology_name,
-            create_technologies(start=start)
-        ))
-        json = {
-            'technology_names': technologies_name_list
-        }
-        response = self.client.post(
-            reverse(
-                self.add_developer_tech,
-                kwargs={'pk': pk},
-            ),
-            data=json
-
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-
-        self.assertEqual(
-            [tech['technology_name']
-             for tech in Developer.objects.get(pk=pk).stack.values()
-             ],
-            technologies_name_list
-        )
-
-    def test_remove_technologies_to_developer(self):
-        dev = self.dev_2
-        start = self.developer_count + abs(
-            hash('remove_technologies_to_developer')
-        )
-        technologies_list = create_technologies(start=start)
-        for tech in technologies_list:
-            dev.append_technologies(tech)
-
-        technologies_name_list = list(map(
-            lambda x: x.technology_name,
-            technologies_list
-        ))
-        tech_rem_list = technologies_name_list[0:(len(TechnologiesStack) // 2)]
-
-        pk = dev.pk
-        json = {
-            'technology_names': tech_rem_list
-        }
-        response = self.client.post(
-            reverse(
-                self.remove_developer_tech,
-                kwargs={'pk': pk},
-            ),
-            data=json
-
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        for tech_names in [
-            tech['technology_name']
-            for tech in Developer.objects.get(pk=pk).stack.values()
-        ]:
-            self.assertEqual(
-                tech_names not in tech_rem_list,
-                True
-            )
