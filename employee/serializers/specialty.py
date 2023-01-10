@@ -1,12 +1,18 @@
+from rest_framework import serializers
+
 from employee.serializers import DeveloperSerializer
 
 from employee.serializers.generics import BaseDeveloperOrgSpecialtySerializer
-from organization.serializers import OrganizationSerializer
 
 
 class DeveloperOrgSpecialtyShowSerializer(BaseDeveloperOrgSpecialtySerializer):
     organization_developer = DeveloperSerializer(read_only=True)
-    organization = OrganizationSerializer(read_only=True)
+    organization = serializers.SerializerMethodField()
+
+    def get_organization(self, obj):
+        if obj.organization:
+            return obj.organization.organization_name
+        return None
 
 
 class DeveloperOrgSpecialtySerializer(BaseDeveloperOrgSpecialtySerializer):

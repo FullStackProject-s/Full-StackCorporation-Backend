@@ -1,30 +1,38 @@
 from rest_framework import generics
-from project.models import Project
-from project.serializer import ProjectSerializer
+
+from .generics import BaseConfigurationProjectsViewGeneric
 
 
-class ProjectsListAPIVIew(generics.ListAPIView):
-    serializer_class = ProjectSerializer
-    queryset = Project.objects.all()
+class ProjectsListAPIVIew(
+    BaseConfigurationProjectsViewGeneric,
+    generics.ListAPIView
+):
+    pass
 
 
-class ProjectsRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = ProjectSerializer
-    queryset = Project.objects.all()
+class ProjectsRetrieveAPIView(
+    BaseConfigurationProjectsViewGeneric,
+    generics.RetrieveAPIView
+):
+    pass
 
 
-class ProjectCreateAPIView(generics.CreateAPIView):
-    serializer_class = ProjectSerializer
-    queryset = Project.objects.all()
+class ProjectCreateAPIView(
+    BaseConfigurationProjectsViewGeneric,
+    generics.CreateAPIView
+):
+    pass
 
 
-class ProjectDestroyAPIView(generics.DestroyAPIView):
-    serializer_class = ProjectSerializer
-    queryset = Project.objects.all()
+class ProjectDestroyAPIView(
+    BaseConfigurationProjectsViewGeneric,
+    generics.DestroyAPIView
+):
+    pass
 
 
-class ProjectUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = ProjectSerializer
-    queryset = Project.objects.all()
-
-
+class ProjectUpdateAPIView(
+    BaseConfigurationProjectsViewGeneric,
+    generics.UpdateAPIView
+):
+    pass

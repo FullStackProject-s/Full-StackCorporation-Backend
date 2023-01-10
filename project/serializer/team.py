@@ -1,59 +1,22 @@
-from rest_framework import serializers
-from project.models.team import Team
-from employee.serializers.developer import DeveloperSerializer
-from employee.serializers.project_manager import ProjectManagerSerializer
+from employee.serializers import (
+    DeveloperShowSerializer,
+    ProjectManagerShowSerializer
+)
+
+from project.serializer.services import _update_personal
+from project.serializer.generics import BaseTeamSerializer
 
 
-class TeamSerializer(serializers.ModelSerializer):
-    team_lead = DeveloperSerializer()
-    project_manager = ProjectManagerSerializer()
-    developers = DeveloperSerializer(many=True)
-
-    class Meta:
-        model = Team
-        fields = (
-            'pk',
-            'team_name',
-            'team_lead',
-            'project_manager',
-            'developers',
-            'create_at'
-        )
+class TeamShowSerializer(BaseTeamSerializer):
+    team_lead = DeveloperShowSerializer()
+    project_manager = ProjectManagerShowSerializer()
+    developers = DeveloperShowSerializer(many=True)
 
 
-class TeamCreateSerializer(serializers.ModelSerializer):
+class TeamSerializer(BaseTeamSerializer):
+    def to_representation(self, instance):
+        return TeamShowSerializer(instance).data
 
-    class Meta:
-        model = Team
-        fields = (
-            'team_name',
-        )
-
-
-class TeamTeamLeadSerializer(serializers.Serializer):
-    team_lead = serializers.CharField()
-
-    class Meta:
-        fields = (
-            'team_lead'
-        )
-
-
-class TeamProjectManagerSerializer(serializers.Serializer):
-    project_manager = serializers.CharField()
-
-    class Meta:
-        fields = (
-            'project_manager'
-        )
-
-
-class TeamDevelopersSerializer(serializers.Serializer):
-    developers = serializers.ListField(
-        child=serializers.CharField()
-    )
-
-    class Meta:
-        fields = (
-            'developers',
-        )
+    def update(self, instance, validated_data):
+        _update_personal(instance, validated_data)
+        return super().update(instance, validated_data)

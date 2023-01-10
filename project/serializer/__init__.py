@@ -1,11 +1,8 @@
 from .team import (
     TeamSerializer,
-    TeamCreateSerializer,
-    TeamTeamLeadSerializer,
-    TeamProjectManagerSerializer,
-    TeamDevelopersSerializer
+    TeamShowSerializer
 )
 from .project import (
-    ProjectSerializer
+    ProjectSerializer,
+    ProjectShowSerializer
 )
-

@@ -1,38 +1,38 @@
 from rest_framework import generics
 
-from .generics import OrganizationGenericView
+from .generics import BaseConfigurationOrganizationViewGeneric
 
 
 class OrganizationListAPIVIew(
-    OrganizationGenericView,
+    BaseConfigurationOrganizationViewGeneric,
     generics.ListAPIView
 ):
     pass
 
 
 class OrganizationRetrieveAPIView(
-    OrganizationGenericView,
+    BaseConfigurationOrganizationViewGeneric,
     generics.RetrieveAPIView
 ):
     pass
 
 
 class OrganizationCreateAPIView(
-    OrganizationGenericView,
+    BaseConfigurationOrganizationViewGeneric,
     generics.CreateAPIView
 ):
     pass
 
 
 class OrganizationDestroyAPIView(
-    OrganizationGenericView,
+    BaseConfigurationOrganizationViewGeneric,
     generics.DestroyAPIView
 ):
     pass
 
 
 class OrganizationUpdateAPIView(
-    OrganizationGenericView,
+    BaseConfigurationOrganizationViewGeneric,
     generics.UpdateAPIView
 ):
     pass

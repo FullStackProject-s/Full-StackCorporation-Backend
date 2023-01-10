@@ -1,24 +1,24 @@
 from rest_framework import serializers
 
-from project.serializer import TeamSerializer
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 
-from project.models import Project
+from project.serializer import TeamShowSerializer
+from project.serializer.generics import BaseProjectSerializer
 
 
-class ProjectSerializer(serializers.ModelSerializer):
-    pk = serializers.IntegerField(read_only=True)
-    teams = TeamSerializer(many=True, read_only=True)
+class ProjectShowSerializer(BaseProjectSerializer):
+    teams = TeamShowSerializer(many=True, read_only=True)
     deadline = serializers.DateField()
-    create_at = serializers.DateField(read_only=True)
+    organization = serializers.SerializerMethodField()
 
-    class Meta:
-        model = Project
-        fields = (
-            'pk',
-            'project_name',
-            'teams',
-            'organization',
-            'create_at',
-            'deadline'
+    @extend_schema_field(OpenApiTypes.STR)
+    def get_organization(self, obj):
+        if obj.organization:
+            return obj.organization.organization_name
+        return None
 
-        )
+
+class ProjectSerializer(BaseProjectSerializer):
+    def to_representation(self, instance):
+        return ProjectShowSerializer(instance).data

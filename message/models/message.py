@@ -1,8 +1,8 @@
-from general.models import TimeStampModelMixin
+from general.models import BaseTimeStampModel
 from django.db import models
 
 
-class MessageBase(TimeStampModelMixin):
+class MessageBase(BaseTimeStampModel):
     creator = models.ForeignKey(
         'user.CustomUser',
         on_delete=models.CASCADE

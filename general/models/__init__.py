@@ -1,1 +1,1 @@
-from .utility import TimeStampModelMixin
+from .utility import BaseTimeStampModel
