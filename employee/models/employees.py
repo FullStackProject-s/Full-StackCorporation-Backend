@@ -16,7 +16,7 @@ class Developer(BaseEmployeeMixin):
     )
     team = models.ForeignKey(
         'project.Team',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='developer_team',
         blank=True,
         null=True
@@ -26,6 +26,14 @@ class Developer(BaseEmployeeMixin):
         max_length=200,
         default=SkillLevel.junior
     )
+
+    def set_team(self, team):
+        self.team = team
+        self.save()
+
+    def remove_team(self):
+        self.team = None
+        self.save()
 
     def append_technologies(self, tech: Technologies):
         self.stack.add(tech)
@@ -42,7 +50,7 @@ class Developer(BaseEmployeeMixin):
 class ProjectManager(BaseEmployeeMixin):
     team = models.ForeignKey(
         'project.Team',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='project_manager_team',
         blank=True,
         null=True

@@ -10,15 +10,15 @@ class Team(BaseTimeStampModel):
     )
     team_lead = models.ForeignKey(
         'employee.Developer',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='team_lead',
         blank=True,
         null=True
     )
     project_manager = models.ForeignKey(
         'employee.ProjectManager',
-        on_delete=models.CASCADE,
         related_name='project_manager',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True
     )
@@ -27,14 +27,6 @@ class Team(BaseTimeStampModel):
         related_name='developers',
         blank=True,
     )
-
-    def append_developer(self, developer):
-        self.developers.add(developer)
-        self.save()
-
-    def remove_developer(self, developer):
-        self.developers.remove(developer)
-        self.save()
 
     def __str__(self):
         return f'Team name: {self.team_name} - ' \

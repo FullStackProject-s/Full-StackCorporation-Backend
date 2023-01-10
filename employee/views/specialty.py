@@ -1,7 +1,8 @@
 from rest_framework import generics
 
-from employee.views.generics import \
+from employee.views.generics import (
     BaseDeveloperOrganizationSpecialtyViewGeneric
+)
 
 
 class DeveloperOrganizationSpecialtyListAPIView(

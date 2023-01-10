@@ -4,6 +4,7 @@ from employee.serializers import (
     DeveloperShowSerializer,
     ProjectManagerShowSerializer
 )
+from project.serializer.mixins import UpdateTeamMixin
 
 
 class BaseTeamSerializer(serializers.ModelSerializer):
@@ -25,43 +26,13 @@ class TeamShowSerializer(BaseTeamSerializer):
     developers = DeveloperShowSerializer(many=True)
 
 
-class TeamSerializer(BaseTeamSerializer):
+class TeamSerializer(
+    BaseTeamSerializer,
+    UpdateTeamMixin
+):
     def to_representation(self, instance):
         return TeamShowSerializer(instance).data
 
-
-class TeamCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Team
-        fields = (
-            'team_name',
-        )
-
-
-class TeamTeamLeadSerializer(serializers.Serializer):
-    team_lead = serializers.CharField()
-
-    class Meta:
-        fields = (
-            'team_lead'
-        )
-
-
-class TeamProjectManagerSerializer(serializers.Serializer):
-    project_manager = serializers.CharField()
-
-    class Meta:
-        fields = (
-            'project_manager'
-        )
-
-
-class TeamDevelopersSerializer(serializers.Serializer):
-    developers = serializers.ListField(
-        child=serializers.CharField()
-    )
-
-    class Meta:
-        fields = (
-            'developers',
-        )
+    def update(self, instance, validated_data):
+        self._update(instance, validated_data)
+        return super().update(instance, validated_data)

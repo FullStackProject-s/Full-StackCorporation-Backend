@@ -4,7 +4,6 @@ from drf_spectacular.plumbing import build_array_type, build_basic_type
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema_field
 
-from employee.models.employees import Developer
 from employee.serializers.generics import BaseDeveloperSerializer
 from employee.serializers.technologies import TechnologiesSerializer
 
@@ -21,7 +20,7 @@ class DeveloperShowSerializer(BaseDeveloperSerializer):
     profile = ProfileShowSerializer(read_only=True)
 
     @extend_schema_field(build_array_type(build_basic_type(OpenApiTypes.STR)))
-    def get_specialties(self, obj: Developer):
+    def get_specialties(self, obj):
         if obj.specialties:
             return [
                 f'{specialty.specialty} - ' \

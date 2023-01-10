@@ -12,15 +12,15 @@ urlpatterns = [
 
     # path('', include('employee.urls')),
 
-    path('', include('project.urls')),
+    # path('', include('project.urls')),
 
-    # path('', include('organization.urls'))
+    path('', include('organization.urls'))
 ]
 
 urlpatterns += [
     path('api-swagger/schema/', SpectacularAPIView.as_view(), name='schema'),
 
-    path('docs/', SpectacularSwaggerView.as_view(),
+    path('', SpectacularSwaggerView.as_view(),
          name="swagger-ui"),
 ]
 
