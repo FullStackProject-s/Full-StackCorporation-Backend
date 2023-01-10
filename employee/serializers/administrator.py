@@ -1,21 +1,6 @@
-from employee.models import Administrator
-from employee.serializers.generics import BaseStaffSerializer
+from employee.serializers.generics import BaseAdministratorSerializer
 
 from user.serializers import ProfileShowSerializer
-
-
-# from employee.serializers.mixins import StaffPermissionsSetSerializerMixin
-#
-#
-# from user.models.consts import StaffRole
-#
-
-class BaseAdministratorSerializer(BaseStaffSerializer):
-    class Meta:
-        model = Administrator
-        fields = (
-            *BaseStaffSerializer.Meta.fields,
-        )
 
 
 class AdministratorShowSerializer(BaseAdministratorSerializer):

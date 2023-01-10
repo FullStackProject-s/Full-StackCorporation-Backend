@@ -1,15 +1,7 @@
 from employee.models import ProjectManager
-from employee.serializers.generics import BaseManagerDeveloperSerializer
+from employee.serializers.generics import BaseProjectManagerSerializer
 
 from user.serializers import ProfileShowSerializer
-
-
-class BaseProjectManagerSerializer(BaseManagerDeveloperSerializer):
-    class Meta:
-        model = ProjectManager
-        fields = (
-            *BaseManagerDeveloperSerializer.Meta.fields,
-        )
 
 
 class ProjectManagerShowSerializer(BaseProjectManagerSerializer):
