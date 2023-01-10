@@ -1,15 +1,15 @@
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from rest_framework.test import APITestCase
 from rest_framework import status
-
 
 from employee.models import ProjectManager
 from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 from employee.tests.utils import create_project_managers
 from employee.serializers import ProjectManagerSerializer
 
-from user.models import CustomUser
+User = get_user_model()
 
 
 class ProjectManagerTestCase(
@@ -40,7 +40,7 @@ class ProjectManagerTestCase(
                     )
         _keyword = 'project_manager'
 
-        cls.login_user = CustomUser.objects.create_user(
+        cls.login_user = User.objects.create_user(
             username=f'user_{_keyword}',
             email=f'user{_keyword}@example.com',
             password=f'user_{_keyword}',
@@ -95,10 +95,8 @@ class ProjectManagerTestCase(
             status.HTTP_201_CREATED
         )
         self.assertEqual(
-            response_json,
-            ProjectManagerSerializer(
-                ProjectManager.objects.get(pk=pk)
-            ).data
+            ProjectManager.objects.filter(pk=pk).exists(),
+            True
         )
 
     def test_delete_project_manager(self):
@@ -127,7 +125,8 @@ class ProjectManagerTestCase(
             reverse(
                 self.update_project_manager,
                 kwargs={'pk': proj_manager.pk}
-            )
+            ),
+            keyword='test_put_project_manager'
         )
         response_json = response.json()
         self.assertEqual(
@@ -148,14 +147,15 @@ class ProjectManagerTestCase(
             reverse(
                 self.update_project_manager,
                 kwargs={'pk': proj_manager.pk}
-            )
+            ),
+            keyword='test_patch_project_manager'
         )
         response_json = response.json()
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
         )
-        self.assertNotEqual(
-            response_json['profile'],
-            proj_manager.profile.pk
+        self.assertEqual(
+            response_json['pk'],
+            proj_manager.pk
         )

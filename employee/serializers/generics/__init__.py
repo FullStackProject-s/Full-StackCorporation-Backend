@@ -1,5 +1,6 @@
 from .employee import (
-    BaseManagerDeveloperSerializer,
-    BaseStaffSerializer
+    BaseProjectManagerSerializer,
+    BaseAdministratorSerializer,
+    BaseDeveloperSerializer
 )
-from .technologies import BaseDeveloperOrgSpecialtySerializer
+from .specialty import BaseDeveloperOrgSpecialtySerializer

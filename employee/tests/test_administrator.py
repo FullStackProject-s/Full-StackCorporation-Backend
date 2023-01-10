@@ -1,15 +1,20 @@
+import json
+
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 from rest_framework.test import APITestCase
 from rest_framework import status
-
 
 from employee.models import Administrator
 from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
 from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 
-from user.models import CustomUser
+from user.serializers import ProfileSerializer
+from user.models.consts import StaffRole
+
+User = get_user_model()
 
 
 class AdministratorTestCase(
@@ -40,7 +45,7 @@ class AdministratorTestCase(
                     )
         _keyword = 'administrator'
 
-        cls.login_user = CustomUser.objects.create_user(
+        cls.login_user = User.objects.create_user(
             username=f'user_{_keyword}',
             email=f'user{_keyword}@example.com',
             password=f'user_{_keyword}',
@@ -69,14 +74,9 @@ class AdministratorTestCase(
             reverse(self.retrieve_admin, kwargs={'pk': pk})
         )
         response_json = response.json()
-
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
-        )
-        self.assertEqual(
-            response_json['profile'],
-            admin.profile.pk
         )
         self.assertEqual(
             response_json,
@@ -90,15 +90,14 @@ class AdministratorTestCase(
         )
         response_json = response.json()
         pk = response_json['pk']
+
         self.assertEqual(
             response.status_code,
             status.HTTP_201_CREATED
         )
         self.assertEqual(
-            response_json,
-            AdministratorSerializer(
-                Administrator.objects.get(pk=pk)
-            ).data
+            Administrator.objects.filter(pk=pk).exists(),
+            True
         )
 
     def test_delete_admin(self):

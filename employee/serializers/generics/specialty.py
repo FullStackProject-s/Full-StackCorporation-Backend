@@ -8,3 +8,4 @@ class BaseDeveloperOrgSpecialtySerializer(serializers.ModelSerializer):
     class Meta:
         model = DeveloperOrganizationSpecialty
         fields = '__all__'
+

@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from rest_framework.test import APITestCase
@@ -6,12 +7,11 @@ from rest_framework import status
 from employee.models import DeveloperOrganizationSpecialty
 from employee.tests.utils import create_specialities, create_developers
 from employee.models.consts import Specialty
-from employee.serializers import (
-    DeveloperOrgSpecialtyGETSerializer,
-    DeveloperOrgSpecialtyPOSTSerializer
-)
+from employee.serializers import DeveloperOrgSpecialtySerializer
+
 from organization.tests.utils import create_organizations
-from user.models import CustomUser
+
+User = get_user_model()
 
 
 class DeveloperOrganizationSpecialtyTestCase(APITestCase):
@@ -39,7 +39,7 @@ class DeveloperOrganizationSpecialtyTestCase(APITestCase):
                     )
         _keyword = 'speciality'
 
-        cls.login_user = CustomUser.objects.create_user(
+        cls.login_user = User.objects.create_user(
             username=f'user_{_keyword}',
             email=f'user{_keyword}@example.com',
             password=f'user_{_keyword}',
@@ -78,7 +78,7 @@ class DeveloperOrganizationSpecialtyTestCase(APITestCase):
         )
         self.assertEqual(
             response_json,
-            DeveloperOrgSpecialtyGETSerializer(spec).data
+            DeveloperOrgSpecialtySerializer(spec).data
         )
 
     def test_speciality_create(self):
@@ -104,7 +104,7 @@ class DeveloperOrganizationSpecialtyTestCase(APITestCase):
         )
         self.assertEqual(
             response_json,
-            DeveloperOrgSpecialtyGETSerializer(
+            DeveloperOrgSpecialtySerializer(
                 DeveloperOrganizationSpecialty.objects.get(
                     pk=pk
                 )

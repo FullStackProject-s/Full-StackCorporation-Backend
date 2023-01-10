@@ -12,10 +12,14 @@ def create_developers(developer_number, start=1) -> list[Developer]:
     skill_level_val = SkillLevel.values
 
     _min = len(skill_level_val) - 1
-    profiles_list = create_profiles(developer_number, start=start)
-    return [
+    pks = [
         Developer.objects.create(
             profile=profile,
-            skill_level=skill_level_val[randint(0, _min)],
-        ) for profile in profiles_list
+            skill_level=skill_level_val[randint(0, _min)]
+        ).pk for profile in create_profiles(developer_number, start=start)
+    ]
+    return [
+        Developer.objects.get(
+            pk=pk
+        ) for pk in pks
     ]

@@ -1,1 +1,0 @@
-from .developer_technologies import DeveloperTechnologiesRemoveUpdate

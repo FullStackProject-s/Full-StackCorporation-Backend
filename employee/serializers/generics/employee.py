@@ -3,10 +3,14 @@ from rest_framework import serializers
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema_field
 
+from employee.models import (
+    ProjectManager,
+    Developer,
+    Administrator
+)
+
 
 class BaseStaffSerializer(serializers.ModelSerializer):
-    pk = serializers.IntegerField(read_only=True)
-
     class Meta:
         fields = (
             'pk',
@@ -31,3 +35,30 @@ class BaseManagerDeveloperSerializer(BaseStaffSerializer):
         if obj.team:
             return obj.team.team_name
         return None
+
+
+class BaseProjectManagerSerializer(BaseManagerDeveloperSerializer):
+    class Meta:
+        model = ProjectManager
+        fields = (
+            *BaseManagerDeveloperSerializer.Meta.fields,
+        )
+
+
+class BaseAdministratorSerializer(BaseStaffSerializer):
+    class Meta:
+        model = Administrator
+        fields = (
+            *BaseStaffSerializer.Meta.fields,
+        )
+
+
+class BaseDeveloperSerializer(BaseManagerDeveloperSerializer):
+    class Meta(BaseManagerDeveloperSerializer.Meta):
+        model = Developer
+        fields = (
+            *BaseManagerDeveloperSerializer.Meta.fields,
+            'skill_level',
+            'specialties',
+            'stack',
+        )

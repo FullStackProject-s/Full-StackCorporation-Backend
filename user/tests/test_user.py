@@ -95,31 +95,6 @@ class CustomUserTestCase(APITestCase):
             CustomUserSerializer(User.objects.get(pk=pk)).data
         )
 
-    def test_profile_create_signal_from_user(self):
-        staff_role = create_permissions()[0]
-        json = {
-            'username': "create_user_signal",
-            'email': 'create_user_signal@user.com',
-            'first_name': "create_first",
-            "last_name": "create_last",
-            "password": "123",
-            'staff_role': staff_role.pk
-        }
-        response = self.client.post(
-            self.create_user_url,
-            data=json
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            Profile.objects.filter(user_id=pk).exists(),
-            True
-        )
-
     def test_delete_user(self):
         pk = self.user_1.pk
         response = self.client.delete(

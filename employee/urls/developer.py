@@ -5,8 +5,6 @@ from employee.views.developer import (
     DeveloperDestroyAPIView,
     DeveloperCreateAPIView,
     DeveloperUpdateAPIView,
-    DeveloperAddStackTechnologies,
-    DeveloperRemoveTechnologies,
 )
 
 urlpatterns_developers = [
@@ -30,13 +28,5 @@ urlpatterns_developers = [
          DeveloperUpdateAPIView.as_view(),
          name='update-developer'
          ),
-    path('add-developer-tech/<int:pk>/',
-         DeveloperAddStackTechnologies.as_view(),
-         name='add-developer-tech'
-         ),
-    path('remove-developer-tech/<int:pk>/',
-         DeveloperRemoveTechnologies.as_view(),
-         name='remove-developer-tech'
-         )
 
 ]
