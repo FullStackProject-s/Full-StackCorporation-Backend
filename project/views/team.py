@@ -64,7 +64,6 @@ class TeamUpdateTeamLeadAPIView(
 ):
     serializer_class = TeamTeamLeadSerializer
 
-    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         return self._update_personal(
             request,
@@ -80,7 +79,6 @@ class TeamRemoveTeamLeadAPIView(
 ):
     serializer_class = TeamTeamLeadSerializer
 
-    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         return self._remove_personal(
             request,
@@ -96,7 +94,6 @@ class TeamUpdateProjectManagerAPIView(
 ):
     serializer_class = TeamProjectManagerSerializer
 
-    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         return self._update_personal(
             request,
@@ -112,7 +109,6 @@ class TeamRemoveProjectManagerAPIView(
 ):
     serializer_class = TeamProjectManagerSerializer
 
-    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         return self._remove_personal(
             request,
@@ -127,7 +123,6 @@ class TeamUpdateDevelopersAPIView(
 ):
     serializer_class = TeamDevelopersSerializer
 
-    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         return self._change_developers(
             team := self.get_object(),
@@ -145,7 +140,6 @@ class TeamRemoveDevelopersAPIView(
 ):
     serializer_class = TeamDevelopersSerializer
 
-    @response_true_message_schema
     def post(self, request, *args, **kwargs):
         return self._change_developers(
             team := self.get_object(),

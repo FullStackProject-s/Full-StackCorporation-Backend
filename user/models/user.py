@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 
-from general.models import TimeStampModelMixin
+from general.models import BaseTimeStampModel
 
 from user.models.utility import Permissions
 from user.managers import UserManager
@@ -10,7 +10,7 @@ from user.managers import UserManager
 
 class CustomUser(
     AbstractBaseUser,
-    TimeStampModelMixin,
+    BaseTimeStampModel,
     PermissionsMixin
 ):
     username = models.CharField(

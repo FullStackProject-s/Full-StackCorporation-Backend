@@ -1,10 +1,9 @@
 from django.db import models
-from django.utils import timezone
 
-from general.models import TimeStampModelMixin
+from general.models import BaseTimeStampModel
 
 
-class Team(TimeStampModelMixin):
+class Team(BaseTimeStampModel):
     team_name = models.CharField(
         max_length=200,
         unique=True

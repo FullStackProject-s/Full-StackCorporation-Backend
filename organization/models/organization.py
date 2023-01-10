@@ -1,9 +1,9 @@
 from django.db import models
 
-from general.models import TimeStampModelMixin
+from general.models import BaseTimeStampModel
 
 
-class Organization(TimeStampModelMixin):
+class Organization(BaseTimeStampModel):
     organization_name = models.CharField(
         max_length=200,
         unique=True,

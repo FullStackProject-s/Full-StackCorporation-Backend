@@ -23,11 +23,11 @@ class TeamRemoveUpdateDeveloper:
             ).first():
                 if developer.team and developer.team != team:
                     raise serializers.ValidationError(
-                        "Developer stated in different team"
+                        "Developer stated in different Team"
                     )
                 if developer.team == team and developer_team is not None:
                     raise serializers.ValidationError(
-                        "Developer already stated in this team"
+                        "Developer already stated in this Team"
                     )
                 team_method(developer)
                 developer_list.append(developer)

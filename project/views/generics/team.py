@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 
 from employee.models import (
@@ -5,7 +6,10 @@ from employee.models import (
     Developer
 )
 from project.models import Team
-from project.serializer import TeamSerializer
+from project.serializer import (
+    TeamSerializer,
+    TeamShowSerializer
+)
 
 
 class TeamBaseGenericRemoveUpdateMainPersonal:
@@ -13,6 +17,7 @@ class TeamBaseGenericRemoveUpdateMainPersonal:
     personal_relation_name = None
 
 
+@extend_schema(responses=TeamShowSerializer)
 class TeamBaseGenericView(generics.GenericAPIView):
     serializer_class = TeamSerializer
     queryset = Team.objects.all()

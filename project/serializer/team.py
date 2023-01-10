@@ -1,14 +1,12 @@
 from rest_framework import serializers
 from project.models.team import Team
-from employee.serializers.developer import DeveloperSerializer
-from employee.serializers.project_manager import ProjectManagerSerializer
+from employee.serializers import (
+    DeveloperShowSerializer,
+    ProjectManagerShowSerializer
+)
 
 
-class TeamSerializer(serializers.ModelSerializer):
-    team_lead = DeveloperSerializer()
-    project_manager = ProjectManagerSerializer()
-    developers = DeveloperSerializer(many=True)
-
+class BaseTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = (
@@ -21,8 +19,18 @@ class TeamSerializer(serializers.ModelSerializer):
         )
 
 
-class TeamCreateSerializer(serializers.ModelSerializer):
+class TeamShowSerializer(BaseTeamSerializer):
+    team_lead = DeveloperShowSerializer()
+    project_manager = ProjectManagerShowSerializer()
+    developers = DeveloperShowSerializer(many=True)
 
+
+class TeamSerializer(BaseTeamSerializer):
+    def to_representation(self, instance):
+        return TeamShowSerializer(instance).data
+
+
+class TeamCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = (
