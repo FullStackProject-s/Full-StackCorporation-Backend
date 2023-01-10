@@ -3,8 +3,8 @@ from employee.serializers.developer import (
     DeveloperShowSerializer,
 )
 from employee.serializers.specialty import (
-    DeveloperOrgSpecialtyPOSTSerializer,
-    DeveloperOrgSpecialtyGETSerializer
+    DeveloperOrgSpecialtySerializer,
+    DeveloperOrgSpecialtyShowSerializer
 )
 
 from employee.serializers.technologies import TechnologiesSerializer
