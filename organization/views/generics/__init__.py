@@ -1,1 +1,1 @@
-from .organization import OrganizationGenericView
+from .organization import BaseConfigurationOrganizationViewGeneric

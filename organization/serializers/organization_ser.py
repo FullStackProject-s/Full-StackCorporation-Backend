@@ -1,6 +1,5 @@
+from user.serializers.user import CustomUserShowSerializer
 from organization.serializers.generic import BaseOrganizationSerializer
-
-from user.serializers import CustomUserShowSerializer
 from project.serializer import ProjectShowSerializer
 
 

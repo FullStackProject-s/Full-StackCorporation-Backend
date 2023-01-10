@@ -1,1 +1,2 @@
-from .organization import BaseOrganizationSerializer
+from organization.serializers.generic.organization import \
+    BaseOrganizationSerializer
