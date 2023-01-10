@@ -7,9 +7,7 @@ def update_developer(
         developers: list[Developer]
 ):
     for old_dev in team.developers.all():
-        developer = Developer.objects.get(pk=old_dev.pk)
-        if team.team_lead != developer:
-            developer.remove_team()
+        if team.team_lead != old_dev:
             old_dev.remove_team()
 
     for developer_ in developers:

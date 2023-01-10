@@ -12,7 +12,7 @@ urlpatterns = [
 
     # path('', include('employee.urls')),
 
-    # path('', include('project.urls')),
+    path('', include('project.urls')),
 
     path('', include('organization.urls'))
 ]

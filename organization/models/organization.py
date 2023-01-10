@@ -25,7 +25,3 @@ class Organization(BaseTimeStampModel):
         related_name='org_members',
         blank=True
     )
-
-    def add_owner(self, owner):
-        self.owners.add(owner)
-        self.save()
