@@ -1,9 +1,15 @@
 from rest_framework import generics
 
+from drf_spectacular.utils import extend_schema
+
 from organization.models import Organization
-from organization.serializers import OrganizationSerializer
+from organization.serializers import (
+    OrganizationSerializer,
+    OrganizationShowSerializer
+)
 
 
-class OrganizationGenericView(generics.GenericAPIView):
+@extend_schema(responses=OrganizationShowSerializer)
+class BaseConfigurationOrganizationViewGeneric(generics.GenericAPIView):
     serializer_class = OrganizationSerializer
     queryset = Organization.objects.all()

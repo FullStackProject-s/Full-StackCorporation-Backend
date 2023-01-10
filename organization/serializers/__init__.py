@@ -1,1 +1,4 @@
-from .organization import OrganizationSerializer
+from .organization import (
+    OrganizationSerializer,
+    OrganizationShowSerializer
+)

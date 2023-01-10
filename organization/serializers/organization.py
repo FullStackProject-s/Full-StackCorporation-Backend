@@ -1,16 +1,15 @@
-from rest_framework import serializers
+from organization.serializers.generic import BaseOrganizationSerializer
 
-from organization.models import Organization
+from user.serializers import CustomUserShowSerializer
+from project.serializer import ProjectShowSerializer
 
 
-class OrganizationSerializer(serializers.ModelSerializer):
-    pk = serializers.IntegerField(read_only=True)
+class OrganizationShowSerializer(BaseOrganizationSerializer):
+    owner = CustomUserShowSerializer(read_only=True)
+    projects = ProjectShowSerializer(many=True, read_only=True)
+    members = CustomUserShowSerializer(many=True, read_only=True)
 
-    class Meta:
-        model = Organization
-        fields = (
-            'pk',
-            'organization_name',
-            'owner'
 
-        )
+class OrganizationSerializer(BaseOrganizationSerializer):
+    def to_representation(self, instance):
+        return OrganizationShowSerializer(instance).save()
