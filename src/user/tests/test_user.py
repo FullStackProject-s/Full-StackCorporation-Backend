@@ -1,74 +1,44 @@
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
+from general.tests.generic import BaseTestCaseGeneric
+from general.tests.model_factory import make_user
+
 from user.serializers import CustomUserSerializer
-from user.tests.utils import create_users_list, create_permissions
+from user.tests.utils import create_permissions
 
 User = get_user_model()
 
 
-class CustomUserTestCase(APITestCase):
+class CustomUserTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`user.CustomUser`.
     """
 
-    all_users_url = reverse('all-users')
-    create_user_url = reverse('create-user')
+    all_objects_url = reverse('all-users')
+    create_object_url = reverse('create-user')
 
-    retrieve_user = 'user'
-    delete_user = 'delete-user'
-    update_user = 'update-user'
+    retrieve_object_url = 'user'
+    delete_object_url = 'delete-user'
+    update_object_url = 'update-user'
 
-    number_of_users = 4
+    number_of_objects = 4
+    make_method = make_user
+
+    serializer_class = CustomUserSerializer
+    model_class = User
 
     @classmethod
     def setUpTestData(cls):
-        for index, user in enumerate(
-                create_users_list(cls.number_of_users),
-                start=1
-        ):
-            setattr(
-                cls,
-                f'user_{index}',
-                user
-            )
-
-    def setUp(self) -> None:
-        self.client.force_login(self.user_1)
+        super().setUpTestData()
 
     def test_get_all_users(self):
-        response = self.client.get(self.all_users_url)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            len(response.json()),
-            self.number_of_users
-        )
+        self._test_get_all_objects()
 
     def test_user_retrieve(self):
-        user = self.user_2
-        response = self.client.get(
-            reverse(self.retrieve_user, kwargs={'pk': user.pk})
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response_json['username'],
-            user.username
-        )
-        self.assertEqual(
-            response_json,
-            CustomUserSerializer(user).data
-        )
+        self._test_retrieve_object()
 
     def test_user_create(self):
         staff_role = create_permissions()[0]
@@ -80,77 +50,26 @@ class CustomUserTestCase(APITestCase):
             "password": "123",
             'staff_role': staff_role.pk
         }
-        response = self.client.post(
-            self.create_user_url,
-            data=json
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            response_json,
-            CustomUserSerializer(User.objects.get(pk=pk)).data
-        )
+        self._test_create_object(json)
 
     def test_delete_user(self):
-        pk = self.user_1.pk
-        response = self.client.delete(
-            reverse(self.delete_user, kwargs={'pk': pk})
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_204_NO_CONTENT
-        )
-        self.assertEqual(
-            User.objects.filter(pk=pk).exists(),
-            False
-        )
+        self._test_delete_object()
 
     def test_put_user(self):
-        pk = self.user_4.pk
-
+        name = 'test_put_user'
         json = {
-            'username': f'user_{pk}',
-            'email': f'user{pk}@example.com',
-            'password': f'user_{pk}',
-            'first_name': f'first_{pk}',
-            'last_name': f'second_{pk}',
+            'username': f'user_{name}',
+            'email': f'user{name}@example.com',
+            'password': f'user_{name}',
+            'first_name': f'first_{name}',
+            'last_name': f'second_{name}',
         }
-
-        response = self.client.put(
-            reverse(self.update_user, kwargs={'pk': pk}),
-            data=json
-        )
-        response_json = response.json()
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            response_json['last_name'],
-            json['last_name'],
-        )
+        self._test_put_object(json)
 
     def test_patch_user(self):
-        pk = self.user_4.pk
+        name = 'test_patch_user'
 
         json = {
-            'first_name': f'first_{pk}',
+            'first_name': f'first_{name}',
         }
-        response = self.client.patch(
-            reverse(self.update_user, kwargs={'pk': pk}),
-            data=json
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            response_json['first_name'],
-            json['first_name'],
-        )
+        self._test_patch_object(json)
