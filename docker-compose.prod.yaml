@@ -10,7 +10,7 @@ services:
    ports:
      - 7999:8000
    env_file:
-     - ./core/.env
+     - ./src/core/.env
    depends_on:
      - postgres
  postgres:
@@ -18,4 +18,4 @@ services:
     image: postgres:latest
     restart: on-failure
     env_file:
-      - ./core/.env
+      - ./src/core/.env
