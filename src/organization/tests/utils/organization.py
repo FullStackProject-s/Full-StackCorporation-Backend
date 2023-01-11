@@ -1,4 +1,4 @@
-from user.tests.utils import create_users_list
+from general.tests.model_factory import make_user
 from organization.models import Organization
 
 
@@ -8,10 +8,8 @@ def create_organizations(
         keyword=''
 ) -> list[Organization]:
     keyword = 'create_organizations' + keyword
-    users = create_users_list(
+    users = make_user(
         organizations_numbers,
-        start=start,
-        keyword=keyword
     )
 
     return [

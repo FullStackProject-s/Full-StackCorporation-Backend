@@ -12,11 +12,8 @@ def create_projects(
         start=1,
         keyword=''
 ) -> list[Project]:
-    keyword = 'create_projects' + keyword
     organizations = create_organizations(
         project_number,
-        start=start,
-        keyword=keyword
     )
     return [
         Project.objects.create(

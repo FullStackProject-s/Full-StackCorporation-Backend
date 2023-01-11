@@ -1,16 +1,17 @@
 from django.urls import reverse
 from rest_framework import status
 
-from general.tests import BaseTestCaseGeneric
+from general.tests.generic import BaseTestCaseGeneric
 
 from organization.models import Organization
 from organization.serializers import OrganizationSerializer
-from organization.tests.utils import create_organizations
+from general.tests.model_factory import (
+    make_organization,
+    make_project,
+    make_user
+)
 
 from project.models import Project
-from project.tests.utils import create_projects
-
-from user.tests.utils import create_users_list
 
 
 class OrganizationTestCase(BaseTestCaseGeneric):
@@ -28,8 +29,9 @@ class OrganizationTestCase(BaseTestCaseGeneric):
 
     @classmethod
     def setUpTestData(cls):
+        super().setUpTestData()
         for index, profile in enumerate(
-                create_organizations(cls.number_of_organizations),
+                make_organization(cls.number_of_organizations),
                 start=1
         ):
             setattr(
@@ -37,9 +39,6 @@ class OrganizationTestCase(BaseTestCaseGeneric):
                 f'org_{index}',
                 profile
             )
-
-    def setUp(self) -> None:
-        self.client.force_login(self.org_1.owner)
 
     def test_get_all_organizations(self):
         response = self.client.get(self.all_organization_url)
@@ -59,11 +58,13 @@ class OrganizationTestCase(BaseTestCaseGeneric):
         response = self.client.get(
             reverse(self.retrieve_organization, kwargs={'pk': pk})
         )
+
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
         )
         response_json = response.json()
+
         self.assertEqual(
             response_json['organization_name'],
             org.organization_name
@@ -74,8 +75,7 @@ class OrganizationTestCase(BaseTestCaseGeneric):
         )
 
     def test_organization_create(self):
-        start = abs(hash('test_organization_create'))
-        user = create_users_list(start, start=start)[0]
+        user = make_user(1)
 
         json = {
             "organization_name": "create_org",
@@ -116,8 +116,7 @@ class OrganizationTestCase(BaseTestCaseGeneric):
 
     def test_put_organization(self):
         name = 'test_put_organization'
-        start = abs(hash(name))
-        user = create_users_list(start, start=start)[0]
+        user = make_user(1)
 
         org = self.org_2
         pk = org.pk
@@ -174,10 +173,7 @@ class OrganizationTestCase(BaseTestCaseGeneric):
         name = 'test_project_organization_signal'
         start = abs(hash(name))
 
-        proj_1, proj_2, proj_3, proj_4 = create_projects(
-            start + 3,
-            start=start
-        )
+        proj_1, proj_2, proj_3, proj_4 = make_project(4)
 
         json = {
             "projects": [

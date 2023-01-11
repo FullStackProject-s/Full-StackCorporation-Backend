@@ -5,7 +5,7 @@ from general.tests import BaseTestCaseGeneric
 from general.tests.model_factory import make_user
 
 from user.serializers import CustomUserSerializer
-from user.tests.utils import create_permissions
+from general.tests import make_permission
 
 User = get_user_model()
 
@@ -38,7 +38,7 @@ class CustomUserTestCase(BaseTestCaseGeneric):
         self._test_retrieve_object()
 
     def test_user_create(self):
-        staff_role = create_permissions()[0]
+        staff_role = make_permission(1)
         json = {
             'username': "create_user",
             'email': 'create@user.com',
