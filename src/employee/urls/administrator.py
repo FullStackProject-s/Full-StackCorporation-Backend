@@ -1,33 +1,32 @@
 from django.urls import path
 
-from employee.views.administrator import (
-    AllAdministratorsListAPIView,
-    AdministratorCreateAPIView,
-    AdministratorDestroyAPIView,
-    AdministratorRetrieveAPIView,
-    AdministratorUpdateAPIView,
-)
+from employee.views import administrator
 
 urlpatterns_admin = [
-    path('all-admins/',
-         AllAdministratorsListAPIView.as_view(),
-         name='all-admins'
-         ),
-    path('<int:pk>/',
-         AdministratorRetrieveAPIView.as_view(),
-         name='admin'
-         ),
-    path('create-admin/',
-         AdministratorCreateAPIView.as_view(),
-         name='create-admin'
-         ),
-    path('delete-admin/<int:pk>/',
-         AdministratorDestroyAPIView.as_view(),
-         name='delete-admin'
-         ),
-    path('update-admin/<int:pk>/',
-         AdministratorUpdateAPIView.as_view(),
-         name='update-admin'
-         ),
+    path(
+        'all-admins/',
+        administrator.AllAdministratorsListAPIView.as_view(),
+        name='all-admins'
+    ),
+    path(
+        '<int:pk>/',
+        administrator.AdministratorRetrieveAPIView.as_view(),
+        name='admin'
+    ),
+    path(
+        'create-admin/',
+        administrator.AdministratorCreateAPIView.as_view(),
+        name='create-admin'
+    ),
+    path(
+        'delete-admin/<int:pk>/',
+        administrator.AdministratorDestroyAPIView.as_view(),
+        name='delete-admin'
+    ),
+    path(
+        'update-admin/<int:pk>/',
+        administrator.AdministratorUpdateAPIView.as_view(),
+        name='update-admin'
+    ),
 
 ]
