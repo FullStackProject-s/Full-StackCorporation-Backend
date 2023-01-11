@@ -22,7 +22,6 @@ class CustomUserTestCase(BaseTestCaseGeneric):
     delete_object_url = 'delete-user'
     update_object_url = 'update-user'
 
-    number_of_objects = 4
     make_method = make_user
 
     serializer_class = CustomUserSerializer

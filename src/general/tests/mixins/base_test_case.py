@@ -1,11 +1,10 @@
-from django.core.handlers.wsgi import WSGIRequest
 from django.urls import reverse
 
 from rest_framework import status
 
 
 class ListObjectsMixin:
-    def _test_get_all_objects(self) -> WSGIRequest:
+    def _test_get_all_objects(self):
         response = self.client.get(self.all_objects_url)
 
         self.assertEqual(
@@ -21,7 +20,7 @@ class ListObjectsMixin:
 
 
 class RetrieveObjectsMixin:
-    def _test_retrieve_object(self) -> WSGIRequest:
+    def _test_retrieve_object(self):
         obj = getattr(self, f'obj_{self.default_object_number}')
         pk = obj.pk
         response = self.client.get(
@@ -42,7 +41,7 @@ class RetrieveObjectsMixin:
 
 class DeleteObjectsMixin:
 
-    def _test_delete_object(self) -> WSGIRequest:
+    def _test_delete_object(self):
         obj = getattr(self, f'obj_{self.default_object_number}')
         pk = obj.pk
         response = self.client.delete(
@@ -60,7 +59,7 @@ class DeleteObjectsMixin:
 
 
 class CreateObjectsMixin:
-    def _test_create_object(self, json: dict) -> WSGIRequest:
+    def _test_create_object(self, json: dict):
         response = self.client.post(
             self.create_object_url,
             data=json
@@ -83,7 +82,7 @@ class CreateObjectsMixin:
 
 
 class UpdateObjectsMixin:
-    def _test_put_object(self, json: dict) -> WSGIRequest:
+    def _test_put_object(self, json: dict):
         obj = getattr(self, f'obj_{self.default_object_number}')
 
         pk = obj.pk
@@ -106,7 +105,7 @@ class UpdateObjectsMixin:
         )
         return response
 
-    def _test_patch_object(self, json: dict) -> WSGIRequest:
+    def _test_patch_object(self, json: dict):
         obj = getattr(self, f'obj_{self.default_object_number}')
 
         pk = obj.pk

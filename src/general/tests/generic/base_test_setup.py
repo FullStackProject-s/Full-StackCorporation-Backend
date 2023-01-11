@@ -9,7 +9,7 @@ class BaseTestCaseSetupGeneric(APITestCase):
     """
     Base setup testCase.
     """
-    number_of_objects: int | None = None
+    number_of_objects: int = 4
     make_method: Callable[[int], list] | None = None
 
     @classmethod
