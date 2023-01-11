@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
 from employee.models import Developer
@@ -12,6 +11,7 @@ from employee.models.consts import (
     Specialty,
     SkillLevel,
 )
+from general.tests import BaseTestCaseGeneric
 
 from user.models.consts import StaffRole
 
@@ -19,7 +19,7 @@ User = get_user_model()
 
 
 class DeveloperTestCase(
-    APITestCase,
+    BaseTestCaseGeneric,
     CreateUpdateEmployeeTestCaseMixin
 ):
     """

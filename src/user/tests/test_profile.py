@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.test import override_settings
 
-from general.tests.generic import BaseTestCaseGeneric
+from general.tests import BaseTestCaseGeneric
 from general.tests.model_factory import make_profile, make_user
 from user.models import Profile
 

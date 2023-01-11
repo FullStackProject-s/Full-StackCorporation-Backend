@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
 from employee.models import ProjectManager
@@ -9,11 +8,13 @@ from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 from employee.tests.utils import create_project_managers
 from employee.serializers import ProjectManagerSerializer
 
+from general.tests import BaseTestCaseGeneric
+
 User = get_user_model()
 
 
 class ProjectManagerTestCase(
-    APITestCase,
+    BaseTestCaseGeneric,
     CreateUpdateEmployeeTestCaseMixin
 ):
     """

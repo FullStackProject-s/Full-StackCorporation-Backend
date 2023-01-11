@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
 from employee.models import DeveloperOrganizationSpecialty, Developer
@@ -9,12 +8,14 @@ from employee.tests.utils import create_specialities, create_developers
 from employee.models.consts import Specialty
 from employee.serializers import DeveloperOrgSpecialtySerializer
 
+from general.tests import BaseTestCaseGeneric
+
 from organization.tests.utils import create_organizations
 
 User = get_user_model()
 
 
-class DeveloperOrganizationSpecialtyTestCase(APITestCase):
+class DeveloperOrganizationSpecialtyTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.DeveloperOrganizationSpecialty`.
     """

@@ -1,7 +1,7 @@
 from django.urls import reverse
-
-from rest_framework.test import APITestCase
 from rest_framework import status
+
+from general.tests import BaseTestCaseGeneric
 
 from organization.models import Organization
 from organization.serializers import OrganizationSerializer
@@ -13,7 +13,7 @@ from project.tests.utils import create_projects
 from user.tests.utils import create_users_list
 
 
-class OrganizationTestCase(APITestCase):
+class OrganizationTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`organization.Organization`.
     """

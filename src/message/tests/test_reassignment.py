@@ -1,7 +1,8 @@
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
 from rest_framework import status
+
+from general.tests import BaseTestCaseGeneric
 
 from message.serializers import ReassignmentSerializer
 from message.tests.utils import create_reassignment
@@ -13,7 +14,7 @@ from user.models import CustomUser
 from user.tests.utils import create_users_list
 
 
-class ReassignmentTestCase(APITestCase):
+class ReassignmentTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`message.Reassignment`.
     """

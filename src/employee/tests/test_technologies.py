@@ -1,6 +1,5 @@
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
 from employee.models import Technologies
@@ -8,10 +7,12 @@ from employee.serializers import TechnologiesSerializer
 from employee.tests.utils import create_technologies
 from employee.models.consts import TechnologiesStack
 
+from general.tests import BaseTestCaseGeneric
+
 from user.models import CustomUser
 
 
-class TechnologiesTestCase(APITestCase):
+class TechnologiesTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Technologies`.
     """

@@ -3,9 +3,9 @@ from datetime import timedelta
 from django.urls import reverse
 from django.utils import timezone
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
+from general.tests import BaseTestCaseGeneric
 from organization.tests.utils import create_organizations
 
 from project.serializer import ProjectSerializer
@@ -13,7 +13,7 @@ from project.models import Project
 from project.tests.utils import create_projects
 
 
-class ProjectTestCase(APITestCase):
+class ProjectTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Project`.
     """

@@ -1,10 +1,10 @@
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
 from rest_framework import status
 
 from employee.models import Developer, ProjectManager
 from employee.tests.utils import create_developers, create_project_managers
+from general.tests import BaseTestCaseGeneric
 
 from project.models import Team
 from project.serializer import TeamSerializer
@@ -14,7 +14,7 @@ from project.tests.utils import create_teams
 from user.models import CustomUser
 
 
-class DeveloperTestCase(APITestCase):
+class DeveloperTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Team`.
     """
