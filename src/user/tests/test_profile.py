@@ -27,10 +27,11 @@ class ProfileTestCase(APITestCase):
                 create_profiles(cls.number_of_profiles),
                 start=1
         ):
-            setattr(cls,
-                    f'profile_{index}',
-                    profile
-                    )
+            setattr(
+                cls,
+                f'profile_{index}',
+                profile
+            )
 
     def setUp(self) -> None:
         self.client.force_login(self.profile_1.user)

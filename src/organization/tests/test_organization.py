@@ -32,10 +32,11 @@ class OrganizationTestCase(APITestCase):
                 create_organizations(cls.number_of_organizations),
                 start=1
         ):
-            setattr(cls,
-                    f'org_{index}',
-                    profile
-                    )
+            setattr(
+                cls,
+                f'org_{index}',
+                profile
+            )
 
     def setUp(self) -> None:
         self.client.force_login(self.org_1.owner)

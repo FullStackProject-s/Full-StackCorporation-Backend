@@ -1,5 +1,3 @@
-import json
-
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
@@ -10,9 +8,6 @@ from employee.models import Administrator
 from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
 from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
-
-from user.serializers import ProfileSerializer
-from user.models.consts import StaffRole
 
 User = get_user_model()
 
@@ -39,10 +34,11 @@ class AdministratorTestCase(
                 create_administrators(cls.administrator_count),
                 start=1
         ):
-            setattr(cls,
-                    f'admin_{index}',
-                    admin
-                    )
+            setattr(
+                cls,
+                f'admin_{index}',
+                admin
+            )
         _keyword = 'administrator'
 
         cls.login_user = User.objects.create_user(

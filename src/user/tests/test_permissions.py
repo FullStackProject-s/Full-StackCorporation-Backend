@@ -31,10 +31,11 @@ class PermissionsTestCase(APITestCase):
                 start=1
         ):
             cls.number_of_perms += 1
-            setattr(cls,
-                    f'perm_{index}',
-                    perm
-                    )
+            setattr(
+                cls,
+                f'perm_{index}',
+                perm
+            )
         _keyword = 'perm'
         cls.user_perm = User.objects.create_user(
             username=f'user_{_keyword}',
