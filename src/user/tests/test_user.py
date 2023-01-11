@@ -1,8 +1,6 @@
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
-from rest_framework import status
-
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_user
 

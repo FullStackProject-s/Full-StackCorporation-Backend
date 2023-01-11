@@ -66,6 +66,7 @@ class CreateObjectsMixin:
             data=json
         )
         response_json = response.json()
+
         pk = response_json['pk']
 
         self.assertEqual(
