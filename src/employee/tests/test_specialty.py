@@ -33,10 +33,11 @@ class DeveloperOrganizationSpecialtyTestCase(APITestCase):
                 create_specialities(cls.count_all_spec, start=1),
                 start=1
         ):
-            setattr(cls,
-                    f'spec_{index}',
-                    spec
-                    )
+            setattr(
+                cls,
+                f'spec_{index}',
+                spec
+            )
         _keyword = 'speciality'
 
         cls.login_user = User.objects.create_user(

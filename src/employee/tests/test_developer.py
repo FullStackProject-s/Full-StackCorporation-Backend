@@ -40,10 +40,11 @@ class DeveloperTestCase(
                 create_developers(cls.developer_count),
                 start=1
         ):
-            setattr(cls,
-                    f'dev_{index}',
-                    developer
-                    )
+            setattr(
+                cls,
+                f'dev_{index}',
+                developer
+            )
         _keyword = 'developer'
 
         cls.login_user = User.objects.create_user(

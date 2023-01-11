@@ -14,7 +14,9 @@ urlpatterns = [
 
     path('', include('project.urls')),
 
-    path('', include('organization.urls'))
+    path('', include('organization.urls')),
+
+    path('', include('message.urls'))
 ]
 
 urlpatterns += [

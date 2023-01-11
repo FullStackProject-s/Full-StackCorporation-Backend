@@ -1,6 +1,6 @@
 from django.db import models
 
-from employee.models.baseEmployee import BaseEmployeeMixin
+from employee.models.base_employee import BaseEmployeeMixin
 from employee.models.consts import SkillLevel
 from employee.models.technologies import Technologies
 

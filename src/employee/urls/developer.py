@@ -1,32 +1,31 @@
 from django.urls import path
-from employee.views.developer import (
-    AllDeveloperListAPIView,
-    DeveloperRetrieveAPIView,
-    DeveloperDestroyAPIView,
-    DeveloperCreateAPIView,
-    DeveloperUpdateAPIView,
-)
+from employee.views import developer
 
 urlpatterns_developers = [
-    path('all-developers/',
-         AllDeveloperListAPIView.as_view(),
-         name='all-developers'
-         ),
-    path('<int:pk>/',
-         DeveloperRetrieveAPIView.as_view(),
-         name='developer'
-         ),
-    path('create-developer/',
-         DeveloperCreateAPIView.as_view(),
-         name='create-developer'
-         ),
-    path('delete-developer/<int:pk>/',
-         DeveloperDestroyAPIView.as_view(),
-         name='delete-developer'
-         ),
-    path('update-developer/<int:pk>/',
-         DeveloperUpdateAPIView.as_view(),
-         name='update-developer'
-         ),
+    path(
+        'all-developers/',
+        developer.AllDeveloperListAPIView.as_view(),
+        name='all-developers'
+    ),
+    path(
+        '<int:pk>/',
+        developer.DeveloperRetrieveAPIView.as_view(),
+        name='developer'
+    ),
+    path(
+        'create-developer/',
+        developer.DeveloperCreateAPIView.as_view(),
+        name='create-developer'
+    ),
+    path(
+        'delete-developer/<int:pk>/',
+        developer.DeveloperDestroyAPIView.as_view(),
+        name='delete-developer'
+    ),
+    path(
+        'update-developer/<int:pk>/',
+        developer.DeveloperUpdateAPIView.as_view(),
+        name='update-developer'
+    ),
 
 ]

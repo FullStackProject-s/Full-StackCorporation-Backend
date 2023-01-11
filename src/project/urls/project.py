@@ -1,31 +1,30 @@
 from django.urls import path
-from project.views.project import (
-    ProjectsListAPIVIew,
-    ProjectsRetrieveAPIView,
-    ProjectCreateAPIView,
-    ProjectDestroyAPIView,
-    ProjectUpdateAPIView
-)
+from project.views import project
 
 urlpatterns_project = [
-    path('all-projects/',
-         ProjectsListAPIVIew.as_view(),
-         name='all-projects'
-         ),
-    path('<int:pk>/',
-         ProjectsRetrieveAPIView.as_view(),
-         name='project'
-         ),
-    path('project-create/',
-         ProjectCreateAPIView.as_view(),
-         name='create-project'
-         ),
-    path('delete-project/<int:pk>/',
-         ProjectDestroyAPIView.as_view(),
-         name='delete-project'
-         ),
-    path('update-project/<int:pk>/',
-         ProjectUpdateAPIView.as_view(),
-         name='update-project'
-         ),
+    path(
+        'all-projects/',
+        project.ProjectsListAPIVIew.as_view(),
+        name='all-projects'
+    ),
+    path(
+        '<int:pk>/',
+        project.ProjectsRetrieveAPIView.as_view(),
+        name='project'
+    ),
+    path(
+        'project-create/',
+        project.ProjectCreateAPIView.as_view(),
+        name='create-project'
+    ),
+    path(
+        'delete-project/<int:pk>/',
+        project.ProjectDestroyAPIView.as_view(),
+        name='delete-project'
+    ),
+    path(
+        'update-project/<int:pk>/',
+        project.ProjectUpdateAPIView.as_view(),
+        name='update-project'
+    ),
 ]

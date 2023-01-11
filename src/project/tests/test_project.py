@@ -32,10 +32,11 @@ class ProjectTestCase(APITestCase):
                 create_projects(cls.number_of_projects),
                 start=1
         ):
-            setattr(cls,
-                    f'proj_{index}',
-                    project
-                    )
+            setattr(
+                cls,
+                f'proj_{index}',
+                project
+            )
 
     def setUp(self) -> None:
         self.client.force_login(self.proj_1.organization.owner)

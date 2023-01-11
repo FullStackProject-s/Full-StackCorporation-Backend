@@ -32,10 +32,11 @@ class OrganizationTestCase(APITestCase):
                 create_organizations(cls.number_of_organizations),
                 start=1
         ):
-            setattr(cls,
-                    f'org_{index}',
-                    profile
-                    )
+            setattr(
+                cls,
+                f'org_{index}',
+                profile
+            )
 
     def setUp(self) -> None:
         self.client.force_login(self.org_1.owner)
@@ -197,8 +198,11 @@ class OrganizationTestCase(APITestCase):
             response.status_code,
             status.HTTP_200_OK
         )
-        self.assertEqual(
-            list(Organization.objects.get(pk=pk).projects.all()),
+        self.assertListEqual(
+            sorted(
+                list(Organization.objects.get(pk=pk).projects.all()),
+                key=lambda organization: organization.pk
+            ),
             [proj_1, proj_2]
         )
         self.assertEqual(

@@ -6,7 +6,6 @@ from rest_framework import status
 
 from user.serializers import CustomUserSerializer
 from user.tests.utils import create_users_list, create_permissions
-from user.models.profile import Profile
 
 User = get_user_model()
 
@@ -31,10 +30,11 @@ class CustomUserTestCase(APITestCase):
                 create_users_list(cls.number_of_users),
                 start=1
         ):
-            setattr(cls,
-                    f'user_{index}',
-                    user
-                    )
+            setattr(
+                cls,
+                f'user_{index}',
+                user
+            )
 
     def setUp(self) -> None:
         self.client.force_login(self.user_1)

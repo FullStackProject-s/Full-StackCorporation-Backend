@@ -33,10 +33,11 @@ class DeveloperTestCase(APITestCase):
                 create_teams(cls.team_count),
                 start=1
         ):
-            setattr(cls,
-                    f'team_{index}',
-                    team
-                    )
+            setattr(
+                cls,
+                f'team_{index}',
+                team
+            )
         _keyword = 'team'
 
         cls.login_user = CustomUser.objects.create_user(

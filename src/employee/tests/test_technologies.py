@@ -3,7 +3,6 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-
 from employee.models import Technologies
 from employee.serializers import TechnologiesSerializer
 from employee.tests.utils import create_technologies
@@ -32,10 +31,11 @@ class TechnologiesTestCase(APITestCase):
                 start=1
         ):
             cls.count_all_tech += 1
-            setattr(cls,
-                    f'tech_{index}',
-                    tech
-                    )
+            setattr(
+                cls,
+                f'tech_{index}',
+                tech
+            )
         _keyword = 'technologies'
 
         cls.login_user = CustomUser.objects.create_user(

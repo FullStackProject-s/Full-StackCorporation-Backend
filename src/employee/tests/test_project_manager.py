@@ -34,10 +34,11 @@ class ProjectManagerTestCase(
                 create_project_managers(cls.project_manager_count),
                 start=1
         ):
-            setattr(cls,
-                    f'proj_manager_{index}',
-                    project_manager
-                    )
+            setattr(
+                cls,
+                f'proj_manager_{index}',
+                project_manager
+            )
         _keyword = 'project_manager'
 
         cls.login_user = User.objects.create_user(
