@@ -19,4 +19,4 @@ class Project(BaseTimeStampModel):
         on_delete=models.CASCADE,
         null=True
     )
-    deadline = models.DateField(blank=True)
+    deadline = models.DateField(blank=False)

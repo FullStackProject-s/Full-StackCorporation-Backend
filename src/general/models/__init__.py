@@ -1,1 +1,1 @@
-from .utility import BaseTimeStampModel
+from .base import BaseTimeStampModel

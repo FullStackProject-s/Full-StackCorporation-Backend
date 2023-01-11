@@ -1,0 +1,1 @@
+from .reassignment import BaseReassignmentViewGeneric
