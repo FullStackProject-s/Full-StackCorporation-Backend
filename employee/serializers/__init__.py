@@ -4,6 +4,7 @@ from employee.serializers.developer import (
 )
 from employee.serializers.specialty import (
     DeveloperOrgSpecialtySerializer,
+    DeveloperOrgUpdateSpecialtySerializer,
     DeveloperOrgSpecialtyShowSerializer
 )
 

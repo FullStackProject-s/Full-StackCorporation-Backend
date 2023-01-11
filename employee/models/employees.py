@@ -27,6 +27,14 @@ class Developer(BaseEmployeeMixin):
         default=SkillLevel.junior
     )
 
+    def append_specialties(self, spec):
+        self.specialties.add(spec)
+        self.save()
+
+    def remove_specialties(self, spec):
+        self.specialties.remove(spec)
+        self.save()
+
     def set_team(self, team):
         self.team = team
         self.save()

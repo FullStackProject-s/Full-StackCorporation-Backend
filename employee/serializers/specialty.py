@@ -18,3 +18,10 @@ class DeveloperOrgSpecialtyShowSerializer(BaseDeveloperOrgSpecialtySerializer):
 class DeveloperOrgSpecialtySerializer(BaseDeveloperOrgSpecialtySerializer):
     def to_representation(self, instance):
         return DeveloperOrgSpecialtyShowSerializer(instance).data
+
+
+class DeveloperOrgUpdateSpecialtySerializer(DeveloperOrgSpecialtySerializer):
+    class Meta(DeveloperOrgSpecialtySerializer.Meta):
+        fields = (
+            'specialty',
+        )

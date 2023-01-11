@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from employee.models import DeveloperOrganizationSpecialty
+from employee.models import DeveloperOrganizationSpecialty, Developer
 from employee.tests.utils import create_specialities, create_developers
 from employee.models.consts import Specialty
 from employee.serializers import DeveloperOrgSpecialtySerializer
@@ -109,6 +109,12 @@ class DeveloperOrganizationSpecialtyTestCase(APITestCase):
                     pk=pk
                 )
             ).data
+        )
+
+        # test signal
+        self.assertIn(
+            DeveloperOrganizationSpecialty.objects.get(pk=pk),
+            Developer.objects.get(pk=dev.pk).specialties.all(),
         )
 
     def test_delete_speciality(self):
