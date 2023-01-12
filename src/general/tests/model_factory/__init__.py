@@ -9,3 +9,6 @@ from .organization import (
 from .project import (
     make_project
 )
+from .employee import (
+    make_specialty
+)

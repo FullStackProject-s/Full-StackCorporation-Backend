@@ -6,7 +6,6 @@ from general.tests.model_factory import make_user
 
 
 class BaseTestCaseSetupGeneric(APITestCase):
-    """@DynamicAttrs"""
     """
     Base setup testCase.    
     """

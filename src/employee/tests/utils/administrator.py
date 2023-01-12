@@ -1,9 +1,9 @@
 from employee.models import Administrator
-from user.tests.utils import create_profiles
+from general.tests.model_factory import make_profile
 
 
 def create_administrators(admin_numbers):
-    profiles_list = create_profiles(admin_numbers)
+    profiles_list = make_profile(admin_numbers)
     pks = []
     for profile in profiles_list:
         pks.append(

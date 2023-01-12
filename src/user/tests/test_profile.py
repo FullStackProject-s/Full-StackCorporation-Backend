@@ -1,14 +1,13 @@
 from django.urls import reverse
-from django.test import override_settings
 
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_profile, make_user
+
 from user.models import Profile
 
 from user.serializers import ProfileSerializer
 
 
-@override_settings(SUSPEND_SIGNALS=True)
 class ProfileTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`user.Profile`.

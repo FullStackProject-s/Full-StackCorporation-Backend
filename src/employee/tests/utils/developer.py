@@ -1,7 +1,7 @@
 from employee.models import Developer
 from employee.models.consts import SkillLevel
 
-from user.tests.utils import create_profiles
+from general.tests.model_factory import make_profile
 
 from random import randint
 
@@ -14,7 +14,7 @@ def create_developers(developer_number: int, start=1) -> list[Developer]:
         Developer.objects.create(
             profile=profile,
             skill_level=skill_level_val[randint(0, _min)]
-        ).pk for profile in create_profiles(developer_number, start=start)
+        ).pk for profile in make_profile(developer_number)
     ]
     return [
         Developer.objects.get(

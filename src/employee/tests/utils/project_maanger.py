@@ -1,9 +1,9 @@
 from employee.models import ProjectManager
-from user.tests.utils import create_profiles
+from general.tests.model_factory import make_profile
 
 
 def create_project_managers(project_manager_number, start=1):
-    profiles_list = create_profiles(project_manager_number, start=start)
+    profiles_list = make_profile(project_manager_number)
     pks = []
     for profile in profiles_list:
         pks.append(
