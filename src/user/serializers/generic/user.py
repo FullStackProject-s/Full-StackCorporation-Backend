@@ -13,7 +13,6 @@ class BaseCustomUserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'create_at',
-            'password',
             'staff_role'
 
         )
