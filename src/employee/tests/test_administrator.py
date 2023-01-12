@@ -6,17 +6,11 @@ from rest_framework import status
 from employee.models import Administrator
 from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
-from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 
-from general.tests import BaseTestCaseGeneric
-
-User = get_user_model()
+from general.tests.generic import BaseTestCaseGeneric
 
 
-class AdministratorTestCase(
-    BaseTestCaseGeneric,
-    CreateUpdateEmployeeTestCaseMixin
-):
+class AdministratorTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Administrator`.
     """
