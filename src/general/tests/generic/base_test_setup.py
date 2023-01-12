@@ -6,8 +6,9 @@ from general.tests.model_factory import make_user
 
 
 class BaseTestCaseSetupGeneric(APITestCase):
+    """@DynamicAttrs"""
     """
-    Base setup testCase.
+    Base setup testCase.    
     """
     number_of_objects: int = 4
     make_method: Callable[[int], list] | None = None

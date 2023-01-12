@@ -9,6 +9,8 @@ def suspending_receiver(signal, **decorator_kwargs):
         @receiver(signal, **decorator_kwargs)
         @functools.wraps(func)
         def fake_receiver(sender, **kwargs):
+            if not hasattr(settings, 'SUSPEND_SIGNALS'):
+                return func(sender, **kwargs)
             if settings.SUSPEND_SIGNALS:
                 return
             return func(sender, **kwargs)

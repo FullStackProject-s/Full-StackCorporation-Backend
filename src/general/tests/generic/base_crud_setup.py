@@ -25,5 +25,5 @@ class BaseCRUDTestCaseGeneric(
     serializer_class = None
     # tested model
     model_class = None
-    # default object number
+    # default picker object number, obj_1
     default_object_number = 1

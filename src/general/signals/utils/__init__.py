@@ -1,1 +1,1 @@
-from .test_reciever import suspending_receiver
+from .test_receiver import suspending_receiver

@@ -1,11 +1,11 @@
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
-from general.tests import BaseTestCaseGeneric
+from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_user
 
 from user.serializers import CustomUserSerializer
-from general.tests import make_permission
+from general.tests.model_factory import make_permission
 
 User = get_user_model()
 
