@@ -1,16 +1,13 @@
 from django.urls import reverse
-from django.contrib.auth import get_user_model
-
-from rest_framework import status
 
 from employee.models import Administrator
-from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
 
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_profile
-from general.tests.model_factory.employee.administrator import \
+from general.tests.model_factory.employee.administrator import (
     make_administrator
+)
 
 
 class AdministratorTestCase(BaseTestCaseGeneric):

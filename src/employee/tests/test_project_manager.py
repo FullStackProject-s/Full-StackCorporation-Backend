@@ -1,14 +1,13 @@
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from rest_framework import status
-
 from employee.models import ProjectManager
-from employee.tests.utils import create_project_managers
 from employee.serializers import ProjectManagerSerializer
 
 from general.tests.generic import BaseTestCaseGeneric
-from general.tests.model_factory import make_project_manager, make_profile
+from general.tests.model_factory import (
+    make_project_manager,
+    make_profile
+)
 
 
 class ProjectManagerTestCase(BaseTestCaseGeneric):

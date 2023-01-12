@@ -5,7 +5,10 @@ from employee.serializers import DeveloperSerializer
 from employee.models.consts import SkillLevel
 
 from general.tests.generic import BaseTestCaseGeneric
-from general.tests.model_factory import make_developer, make_profile
+from general.tests.model_factory import (
+    make_developer,
+    make_profile
+)
 
 
 class DeveloperTestCase(BaseTestCaseGeneric):

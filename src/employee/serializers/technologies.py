@@ -5,5 +5,8 @@ from employee.models import Technologies
 class TechnologiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Technologies
-        fields = '__all__'
-
+        fields = (
+            'pk',
+            'technology_name',
+            'technology_category'
+        )
