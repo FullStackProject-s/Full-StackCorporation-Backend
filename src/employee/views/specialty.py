@@ -3,7 +3,7 @@ from rest_framework import generics
 from employee.views.generics import (
     BaseDeveloperOrganizationSpecialtyViewGeneric
 )
-from employee.serializers import DeveloperOrgUpdateSpecialtySerializer
+from employee.serializers import DeveloperOrgSpecialtyUpdateSerializer
 
 
 class DeveloperOrganizationSpecialtyListAPIView(
@@ -38,4 +38,4 @@ class DeveloperOrganizationSpecialtyUpdateAPIView(
     BaseDeveloperOrganizationSpecialtyViewGeneric,
     generics.UpdateAPIView
 ):
-    serializer_class = DeveloperOrgUpdateSpecialtySerializer
+    serializer_class = DeveloperOrgSpecialtyUpdateSerializer

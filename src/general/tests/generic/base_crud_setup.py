@@ -20,10 +20,3 @@ class BaseCRUDTestCaseGeneric(
     delete_object_url = ''
     create_object_url = ''
     update_object_url = ''
-
-    # tested serializer
-    serializer_class = None
-    # tested model
-    model_class = None
-    # default picker object number, obj_1
-    default_object_number = 1

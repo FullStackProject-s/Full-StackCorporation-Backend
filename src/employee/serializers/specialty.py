@@ -20,7 +20,7 @@ class DeveloperOrgSpecialtySerializer(BaseDeveloperOrgSpecialtySerializer):
         return DeveloperOrgSpecialtyShowSerializer(instance).data
 
 
-class DeveloperOrgUpdateSpecialtySerializer(DeveloperOrgSpecialtySerializer):
+class DeveloperOrgSpecialtyUpdateSerializer(DeveloperOrgSpecialtySerializer):
     class Meta(DeveloperOrgSpecialtySerializer.Meta):
         fields = (
             'specialty',

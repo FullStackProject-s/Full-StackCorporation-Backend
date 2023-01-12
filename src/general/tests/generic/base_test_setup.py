@@ -9,8 +9,17 @@ class BaseTestCaseSetupGeneric(APITestCase):
     """
     Base setup testCase.    
     """
+
     number_of_objects: int = 4
+    # function for create model objects
     make_method: Callable[[int], list] | None = None
+
+    # tested serializer
+    serializer_class = None
+    # tested model
+    model_class = None
+    # default picker object number, obj_1
+    default_object_number = 1
 
     @classmethod
     def setUpTestData(cls):
@@ -34,3 +43,4 @@ class BaseTestCaseSetupGeneric(APITestCase):
 
     def setUp(self):
         self.client.force_login(self.base_login_user)
+        self.default_object_number = 1

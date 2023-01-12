@@ -10,5 +10,6 @@ from .project import (
     make_project
 )
 from .employee import (
-    make_specialty
+    make_specialty,
+    make_developer
 )

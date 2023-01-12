@@ -1,4 +1,4 @@
-from user.tests.utils import create_profiles
+from general.tests.model_factory import make_profile
 
 
 class CreateEmployeesTestCaseMixin:
@@ -10,7 +10,7 @@ class CreateEmployeesTestCaseMixin:
             **kwargs
     ):
         profile_pk = employee_count + abs(hash(keyword))
-        profile = create_profiles(profile_pk, start=profile_pk)[0]
+        profile = make_profile(profile_pk)[0]
         json = {
             'profile': profile.pk,
             **kwargs
@@ -62,7 +62,7 @@ class UpdateEmployeesTestCaseMixin:
             **kwargs
     ):
         profile_pk = employee_count + abs(hash(keyword))
-        profile = create_profiles(profile_pk, start=profile_pk)[0]
+        profile = make_profile(profile_pk)[0]
         return {
             "profile": profile.pk,
             **kwargs
