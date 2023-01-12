@@ -73,6 +73,10 @@ class CreateObjectsMixin:
             status.HTTP_201_CREATED
         )
         self.assertEqual(
+            self.model_class.objects.filter(pk=pk).exists(),
+            True
+        )
+        self.assertEqual(
             response_json,
             self.serializer_class(
                 self.model_class.objects.get(pk=pk)

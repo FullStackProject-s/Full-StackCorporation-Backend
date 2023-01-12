@@ -1,28 +1,14 @@
-from django.contrib.auth import get_user_model
 from django.urls import reverse
-
-from rest_framework import status
 
 from employee.models import Developer
 from employee.serializers import DeveloperSerializer
-from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
-from employee.tests.utils import create_developers
-from employee.models.consts import (
-    Specialty,
-    SkillLevel,
-)
+from employee.models.consts import SkillLevel
+
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_developer, make_profile
 
-from user.models.consts import StaffRole
 
-User = get_user_model()
-
-
-class DeveloperTestCase(
-    BaseTestCaseGeneric,
-    CreateUpdateEmployeeTestCaseMixin
-):
+class DeveloperTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Developers`.
     """

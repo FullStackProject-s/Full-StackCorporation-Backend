@@ -7,6 +7,7 @@ from employee.models import (
     ProjectManager,
     Developer
 )
+from general.signals import suspending_receiver
 
 from user.models.consts import StaffRole
 from user.models import Permissions
@@ -29,7 +30,7 @@ def set_admin_permission(
         instance.save()
 
 
-@receiver(post_save, sender=ProjectManager)
+@suspending_receiver(post_save, sender=ProjectManager)
 def set_project_manager_permission(
         sender,
         instance: ProjectManager,

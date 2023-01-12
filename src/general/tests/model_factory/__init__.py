@@ -11,5 +11,6 @@ from .project import (
 )
 from .employee import (
     make_specialty,
-    make_developer
+    make_developer,
+    make_project_manager
 )
