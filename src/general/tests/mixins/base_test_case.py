@@ -119,7 +119,7 @@ class UpdateObjectsMixin:
             data=json
         )
         response_json = response.json()
-        print(response_json)
+
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
