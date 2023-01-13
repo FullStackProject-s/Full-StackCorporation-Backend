@@ -1,1 +1,1 @@
-from .message import BaseMessageSerializer
+from .message import BaseReassignmentSerializer

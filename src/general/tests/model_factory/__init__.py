@@ -10,6 +10,9 @@ from .project import (
     make_project,
     make_team
 )
+from .message import (
+    make_reassignment
+)
 from .employee import (
     make_specialty,
     make_developer,

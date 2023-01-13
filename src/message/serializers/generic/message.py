@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from message.models import Reassignment
+
 
 class BaseMessageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,4 +10,19 @@ class BaseMessageSerializer(serializers.ModelSerializer):
             'creator',
             'text',
             'create_at',
+        )
+
+
+class BaseReassignmentSerializer(BaseMessageSerializer):
+    confirmed = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = Reassignment
+        fields = (
+            *BaseMessageSerializer.Meta.fields,
+            'from_project',
+            'to_project',
+            'from_team',
+            'to_team',
+            'confirmed',
         )
