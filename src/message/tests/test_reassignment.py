@@ -96,7 +96,7 @@ class ReassignmentTestCase(BaseTestCaseGeneric):
             'confirmed': True
 
         }
-        response_json = self._test_patch_object(json).json()
+        response_json = self._test_put_object(json).json()
 
         self.assertEqual(
             response_json['confirmed'],

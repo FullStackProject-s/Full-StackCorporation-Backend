@@ -11,7 +11,8 @@ from .project import (
     make_team
 )
 from .message import (
-    make_reassignment
+    make_reassignment,
+    make_task
 )
 from .employee import (
     make_specialty,
