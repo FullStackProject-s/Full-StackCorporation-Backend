@@ -1,1 +1,5 @@
-from .message import BaseReassignmentSerializer
+from .message import (
+    BaseReassignmentSerializer,
+    BaseMessageSerializer,
+    BaseTaskSerializer
+)

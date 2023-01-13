@@ -1,5 +1,5 @@
-from message.models.message import MessageBase
 from django.db import models
+from message.models.generic import MessageBase
 
 
 class Task(MessageBase):

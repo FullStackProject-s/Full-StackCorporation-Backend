@@ -3,3 +3,8 @@ from .reassignment import (
     ReassignmentSerializer,
     ReassignmentUpdateSerializer
 )
+from .task import (
+    TaskShowSerializer,
+    TaskSerializer,
+    TaskUpdateSerializer
+)

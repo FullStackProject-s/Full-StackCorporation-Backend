@@ -1,6 +1,11 @@
 from rest_framework import serializers
 
-from message.models import Reassignment
+from message.models import (
+    Reassignment,
+    Task
+)
+
+from user.serializers import CustomUserShowSerializer
 
 
 class BaseMessageSerializer(serializers.ModelSerializer):
@@ -26,3 +31,8 @@ class BaseReassignmentSerializer(BaseMessageSerializer):
             'to_team',
             'confirmed',
         )
+
+
+class BaseTaskSerializer(BaseMessageSerializer):
+    class Meta(BaseMessageSerializer.Meta):
+        model = Task
