@@ -8,3 +8,8 @@ from .task import (
     TaskSerializer,
     TaskUpdateSerializer
 )
+from .completed_tasks import (
+    CompletedTasksSerializer,
+    CompletedTasksUpdateSerializer,
+    CompletedTasksShowSerializer
+)
