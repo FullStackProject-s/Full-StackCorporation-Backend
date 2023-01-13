@@ -10,9 +10,7 @@ def _create_projects(instance):
 def _update_projects(instance, validated_data):
     if projects := validated_data.get('projects', None):
         for project in instance.projects.all():
-            project.organization = None
-            project.save()
+            project.remove_organization()
 
         for project in projects:
-            project.organization = instance
-            project.save()
+            project.set_organization(instance)
