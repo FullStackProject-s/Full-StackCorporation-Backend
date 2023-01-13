@@ -7,7 +7,6 @@ from employee.models import (
     Developer
 )
 from employee.signals.services import set_perms_for_employee
-from general.signals import suspending_receiver
 
 from user.models.consts import StaffRole
 from user.models import Permissions
