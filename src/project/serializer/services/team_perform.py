@@ -26,3 +26,13 @@ def _update_personal(team, validated_data):
         update_developer(team, developers)
 
     return team
+
+
+def _create_personal(instance):
+    if team_lead_ := instance.team_lead:
+        Developer.objects.get(pk=team_lead_.pk).set_team(instance)
+    if project_manger_ := instance.project_manager:
+        ProjectManager.objects.get(pk=project_manger_.pk).set_team(instance)
+    if developers := instance.developers.all():
+        for developer in developers:
+            developer.set_team(instance)
