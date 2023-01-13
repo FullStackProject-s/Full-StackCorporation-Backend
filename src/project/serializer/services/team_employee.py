@@ -14,5 +14,5 @@ def update_employee(
         new_employee: Developer | ProjectManager
 ) -> None:
     if old_employee:
-        model_.objects.get(pk=old_employee.pk).set_team(None)
+        model_.objects.get(pk=old_employee.pk).remove_team()
     new_employee.set_team(team)
