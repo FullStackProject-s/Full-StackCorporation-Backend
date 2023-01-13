@@ -1,83 +1,41 @@
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
-from rest_framework import status
-
 from employee.models import Technologies
 from employee.serializers import TechnologiesSerializer
-from employee.tests.utils import create_technologies
 from employee.models.consts import TechnologiesStack
 
-from user.models import CustomUser
+from general.tests.generic import BaseTestCaseGeneric
+from general.tests.model_factory import make_technologies
 
 
-class TechnologiesTestCase(APITestCase):
+class TechnologiesTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Technologies`.
     """
-    all_tech_url = reverse('all-tech')
-    create_tech_url = reverse('create-tech')
+    all_objects_url = reverse('all-tech')
+    create_object_url = reverse('create-tech')
 
-    retrieve_tech = 'technology'
-    delete_tech = 'delete-tech'
-    update_tech = 'update-tech'
+    retrieve_object_url = 'technology'
+    delete_object_url = 'delete-tech'
+    update_object_url = 'update-tech'
 
-    count_all_tech = 0
+    make_method = make_technologies
+    serializer_class = TechnologiesSerializer
+    model_class = Technologies
 
     @classmethod
     def setUpTestData(cls):
-        for index, tech in enumerate(
-                create_technologies(start=1),
-                start=1
-        ):
-            cls.count_all_tech += 1
-            setattr(
-                cls,
-                f'tech_{index}',
-                tech
-            )
-        _keyword = 'technologies'
-
-        cls.login_user = CustomUser.objects.create_user(
-            username=f'user_{_keyword}',
-            email=f'user{_keyword}@example.com',
-            password=f'user_{_keyword}',
-            first_name=f'first_{_keyword}',
-            last_name=f'last_{_keyword}',
-        )
-
-    def setUp(self):
-        self.client.force_login(self.login_user)
+        super().setUpTestData()
 
     def test_get_all_technologies(self):
-        response = self.client.get(self.all_tech_url)
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            len(response.json()),
-            self.count_all_tech
-        )
+        self._test_get_all_objects()
 
     def test_technologies_retrieve(self):
-        tech = self.tech_1
-        pk = tech.pk
-        response = self.client.get(
-            reverse(self.retrieve_tech, kwargs={'pk': pk})
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_retrieve_object().json()
+
         self.assertEqual(
             response_json['technology_name'],
-            tech.technology_name
-        )
-        self.assertEqual(
-            response_json,
-            TechnologiesSerializer(tech).data
+            self.obj_1.technology_name
         )
 
     def test_technologies_create(self):
@@ -85,84 +43,30 @@ class TechnologiesTestCase(APITestCase):
             "technology_name": f'tech_create',
             "technology_category": TechnologiesStack.FRONT
         }
-        response = self.client.post(
-            self.create_tech_url,
-            data=json
-        )
-        response_json = response.json()
-        name = response_json['technology_name']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            response_json,
-            TechnologiesSerializer(
-                Technologies.objects.get(technology_name=name)
-            ).data
-        )
+        self._test_create_object(json)
 
     def test_delete_technologies(self):
-        pk = self.tech_1.pk
-
-        response = self.client.delete(
-            reverse(
-                self.delete_tech,
-                kwargs={'pk': pk}
-            )
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_204_NO_CONTENT
-        )
-        self.assertEqual(
-            Technologies.objects.filter(pk=pk).exists(),
-            False
-        )
+        self._test_delete_object()
 
     def test_put_technologies(self):
-        tech = self.tech_2
-        pk = tech.pk
+        self.default_object_number = 2
         json = {
-            "technology_name": f'{tech}_2',
+            "technology_name": f'test_put_technologies_2',
             "technology_category": TechnologiesStack.FRONT
         }
-        response = self.client.put(
-            reverse(
-                self.update_tech,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+
+        response_json = self._test_put_object(json).json()
         self.assertEqual(
             response_json['technology_name'],
             json['technology_name'],
         )
 
     def test_patch_technologies(self):
-        tech = self.tech_2
-        pk = tech.pk
         json = {
-            "technology_category": TechnologiesStack.FRONT
+            "technology_name": 'test_patch_technologies'
         }
-        response = self.client.patch(
-            reverse(
-                self.update_tech,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
+        response_json = self._test_patch_object(json).json()
         self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            response_json['technology_category'],
-            json['technology_category'],
+            response_json['technology_name'],
+            json['technology_name'],
         )

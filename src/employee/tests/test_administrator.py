@@ -1,152 +1,64 @@
 from django.urls import reverse
-from django.contrib.auth import get_user_model
-
-from rest_framework.test import APITestCase
-from rest_framework import status
 
 from employee.models import Administrator
-from employee.tests.utils import create_administrators
 from employee.serializers import AdministratorSerializer
-from employee.tests.mixins import CreateUpdateEmployeeTestCaseMixin
 
-User = get_user_model()
+from general.tests.generic import BaseTestCaseGeneric
+from general.tests.model_factory import make_profile
+from general.tests.model_factory.employee.administrator import (
+    make_administrator
+)
 
 
-class AdministratorTestCase(
-    APITestCase,
-    CreateUpdateEmployeeTestCaseMixin
-):
+class AdministratorTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Administrator`.
     """
-    all_admins_url = reverse('all-admins')
-    create_admin_url = reverse('create-admin')
+    all_objects_url = reverse('all-admins')
+    create_object_url = reverse('create-admin')
 
-    retrieve_admin = 'admin'
-    delete_admin = 'delete-admin'
-    update_admin = 'update-admin'
+    retrieve_object_url = 'admin'
+    delete_object_url = 'delete-admin'
+    update_object_url = 'update-admin'
 
-    administrator_count = 4
+    make_method = make_administrator
+    serializer_class = AdministratorSerializer
+    model_class = Administrator
 
     @classmethod
     def setUpTestData(cls):
-        for index, admin in enumerate(
-                create_administrators(cls.administrator_count),
-                start=1
-        ):
-            setattr(
-                cls,
-                f'admin_{index}',
-                admin
-            )
-        _keyword = 'administrator'
-
-        cls.login_user = User.objects.create_user(
-            username=f'user_{_keyword}',
-            email=f'user{_keyword}@example.com',
-            password=f'user_{_keyword}',
-            first_name=f'first_{_keyword}',
-            last_name=f'last_{_keyword}',
-        )
-
-    def setUp(self):
-        self.client.force_login(self.login_user)
+        super().setUpTestData()
 
     def test_get_all_admins(self):
-        response = self.client.get(self.all_admins_url)
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            len(response.json()),
-            self.administrator_count
-        )
+        self._test_get_all_objects()
 
     def test_admin_retrieve(self):
-        admin = self.admin_1
-        pk = admin.pk
-        response = self.client.get(
-            reverse(self.retrieve_admin, kwargs={'pk': pk})
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            response_json,
-            AdministratorSerializer(admin).data
-        )
+        self._test_retrieve_object()
 
     def test_admins_create(self):
-        response = self._create_employee_response(
-            self.administrator_count,
-            self.create_admin_url
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            Administrator.objects.filter(pk=pk).exists(),
-            True
-        )
+        profile = make_profile(1)
+        json = {
+            'profile': profile.pk
+        }
+        self._test_create_object(json)
 
     def test_delete_admin(self):
-        pk = self.admin_1.pk
-
-        response = self.client.delete(
-            reverse(
-                self.delete_admin,
-                kwargs={'pk': pk}
-            )
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_204_NO_CONTENT
-        )
-        self.assertEqual(
-            Administrator.objects.filter(pk=pk).exists(),
-            False
-        )
+        self._test_delete_object()
 
     def test_put_admin(self):
-        admin = self.admin_2
-        response = self._put_employee_response(
-            self.administrator_count,
-            reverse(
-                self.update_admin,
-                kwargs={'pk': admin.pk}
-            )
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            response_json['pk'],
-            admin.pk
-        )
+        profile = make_profile(1)
+        json = {
+            'profile': profile.pk
+        }
+        self._test_put_object(json)
 
     def test_patch_admin(self):
-        admin = self.admin_2
-        response = self._patch_employee_response(
-            self.administrator_count,
-            reverse(
-                self.update_admin,
-                kwargs={'pk': admin.pk}
-            )
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        admin = self.obj_2
+        profile = make_profile(1)
+        json = {
+            'profile': profile.pk
+        }
+        response_json = self._test_patch_object(json).json()
         self.assertNotEqual(
             response_json['profile'],
             admin.profile.pk

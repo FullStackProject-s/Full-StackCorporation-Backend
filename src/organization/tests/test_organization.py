@@ -1,165 +1,82 @@
 from django.urls import reverse
 
-from rest_framework.test import APITestCase
-from rest_framework import status
+from general.tests.generic import BaseTestCaseGeneric
 
 from organization.models import Organization
 from organization.serializers import OrganizationSerializer
-from organization.tests.utils import create_organizations
+from general.tests.model_factory import (
+    make_organization,
+    make_project,
+    make_user
+)
 
 from project.models import Project
-from project.tests.utils import create_projects
-
-from user.tests.utils import create_users_list
 
 
-class OrganizationTestCase(APITestCase):
+class OrganizationTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`organization.Organization`.
     """
-    all_organization_url = reverse('all-organizations')
-    create_organization_url = reverse('organization-create')
+    all_objects_url = reverse('all-organizations')
+    create_object_url = reverse('organization-create')
 
-    retrieve_organization = 'organization'
-    delete_organization = 'delete-organization'
-    update_organization = 'update-organization'
+    retrieve_object_url = 'organization'
+    delete_object_url = 'delete-organization'
+    update_object_url = 'update-organization'
 
-    number_of_organizations = 4
+    make_method = make_organization
+    model_class = Organization
+    serializer_class = OrganizationSerializer
 
     @classmethod
     def setUpTestData(cls):
-        for index, profile in enumerate(
-                create_organizations(cls.number_of_organizations),
-                start=1
-        ):
-            setattr(
-                cls,
-                f'org_{index}',
-                profile
-            )
-
-    def setUp(self) -> None:
-        self.client.force_login(self.org_1.owner)
+        super().setUpTestData()
 
     def test_get_all_organizations(self):
-        response = self.client.get(self.all_organization_url)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            len(response.json()),
-            self.number_of_organizations
-        )
+        self._test_get_all_objects()
 
     def test_organization_retrieve(self):
-        org = self.org_1
-        pk = org.pk
-        response = self.client.get(
-            reverse(self.retrieve_organization, kwargs={'pk': pk})
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        response_json = response.json()
+        org = self.obj_1
+        response_json = self._test_retrieve_object().json()
+
         self.assertEqual(
             response_json['organization_name'],
             org.organization_name
         )
-        self.assertEqual(
-            response_json,
-            OrganizationSerializer(org).data
-        )
 
     def test_organization_create(self):
-        start = abs(hash('test_organization_create'))
-        user = create_users_list(start, start=start)[0]
+        user = make_user(1)
 
         json = {
             "organization_name": "create_org",
             "user": user.pk
         }
-        response = self.client.post(
-            self.create_organization_url,
-            data=json,
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            response_json,
-            OrganizationSerializer(Organization.objects.get(pk=pk)).data
-        )
+        self._test_create_object(json)
 
     def test_delete_organization(self):
-        pk = self.org_1.pk
-
-        response = self.client.delete(
-            reverse(
-                self.delete_organization,
-                kwargs={'pk': pk}
-            )
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_204_NO_CONTENT
-        )
-        self.assertEqual(
-            Organization.objects.filter(pk=pk).exists(),
-            False
-        )
+        self._test_delete_object()
 
     def test_put_organization(self):
-        name = 'test_put_organization'
-        start = abs(hash(name))
-        user = create_users_list(start, start=start)[0]
-
-        org = self.org_2
-        pk = org.pk
+        user = make_user(1)
+        self.default_object_number = 2
         json = {
-            "organization_name": name,
+            "organization_name": 'test_put_organization',
             "user": user.pk
         }
-        response = self.client.put(
-            reverse(
-                self.update_organization,
-                kwargs={'pk': pk}
-            ),
-            data=json,
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_put_object(json).json()
         self.assertEqual(
             response_json['organization_name'],
             json['organization_name'],
         )
 
     def test_patch_organization(self):
-        org = self.org_2
-        pk = org.pk
+        org = self.obj_2
+        self.default_object_number = 2
         json = {
             "organization_name": "test_patch_organization",
         }
-        response = self.client.patch(
-            reverse(
-                self.update_organization,
-                kwargs={'pk': pk}
-            ),
-            data=json,
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_patch_object(json).json()
+
         self.assertEqual(
             response_json['organization_name'],
             json['organization_name'],
@@ -169,15 +86,11 @@ class OrganizationTestCase(APITestCase):
             org.organization_name,
         )
 
-    def test_project_organization_signal(self):
-        org = self.org_2
-        name = 'test_project_organization_signal'
-        start = abs(hash(name))
-
-        proj_1, proj_2, proj_3, proj_4 = create_projects(
-            start + 3,
-            start=start
-        )
+    def test_project_organization_sets(self):
+        org = self.obj_3
+        self.default_object_number = 3
+        pk = org.pk
+        proj_1, proj_2, proj_3, proj_4 = make_project(4)
 
         json = {
             "projects": [
@@ -185,24 +98,10 @@ class OrganizationTestCase(APITestCase):
                 proj_2.pk
             ],
         }
-        response = self.client.patch(
-            reverse(
-                self.update_organization,
-                kwargs={'pk': org.pk}
-            ),
-            data=json,
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        self._test_patch_object(json).json()
+
         self.assertListEqual(
-            sorted(
-                list(Organization.objects.get(pk=pk).projects.all()),
-                key=lambda organization: organization.pk
-            ),
+            list(Organization.objects.get(pk=pk).projects.all()),
             [proj_1, proj_2]
         )
         self.assertEqual(
@@ -220,19 +119,8 @@ class OrganizationTestCase(APITestCase):
                 proj_4.pk
             ],
         }
-        response = self.client.patch(
-            reverse(
-                self.update_organization,
-                kwargs={'pk': org.pk}
-            ),
-            data=json,
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        self._test_patch_object(json).json()
+
         self.assertEqual(
             list(Organization.objects.get(pk=pk).projects.all()),
             [proj_3, proj_4]

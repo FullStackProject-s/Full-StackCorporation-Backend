@@ -3,143 +3,74 @@ from datetime import timedelta
 from django.urls import reverse
 from django.utils import timezone
 
-from rest_framework.test import APITestCase
-from rest_framework import status
-
-from organization.tests.utils import create_organizations
-
 from project.serializer import ProjectSerializer
 from project.models import Project
-from project.tests.utils import create_projects
+
+from general.tests.generic import BaseTestCaseGeneric
+from general.tests.model_factory import (
+    make_project,
+    make_organization
+)
 
 
-class ProjectTestCase(APITestCase):
+class ProjectTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Project`.
     """
-    all_projects_url = reverse('all-projects')
-    create_project_url = reverse('create-project')
+    all_objects_url = reverse('all-projects')
+    create_object_url = reverse('create-project')
 
-    retrieve_project = 'project'
-    delete_project = 'delete-project'
-    update_project = 'update-project'
+    retrieve_object_url = 'project'
+    delete_object_url = 'delete-project'
+    update_object_url = 'update-project'
 
-    number_of_projects = 4
+    make_method = make_project
+    model_class = Project
+    serializer_class = ProjectSerializer
 
     @classmethod
     def setUpTestData(cls):
-        for index, project in enumerate(
-                create_projects(cls.number_of_projects),
-                start=1
-        ):
-            setattr(
-                cls,
-                f'proj_{index}',
-                project
-            )
-
-    def setUp(self) -> None:
-        self.client.force_login(self.proj_1.organization.owner)
+        super().setUpTestData()
 
     def test_get_all_projects(self):
-        response = self.client.get(self.all_projects_url)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            len(response.json()),
-            self.number_of_projects
-        )
+        self._test_get_all_objects()
 
     def test_project_retrieve(self):
-        proj = self.proj_1
-        pk = proj.pk
-        response = self.client.get(
-            reverse(self.retrieve_project, kwargs={'pk': pk})
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        response_json = response.json()
+        proj = self.obj_1
+        response_json = self._test_retrieve_object().json()
         self.assertEqual(
             response_json['project_name'],
             proj.project_name
         )
-        self.assertEqual(
-            response_json,
-            ProjectSerializer(proj).data
-        )
 
     def test_project_create(self):
-        start = abs(hash('test_project_create'))
-        org = create_organizations(start, start=start)[0]
+        org = make_organization(1)
 
         json = {
             "project_name": "project_create",
             "organization": org.pk,
             "deadline": timezone.now().date() + timedelta(days=4)
         }
-        response = self.client.post(
-            self.create_project_url,
-            data=json,
-        )
-        response_json = response.json()
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
-        self.assertEqual(
-            response_json,
-            ProjectSerializer(Project.objects.get(pk=pk)).data
-        )
+        self._test_create_object(json)
 
     def test_delete_project(self):
-        pk = self.proj_1.pk
-
-        response = self.client.delete(
-            reverse(
-                self.delete_project,
-                kwargs={'pk': pk}
-            )
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_204_NO_CONTENT
-        )
-        self.assertEqual(
-            Project.objects.filter(pk=pk).exists(),
-            False
-        )
+        self._test_delete_object()
 
     def test_put_project(self):
-        name = 'test_put_project'
-        start = abs(hash(name))
-        org = create_organizations(start, start=start)[0]
+        org = make_organization(1)
 
-        proj = self.proj_4
-        pk = proj.pk
+        proj = self.obj_4
+        self.default_object_number = 4
+
         delta = timedelta(days=4)
         json = {
             "project_name": "project_put",
             "organization": org.pk,
             "deadline": proj.deadline + delta
         }
-        response = self.client.put(
-            reverse(
-                self.update_project,
-                kwargs={'pk': pk}
-            ),
-            data=json,
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+
+        response_json = self._test_put_object(json).json()
+
         self.assertEqual(
             Project.objects.get(pk=proj.pk).deadline,
             proj.deadline + delta
@@ -154,23 +85,13 @@ class ProjectTestCase(APITestCase):
         )
 
     def test_patch_project(self):
-        proj = self.proj_4
-        pk = proj.pk
+        self.default_object_number = 4
         json = {
             "project_name": "project_patch"
         }
-        response = self.client.patch(
-            reverse(
-                self.update_project,
-                kwargs={'pk': pk}
-            ),
-            data=json,
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+
+        response_json = self._test_patch_object(json).json()
+
         self.assertEqual(
             response_json['project_name'],
             json['project_name']

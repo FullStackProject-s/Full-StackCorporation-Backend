@@ -1,25 +1,11 @@
 from rest_framework import serializers
 
-from message.serializers.generic import BaseMessageSerializer
-from message.models import Reassignment
+from message.serializers.generic import BaseReassignmentSerializer
 
-from project.serializer import ProjectShowSerializer, TeamShowSerializer
-
-
-class BaseReassignmentSerializer(BaseMessageSerializer):
-    confirmed = serializers.BooleanField(read_only=True)
-
-    class Meta:
-        model = Reassignment
-        fields = (
-            *BaseMessageSerializer.Meta.fields,
-            'from_project',
-            'to_project',
-            'from_team',
-            'to_team',
-            'confirmed',
-        )
-
+from project.serializer import (
+    ProjectShowSerializer,
+    TeamShowSerializer
+)
 
 class ReassignmentShowSerializer(BaseReassignmentSerializer):
     from_project = ProjectShowSerializer(read_only=True)

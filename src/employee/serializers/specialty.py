@@ -16,11 +16,16 @@ class DeveloperOrgSpecialtyShowSerializer(BaseDeveloperOrgSpecialtySerializer):
 
 
 class DeveloperOrgSpecialtySerializer(BaseDeveloperOrgSpecialtySerializer):
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        instance.organization_developer.append_specialties(instance)
+        return instance
+
     def to_representation(self, instance):
         return DeveloperOrgSpecialtyShowSerializer(instance).data
 
 
-class DeveloperOrgUpdateSpecialtySerializer(DeveloperOrgSpecialtySerializer):
+class DeveloperOrgSpecialtyUpdateSerializer(DeveloperOrgSpecialtySerializer):
     class Meta(DeveloperOrgSpecialtySerializer.Meta):
         fields = (
             'specialty',

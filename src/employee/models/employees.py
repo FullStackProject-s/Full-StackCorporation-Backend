@@ -1,11 +1,14 @@
 from django.db import models
 
-from employee.models.base_employee import BaseEmployeeMixin
+from employee.models.generic import (
+    BaseEmployeeGeneric,
+    BaseProjectManagerDeveloperGeneric
+)
 from employee.models.consts import SkillLevel
 from employee.models.technologies import Technologies
 
 
-class Developer(BaseEmployeeMixin):
+class Developer(BaseProjectManagerDeveloperGeneric):
     specialties = models.ManyToManyField(
         'employee.DeveloperOrganizationSpecialty',
         blank=True,
@@ -35,14 +38,6 @@ class Developer(BaseEmployeeMixin):
         self.specialties.remove(spec)
         self.save()
 
-    def set_team(self, team):
-        self.team = team
-        self.save()
-
-    def remove_team(self):
-        self.team = None
-        self.save()
-
     def append_technologies(self, tech: Technologies):
         self.stack.add(tech)
         self.save()
@@ -55,7 +50,7 @@ class Developer(BaseEmployeeMixin):
         return f'{self.profile.user} - {self.pk}'
 
 
-class ProjectManager(BaseEmployeeMixin):
+class ProjectManager(BaseProjectManagerDeveloperGeneric):
     team = models.ForeignKey(
         'project.Team',
         on_delete=models.SET_NULL,
@@ -68,6 +63,6 @@ class ProjectManager(BaseEmployeeMixin):
         return f'{self.profile.user} - {self.pk}'
 
 
-class Administrator(BaseEmployeeMixin):
+class Administrator(BaseEmployeeGeneric):
     def __str__(self):
         return f'{self.profile.user} - {self.pk}'

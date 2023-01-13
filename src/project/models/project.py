@@ -20,3 +20,11 @@ class Project(BaseTimeStampModel):
         null=True
     )
     deadline = models.DateField(blank=False)
+
+    def set_organization(self, organization):
+        self.organization = organization
+        self.save()
+
+    def remove_organization(self):
+        self.organization = None
+        self.save()

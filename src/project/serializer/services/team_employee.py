@@ -14,9 +14,5 @@ def update_employee(
         new_employee: Developer | ProjectManager
 ) -> None:
     if old_employee:
-        old_employee_ = model_.objects.get(pk=old_employee.pk)
-        old_employee_.team = None
-        old_employee_.save()
-    new_employee.team = team
-
-    new_employee.save()
+        model_.objects.get(pk=old_employee.pk).remove_team()
+    new_employee.set_team(team)

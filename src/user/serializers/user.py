@@ -16,3 +16,9 @@ class CustomUserShowSerializer(BaseCustomUserSerializer):
 class CustomUserSerializer(BaseCustomUserSerializer):
     def to_representation(self, data):
         return CustomUserShowSerializer(data).data
+
+    class Meta(BaseCustomUserSerializer.Meta):
+        fields = (
+            *BaseCustomUserSerializer.Meta.fields,
+            'password',
+        )

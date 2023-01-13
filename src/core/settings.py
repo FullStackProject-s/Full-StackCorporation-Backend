@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'drf_spectacular',
+    'model_bakery',
 
 ]
 PROJECT_APPS = [
