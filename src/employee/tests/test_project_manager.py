@@ -9,6 +9,8 @@ from general.tests.model_factory import (
     make_profile
 )
 
+from user.models.consts import StaffRole
+
 
 class ProjectManagerTestCase(BaseTestCaseGeneric):
     """
@@ -40,7 +42,16 @@ class ProjectManagerTestCase(BaseTestCaseGeneric):
         json = {
             'profile': profile.pk
         }
-        self._test_create_object(json)
+
+        response_json = self._test_create_object(json).json()
+        pk = response_json['pk']
+
+        self.assertEqual(
+            ProjectManager.objects.select_related(
+                'profile__user'
+            ).get(pk=pk).profile.user.staff_role.role_name,
+            StaffRole.PRODUCT_MANAGER
+        )
 
     def test_delete_project_manager(self):
         self._test_delete_object()

@@ -10,6 +10,8 @@ from general.tests.model_factory import (
     make_profile
 )
 
+from user.models.consts import StaffRole
+
 
 class DeveloperTestCase(BaseTestCaseGeneric):
     """
@@ -51,10 +53,16 @@ class DeveloperTestCase(BaseTestCaseGeneric):
         }
 
         response_json = self._test_create_object(json).json()
-
+        pk = response_json['pk']
         self.assertEqual(
             response_json['skill_level'],
             SkillLevel.senior
+        )
+        self.assertEqual(
+            Developer.objects.select_related(
+                'profile__user'
+            ).get(pk=pk).profile.user.staff_role.role_name,
+            StaffRole.DEVELOPER
         )
 
     def test_delete_developer(self):
