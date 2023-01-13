@@ -1,11 +1,15 @@
 from django.urls import reverse
 
-from employee.models import DeveloperOrganizationSpecialty
+from employee.models import DeveloperOrganizationSpecialty, Developer
 from employee.models.consts import Specialty
 from employee.serializers import DeveloperOrgSpecialtySerializer
 
 from general.tests.generic import BaseTestCaseGeneric
-from general.tests.model_factory import make_specialty
+from general.tests.model_factory import (
+    make_specialty,
+    make_developer,
+    make_organization
+)
 
 
 class DeveloperOrganizationSpecialtyTestCase(BaseTestCaseGeneric):
@@ -41,111 +45,55 @@ class DeveloperOrganizationSpecialtyTestCase(BaseTestCaseGeneric):
             spec.specialty
         )
 
-    # def test_speciality_create(self):
-    #     orgs_start = abs(hash('test_speciality_create_orgs'))
-    #     devs_start = abs(hash('test_speciality_create_devs'))
-    #     dev = create_developers(devs_start, start=devs_start)[0]
-    #     org = create_organizations(orgs_start, start=orgs_start)[0]
-    #
-    #     json = {
-    #         "specialty": Specialty.FRONT,
-    #         "organization_developer": dev.pk,
-    #         "organization": org.pk
-    #     }
-    #     response = self.client.post(
-    #         self.create_spec_url,
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     pk = response_json['pk']
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_201_CREATED
-    #     )
-    #     self.assertEqual(
-    #         response_json,
-    #         DeveloperOrgSpecialtySerializer(
-    #             DeveloperOrganizationSpecialty.objects.get(
-    #                 pk=pk
-    #             )
-    #         ).data
-    #     )
-    #
-    #     # test signal
-    #     self.assertIn(
-    #         DeveloperOrganizationSpecialty.objects.get(pk=pk),
-    #         Developer.objects.get(pk=dev.pk).specialties.all(),
-    #     )
-    #
-    # def test_delete_speciality(self):
-    #     pk = self.spec_1.pk
-    #
-    #     response = self.client.delete(
-    #         reverse(
-    #             self.delete_speciality,
-    #             kwargs={'pk': pk}
-    #         )
-    #     )
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_204_NO_CONTENT
-    #     )
-    #     self.assertEqual(
-    #         DeveloperOrganizationSpecialty.objects.filter(pk=pk).exists(),
-    #         False
-    #     )
-    #
-    # def test_put_speciality(self):
-    #     spec = self.spec_2
-    #     orgs_start = abs(hash('test_put_technologies_orgs'))
-    #     devs_start = abs(hash('test_put_technologies_devs'))
-    #
-    #     dev = create_developers(devs_start, start=devs_start)[0]
-    #     org = create_organizations(orgs_start, start=orgs_start)[0]
-    #
-    #     pk = spec.pk
-    #     json = {
-    #         "specialty": Specialty.BACK,
-    #         "organization_developer": dev.pk,
-    #         "organization": org.pk
-    #     }
-    #     response = self.client.put(
-    #         reverse(
-    #             self.update_speciality,
-    #             kwargs={'pk': pk}
-    #         ),
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     self.assertEqual(
-    #         response_json['specialty'],
-    #         json['specialty'],
-    #     )
-    #
-    # def test_patch_speciality(self):
-    #     spec = self.spec_2
-    #
-    #     pk = spec.pk
-    #     json = {
-    #         "specialty": Specialty.DEVOPS,
-    #     }
-    #     response = self.client.patch(
-    #         reverse(
-    #             self.update_speciality,
-    #             kwargs={'pk': pk}
-    #         ),
-    #         data=json
-    #     )
-    #     response_json = response.json()
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #     self.assertEqual(
-    #         response_json['specialty'],
-    #         json['specialty'],
-    #     )
+    def test_speciality_create(self):
+        dev = make_developer(1)
+        org = make_organization(1)
+
+        json = {
+            "specialty": Specialty.FRONT,
+            "organization_developer": dev.pk,
+            "organization": org.pk
+        }
+
+        response_json = self._test_create_object(json).json()
+        pk = response_json['pk']
+
+        # test signal
+        self.assertIn(
+            DeveloperOrganizationSpecialty.objects.get(pk=pk),
+            Developer.objects.get(pk=dev.pk).specialties.all(),
+        )
+
+    def test_delete_speciality(self):
+        self._test_delete_object()
+
+    def test_put_speciality(self):
+        self.default_object_number = 2
+
+        dev = make_developer(1)
+        org = make_organization(1)
+
+        json = {
+            "specialty": Specialty.BACK,
+            "organization_developer": dev.pk,
+            "organization": org.pk
+        }
+        response_json = self._test_put_object(json).json()
+
+        self.assertEqual(
+            response_json['specialty'],
+            json['specialty'],
+        )
+
+    def test_patch_speciality(self):
+        self.default_object_number = 2
+        json = {
+            "specialty": Specialty.DEVOPS,
+        }
+
+        response_json = self._test_patch_object(json).json()
+
+        self.assertEqual(
+            response_json['specialty'],
+            json['specialty'],
+        )
