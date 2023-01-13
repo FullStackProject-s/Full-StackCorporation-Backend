@@ -1,10 +1,7 @@
 from django.urls import reverse
 
-from rest_framework import status
-
 from employee.models import Technologies
 from employee.serializers import TechnologiesSerializer
-from employee.tests.utils import create_technologies
 from employee.models.consts import TechnologiesStack
 
 from general.tests.generic import BaseTestCaseGeneric
