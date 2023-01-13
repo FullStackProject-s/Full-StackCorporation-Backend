@@ -7,7 +7,8 @@ from .organization import (
     make_organization
 )
 from .project import (
-    make_project
+    make_project,
+    make_team
 )
 from .employee import (
     make_specialty,

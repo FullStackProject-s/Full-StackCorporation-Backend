@@ -1,79 +1,43 @@
 from django.urls import reverse
 
-from rest_framework import status
-
 from employee.models import Developer, ProjectManager
-from employee.tests.utils import create_developers, create_project_managers
-from general.tests import BaseTestCaseGeneric
+from general.tests.generic import BaseTestCaseGeneric
+from general.tests.model_factory import (
+    make_team,
+    make_developer,
+    make_project_manager
+
+)
 
 from project.models import Team
 from project.serializer import TeamSerializer
 
-from project.tests.utils import create_teams
 
-from user.models import CustomUser
-
-
-class DeveloperTestCase(BaseTestCaseGeneric):
+class TeamTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Team`.
     """
-    all_teams_url = reverse('all-teams')
-    create_team_url = reverse('create-team')
+    all_objects_url = reverse('all-teams')
+    create_object_url = reverse('create-team')
 
-    retrieve_team = 'team'
-    delete_team = 'delete-team'
-    update_team = 'update-team'
+    retrieve_object_url = 'team'
+    delete_object_url = 'delete-team'
+    update_object_url = 'update-team'
 
-    team_count = 4
+    make_method = make_team
+    serializer_class = TeamSerializer
+    model_class = Team
 
     @classmethod
     def setUpTestData(cls):
-        for index, team in enumerate(
-                create_teams(cls.team_count),
-                start=1
-        ):
-            setattr(
-                cls,
-                f'team_{index}',
-                team
-            )
-        _keyword = 'team'
-
-        cls.login_user = CustomUser.objects.create_user(
-            username=f'user_{_keyword}',
-            email=f'user{_keyword}@example.com',
-            password=f'user_{_keyword}',
-            first_name=f'first_{_keyword}',
-            last_name=f'last_{_keyword}',
-        )
-
-    def setUp(self):
-        self.client.force_login(self.login_user)
+        super().setUpTestData()
 
     def test_get_all_teams(self):
-        response = self.client.get(self.all_teams_url)
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            len(response.json()),
-            self.team_count
-        )
+        self._test_get_all_objects()
 
     def test_team_retrieve(self):
-        team = self.team_2
-        pk = self.team_2.pk
-        response = self.client.get(
-            reverse(self.retrieve_team, kwargs={'pk': pk})
-        )
-        response_json = response.json()
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        team = self.obj_1
+        response_json = self._test_retrieve_object().json()
 
         self.assertEqual(
             response_json['team_lead'],
@@ -83,19 +47,10 @@ class DeveloperTestCase(BaseTestCaseGeneric):
             response_json['project_manager'],
             team.project_manager
         )
-        self.assertEqual(
-            response_json,
-            TeamSerializer(team).data
-        )
 
     def test_team_create(self):
-        start_dev = abs(hash('test_team_create_dev'))
-        start_proj = abs(hash('test_team_create_proj_manager'))
-        proj_manager = create_project_managers(start_proj, start=start_proj)[0]
-        team_lead, dev_1, dev_2 = create_developers(
-            start_dev + 2,
-            start=start_dev
-        )
+        proj_manager = make_project_manager(1)
+        team_lead, dev_1, dev_2 = make_developer(3)
         json = {
             'team_name': "team_create_name",
             'team_lead': team_lead.pk,
@@ -107,15 +62,10 @@ class DeveloperTestCase(BaseTestCaseGeneric):
 
         }
         response = self.client.post(
-            self.create_team_url,
-            data=json,
-            format='json'
+            self.create_object_url,
+            data=json
         )
         response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_201_CREATED
-        )
 
         team = Team.objects.get(pk=response_json['pk'])
         self.assertEqual(
@@ -135,139 +85,69 @@ class DeveloperTestCase(BaseTestCaseGeneric):
         )
 
     def test_delete_team(self):
-        pk = self.team_1.pk
-
-        response = self.client.delete(
-            reverse(
-                self.delete_team,
-                kwargs={'pk': pk}
-            )
-        )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_204_NO_CONTENT
-        )
-        self.assertEqual(
-            Team.objects.filter(pk=pk).exists(),
-            False
-        )
+        self._test_delete_object()
 
     def test_team_name_put_team(self):
         json = {
             'team_name': 'put_team_name'
         }
-        pk = self.team_4.pk
-        response = self.client.put(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_put_object(json).json()
         self.assertEqual(
             response_json['team_name'],
-            Team.objects.get(pk=pk).team_name
+            Team.objects.get(pk=self.obj_1.pk).team_name
         )
 
     def test_team_lead_patch_team(self):
-        name = 'test_team_lead_patch_team'
-        team = self.team_3
-        start = abs(hash(name))
+        team = self.obj_1
+        dev_1, dev_2 = make_developer(2)
 
-        team_lead_1, team_lead_2 = create_developers(start + 1, start=start)
-
-        pk = team.pk
         json = {
-            'team_name': name,
-            'team_lead': team_lead_1.pk
+            'team_name': 'test_team_lead_patch_team',
+            'team_lead': dev_1.pk
         }
-        response = self.client.patch(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
 
-        # Set's first team_lead
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_patch_object(json).json()
+
         self.assertEqual(
             Team.objects.get(pk=response_json['pk']).team_lead,
-            team_lead_1
+            dev_1
         )
         self.assertEqual(
-            Developer.objects.get(pk=team_lead_1.pk).team,
+            Developer.objects.get(pk=dev_1.pk).team,
             team
         )
 
-        # Set's second's team_lead
+        # Set's second's team lead
         json = {
-            'team_lead': team_lead_2.pk
+            'team_lead': dev_2.pk
         }
-        response = self.client.patch(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
+
+        response_json = self._test_patch_object(json).json()
 
         self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
             Team.objects.get(pk=response_json['pk']).team_lead,
-            team_lead_2
+            dev_2
         )
         self.assertEqual(
-            Developer.objects.get(pk=team_lead_2.pk).team,
+            Developer.objects.get(pk=dev_2.pk).team,
             team
         )
         self.assertEqual(
-            Developer.objects.get(pk=team_lead_1.pk).team,
+            Developer.objects.get(pk=dev_1.pk).team,
             None
         )
 
     def test_project_manager_patch_team(self):
-        name = 'test_project_manager_patch_team'
-        team = self.team_3
-        start = abs(hash(name))
+        team = self.obj_1
+        project_manager_1, project_manager_2 = make_project_manager(2)
 
-        project_manager_1, project_manager_2 = create_project_managers(
-            start + 1,
-            start=start
-        )
-
-        pk = team.pk
         json = {
-            'team_name': name,
+            'team_name': 'test_project_manager_patch_team',
             'project_manager': project_manager_1.pk
         }
-        response = self.client.patch(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
 
-        # Set's first team_lead
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_patch_object(json).json()
+
         self.assertEqual(
             Team.objects.get(pk=response_json['pk']).project_manager,
             project_manager_1
@@ -277,23 +157,13 @@ class DeveloperTestCase(BaseTestCaseGeneric):
             team
         )
 
-        # Set's second's team_lead
+        # Set's second's project manager
         json = {
             'project_manager': project_manager_2.pk
         }
-        response = self.client.patch(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
 
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response_json = self._test_patch_object(json).json()
+
         self.assertEqual(
             Team.objects.get(pk=response_json['pk']).project_manager,
             project_manager_2
@@ -308,39 +178,21 @@ class DeveloperTestCase(BaseTestCaseGeneric):
         )
 
     def test_developers_patch_team(self):
-        name = 'test_developers_patch_team'
-        team = self.team_3
-        start = abs(hash(name))
+        team = self.obj_2
+        self.default_object_number = 2
 
-        dev_1, dev_2, dev_3, dev_4 = create_developers(
-            start + 3,
-            start=start
-        )
+        dev_1, dev_2, dev_3, dev_4 = make_developer(4)
 
         pk = team.pk
         json = {
-            'team_name': name,
+            'team_name': 'test_developers_patch_team',
             'developers': [
                 dev_1.pk,
                 dev_2.pk
             ]
         }
-        response = self.client.patch(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json,
-            format='json'
-        )
-        response_json = response.json()
-        pk = response_json['pk']
+        self._test_patch_object(json).json()
 
-        # Set's first team_lead
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
         self.assertEqual(
             list(Team.objects.get(pk=pk).developers.all()),
             [dev_1, dev_2]
@@ -354,27 +206,15 @@ class DeveloperTestCase(BaseTestCaseGeneric):
             team
         )
 
-        # Set's second's team_lead
+        # Set's second's developers set
         json = {
             'developers': [
                 dev_3.pk,
                 dev_4.pk
             ]
         }
-        response = self.client.patch(
-            reverse(
-                self.update_team,
-                kwargs={'pk': pk}
-            ),
-            data=json
-        )
-        response_json = response.json()
+        self._test_patch_object(json).json()
 
-        pk = response_json['pk']
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
         self.assertEqual(
             list(Team.objects.get(pk=pk).developers.all()),
             [dev_3, dev_4]
