@@ -16,7 +16,9 @@ urlpatterns = [
 
     path('', include('organization.urls')),
 
-    path('', include('message.urls'))
+    path('', include('message.urls')),
+
+    path('auth/', include('authentication.urls'))
 ]
 
 urlpatterns += [

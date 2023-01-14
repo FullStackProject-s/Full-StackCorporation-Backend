@@ -58,7 +58,6 @@ class DeveloperOrganizationSpecialtyTestCase(BaseTestCaseGeneric):
         response_json = self._test_create_object(json).json()
         pk = response_json['pk']
 
-        # test signal
         self.assertIn(
             DeveloperOrganizationSpecialty.objects.get(pk=pk),
             Developer.objects.get(pk=dev.pk).specialties.all(),

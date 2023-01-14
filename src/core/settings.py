@@ -3,7 +3,9 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from corsheaders.defaults import default_headers
 from dotenv import load_dotenv
+
 
 load_dotenv(os.path.join(Path(__file__).resolve().parent, '.dev.env'))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -62,11 +64,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CSRF_TRUSTED_ORIGINS = [
+    f"http://{os.getenv('CORS_ALLOWED')}"
+]
 
 CORS_ALLOWED_ORIGINS = [
     f"http://{os.getenv('CORS_ALLOWED')}"
 ]
-
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + ['Set-Cookie']
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -148,8 +154,10 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
+        'authentication.authenticate.CustomAuthentication',
     ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
@@ -179,10 +187,10 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 
-    # 'JTI_CLAIM': 'jti',
+    'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_LIFETIME': timedelta(hours=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 
     # custom
@@ -196,7 +204,8 @@ SIMPLE_JWT = {
     # Http only cookie flag.It's not fetch by javascript.
     'AUTH_COOKIE_PATH': '/',  # The path of the auth cookie.
     'AUTH_COOKIE_SAMESITE': 'Lax',
-    # Whether to set the flag restricting cookie leaks on cross-site requests. This can be 'Lax', 'Strict', or None to disable the flag.
+    # Whether to set the flag restricting cookie leaks on cross-site requests.
+    # This can be 'Lax', 'Strict', or None to disable the flag.
 }
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Web corporation api',
@@ -204,4 +213,8 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     "COMPONENT_SPLIT_REQUEST": True,
+    'PREPROCESSING_HOOKS': [
+        'general.schema.exclude.preprocessing_filter_spec'],
+    'DISABLE_ERRORS_AND_WARNINGS': True,
+
 }
