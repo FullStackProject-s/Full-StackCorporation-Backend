@@ -43,7 +43,8 @@ PROJECT_APPS = [
     'project',
     'general',
     'message',
-    'organization'
+    'organization',
+    'authentication'
 ]
 
 INSTALLED_APPS = [
