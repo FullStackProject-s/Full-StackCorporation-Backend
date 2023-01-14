@@ -14,7 +14,11 @@ class Organization(BaseTimeStampModel):
         related_name='org_owner',
         null=True
     )
-    organization_avatar = models.ImageField(blank=True, null=True)
+    organization_avatar = models.ImageField(
+        upload_to='organization_avatar',
+        blank=True,
+        null=True
+    )
     projects = models.ManyToManyField(
         'project.Project',
         related_name='org_projects',
@@ -25,3 +29,6 @@ class Organization(BaseTimeStampModel):
         related_name='org_members',
         blank=True
     )
+
+    def __str__(self):
+        return f'{self.organization_name} - {self.pk}'

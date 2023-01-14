@@ -27,4 +27,9 @@ urlpatterns_organization = [
         organization.OrganizationUpdateAPIView.as_view(),
         name='update-organization'
     ),
+    path(
+        'upload-image/<int:pk>/',
+        organization.OrganizationUploadImageAPIView.as_view(),
+        name='upload-image'
+    )
 ]

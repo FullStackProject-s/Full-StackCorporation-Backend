@@ -1,4 +1,5 @@
 from organization.serializers.organization import (
     OrganizationSerializer,
-    OrganizationShowSerializer
+    OrganizationShowSerializer,
+    OrganizationImageUploadSerializer
 )

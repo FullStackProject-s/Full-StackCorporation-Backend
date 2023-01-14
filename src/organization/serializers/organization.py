@@ -1,6 +1,6 @@
 from organization.serializers.services import (
-    _update_projects,
-    _create_projects
+    update_projects,
+    create_projects
 )
 from user.serializers.user import CustomUserShowSerializer
 from organization.serializers.generic import BaseOrganizationSerializer
@@ -19,9 +19,17 @@ class OrganizationSerializer(BaseOrganizationSerializer):
 
     def create(self, validated_data):
         instance = super().create(validated_data)
-        _create_projects(instance)
+        create_projects(instance)
         return instance
 
     def update(self, instance, validated_data):
-        _update_projects(instance, validated_data)
+        update_projects(instance, validated_data)
         return super().update(instance, validated_data)
+
+
+class OrganizationImageUploadSerializer(BaseOrganizationSerializer):
+    class Meta:
+        model = BaseOrganizationSerializer.Meta.model
+        fields = (
+            'organization_avatar',
+        )

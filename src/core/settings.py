@@ -1,4 +1,6 @@
 from pathlib import Path
+
+import rest_framework.permissions
 from dotenv import load_dotenv
 import os
 
@@ -150,7 +152,8 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",
+        # "rest_framework.permissions.IsAuthenticated",
+        'rest_framework.permissions.AllowAny',
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }

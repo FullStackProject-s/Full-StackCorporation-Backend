@@ -2,3 +2,5 @@
 __pycache__
 .env
 .dev.env
+*.png
+*.jpg

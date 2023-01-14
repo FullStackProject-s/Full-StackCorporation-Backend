@@ -1,9 +1,14 @@
-from rest_framework import generics, status
+from rest_framework import (
+    generics,
+    status
+)
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 
-from user.serializers import ProfileImageUploadSerializer, \
+from user.serializers import (
+    ProfileImageUploadSerializer,
     ProfileShowSerializer
+)
 from user.views.generics import BaseConfigurationProfilesViewGeneric
 
 
@@ -48,17 +53,18 @@ class ProfileImageUploadAPIView(BaseConfigurationProfilesViewGeneric):
 
     def post(self, request, *args, **kwargs):
         profile = self.get_object()
-        serializer = self.serializer_class(
-            data=request.data
-        )
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
         if profile.profile_avatar:
             profile.profile_avatar.delete()
-            profile.save()
+
         profile.profile_avatar = serializer.validated_data.get(
-            'profile_avatar')
+            'profile_avatar'
+        )
         profile.save()
+
         return Response(
             ProfileShowSerializer(profile).data,
-            status=status.HTTP_200_OK
+            status=status.HTTP_202_ACCEPTED
         )
