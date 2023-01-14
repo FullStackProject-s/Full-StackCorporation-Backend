@@ -6,7 +6,9 @@ from drf_spectacular.utils import extend_schema_field
 
 from employee.serializers.generics import BaseDeveloperSerializer
 from employee.serializers.technologies import TechnologiesSerializer
+from employee.serializers.services import set_perms_for_employee
 
+from user.models.consts import StaffRole
 from user.serializers import ProfileShowSerializer
 
 
@@ -31,5 +33,10 @@ class DeveloperShowSerializer(BaseDeveloperSerializer):
 
 
 class DeveloperSerializer(BaseDeveloperSerializer):
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        set_perms_for_employee(StaffRole.DEVELOPER, instance)
+        return instance
+
     def to_representation(self, instance):
         return DeveloperShowSerializer(instance).data

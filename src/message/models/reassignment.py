@@ -1,5 +1,5 @@
 from django.db import models
-from message.models.message import MessageBase
+from message.models.generic import MessageBase
 
 
 class Reassignment(MessageBase):

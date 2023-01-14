@@ -1,5 +1,5 @@
-from message.models.message import MessageBase
 from django.db import models
+from message.models.generic import MessageBase
 
 
 class Task(MessageBase):
@@ -8,7 +8,7 @@ class Task(MessageBase):
 
 class CompletedTasks(MessageBase):
     checked = models.BooleanField(default=False)
-    task = models.ManyToManyField(
+    tasks = models.ManyToManyField(
         Task,
         related_name='task'
     )

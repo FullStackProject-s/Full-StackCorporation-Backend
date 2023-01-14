@@ -1,1 +1,3 @@
 from .reassignment import BaseReassignmentViewGeneric
+from .task import BaseTaskViewGeneric
+from .completed_tasks import BaseCompletedTasksViewGeneric

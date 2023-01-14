@@ -9,6 +9,8 @@ from general.tests.model_factory.employee.administrator import (
     make_administrator
 )
 
+from user.models.consts import StaffRole
+
 
 class AdministratorTestCase(BaseTestCaseGeneric):
     """
@@ -40,7 +42,15 @@ class AdministratorTestCase(BaseTestCaseGeneric):
         json = {
             'profile': profile.pk
         }
-        self._test_create_object(json)
+        response_json = self._test_create_object(json).json()
+        pk = response_json['pk']
+
+        self.assertEqual(
+            Administrator.objects.select_related(
+                'profile__user'
+            ).get(pk=pk).profile.user.staff_role.role_name,
+            StaffRole.ADMIN
+        )
 
     def test_delete_admin(self):
         self._test_delete_object()

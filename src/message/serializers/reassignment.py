@@ -6,8 +6,11 @@ from project.serializer import (
     ProjectShowSerializer,
     TeamShowSerializer
 )
+from user.serializers import CustomUserShowSerializer
+
 
 class ReassignmentShowSerializer(BaseReassignmentSerializer):
+    creator = CustomUserShowSerializer(read_only=True)
     from_project = ProjectShowSerializer(read_only=True)
     to_project = ProjectShowSerializer(read_only=True)
     from_team = TeamShowSerializer(read_only=True)

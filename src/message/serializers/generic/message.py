@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from message.models import Reassignment
+from message.models import (
+    Reassignment,
+    Task,
+    CompletedTasks
+)
+
+from user.serializers import CustomUserShowSerializer
 
 
 class BaseMessageSerializer(serializers.ModelSerializer):
@@ -25,4 +31,21 @@ class BaseReassignmentSerializer(BaseMessageSerializer):
             'from_team',
             'to_team',
             'confirmed',
+        )
+
+
+class BaseTaskSerializer(BaseMessageSerializer):
+    class Meta(BaseMessageSerializer.Meta):
+        model = Task
+
+
+class BaseCompletedTasksSerializer(BaseMessageSerializer):
+    checked = serializers.BooleanField(read_only=True)
+
+    class Meta(BaseMessageSerializer.Meta):
+        model = CompletedTasks
+        fields = (
+            *BaseMessageSerializer.Meta.fields,
+            'tasks',
+            'checked',
         )

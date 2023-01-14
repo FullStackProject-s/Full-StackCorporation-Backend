@@ -6,4 +6,5 @@ from user.serializers.user import (
 from user.serializers.profile import (
     ProfileShowSerializer,
     ProfileSerializer,
+    ProfileImageUploadSerializer
 )

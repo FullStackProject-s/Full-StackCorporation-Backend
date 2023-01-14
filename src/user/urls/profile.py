@@ -27,4 +27,9 @@ urlpatterns_profile = [
         profile.ProfileUpdateAPIView.as_view(),
         name='update-profile',
     ),
+    path(
+        'upload-image/<int:pk>',
+        profile.ProfileImageUploadAPIView.as_view(),
+        name='upload-image',
+    ),
 ]
