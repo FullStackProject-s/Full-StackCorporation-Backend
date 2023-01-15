@@ -2,13 +2,12 @@ from django.urls import (
     path,
     include
 )
-
+from .utils import filtered_djoser_urls
 from .token import urlpatterns_token
-from djoser.urls import urlpatterns as urls
 
-# print(urls)
+
 urlpatterns = [
     path('', include(urlpatterns_token)),
-    path('', include('djoser.urls'))
+    path('', include(filtered_djoser_urls())),
 
 ]
