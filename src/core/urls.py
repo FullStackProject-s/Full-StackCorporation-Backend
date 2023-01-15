@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('', include('message.urls')),
 
-    path('auth/', include('authentication.urls'))
+    path('auth/', include('authentication.urls')),
 ]
 
 urlpatterns += [
