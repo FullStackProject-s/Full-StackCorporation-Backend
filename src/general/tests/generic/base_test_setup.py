@@ -1,5 +1,7 @@
 from typing import Callable
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from rest_framework.test import APITestCase
 
 from general.tests.model_factory import make_user
@@ -40,7 +42,11 @@ class BaseTestCaseSetupGeneric(APITestCase):
             cls.base_login_user = make_user(1)
         else:
             cls.base_login_user = cls.obj_1
+        cls.refresh = RefreshToken.for_user(cls.base_login_user)
 
     def setUp(self):
         self.client.force_login(self.base_login_user)
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f'Bearer {self.refresh.access_token}'
+        )
         self.default_object_number = 1

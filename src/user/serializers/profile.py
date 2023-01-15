@@ -1,5 +1,3 @@
-from rest_framework import serializers
-
 from user.serializers.user import CustomUserShowSerializer
 from user.serializers.generic import BaseProfileSerializer
 
@@ -20,5 +18,3 @@ class ProfileImageUploadSerializer(BaseProfileSerializer):
             'profile_avatar',
         )
 
-    def to_representation(self, instance):
-        return ProfileShowSerializer(instance).data

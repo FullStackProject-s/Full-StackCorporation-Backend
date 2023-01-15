@@ -1,8 +1,13 @@
-from pathlib import Path
-from dotenv import load_dotenv
 import os
 
+from datetime import timedelta
+from pathlib import Path
+
+from corsheaders.defaults import default_headers
+from dotenv import load_dotenv
+
 load_dotenv(os.path.join(Path(__file__).resolve().parent, '.dev.env'))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,8 +37,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'drf_spectacular',
-    'model_bakery',
-
+    'djoser'
 ]
 PROJECT_APPS = [
     'user',
@@ -41,7 +45,8 @@ PROJECT_APPS = [
     'project',
     'general',
     'message',
-    'organization'
+    'organization',
+    'authentication'
 ]
 
 INSTALLED_APPS = [
@@ -62,8 +67,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    f"http://{os.getenv('CORS_ALLOWED')}"
+    f"http://{os.getenv('CORS_ALLOWED')}",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'core.urls'
 
@@ -146,14 +153,27 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
+
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+
     ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
+
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+
+}
+COOKIE_MAX_AGE = 3600 * 24  # 1 day
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Web corporation api',
@@ -161,4 +181,9 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     "COMPONENT_SPLIT_REQUEST": True,
+    # 'PREPROCESSING_HOOKS': [
+    #     'general.schema.exclude.preprocessing_filter_spec'
+    # ],
+    'DISABLE_ERRORS_AND_WARNINGS': True,
+
 }

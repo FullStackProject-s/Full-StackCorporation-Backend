@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 
+from user.models import CustomUser
 from user.serializers.permission import PermissionSerializer
 from user.serializers.generic import BaseCustomUserSerializer
 
@@ -14,6 +15,9 @@ class CustomUserShowSerializer(BaseCustomUserSerializer):
 
 
 class CustomUserSerializer(BaseCustomUserSerializer):
+    def create(self, validated_data):
+        return CustomUser.objects.create_user(**validated_data)
+
     def to_representation(self, data):
         return CustomUserShowSerializer(data).data
 
