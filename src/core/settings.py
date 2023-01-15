@@ -184,6 +184,6 @@ SPECTACULAR_SETTINGS = {
     # 'PREPROCESSING_HOOKS': [
     #     'general.schema.exclude.preprocessing_filter_spec'
     # ],
-    # 'DISABLE_ERRORS_AND_WARNINGS': True,
+    'DISABLE_ERRORS_AND_WARNINGS': True,
 
 }
