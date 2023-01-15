@@ -6,8 +6,8 @@ from pathlib import Path
 from corsheaders.defaults import default_headers
 from dotenv import load_dotenv
 
-
 load_dotenv(os.path.join(Path(__file__).resolve().parent, '.dev.env'))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -64,15 +64,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CSRF_TRUSTED_ORIGINS = [
-    f"http://{os.getenv('CORS_ALLOWED')}"
-]
 
 CORS_ALLOWED_ORIGINS = [
-    f"http://{os.getenv('CORS_ALLOWED')}"
+    f"http://{os.getenv('CORS_ALLOWED')}",
 ]
+
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = list(default_headers) + ['Set-Cookie']
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -156,65 +154,35 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # "rest_framework.authentication.SessionAuthentication",
-        'authentication.authenticate.CustomAuthentication',
+
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+
     ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
-        # 'rest_framework.permissions.AllowAny',
+
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'UPDATE_LAST_LOGIN': False,
-
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
 
-    'JTI_CLAIM': 'jti',
-
-    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(hours=1),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-
-    # custom
-    'AUTH_COOKIE': 'access_token',
-    # Cookie name. Enables cookies if value is set.
-    'AUTH_COOKIE_DOMAIN': None,
-    # A string like "example.com", or None for standard domain cookie.
-    'AUTH_COOKIE_SECURE': False,
-    # Whether the auth cookies should be secure (https:// only).
-    'AUTH_COOKIE_HTTP_ONLY': True,
-    # Http only cookie flag.It's not fetch by javascript.
-    'AUTH_COOKIE_PATH': '/',  # The path of the auth cookie.
-    'AUTH_COOKIE_SAMESITE': 'Lax',
-    # Whether to set the flag restricting cookie leaks on cross-site requests.
-    # This can be 'Lax', 'Strict', or None to disable the flag.
 }
+COOKIE_MAX_AGE = 3600 * 24  # 1 day
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Web corporation api',
     'DESCRIPTION': 'web corp api',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     "COMPONENT_SPLIT_REQUEST": True,
-    'PREPROCESSING_HOOKS': [
-        'general.schema.exclude.preprocessing_filter_spec'],
-    'DISABLE_ERRORS_AND_WARNINGS': True,
+    # 'PREPROCESSING_HOOKS': [
+    #     'general.schema.exclude.preprocessing_filter_spec'
+    # ],
+    # 'DISABLE_ERRORS_AND_WARNINGS': True,
 
 }
