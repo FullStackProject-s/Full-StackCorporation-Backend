@@ -8,6 +8,9 @@ services:
     env_file:
       - ./src/core/.dev.env
   redis:
+    container_name: redisDevelopment
     image: redis:alpine
     restart: always
     command: redis-server
+    ports:
+      - 6379:6379
