@@ -13,9 +13,6 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **kwargs):
-        kwargs.setdefault('is_active', True)
-        if not kwargs.get('is_active'):
-            raise ValueError(_('User must be active'))
         if not email:
             raise ValueError(_("Users must have an email address"))
 
@@ -24,9 +21,11 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **kwargs):
         kwargs.setdefault('is_staff', True)
         kwargs.setdefault('is_superuser', True)
+        kwargs.setdefault('is_active', True)
+        if not kwargs.get('is_active'):
+            raise ValueError(_('User must be active'))
         if not kwargs.get('is_staff'):
             raise ValueError(_('Superuser must be staff'))
         if not kwargs.get('is_superuser'):
             raise ValueError(_('Superuser must have is_superuser=True'))
         return self.create_user(email, password, **kwargs)
-

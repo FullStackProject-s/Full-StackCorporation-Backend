@@ -1,5 +1,5 @@
 services:
- postgres:
+  postgres:
     container_name: postgresDevelopment
     image: postgres:latest
     restart: on-failure
@@ -7,3 +7,10 @@ services:
       - 5431:5432
     env_file:
       - ./src/core/.dev.env
+  redis:
+    container_name: redisDevelopment
+    image: redis:alpine
+    restart: always
+    command: redis-server
+    ports:
+      - 6379:6379

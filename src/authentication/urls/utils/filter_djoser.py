@@ -1,10 +1,8 @@
-from djoser.urls import urlpatterns as urls
-
-
-def filtered_djoser_urls() -> list:
+def filtered_djoser_urls(urls: list) -> list:
     resulted_djoser_list = (
+        'customuser-list',
+
         'customuser-activation',
-        'customuser-resend-activation',
 
         'customuser-reset-password',
         'customuser-reset-password-confirm'

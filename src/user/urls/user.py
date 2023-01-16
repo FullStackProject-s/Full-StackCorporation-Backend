@@ -17,11 +17,12 @@ urlpatterns_user = [
         user.UserDestroyAPIView.as_view(),
         name='delete-user'
     ),
-    path(
-        'create-user/',
-        user.UserCreateAPIView.as_view(),
-        name='create-user'
-    ),
+    # Now user endpoint in auth segment
+    # path(
+    #     'create-user/',
+    #     user.UserCreateAPIView.as_view(),
+    #     name='create-user'
+    # ),
     path(
         'update-user/<int:pk>/',
         user.UserUpdateAPIView.as_view(),

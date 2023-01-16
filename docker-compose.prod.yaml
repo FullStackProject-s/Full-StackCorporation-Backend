@@ -1,5 +1,5 @@
 services:
- web-django:
+  web-django:
    container_name: BackendAPI
    restart: always
    build:
@@ -13,9 +13,27 @@ services:
      - ./src/core/.env
    depends_on:
      - postgres
- postgres:
+     - redis
+
+  postgres:
     container_name: postgresProduction
     image: postgres:latest
     restart: on-failure
+    env_file:
+      - ./src/core/.env
+
+  redis:
+    container_name: redisProduction
+    image: redis:alpine
+    restart: always
+    command: redis-server
+
+  celery:
+    container_name: celeryProduction
+    build: .
+    command: bash -c
+      "python -m celery -A core worker -l info"
+    depends_on:
+      - redis
     env_file:
       - ./src/core/.env

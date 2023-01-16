@@ -1,12 +1,18 @@
 import os
 
-from datetime import timedelta
 from pathlib import Path
 
-from corsheaders.defaults import default_headers
 from dotenv import load_dotenv
 
-load_dotenv(os.path.join(Path(__file__).resolve().parent, '.dev.env'))
+if bool(int(os.getenv('PROD', 0))):
+    file = '.env'
+else:
+    file = '.dev.env'
+
+load_dotenv(os.path.join(Path(__file__).resolve().parent.parent, file))
+
+# import third party after load env
+from .additional_settings import *  # noqa
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.getenv('DEBUG')))
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split()
 
@@ -65,12 +71,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CORS_ALLOWED_ORIGINS = [
-    f"http://{os.getenv('CORS_ALLOWED')}",
-]
-
-CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'core.urls'
 
@@ -152,38 +152,4 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-
-    ),
-    "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",
-
-    ),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "SIGNING_KEY": SECRET_KEY,
-    "AUTH_HEADER_TYPES": ("Bearer",),
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-
-}
 COOKIE_MAX_AGE = 3600 * 24  # 1 day
-
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Web corporation api',
-    'DESCRIPTION': 'web corp api',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    "COMPONENT_SPLIT_REQUEST": True,
-    # 'PREPROCESSING_HOOKS': [
-    #     'general.schema.exclude.preprocessing_filter_spec'
-    # ],
-    'DISABLE_ERRORS_AND_WARNINGS': True,
-
-}
