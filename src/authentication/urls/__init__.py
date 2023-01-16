@@ -7,7 +7,7 @@ from .token import urlpatterns_token
 
 
 urlpatterns = [
-    path('', include(urlpatterns_token)),
+    path('token/', include(urlpatterns_token)),
     path('', include(filtered_djoser_urls())),
 
 ]
