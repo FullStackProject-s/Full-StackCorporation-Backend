@@ -16,7 +16,7 @@ class CustomUserTestCase(BaseTestCaseGeneric):
     """
 
     all_objects_url = reverse('all-users')
-    create_object_url = reverse('create-user')
+    create_object_url = reverse('customuser-list')
 
     retrieve_object_url = 'user'
     delete_object_url = 'delete-user'
