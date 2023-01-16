@@ -152,6 +152,16 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.getenv('EMAIL_NAME')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PWD')
+
 REST_FRAMEWORK = {
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -175,6 +185,13 @@ SIMPLE_JWT = {
 }
 COOKIE_MAX_AGE = 3600 * 24  # 1 day
 
+# DJOSER
+DOMAIN = os.getenv('FRONT_DOMAIN')
+SITE_NAME = os.getenv('SITE_NAME')
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+}
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Web corporation api',
     'DESCRIPTION': 'web corp api',
