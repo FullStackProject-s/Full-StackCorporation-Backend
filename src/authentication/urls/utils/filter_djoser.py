@@ -3,6 +3,8 @@ from djoser.urls import urlpatterns as urls
 
 def filtered_djoser_urls() -> list:
     resulted_djoser_list = (
+        'customuser-list',
+
         'customuser-activation',
         'customuser-resend-activation',
 

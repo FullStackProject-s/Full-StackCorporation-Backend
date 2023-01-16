@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv(os.path.join(Path(__file__).resolve().parent.parent, '.dev.env'))
 
+# import third party after load env
 from .additional_settings import *  # noqa
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
