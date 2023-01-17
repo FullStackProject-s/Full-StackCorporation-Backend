@@ -6,7 +6,7 @@ urlpatterns_token = [
     path(
         'tokens-obtain/',
         token.CookieTokenObtainPairView.as_view(),
-        name='token-obtain_pair'
+        name='token-obtain-pair'
     ),
     path(
         'token/refresh/',
@@ -16,7 +16,7 @@ urlpatterns_token = [
     path(
         'token/delete/',
         token.CookieTokenDeleteView.as_view(),
-        name='toke-delete',
+        name='token-delete',
     )
 
 ]
