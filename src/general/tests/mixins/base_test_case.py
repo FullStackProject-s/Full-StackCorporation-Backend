@@ -32,6 +32,11 @@ class RetrieveObjectsMixin:
         )
         response_json = response.json()
 
+        self.assertIn(
+            'pk',
+            response_json
+        )
+
         self.assertEqual(
             response_json,
             self.serializer_class(obj).data

@@ -3,13 +3,12 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from rest_framework import status
-from rest_framework.test import APITestCase
+from general.tests.generic import BaseTestCaseGeneric
 
 User = get_user_model()
 
 
-class CookieJWTTestCase(APITestCase):
-    base_login_user = None
+class CookieJWTTestCase(BaseTestCaseGeneric):
     token_delete_url = reverse('token-delete')
     token_refresh_url = reverse('token-refresh')
     token_obtain_tokens_url = reverse('token-obtain-pair')
@@ -28,7 +27,7 @@ class CookieJWTTestCase(APITestCase):
         cls.base_login_user.is_active = True
         cls.base_login_user.save()
 
-    def setUp(self) -> None:
+    def setUp(self):
         self.client.force_login(self.base_login_user)
 
     def test_cookie_tokens_obtain(self):
