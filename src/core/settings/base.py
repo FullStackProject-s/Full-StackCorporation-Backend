@@ -153,3 +153,4 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 COOKIE_MAX_AGE = 3600 * 24  # 1 day
+COOKIE_REFRESH_TOKEN_NAME = 'refresh_token'

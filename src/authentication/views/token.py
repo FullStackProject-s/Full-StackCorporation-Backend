@@ -1,6 +1,5 @@
 from django.conf import settings
-from rest_framework import status, serializers
-from rest_framework.exceptions import NotFound
+from rest_framework import status
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -16,7 +15,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get('refresh'):
             response.set_cookie(
-                'refresh_token',
+                settings.COOKIE_REFRESH_TOKEN_NAME,
                 response.data['refresh'],
                 max_age=settings.COOKIE_MAX_AGE,
                 httponly=True
@@ -31,7 +30,7 @@ class CookieTokenRefreshView(TokenRefreshView):
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get('refresh'):
             response.set_cookie(
-                'refresh_token',
+                settings.COOKIE_REFRESH_TOKEN_NAME,
                 response.data['refresh'],
                 max_age=settings.COOKIE_MAX_AGE,
                 httponly=True
@@ -45,7 +44,7 @@ class CookieTokenDeleteView(TokenRefreshView):
 
     def finalize_response(self, request, response, *args, **kwargs):
         response.delete_cookie(
-            'refresh_token',
+            settings.COOKIE_REFRESH_TOKEN_NAME,
         )
         if not request.COOKIES.get('refresh_token'):
             response.data['detail'] = 'Refresh token already delete'
