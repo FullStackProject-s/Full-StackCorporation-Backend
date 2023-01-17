@@ -41,9 +41,8 @@ services:
     container_name: celeryProduction
     build: .
     command: bash -c
-      "python -m celery -A core worker -l info"
+      "celery -A core purge -f && celery -A core worker -l info"
     depends_on:
-      - redis
       - web-django
     env_file:
       - ./src/core/.env
