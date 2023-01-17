@@ -47,7 +47,15 @@ class CustomUserTestCase(BaseTestCaseGeneric):
             "password": "123",
             'staff_role': staff_role.pk
         }
-        self._test_create_object(json)
+
+        response_json = self._test_create_object(json).json()
+        pk = response_json['pk']
+
+        # By default user not active
+        self.assertEqual(
+            User.objects.get(pk=pk).is_active,
+            False
+        )
 
     def test_delete_user(self):
         self._test_delete_object()
