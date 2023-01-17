@@ -1,33 +1,42 @@
 services:
   web-django:
-   container_name: BackendAPI
-   restart: always
-   build:
-     context: .
-     dockerfile: ./Dockerfile
-   command: bash -c
-     "python manage.py migrate && python manage.py test && python manage.py runserver 0.0.0.0:8000"
-   ports:
-     - 7999:8000
-   env_file:
-     - ./src/core/.env
-   depends_on:
-     - postgres
-     - redis
-
+    container_name: BackendAPI
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: bash -c
+      "python manage.py migrate && python manage.py test && gunicorn core.wsgi:application --bind 0.0.0.0:8000"
+    expose:
+      - 8000
+    env_file:
+      - ./src/core/.env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - static:/app-back/staticfiles
+      - media:/app-back/mediafiles
   postgres:
     container_name: postgresProduction
     image: postgres:latest
     restart: on-failure
     env_file:
       - ./src/core/.env
-
   redis:
     container_name: redisProduction
     image: redis:alpine
     restart: always
     command: redis-server
-
+  nginx:
+    build: ./nginx
+    ports:
+      - 6969:80
+    depends_on:
+      - web-django
+    volumes:
+      - static:/app-back/staticfiles
+      - media:/app-back/mediafiles
   celery:
     container_name: celeryProduction
     build: .
@@ -38,3 +47,7 @@ services:
       - web-django
     env_file:
       - ./src/core/.env
+
+volumes:
+  static:
+  media:
