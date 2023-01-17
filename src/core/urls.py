@@ -22,10 +22,17 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('api-swagger/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path(
+        'api-swagger/schema/',
+        SpectacularAPIView.as_view(),
+        name='schema'
+    ),
 
-    path('', SpectacularSwaggerView.as_view(),
-         name="swagger-ui"),
+    path(
+        '',
+        SpectacularSwaggerView.as_view(),
+        name="swagger-ui"
+    ),
 ]
 
 if settings.DEBUG:

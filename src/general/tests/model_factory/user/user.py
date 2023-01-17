@@ -8,7 +8,7 @@ def make_user(number: int) -> list[User] | User:
     users = baker.make(
         'user.CustomUser',
         _quantity=number,
-        is_active=True
+        is_active=True,
     )
     if number == 1:
         return users[0]
