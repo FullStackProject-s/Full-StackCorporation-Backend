@@ -1,9 +1,14 @@
 from django.conf import settings
+from rest_framework import status
+
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenObtainPairView
 )
-from authentication.serializers import CookieTokenRefreshSerializer
+from authentication.serializers import (
+    CookieTokenRefreshSerializer,
+    CookieTokenDeleteSerializer
+)
 
 
 class CookieTokenObtainPairView(TokenObtainPairView):
@@ -31,4 +36,16 @@ class CookieTokenRefreshView(TokenRefreshView):
                 httponly=True
             )
             del response.data['refresh']
+        return super().finalize_response(request, response, *args, **kwargs)
+
+
+class CookieTokenDeleteView(TokenRefreshView):
+    serializer_class = CookieTokenDeleteSerializer
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        response.delete_cookie(
+            'refresh_token',
+        )
+
+        response.status_code = status.HTTP_204_NO_CONTENT
         return super().finalize_response(request, response, *args, **kwargs)

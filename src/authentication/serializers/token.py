@@ -12,3 +12,11 @@ class CookieTokenRefreshSerializer(TokenRefreshSerializer):
         raise InvalidToken(
             'No valid token found in cookie \'refresh_token\''
         )
+
+
+class CookieTokenDeleteSerializer(TokenRefreshSerializer):
+    refresh = None
+    access = None
+
+    def validate(self, attrs):
+        return attrs

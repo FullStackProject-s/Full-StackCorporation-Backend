@@ -1,1 +1,1 @@
-from .token import CookieTokenRefreshSerializer
+from .token import CookieTokenRefreshSerializer, CookieTokenDeleteSerializer
