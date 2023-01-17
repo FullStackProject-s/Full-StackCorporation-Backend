@@ -38,6 +38,7 @@ class CustomUserTestCase(BaseTestCaseGeneric):
         self._test_retrieve_object()
 
     def test_user_create(self):
+        # Test user without request, because create endpoint have celery task
         staff_role = make_permission(1)
         json = {
             'username': "create_user",
@@ -47,7 +48,11 @@ class CustomUserTestCase(BaseTestCaseGeneric):
             "password": "123",
             'staff_role': staff_role.pk
         }
-        self._test_create_object(json)
+        serializer = CustomUserSerializer(data=json)
+        self.assertEqual(
+            serializer.is_valid(),
+            True
+        )
 
     def test_delete_user(self):
         self._test_delete_object()

@@ -15,7 +15,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get('refresh'):
             response.set_cookie(
-                'refresh_token',
+                settings.COOKIE_REFRESH_TOKEN_NAME,
                 response.data['refresh'],
                 max_age=settings.COOKIE_MAX_AGE,
                 httponly=True
@@ -30,7 +30,7 @@ class CookieTokenRefreshView(TokenRefreshView):
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get('refresh'):
             response.set_cookie(
-                'refresh_token',
+                settings.COOKIE_REFRESH_TOKEN_NAME,
                 response.data['refresh'],
                 max_age=settings.COOKIE_MAX_AGE,
                 httponly=True
@@ -44,8 +44,16 @@ class CookieTokenDeleteView(TokenRefreshView):
 
     def finalize_response(self, request, response, *args, **kwargs):
         response.delete_cookie(
-            'refresh_token',
+            settings.COOKIE_REFRESH_TOKEN_NAME,
         )
-
+        if not request.COOKIES.get('refresh_token'):
+            response.data['detail'] = 'Refresh token already delete'
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return super().finalize_response(
+                request,
+                response,
+                *args,
+                **kwargs
+            )
         response.status_code = status.HTTP_204_NO_CONTENT
         return super().finalize_response(request, response, *args, **kwargs)

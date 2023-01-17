@@ -23,6 +23,8 @@ class BaseTestCaseSetupGeneric(APITestCase):
     # default picker object number, obj_1
     default_object_number = 1
 
+    base_login_user = None
+
     @classmethod
     def setUpTestData(cls):
 

@@ -19,13 +19,24 @@ urlpatterns = [
     path('', include('message.urls')),
 
     path('auth/', include('authentication.urls')),
+
+    # ONLY FOR DEVELOPMENT
+    path('', include('general.urls')),
+
 ]
 
 urlpatterns += [
-    path('api-swagger/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path(
+        'api-swagger/schema/',
+        SpectacularAPIView.as_view(),
+        name='schema'
+    ),
 
-    path('', SpectacularSwaggerView.as_view(),
-         name="swagger-ui"),
+    path(
+        '',
+        SpectacularSwaggerView.as_view(),
+        name="swagger-ui"
+    ),
 ]
 
 if settings.DEBUG:
@@ -33,4 +44,3 @@ if settings.DEBUG:
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
     )
-    urlpatterns += [path('', include('general.urls'))]
