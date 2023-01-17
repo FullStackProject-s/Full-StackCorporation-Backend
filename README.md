@@ -6,7 +6,7 @@ The first thing to do is to clone the repository:
 
 ```shell
 https://github.com/FullStackProject-s/Full-StackCorporation-Backend.git
-cd ReactDjangoWebChat
+cd Full-StackCorporation-Backend
 ```
 
 After that you need run this project.
