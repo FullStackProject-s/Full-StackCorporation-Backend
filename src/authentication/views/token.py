@@ -1,5 +1,6 @@
 from django.conf import settings
-from rest_framework import status
+from rest_framework import status, serializers
+from rest_framework.exceptions import NotFound
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -46,6 +47,14 @@ class CookieTokenDeleteView(TokenRefreshView):
         response.delete_cookie(
             'refresh_token',
         )
-
+        if not request.COOKIES.get('refresh_token'):
+            response.data['detail'] = 'Refresh token already delete'
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return super().finalize_response(
+                request,
+                response,
+                *args,
+                **kwargs
+            )
         response.status_code = status.HTTP_204_NO_CONTENT
         return super().finalize_response(request, response, *args, **kwargs)
