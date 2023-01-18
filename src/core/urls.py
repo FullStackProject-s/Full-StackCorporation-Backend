@@ -26,7 +26,7 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
 
     # ONLY FOR DEVELOPMENT
-    path('', include('general.urls')),
+    path('dev/', include('general.urls')),
 
 ]
 
