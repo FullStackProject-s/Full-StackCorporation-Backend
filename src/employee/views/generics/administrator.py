@@ -1,5 +1,4 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework import generics
 
 from employee.models import Administrator
 from employee.serializers import (
@@ -7,8 +6,14 @@ from employee.serializers import (
     AdministratorShowSerializer
 )
 
+from employee.views.generics.base_employee import (
+    BaseConfigurationEmployeeViewGeneric
+)
+
 
 @extend_schema(responses=AdministratorShowSerializer)
-class BaseConfigurationAdministratorsViewGeneric(generics.GenericAPIView):
+class BaseConfigurationAdministratorsViewGeneric(
+    BaseConfigurationEmployeeViewGeneric
+):
     serializer_class = AdministratorSerializer
     queryset = Administrator.objects.all()
