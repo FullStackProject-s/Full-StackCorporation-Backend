@@ -6,8 +6,6 @@ from message.models import (
     CompletedTasks
 )
 
-from user.serializers import CustomUserShowSerializer
-
 
 class BaseMessageSerializer(serializers.ModelSerializer):
     class Meta:

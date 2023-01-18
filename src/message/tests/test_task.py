@@ -57,6 +57,10 @@ class TaskTestCase(BaseTestCaseGeneric):
             response_json['text'],
             Task.objects.get(pk=pk).text
         )
+        self.assertEqual(
+            response_json['completed'],
+            False
+        )
 
     def test_delete_task(self):
         self._test_delete_object()
