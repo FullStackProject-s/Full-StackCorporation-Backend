@@ -1,1 +1,4 @@
-from .base_test import BaseTestCaseGeneric
+from .base_test import (
+    BaseTestCaseGeneric,
+    BaseTestCasePermissionsGeneric
+)
