@@ -12,7 +12,7 @@ from general.tests.model_factory import (
 from user.models.consts import StaffRole
 
 
-class ProjectManagerTestCase(BaseTestCaseGeneric):
+class BaseProjectManagerTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.ProjectManager`.
     """
@@ -31,6 +31,8 @@ class ProjectManagerTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class ProjectManagerTestCase(BaseProjectManagerTestCase):
     def test_get_all_project_managers(self):
         self._test_get_all_objects()
 

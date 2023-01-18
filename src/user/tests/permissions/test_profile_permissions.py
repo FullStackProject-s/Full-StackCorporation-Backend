@@ -9,20 +9,20 @@ class ProfilePermissionsTestCase(
     BaseTestCasePermissionsGeneric
 ):
     """
-    Test Cases for IsOwnerOrReadOnlyCustomUser permission.
+    Test Cases for IsOwnerOrReadOnlyProfile permission.
     """
 
-    def test_get_all_users_perms(self):
+    def test_get_all_profiles_perms(self):
         self._test_get_all_objects()
 
-    def test_user_retrieve_perms(self):
+    def test_profile_retrieve_perms(self):
         self._test_retrieve_object()
 
-    def test_delete_user_perms(self):
+    def test_delete_profile_perms(self):
         self._test_delete_object_perms()
 
-    def test_put_user_perms(self):
+    def test_put_profile_perms(self):
         self._test_put_object_perms()
 
-    def test_patch_user_perms(self):
+    def test_patch_profile_perms(self):
         self._test_put_object_perms()

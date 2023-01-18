@@ -12,7 +12,7 @@ from general.tests.model_factory.employee.administrator import (
 from user.models.consts import StaffRole
 
 
-class AdministratorTestCase(BaseTestCaseGeneric):
+class BaseAdministratorTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Administrator`.
     """
@@ -31,6 +31,8 @@ class AdministratorTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class AdministratorTestCase(BaseAdministratorTestCase):
     def test_get_all_admins(self):
         self._test_get_all_objects()
 
