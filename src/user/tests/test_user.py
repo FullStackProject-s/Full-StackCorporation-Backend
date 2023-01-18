@@ -10,13 +10,12 @@ from general.tests.model_factory import make_permission
 User = get_user_model()
 
 
-class CustomUserTestCase(BaseTestCaseGeneric):
+class BaseCustomUserTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`user.CustomUser`.
     """
 
     all_objects_url = reverse('all-users')
-    create_object_url = reverse('customuser-list')
 
     retrieve_object_url = 'user'
     delete_object_url = 'delete-user'
@@ -30,6 +29,9 @@ class CustomUserTestCase(BaseTestCaseGeneric):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
+
+
+class CustomUserTestCases(BaseCustomUserTestCase):
 
     def test_get_all_users(self):
         self._test_get_all_objects()

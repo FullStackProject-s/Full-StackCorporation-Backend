@@ -5,3 +5,7 @@ from .base_test_case import (
     CreateObjectsMixin,
     UpdateObjectsMixin
 )
+from .base_test_case_permissions import (
+    DeleteObjectsPermsMixin,
+    UpdateObjectsPermsMixin
+)

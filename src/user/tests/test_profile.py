@@ -8,7 +8,7 @@ from user.models import Profile
 from user.serializers import ProfileSerializer
 
 
-class ProfileTestCase(BaseTestCaseGeneric):
+class BaseProfileTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`user.Profile`.
     """
@@ -27,6 +27,8 @@ class ProfileTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class ProfileTestCase(BaseProfileTestCase):
     def test_get_all_profiles(self):
         self._test_get_all_objects()
 

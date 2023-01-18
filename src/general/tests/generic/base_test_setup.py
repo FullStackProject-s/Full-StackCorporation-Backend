@@ -20,7 +20,7 @@ class BaseTestCaseSetupGeneric(APITestCase):
     serializer_class = None
     # tested model
     model_class = None
-    # default picker object number, obj_1
+    # default picked object number, obj_1
     default_object_number = 1
 
     base_login_user = None
@@ -45,6 +45,8 @@ class BaseTestCaseSetupGeneric(APITestCase):
         else:
             cls.base_login_user = cls.obj_1
         cls.refresh = RefreshToken.for_user(cls.base_login_user)
+        cls.base_login_user.is_superuser = True
+        cls.base_login_user.save()
 
     def setUp(self):
         self.client.force_login(self.base_login_user)
@@ -52,3 +54,14 @@ class BaseTestCaseSetupGeneric(APITestCase):
             HTTP_AUTHORIZATION=f'Bearer {self.refresh.access_token}'
         )
         self.default_object_number = 1
+
+
+class BaseTestCaseSetupPermissionsGeneric(BaseTestCaseSetupGeneric):
+    # default picked object to change -- obj_2
+    default_changed_object_number = 2
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.base_login_user.is_superuser = False
+        cls.base_login_user.save()
