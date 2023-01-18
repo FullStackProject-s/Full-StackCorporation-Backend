@@ -1,3 +1,4 @@
+from general.models.utils import set_image_on_imagefield
 from organization.serializers.services import (
     update_projects,
     create_projects
@@ -32,6 +33,12 @@ class OrganizationSerializer(BaseOrganizationSerializer):
         instance = super().create(validated_data)
         instance.owner = self.context['request'].user
         instance.save()
+
+        set_image_on_imagefield(
+            instance.organization_name,
+            imagefield=instance.organization_avatar,
+        )
+
         create_projects(instance)
         return instance
 
