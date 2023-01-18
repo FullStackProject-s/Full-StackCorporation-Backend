@@ -1,5 +1,8 @@
 from django.contrib.auth import get_user_model
 
+from general.models.utils import set_image_on_imagefield
+from user.models import Profile
+
 from user.serializers.permission import PermissionSerializer
 from user.serializers.generic import BaseCustomUserSerializer
 
@@ -15,7 +18,15 @@ class CustomUserShowSerializer(BaseCustomUserSerializer):
 
 class CustomUserSerializer(BaseCustomUserSerializer):
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        instance = User.objects.create_user(**validated_data)
+
+        profile_instance = Profile.objects.create(user=instance)
+        set_image_on_imagefield(
+            profile_instance.user.username,
+            profile_instance.user.email,
+            imagefield=profile_instance.profile_avatar,
+        )
+        return instance
 
     def to_representation(self, data):
         return CustomUserShowSerializer(data).data

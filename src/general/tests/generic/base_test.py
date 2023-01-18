@@ -10,8 +10,7 @@ from .base_crud_setup import (
 )
 
 
-# By default, all signals with special decorator disable when test run
-@override_settings(SUSPEND_SIGNALS=True)
+@override_settings(TESTS_LAUNCHED=True)
 class BaseTestCaseGeneric(
     BaseTestCaseSetupGeneric,
     BaseCRUDTestCaseGeneric
@@ -19,7 +18,7 @@ class BaseTestCaseGeneric(
     pass
 
 
-@override_settings(SUSPEND_SIGNALS=True)
+@override_settings(TESTS_LAUNCHED=True)
 class BaseTestCasePermissionsGeneric(
     BaseTestCaseSetupPermissionsGeneric,
     BaseNotSaveCRUDTestCaseGeneric
