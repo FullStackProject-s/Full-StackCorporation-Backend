@@ -4,8 +4,8 @@ from employee.models import Administrator
 from employee.serializers import AdministratorSerializer
 
 from general.tests.generic import BaseTestCaseGeneric
-from general.tests.model_factory import make_profile
-from general.tests.model_factory.employee.administrator import (
+from general.tests.model_factory import (
+    make_profile,
     make_administrator
 )
 
