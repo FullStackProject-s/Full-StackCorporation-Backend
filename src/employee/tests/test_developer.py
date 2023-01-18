@@ -13,7 +13,7 @@ from general.tests.model_factory import (
 from user.models.consts import StaffRole
 
 
-class DeveloperTestCase(BaseTestCaseGeneric):
+class BaseDeveloperTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Developers`.
     """
@@ -32,6 +32,8 @@ class DeveloperTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class DeveloperTestCase(BaseDeveloperTestCase):
     def test_get_all_developers(self):
         self._test_get_all_objects()
 

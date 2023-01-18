@@ -4,15 +4,15 @@ from employee.models import Administrator
 from employee.serializers import AdministratorSerializer
 
 from general.tests.generic import BaseTestCaseGeneric
-from general.tests.model_factory import make_profile
-from general.tests.model_factory.employee.administrator import (
+from general.tests.model_factory import (
+    make_profile,
     make_administrator
 )
 
 from user.models.consts import StaffRole
 
 
-class AdministratorTestCase(BaseTestCaseGeneric):
+class BaseAdministratorTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`employee.Administrator`.
     """
@@ -31,6 +31,8 @@ class AdministratorTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class AdministratorTestCase(BaseAdministratorTestCase):
     def test_get_all_admins(self):
         self._test_get_all_objects()
 

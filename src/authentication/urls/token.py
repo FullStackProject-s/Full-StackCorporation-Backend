@@ -9,12 +9,12 @@ urlpatterns_token = [
         name='token-obtain-pair'
     ),
     path(
-        'token/refresh/',
+        'refresh/',
         token.CookieTokenRefreshView.as_view(),
         name='token-refresh'
     ),
     path(
-        'token/delete/',
+        'delete/',
         token.CookieTokenDeleteView.as_view(),
         name='token-delete',
     )

@@ -3,7 +3,7 @@ from message.models.generic import MessageBase
 
 
 class Task(MessageBase):
-    pass
+    completed = models.BooleanField(default=False)
 
 
 class CompletedTasks(MessageBase):

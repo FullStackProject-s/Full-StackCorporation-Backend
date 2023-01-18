@@ -45,13 +45,14 @@ class OrganizationTestCase(BaseTestCaseGeneric):
         )
 
     def test_organization_create(self):
-        user = make_user(1)
-
         json = {
             "organization_name": "create_org",
-            "user": user.pk
         }
-        self._test_create_object(json)
+        response_json = self._test_create_object(json).json()
+        self.assertEqual(
+            response_json['owner']['pk'],
+            self.base_login_user.pk
+        )
 
     def test_delete_organization(self):
         self._test_delete_object()
