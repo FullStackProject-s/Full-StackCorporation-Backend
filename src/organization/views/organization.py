@@ -10,20 +10,23 @@ from organization.serializers import (
     OrganizationShowSerializer
 )
 from .generics import BaseConfigurationOrganizationViewGeneric
+from organization.models import Organization
 
 
 class OrganizationListAPIVIew(
     BaseConfigurationOrganizationViewGeneric,
     generics.ListAPIView
 ):
-    pass
+    queryset = Organization.objects. \
+        prefetch_related('members')
 
 
 class OrganizationRetrieveAPIView(
     BaseConfigurationOrganizationViewGeneric,
     generics.RetrieveAPIView
 ):
-    pass
+    queryset = Organization.objects. \
+        prefetch_related('members')
 
 
 class OrganizationCreateAPIView(

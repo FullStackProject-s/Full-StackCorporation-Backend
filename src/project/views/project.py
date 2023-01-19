@@ -1,20 +1,21 @@
 from rest_framework import generics
 
 from .generics import BaseConfigurationProjectsViewGeneric
+from project.models import Project
 
 
 class ProjectsListAPIVIew(
     BaseConfigurationProjectsViewGeneric,
     generics.ListAPIView
 ):
-    pass
+    queryset = Project.objects.prefetch_related('teams')
 
 
 class ProjectsRetrieveAPIView(
     BaseConfigurationProjectsViewGeneric,
     generics.RetrieveAPIView
 ):
-    pass
+    queryset = Project.objects.prefetch_related('teams')
 
 
 class ProjectCreateAPIView(
