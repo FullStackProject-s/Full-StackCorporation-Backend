@@ -1,4 +1,5 @@
 from django.conf import settings
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 
 from rest_framework_simplejwt.views import (
@@ -9,8 +10,10 @@ from authentication.serializers import (
     CookieTokenRefreshSerializer,
     CookieTokenDeleteSerializer
 )
+from authentication.serializers import TokenObtainSerializerSchema
 
 
+@extend_schema(responses=TokenObtainSerializerSchema)
 class CookieTokenObtainPairView(TokenObtainPairView):
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get('refresh'):

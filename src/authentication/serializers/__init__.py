@@ -1,1 +1,5 @@
-from .token import CookieTokenRefreshSerializer, CookieTokenDeleteSerializer
+from .token import (
+    CookieTokenRefreshSerializer,
+    CookieTokenDeleteSerializer,
+    TokenObtainSerializerSchema
+)
