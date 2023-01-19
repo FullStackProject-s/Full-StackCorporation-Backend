@@ -5,7 +5,7 @@ from project.serializer.services import (
 )
 
 
-def _update_personal(team, validated_data):
+def update_personal(team, validated_data):
     if team_lead := validated_data.get('team_lead', None):
         update_employee(
             team,
@@ -28,7 +28,7 @@ def _update_personal(team, validated_data):
     return team
 
 
-def _create_personal(instance):
+def create_personal(instance):
     if team_lead_ := instance.team_lead:
         Developer.objects.get(pk=team_lead_.pk).set_team(instance)
     if project_manger_ := instance.project_manager:

@@ -27,7 +27,8 @@ class DeveloperShowSerializer(BaseDeveloperSerializer):
             return [
                 f'{specialty.specialty} - ' \
                 f'{specialty.organization.organization_name}'
-                for specialty in obj.specialties.all()
+                for specialty in
+                obj.specialties.prefetch_related('organization')
             ]
         return None
 

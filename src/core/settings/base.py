@@ -28,7 +28,10 @@ DEBUG = bool(int(os.getenv('DEBUG')))
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split()
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:6969"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:6969",
+    f"http://{os.getenv('CORS_ALLOWED')}",
+]
 
 # Application definition
 DJANGO_APPS = [

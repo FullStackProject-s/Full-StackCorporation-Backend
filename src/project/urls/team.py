@@ -3,7 +3,7 @@ from project.views import team
 
 urlpatterns_team = [
     path(
-        'all-team/',
+        'all-teams/',
         team.AllTeamListAPIView.as_view(),
         name='all-teams'
     ),

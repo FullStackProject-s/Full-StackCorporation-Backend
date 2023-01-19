@@ -1,10 +1,15 @@
+import random
+
 from django.contrib.auth import get_user_model
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 
+from employee.models import ProjectManager, Developer
 from general.models.utils import set_image_on_imagefield
 from user.models import Profile
+from project.models import Team, Project
 from general.tests.model_factory import *
 
 """
@@ -33,17 +38,18 @@ class CreateFillDataView(APIView):
 
     def post(self, request, *args, **kwargs):
 
-        developers = make_developer(40)
+        spec = make_specialty(40)
+        developers = Developer.objects.all()
         admins = make_administrator(10)
         project_managers = make_project_manager(10)
 
         projects = make_project(50)
+        owners = make_user(10)
         organization_ = make_organization(10)
-
         teams = make_team(10)
 
         completed_tasks = make_completed_tasks(10)
-        reassignments = make_reassignment(10)
+        # reassignments = make_reassignment(10)
         task = make_task(10)
 
         for profile in Profile.objects.all():
@@ -52,7 +58,8 @@ class CreateFillDataView(APIView):
                 profile.user.email,
                 imagefield=profile.profile_avatar,
             )
-        for index, org in enumerate(organization_):
+        for index, (org, owner) in enumerate(zip(organization_, owners)):
+            org.owner = owner
             for proj in projects:
                 org.projects.add(proj)
             for dev in developers:
@@ -67,17 +74,24 @@ class CreateFillDataView(APIView):
             )
             org.save()
 
-        for project in projects:
-            for team in teams:
+        for project in Project.objects.all():
+            for team in Team.objects.all():
                 project.teams.add(team)
+            project.organization = organization_[random.randint(0, 9)]
             project.save()
 
-        for index, team in enumerate(teams):
-            team.team_lead = developers[index]
-            for dev in developers:
-                team.developers.add(dev)
-            for proj in project_managers:
-                team.project_manager = proj
-            team.save()
-
+        for index, (team_, project_manager_) in enumerate(
+                zip(teams, ProjectManager.objects.all())
+        ):
+            team_ = Team.objects.get(pk=team_.pk)
+            team_.team_lead = Developer.objects.get(pk=developers[index].pk)
+            team_.save()
+            for dev in Developer.objects.all():
+                team_.developers.add(dev)
+                team_.save()
+            team_.project_manager = project_manager_
+            team_.save()
+        for dev in developers:
+            dev.specialties.add(*spec)
+            dev.save()
         return Response()
