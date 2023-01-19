@@ -38,14 +38,14 @@ class CreateFillDataView(APIView):
 
     def post(self, request, *args, **kwargs):
 
-        developers = make_developer(40)
+        spec = make_specialty(40)
+        developers = Developer.objects.all()
         admins = make_administrator(10)
         project_managers = make_project_manager(10)
 
         projects = make_project(50)
         owners = make_user(10)
         organization_ = make_organization(10)
-
         teams = make_team(10)
 
         completed_tasks = make_completed_tasks(10)
@@ -91,5 +91,7 @@ class CreateFillDataView(APIView):
                 team_.save()
             team_.project_manager = project_manager_
             team_.save()
-
+        for dev in developers:
+            dev.specialties.add(*spec)
+            dev.save()
         return Response()
