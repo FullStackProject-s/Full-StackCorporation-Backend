@@ -25,4 +25,4 @@ class ProfilePermissionsTestCase(
         self._test_put_object_perms()
 
     def test_patch_profile_perms(self):
-        self._test_put_object_perms()
+        self._test_patch_object_perms()
