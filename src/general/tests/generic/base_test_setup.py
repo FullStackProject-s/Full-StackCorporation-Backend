@@ -1,10 +1,14 @@
 from typing import Callable
 
+from django.contrib.auth import get_user_model
+
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework.test import APITestCase
 
 from general.tests.model_factory import make_user
+
+User = get_user_model()
 
 
 class BaseTestCaseSetupGeneric(APITestCase):
@@ -65,3 +69,10 @@ class BaseTestCaseSetupPermissionsGeneric(BaseTestCaseSetupGeneric):
         super().setUpTestData()
         cls.base_login_user.is_superuser = False
         cls.base_login_user.save()
+
+    def _set_credentials_for_user(self, user: User):
+        refresh = RefreshToken.for_user(user)
+
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}'
+        )

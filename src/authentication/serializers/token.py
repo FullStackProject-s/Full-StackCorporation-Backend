@@ -1,3 +1,4 @@
+from rest_framework import serializers
 from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
@@ -20,3 +21,7 @@ class CookieTokenDeleteSerializer(TokenRefreshSerializer):
 
     def validate(self, attrs):
         return attrs
+
+
+class TokenObtainSerializerSchema(serializers.Serializer):
+    access = serializers.CharField()

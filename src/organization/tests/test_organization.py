@@ -13,7 +13,7 @@ from general.tests.model_factory import (
 from project.models import Project
 
 
-class OrganizationTestCase(BaseTestCaseGeneric):
+class BaseOrganizationTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`organization.Organization`.
     """
@@ -28,6 +28,8 @@ class OrganizationTestCase(BaseTestCaseGeneric):
     model_class = Organization
     serializer_class = OrganizationSerializer
 
+
+class OrganizationTestCase(BaseOrganizationTestCase):
     @classmethod
     def setUpTestData(cls):
         super().setUpTestData()
