@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from .generics import BaseConfigurationAdministratorsViewGeneric
+from .mixins import MeAPIViewMixin
 
 
 class AllAdministratorsListAPIView(
@@ -8,6 +9,15 @@ class AllAdministratorsListAPIView(
     generics.ListAPIView
 ):
     pass
+
+
+class AdministratorMeAPIView(
+    BaseConfigurationAdministratorsViewGeneric,
+    generics.RetrieveAPIView,
+    MeAPIViewMixin
+):
+    def get_object(self):
+        return self._get_me_object_or_404()
 
 
 class AdministratorRetrieveAPIView(
