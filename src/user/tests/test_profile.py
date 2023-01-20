@@ -1,4 +1,6 @@
 from django.urls import reverse
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_profile, make_user
@@ -14,6 +16,7 @@ class BaseProfileTestCase(BaseTestCaseGeneric):
     """
     all_objects_url = reverse('all-profiles')
     create_object_url = reverse('create-profile')
+    obj_self_url = reverse('me-profile')
 
     retrieve_object_url = 'profile'
     delete_object_url = 'delete-profile'
@@ -71,4 +74,25 @@ class ProfileTestCase(BaseProfileTestCase):
         self.assertEqual(
             response_json['about_user'],
             json['about_user'],
+        )
+
+    def test_get_self_user(self):
+        profile = make_profile(1)
+
+        user = profile.user
+        user.is_active = True
+        user.save()
+
+        self.client.force_login(user)
+        self._set_credentials_for_user(user)
+
+        response = self.client.get(self.obj_self_url)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response.json(),
+            self.serializer_class(profile).data
         )
