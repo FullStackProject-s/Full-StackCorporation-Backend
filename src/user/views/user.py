@@ -17,6 +17,15 @@ class UserRetrieveAPIView(
     pass
 
 
+class UserMeAPIView(
+    BaseConfigurationUsersViewGeneric,
+    generics.RetrieveAPIView
+):
+    def get(self, request, *args, **kwargs):
+        self.get_object = lambda: request.user  # noqa
+        return self.retrieve(request, *args, **kwargs)
+
+
 class UserCreateAPIView(
     BaseConfigurationUsersViewGeneric,
     generics.CreateAPIView

@@ -13,6 +13,11 @@ urlpatterns_user = [
         name='user'
     ),
     path(
+        'me/',
+        user.UserMeAPIView.as_view(),
+        name='me'
+    ),
+    path(
         'delete-user/<int:pk>/',
         user.UserDestroyAPIView.as_view(),
         name='delete-user'
@@ -22,4 +27,5 @@ urlpatterns_user = [
         user.UserUpdateAPIView.as_view(),
         name='update-user',
     ),
+
 ]
