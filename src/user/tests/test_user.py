@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from rest_framework import status
 
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_user
@@ -16,11 +17,11 @@ class BaseCustomUserTestCase(BaseTestCaseGeneric):
     """
 
     all_objects_url = reverse('all-users')
+    obj_self_url = reverse('me-user')
 
     retrieve_object_url = 'user'
     delete_object_url = 'delete-user'
     update_object_url = 'update-user'
-
     make_method = make_user
 
     serializer_class = CustomUserSerializer
@@ -77,3 +78,15 @@ class CustomUserTestCases(BaseCustomUserTestCase):
             'first_name': f'first_{name}',
         }
         self._test_patch_object(json)
+
+    def test_get_self_user(self):
+        response = self.client.get(self.obj_self_url)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response.json(),
+            self.serializer_class(self.base_login_user).data
+        )
