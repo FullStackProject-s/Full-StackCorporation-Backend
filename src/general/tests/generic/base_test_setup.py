@@ -1,6 +1,7 @@
 from typing import Callable
 
 from django.contrib.auth import get_user_model
+from django.test import override_settings
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -11,6 +12,7 @@ from general.tests.model_factory import make_user
 User = get_user_model()
 
 
+@override_settings(TESTS_LAUNCHED=True)
 class BaseTestCaseSetupGeneric(APITestCase):
     """
     Base setup testCase.    
@@ -59,6 +61,13 @@ class BaseTestCaseSetupGeneric(APITestCase):
         )
         self.default_object_number = 1
 
+    def _set_credentials_for_user(self, user: User):
+        refresh = RefreshToken.for_user(user)
+
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}'
+        )
+
 
 class BaseTestCaseSetupPermissionsGeneric(BaseTestCaseSetupGeneric):
     # default picked object to change -- obj_2
@@ -70,9 +79,6 @@ class BaseTestCaseSetupPermissionsGeneric(BaseTestCaseSetupGeneric):
         cls.base_login_user.is_superuser = False
         cls.base_login_user.save()
 
-    def _set_credentials_for_user(self, user: User):
-        refresh = RefreshToken.for_user(user)
 
-        self.client.credentials(
-            HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}'
-        )
+class BaseEmployeeTestCaseSetupGeneric(BaseTestCaseSetupGeneric):
+    obj_self_url = None
