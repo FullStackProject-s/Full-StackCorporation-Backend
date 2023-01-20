@@ -4,7 +4,7 @@ from employee.models import Developer
 from employee.serializers import DeveloperSerializer
 from employee.models.consts import SkillLevel
 
-from general.tests.generic import BaseTestCaseGeneric
+from general.tests.generic import BaseEmployeeTestCaseGeneric
 from general.tests.model_factory import (
     make_developer,
     make_profile
@@ -13,12 +13,13 @@ from general.tests.model_factory import (
 from user.models.consts import StaffRole
 
 
-class BaseDeveloperTestCase(BaseTestCaseGeneric):
+class BaseDeveloperTestCase(BaseEmployeeTestCaseGeneric):
     """
     Test Cases for :model:`employee.Developers`.
     """
     all_objects_url = reverse('all-developers')
     create_object_url = reverse('create-developer')
+    obj_self_url = reverse('me-developer')
 
     retrieve_object_url = 'developer'
     delete_object_url = 'delete-developer'
@@ -96,3 +97,6 @@ class DeveloperTestCase(BaseDeveloperTestCase):
             response_json['profile'],
             dev.profile.pk
         )
+
+    def test_me_developer(self):
+        self._test_me(make_developer)

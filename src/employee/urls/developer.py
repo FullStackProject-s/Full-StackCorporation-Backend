@@ -13,6 +13,11 @@ urlpatterns_developers = [
         name='developer'
     ),
     path(
+        'me/',
+        developer.DeveloperMeAPIView.as_view(),
+        name='me-developer'
+    ),
+    path(
         'create-developer/',
         developer.DeveloperCreateAPIView.as_view(),
         name='create-developer'
