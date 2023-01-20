@@ -3,7 +3,7 @@ from django.urls import reverse
 from employee.models import ProjectManager
 from employee.serializers import ProjectManagerSerializer
 
-from general.tests.generic import BaseTestCaseGeneric
+from general.tests.generic import BaseEmployeeTestCaseGeneric
 from general.tests.model_factory import (
     make_project_manager,
     make_profile
@@ -12,12 +12,13 @@ from general.tests.model_factory import (
 from user.models.consts import StaffRole
 
 
-class BaseProjectManagerTestCase(BaseTestCaseGeneric):
+class BaseProjectManagerTestCase(BaseEmployeeTestCaseGeneric):
     """
     Test Cases for :model:`employee.ProjectManager`.
     """
     all_objects_url = reverse('all-managers')
     create_object_url = reverse('create-manager')
+    obj_self_url = reverse('me-project-manager')
 
     retrieve_object_url = 'project-manager'
     delete_object_url = 'delete-manager'
@@ -78,3 +79,6 @@ class ProjectManagerTestCase(BaseProjectManagerTestCase):
             'profile': profile.pk
         }
         self._test_patch_object(json)
+
+    def test_me_project_manager(self):
+        self._test_me(make_project_manager)
