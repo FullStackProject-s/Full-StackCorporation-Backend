@@ -1,19 +1,20 @@
 from django.urls import reverse
 
 from employee.models import Developer, ProjectManager
+
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import (
     make_team,
     make_developer,
-    make_project_manager
+    make_project_manager, make_project
 
 )
 
-from project.models import Team
+from project.models import Team, Project
 from project.serializer import TeamSerializer
 
 
-class TeamTestCase(BaseTestCaseGeneric):
+class BaseTeamTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Team`.
     """
@@ -32,6 +33,8 @@ class TeamTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class TeamTestCase(BaseTeamTestCase):
     def test_get_all_teams(self):
         self._test_get_all_objects()
 
@@ -51,9 +54,12 @@ class TeamTestCase(BaseTestCaseGeneric):
     def test_team_create(self):
         proj_manager = make_project_manager(1)
         team_lead, dev_1, dev_2 = make_developer(3)
+        proj = make_project(1)
+
         json = {
             'team_name': "team_create_name",
             'team_lead': team_lead.pk,
+            'project': proj.pk,
             'project_manager': proj_manager.pk,
             'developers': [
                 dev_1.pk,
@@ -68,6 +74,11 @@ class TeamTestCase(BaseTestCaseGeneric):
         response_json = response.json()
 
         team = Team.objects.get(pk=response_json['pk'])
+
+        self.assertIn(
+            team,
+            Project.objects.get(pk=proj.pk).teams.all()
+        )
         self.assertEqual(
             Developer.objects.get(pk=team_lead.pk).team.pk,
             team.pk
@@ -88,7 +99,9 @@ class TeamTestCase(BaseTestCaseGeneric):
         self._test_delete_object()
 
     def test_team_name_put_team(self):
+        proj = make_project(1)
         json = {
+            'project': proj.pk,
             'team_name': 'put_team_name'
         }
         response_json = self._test_put_object(json).json()
