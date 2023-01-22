@@ -27,6 +27,10 @@ class Team(BaseTimeStampModel):
         related_name='developers',
         blank=True,
     )
+    project = models.ForeignKey(
+        'project.Project',
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return f'Team name: {self.team_name} - ' \

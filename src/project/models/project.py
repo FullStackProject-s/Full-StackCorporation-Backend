@@ -17,7 +17,6 @@ class Project(BaseTimeStampModel):
     organization = models.ForeignKey(
         'organization.Organization',
         on_delete=models.CASCADE,
-        null=True
     )
     deadline = models.DateField(blank=False)
 
