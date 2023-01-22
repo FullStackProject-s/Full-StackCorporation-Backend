@@ -1,4 +1,5 @@
 from django.http import Http404
+
 from rest_framework import (
     generics,
     status
@@ -6,6 +7,7 @@ from rest_framework import (
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 
+from general.schema import image_upload_schema
 from user.serializers import (
     ProfileImageUploadSerializer,
     ProfileShowSerializer
@@ -62,6 +64,7 @@ class ProfileImageUploadAPIView(BaseConfigurationProfilesViewGeneric):
     serializer_class = ProfileImageUploadSerializer
     parser_classes = [MultiPartParser]
 
+    @image_upload_schema(ProfileShowSerializer, 'Accept image')
     def post(self, request, *args, **kwargs):
         profile = self.get_object()
         serializer = self.get_serializer(data=request.data)
