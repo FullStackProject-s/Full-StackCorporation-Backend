@@ -30,7 +30,7 @@ urlpatterns_profile = [
     path(
         'upload-image/<int:pk>',
         profile.ProfileImageUploadAPIView.as_view(),
-        name='upload-image',
+        name='upload-profile-image',
     ),
     path(
         'me/',
