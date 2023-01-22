@@ -1,9 +1,12 @@
+from rest_framework import serializers
+
 from general.models.utils import set_image_on_imagefield
+from organization.models import Organization
 from organization.serializers.services import (
     update_projects,
-    create_projects
 )
 from organization.serializers.generic import BaseOrganizationSerializer
+from organization.serializers.mixins import UniqueProjectForOrganizationMixin
 
 from user.serializers.user import CustomUserShowSerializer
 
@@ -13,7 +16,10 @@ class OrganizationShowSerializer(BaseOrganizationSerializer):
     members = CustomUserShowSerializer(many=True, read_only=True)
 
 
-class OrganizationSerializer(BaseOrganizationSerializer):
+class OrganizationSerializer(
+    BaseOrganizationSerializer,
+    UniqueProjectForOrganizationMixin
+):
     class Meta(BaseOrganizationSerializer.Meta):
         fields = (
             'pk',
@@ -22,6 +28,9 @@ class OrganizationSerializer(BaseOrganizationSerializer):
             'projects',
             'members',
         )
+
+    def validate_projects(self, projects):
+        return self._validate_projects_field(projects)
 
     def to_representation(self, instance):
         return OrganizationShowSerializer(instance).data
@@ -36,7 +45,6 @@ class OrganizationSerializer(BaseOrganizationSerializer):
             imagefield=instance.organization_avatar,
         )
 
-        create_projects(instance)
         return instance
 
     def update(self, instance, validated_data):
