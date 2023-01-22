@@ -1,11 +1,12 @@
 from .base_test_setup import (
     BaseTestCaseSetupGeneric,
-    BaseTestCaseSetupPermissionsGeneric, BaseEmployeeTestCaseSetupGeneric
+    BaseTestCaseSetupPermissionsGeneric
 )
 from .base_crud_setup import (
     BaseCRUDTestCaseGeneric,
     BaseNotSaveCRUDTestCaseGeneric,
-    BaseEmployeeCRUDTestCaseGeneric
+    BaseEmployeeCRUDTestCaseGeneric,
+    BaseUploadFileURLTestCaseGeneric
 )
 
 
@@ -24,7 +25,14 @@ class BaseTestCasePermissionsGeneric(
 
 
 class BaseEmployeeTestCaseGeneric(
-    BaseEmployeeTestCaseSetupGeneric,
+    BaseTestCaseSetupGeneric,
     BaseEmployeeCRUDTestCaseGeneric
+):
+    pass
+
+
+class BaseUploadFileTestCaseGeneric(
+    BaseTestCaseSetupGeneric,
+    BaseUploadFileURLTestCaseGeneric,
 ):
     pass

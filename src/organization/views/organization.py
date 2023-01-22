@@ -5,12 +5,15 @@ from rest_framework import (
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 
+from general.schema import image_upload_schema
+
 from organization.serializers import (
     OrganizationImageUploadSerializer,
     OrganizationShowSerializer
 )
-from .generics import BaseConfigurationOrganizationViewGeneric
 from organization.models import Organization
+
+from .generics import BaseConfigurationOrganizationViewGeneric
 
 
 class OrganizationListAPIVIew(
@@ -54,6 +57,7 @@ class OrganizationUploadImageAPIView(BaseConfigurationOrganizationViewGeneric):
     serializer_class = OrganizationImageUploadSerializer
     parser_classes = [MultiPartParser]
 
+    @image_upload_schema(OrganizationShowSerializer, 'Accept image')
     def post(self, request, *args, **kwargs):
         org = self.get_object()
         serializer = self.get_serializer(data=request.data)

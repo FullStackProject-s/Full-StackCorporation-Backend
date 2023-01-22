@@ -10,6 +10,7 @@ from djoser.views import UserViewSet
 from authentication.tasks import (
     send_reset_password_email,
     send_activation_user_email,
+    send_activation_confirmation_user_email,
     send_reset_password_confirmation_email
 )
 
@@ -27,6 +28,28 @@ class CustomUserViewSet(UserViewSet):
             [get_user_email(user)]
 
         )
+
+    @action(["post"], detail=False)
+    def activation(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.user
+        user.is_active = True
+        user.save()
+
+        send_activation_confirmation_user_email.delay(
+            {
+                'user_id': user.id,
+            },
+            [get_user_email(user)]
+        )
+
+        signals.user_activated.send(
+            sender=self.__class__, user=user, request=self.request
+        )
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(["post"], detail=False)
     def reset_password(self, request, *args, **kwargs):

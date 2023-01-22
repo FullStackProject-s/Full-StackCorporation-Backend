@@ -1,12 +1,14 @@
 from django.urls import reverse
-from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
 
-from general.tests.generic import BaseTestCaseGeneric
+from rest_framework import status
+
+from general.tests.generic import (
+    BaseTestCaseGeneric,
+    BaseUploadFileTestCaseGeneric
+)
 from general.tests.model_factory import make_profile, make_user
 
 from user.models import Profile
-
 from user.serializers import ProfileSerializer
 
 
@@ -96,3 +98,16 @@ class ProfileTestCase(BaseProfileTestCase):
             response.json(),
             self.serializer_class(profile).data
         )
+
+
+class ProfileUploadFileTestCaseGeneric(
+    BaseUploadFileTestCaseGeneric,
+    BaseProfileTestCase,
+):
+    upload_obj_image_url = 'upload-profile-image'
+
+    def test_upload_profile_image(self):
+        self._test_image_upload('profile_avatar')
+        self.model_class.objects.get(
+            pk=self.obj_1.pk
+        ).profile_avatar.delete()

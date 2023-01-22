@@ -1,7 +1,8 @@
 from django.urls import reverse
 from rest_framework import status
 
-from general.tests.generic import BaseTestCaseGeneric
+from general.tests.generic import BaseTestCaseGeneric, \
+    BaseUploadFileTestCaseGeneric
 
 from organization.models import Organization
 from organization.serializers import OrganizationSerializer
@@ -192,3 +193,16 @@ class OrganizationTestCase(BaseOrganizationTestCase):
             response.status_code,
             status.HTTP_400_BAD_REQUEST
         )
+
+
+class OrganizationUploadFileTestCaseGeneric(
+    BaseUploadFileTestCaseGeneric,
+    BaseOrganizationTestCase,
+):
+    upload_obj_image_url = 'upload-organization-image'
+
+    def test_upload_profile_image(self):
+        self._test_image_upload('organization_avatar')
+        self.model_class.objects.get(
+            pk=self.obj_1.pk
+        ).organization_avatar.delete()

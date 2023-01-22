@@ -30,6 +30,6 @@ urlpatterns_organization = [
     path(
         'upload-image/<int:pk>/',
         organization.OrganizationUploadImageAPIView.as_view(),
-        name='upload-image'
+        name='upload-organization-image'
     )
 ]

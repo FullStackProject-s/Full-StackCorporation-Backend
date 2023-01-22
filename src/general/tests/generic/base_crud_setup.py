@@ -6,7 +6,10 @@ from general.tests.mixins import (
     UpdateObjectsMixin,
 
     DeleteObjectsPermsMixin,
-    UpdateObjectsPermsMixin, TestMeEndpointMixin
+    UpdateObjectsPermsMixin,
+
+    TestMeEndpointMixin,
+    ImageUploadMixin
 )
 
 
@@ -17,6 +20,17 @@ class BaseCRUDURLGeneric:
     delete_object_url = ''
     create_object_url = ''
     update_object_url = ''
+
+
+class BaseUploadFileURLGeneric:
+    upload_obj_image_url = ''
+
+
+class BaseUploadFileURLTestCaseGeneric(
+    BaseUploadFileURLGeneric,
+    ImageUploadMixin
+):
+    pass
 
 
 class BaseCRUDTestCaseGeneric(
@@ -42,4 +56,4 @@ class BaseEmployeeCRUDTestCaseGeneric(
     BaseCRUDTestCaseGeneric,
     TestMeEndpointMixin
 ):
-    pass
+    obj_self_url = ''
