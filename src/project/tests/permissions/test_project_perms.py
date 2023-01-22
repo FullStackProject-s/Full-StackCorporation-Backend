@@ -53,16 +53,16 @@ class ProjectPermissionsTestCase(
         self._test_patch_object_perms()
 
     def test_patch_project_admin_perms(self):
-        project = make_project(1)
+        project_1, project_2 = make_project(2)
 
-        admin = make_administrator(1)
+        admin_1 = make_administrator(1)
 
-        user = admin.profile.user
+        user = admin_1.profile.user
         user.is_active = True
         user.save()
 
-        project.organization.members.add(user)
-        project.save()
+        project_1.organization.members.add(user)
+        project_1.save()
 
         self.client.force_login(user)
         self._set_credentials_for_user(user)
@@ -70,12 +70,32 @@ class ProjectPermissionsTestCase(
         response = self.client.patch(
             reverse(
                 self.update_object_url,
-                kwargs={'pk': project.pk}
+                kwargs={'pk': project_1.pk}
             )
         )
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
+        )
+
+        admin_2 = make_administrator(1)
+
+        user = admin_2.profile.user
+        user.is_active = True
+        user.save()
+
+        self.client.force_login(user)
+        self._set_credentials_for_user(user)
+
+        response = self.client.patch(
+            reverse(
+                self.update_object_url,
+                kwargs={'pk': project_1.pk}
+            )
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_403_FORBIDDEN
         )
 
     def test_patch_project_owner_perms(self):

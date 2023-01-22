@@ -44,18 +44,35 @@ class TeamPermissionsTestCase(
     def test_patch_team_manager_perms(self):
         team = make_team(1)
 
-        proj_manager = make_project_manager(1)
+        proj_manager_1, proj_manager_2 = make_project_manager(2)
 
-        user = proj_manager.profile.user
-        user.is_active = True
-        user.save()
+        user_1 = proj_manager_1.profile.user
+        user_1.is_active = True
+        user_1.save()
 
-        team.project_manager = proj_manager
+        user_2 = proj_manager_2.profile.user
+        user_2.is_active = True
+        user_2.save()
+
+        team.project_manager = proj_manager_1
         team.save()
 
-        self._run_patch_request_for_object(
-            user,
+        response = self._run_patch_request_for_object(
+            user_1,
             team
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        response = self._run_patch_request_for_object(
+            user_2,
+            team
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_403_FORBIDDEN
         )
 
     def test_patch_team_admin_perms(self):
