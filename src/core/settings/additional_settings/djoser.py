@@ -1,7 +1,10 @@
 import os
 
+from django.utils.safestring import mark_safe
+
 DOMAIN = os.getenv('FRONT_DOMAIN')
-SITE_NAME = os.getenv('SITE_NAME')
+SITE_NAME = mark_safe(os.getenv('SITE_NAME'))
+
 DJOSER = {
     # Password rest + reset url
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
@@ -14,5 +17,5 @@ DJOSER = {
     'SERIALIZERS': {
         'user_create': 'user.serializers.CustomUserSerializer',
         'user': 'user.serializers.CustomUserShowSerializer',
-    }
+    },
 }
