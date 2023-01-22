@@ -6,7 +6,7 @@ from rest_framework import (
 from drf_spectacular.utils import extend_schema
 
 from project.models import Team
-from project.permissions.team import (
+from project.permissions import (
     IsProjectManagerOrAdministratorOrOwnerOrReadOnlyTeam
 )
 from project.serializer import (
