@@ -1,17 +1,14 @@
 from django.urls import path
 
-from .views import (
-    CreateFillDataView,
-    CreateSuperUserView
-)
+from general import views
 
 urlpatterns = [
     path('create-super-user/',
-         CreateSuperUserView.as_view()
+         views.CreateSuperUserView.as_view()
          ),
     path(
         'create-fill-data/',
-        CreateFillDataView.as_view(),
+        views.CreateFillDataView.as_view(),
 
     )
 ]
