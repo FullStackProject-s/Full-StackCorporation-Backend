@@ -78,7 +78,3 @@ class BaseTestCaseSetupPermissionsGeneric(BaseTestCaseSetupGeneric):
         super().setUpTestData()
         cls.base_login_user.is_superuser = False
         cls.base_login_user.save()
-
-
-class BaseEmployeeTestCaseSetupGeneric(BaseTestCaseSetupGeneric):
-    obj_self_url = None

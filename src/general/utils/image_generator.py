@@ -51,4 +51,5 @@ def generate_avatar(*args, avatar_size: int = 12 * 35) -> ContentFile:
 
     buffer = BytesIO()
     img.save(fp=buffer, format='PNG')
+
     return ContentFile(buffer.getvalue())
