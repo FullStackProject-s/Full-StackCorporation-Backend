@@ -1,4 +1,5 @@
 from django.urls import reverse
+from rest_framework import status
 
 from general.tests.generic import BaseTestCaseGeneric
 
@@ -95,17 +96,23 @@ class OrganizationTestCase(BaseOrganizationTestCase):
         pk = org.pk
         proj_1, proj_2, proj_3, proj_4 = make_project(4)
 
-        json = {
-            "projects": [
-                proj_1.pk,
-                proj_2.pk
-            ],
-        }
-        self._test_patch_object(json).json()
+        org.projects.add(proj_1)
+        proj_1.set_organization(org)
+
+        org.projects.add(proj_2)
+        proj_2.set_organization(org)
+
+        org.projects.add(proj_3)
+        proj_3.set_organization(org)
+
+        org.projects.add(proj_4)
+        proj_4.set_organization(org)
+
+        org.save()
 
         self.assertListEqual(
             list(Organization.objects.get(pk=pk).projects.all()),
-            [proj_1, proj_2]
+            [proj_1, proj_2, proj_3, proj_4]
         )
         self.assertEqual(
             Project.objects.get(pk=proj_1.pk).organization,
@@ -113,6 +120,14 @@ class OrganizationTestCase(BaseOrganizationTestCase):
         )
         self.assertEqual(
             Project.objects.get(pk=proj_2.pk).organization,
+            org
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_3.pk).organization,
+            org
+        )
+        self.assertEqual(
+            Project.objects.get(pk=proj_4.pk).organization,
             org
         )
 
@@ -137,10 +152,43 @@ class OrganizationTestCase(BaseOrganizationTestCase):
             org
         )
         self.assertEqual(
-            Project.objects.get(pk=proj_1.pk).organization,
-            None
+            Project.objects.filter(pk=proj_1.pk).exists(),
+            False
         )
         self.assertEqual(
-            Project.objects.get(pk=proj_2.pk).organization,
-            None
+            Project.objects.filter(pk=proj_2.pk).exists(),
+            False
+        )
+
+    def test_project_for_one_organization(self):
+        org_1, org_2 = make_organization(2)
+        proj = make_project(1)
+        json = {
+            'projects': [
+                proj.pk
+            ]
+        }
+        response = self.client.patch(
+            reverse(
+                self.update_object_url,
+                kwargs={'pk': org_1.pk}
+            ),
+            data=json
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+
+        response = self.client.patch(
+            reverse(
+                self.update_object_url,
+                kwargs={'pk': org_2.pk}
+            ),
+            data=json
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_400_BAD_REQUEST
         )
