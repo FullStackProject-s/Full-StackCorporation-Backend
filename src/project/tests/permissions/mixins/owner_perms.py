@@ -19,9 +19,13 @@ class TestOwnerPermsMixin:
         org.owner = owner
         org.save()
 
-        self._run_patch_request_for_object(
+        response = self._run_patch_request_for_object(
             owner,
             object_
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
         )
 
     def _run_patch_request_for_object(self, owner: User, object_):
@@ -34,7 +38,4 @@ class TestOwnerPermsMixin:
                 kwargs={'pk': object_.pk}
             )
         )
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        return response
