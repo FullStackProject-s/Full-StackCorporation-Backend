@@ -71,12 +71,13 @@ class CreateObjectsMixin:
         )
         response_json = response.json()
 
-        pk = response_json['pk']
-
         self.assertEqual(
             response.status_code,
             status.HTTP_201_CREATED
         )
+
+        pk = response_json['pk']
+
         self.assertEqual(
             self.model_class.objects.filter(pk=pk).exists(),
             True

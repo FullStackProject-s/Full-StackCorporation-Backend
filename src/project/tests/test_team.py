@@ -1,19 +1,22 @@
 from django.urls import reverse
 
+from rest_framework import status
+
 from employee.models import Developer, ProjectManager
+
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import (
     make_team,
     make_developer,
-    make_project_manager
+    make_project_manager, make_project
 
 )
 
-from project.models import Team
+from project.models import Team, Project
 from project.serializer import TeamSerializer
 
 
-class TeamTestCase(BaseTestCaseGeneric):
+class BaseTeamTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Team`.
     """
@@ -32,6 +35,8 @@ class TeamTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class TeamTestCase(BaseTeamTestCase):
     def test_get_all_teams(self):
         self._test_get_all_objects()
 
@@ -51,9 +56,18 @@ class TeamTestCase(BaseTestCaseGeneric):
     def test_team_create(self):
         proj_manager = make_project_manager(1)
         team_lead, dev_1, dev_2 = make_developer(3)
+        proj = make_project(1)
+        self._add_to_organization(
+            proj.organization,
+            team_lead,
+            dev_1,
+            dev_2,
+            proj_manager
+        )
         json = {
             'team_name': "team_create_name",
             'team_lead': team_lead.pk,
+            'project': proj.pk,
             'project_manager': proj_manager.pk,
             'developers': [
                 dev_1.pk,
@@ -68,6 +82,11 @@ class TeamTestCase(BaseTestCaseGeneric):
         response_json = response.json()
 
         team = Team.objects.get(pk=response_json['pk'])
+
+        self.assertIn(
+            team,
+            Project.objects.get(pk=proj.pk).teams.all()
+        )
         self.assertEqual(
             Developer.objects.get(pk=team_lead.pk).team.pk,
             team.pk
@@ -88,7 +107,9 @@ class TeamTestCase(BaseTestCaseGeneric):
         self._test_delete_object()
 
     def test_team_name_put_team(self):
+        proj = make_project(1)
         json = {
+            'project': proj.pk,
             'team_name': 'put_team_name'
         }
         response_json = self._test_put_object(json).json()
@@ -100,6 +121,12 @@ class TeamTestCase(BaseTestCaseGeneric):
     def test_team_lead_patch_team(self):
         team = self.obj_1
         dev_1, dev_2 = make_developer(2)
+
+        self._add_to_organization(
+            team.project.organization,
+            dev_1,
+            dev_2
+        )
 
         json = {
             'team_name': 'test_team_lead_patch_team',
@@ -140,6 +167,12 @@ class TeamTestCase(BaseTestCaseGeneric):
     def test_project_manager_patch_team(self):
         team = self.obj_1
         project_manager_1, project_manager_2 = make_project_manager(2)
+
+        self._add_to_organization(
+            team.project.organization,
+            project_manager_1,
+            project_manager_2
+        )
 
         json = {
             'team_name': 'test_project_manager_patch_team',
@@ -182,8 +215,16 @@ class TeamTestCase(BaseTestCaseGeneric):
         self.default_object_number = 2
 
         dev_1, dev_2, dev_3, dev_4 = make_developer(4)
+        self._add_to_organization(
+            team.project.organization,
+            dev_1,
+            dev_2,
+            dev_3,
+            dev_4
+        )
 
         pk = team.pk
+
         json = {
             'team_name': 'test_developers_patch_team',
             'developers': [
@@ -236,3 +277,26 @@ class TeamTestCase(BaseTestCaseGeneric):
             Developer.objects.get(pk=dev_2.pk).team,
             None
         )
+
+    def test_random_employee_add_test(self):
+        developer = make_developer(1)
+        json = {
+            'developers': [
+                developer.pk
+            ]
+        }
+
+        response = self.client.patch(
+            reverse(self.update_object_url, kwargs={'pk': self.obj_1.pk}),
+            data=json
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_400_BAD_REQUEST
+        )
+
+    def _add_to_organization(self, organization, *employees):
+        organization.members.add(
+            *list(map(lambda employee: employee.profile.user, employees))
+        )
+        organization.save()

@@ -14,7 +14,7 @@ def generate_avatar(*args, avatar_size: int = 12 * 35) -> ContentFile:
     and optional avatar_size value multiple of 12
     """
     background_color = '#f2f1f2'
-    s = args[0] + str(random.randbytes(10))
+    random_string = args[0] + str(random.randbytes(10))
 
     sha = hashlib.sha256(str(hex(sum(hash(ele) for ele in args))).encode())
 
@@ -22,10 +22,12 @@ def generate_avatar(*args, avatar_size: int = 12 * 35) -> ContentFile:
 
     color = '#' + hex_number[2:8]
 
-    bytes_ = hashlib.md5(s.encode('utf-8')).digest()
+    bytes_ = hashlib.md5(random_string.encode('utf-8')).digest()
 
-    need_color = np.array([bit == '1' for byte in bytes_[3:3 + 9] for bit in
-                           bin(byte)[2:].zfill(8)]).reshape(6, 12)
+    need_color = np.array(
+        [bit == '1' for byte in bytes_[3:3 + 9] for bit in
+         bin(byte)[2:].zfill(8)]
+    ).reshape(6, 12)
 
     need_color = np.concatenate((need_color, need_color[::-1]), axis=0)
 

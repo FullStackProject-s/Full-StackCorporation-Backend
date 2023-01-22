@@ -6,7 +6,7 @@ from general.tests.mixins import (
     UpdateObjectsMixin,
 
     DeleteObjectsPermsMixin,
-    UpdateObjectsPermsMixin
+    UpdateObjectsPermsMixin, TestMeEndpointMixin
 )
 
 
@@ -34,5 +34,12 @@ class BaseNotSaveCRUDTestCaseGeneric(
     BaseCRUDURLGeneric,
     DeleteObjectsPermsMixin,
     UpdateObjectsPermsMixin
+):
+    pass
+
+
+class BaseEmployeeCRUDTestCaseGeneric(
+    BaseCRUDTestCaseGeneric,
+    TestMeEndpointMixin
 ):
     pass

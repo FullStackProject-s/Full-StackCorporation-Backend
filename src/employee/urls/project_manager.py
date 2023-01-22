@@ -13,6 +13,11 @@ urlpatterns_manager = [
         name='project-manager'
     ),
     path(
+        'me/',
+        project_manager.ProjectManagerAPIView.as_view(),
+        name='me-project-manager'
+    ),
+    path(
         'create-manager/',
         project_manager.ProjectManagerCreateAPIView.as_view(),
         name='create-manager'

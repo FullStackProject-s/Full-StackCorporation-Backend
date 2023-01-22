@@ -8,7 +8,11 @@ from django.urls import (
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,6 +46,8 @@ urlpatterns += [
         SpectacularSwaggerView.as_view(),
         name="swagger-ui"
     ),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema'),
+         name='redoc'),
 ]
 urlpatterns += [
     path(

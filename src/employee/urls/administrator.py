@@ -19,6 +19,11 @@ urlpatterns_admin = [
         name='create-admin'
     ),
     path(
+        'me/',
+        administrator.AdministratorMeAPIView.as_view(),
+        name='me-admin'
+    ),
+    path(
         'delete-admin/<int:pk>/',
         administrator.AdministratorDestroyAPIView.as_view(),
         name='delete-admin'

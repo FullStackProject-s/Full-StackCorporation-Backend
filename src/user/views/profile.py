@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import (
     generics,
     status
@@ -24,6 +25,16 @@ class ProfileRetrieveAPIView(
     generics.RetrieveAPIView
 ):
     pass
+
+
+class ProfileMeAPIView(
+    BaseConfigurationProfilesViewGeneric,
+    generics.RetrieveAPIView
+):
+    def get_object(self):
+        if obj := self.get_queryset().filter(user=self.request.user):
+            return obj.first()
+        raise Http404
 
 
 class ProfileCreateAPIView(

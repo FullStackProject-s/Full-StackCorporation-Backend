@@ -18,5 +18,14 @@ class ProjectShowSerializer(BaseProjectSerializer):
 
 
 class ProjectSerializer(BaseProjectSerializer):
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+
+        organization = validated_data.get('organization')
+        organization.projects.add(instance)
+        organization.save()
+
+        return instance
+
     def to_representation(self, instance):
         return ProjectShowSerializer(instance).data

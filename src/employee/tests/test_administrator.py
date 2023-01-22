@@ -3,7 +3,8 @@ from django.urls import reverse
 from employee.models import Administrator
 from employee.serializers import AdministratorSerializer
 
-from general.tests.generic import BaseTestCaseGeneric
+from general.tests.generic import BaseEmployeeTestCaseGeneric
+
 from general.tests.model_factory import (
     make_profile,
     make_administrator
@@ -12,12 +13,13 @@ from general.tests.model_factory import (
 from user.models.consts import StaffRole
 
 
-class BaseAdministratorTestCase(BaseTestCaseGeneric):
+class BaseAdministratorTestCase(BaseEmployeeTestCaseGeneric):
     """
     Test Cases for :model:`employee.Administrator`.
     """
     all_objects_url = reverse('all-admins')
     create_object_url = reverse('create-admin')
+    obj_self_url = reverse('me-admin')
 
     retrieve_object_url = 'admin'
     delete_object_url = 'delete-admin'
@@ -75,3 +77,6 @@ class AdministratorTestCase(BaseAdministratorTestCase):
             response_json['profile'],
             admin.profile.pk
         )
+
+    def test_me_admin(self):
+        self._test_me(make_administrator)

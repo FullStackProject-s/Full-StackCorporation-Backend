@@ -9,6 +9,7 @@ class BaseTeamSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'team_name',
+            'project',
             'team_lead',
             'project_manager',
             'developers',

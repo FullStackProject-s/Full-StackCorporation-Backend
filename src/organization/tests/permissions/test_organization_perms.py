@@ -100,15 +100,11 @@ class OrganizationPermissionsTestCase(
     def test_patch_organization_owner_perms(self):
         organization, owner = self.__get_organization_owner()
 
-        json = {
-            'organization_name': 'test_put_organization_owner_perms'
-        }
         self.client.force_login(owner)
         self._set_credentials_for_user(owner)
 
         response = self.client.patch(
-            reverse(self.update_object_url, kwargs={'pk': organization.pk}),
-            data=json
+            reverse(self.update_object_url, kwargs={'pk': organization.pk})
         )
         self.assertEqual(
             response.status_code,
@@ -118,16 +114,11 @@ class OrganizationPermissionsTestCase(
     def test_patch_organization_admin_perms(self):
         organization, user_admin = self.__get_organization_admin()
 
-        json = {
-            'organization_name': 'test_put_organization_admin_perms'
-        }
-
         self.client.force_login(user_admin)
         self._set_credentials_for_user(user_admin)
 
         response = self.client.patch(
-            reverse(self.update_object_url, kwargs={'pk': organization.pk}),
-            data=json
+            reverse(self.update_object_url, kwargs={'pk': organization.pk})
         )
         self.assertEqual(
             response.status_code,

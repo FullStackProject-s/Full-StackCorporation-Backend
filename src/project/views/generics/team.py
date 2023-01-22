@@ -1,8 +1,14 @@
+from rest_framework import (
+    generics,
+    permissions
+)
+
 from drf_spectacular.utils import extend_schema
 
-from rest_framework import generics
-
 from project.models import Team
+from project.permissions import (
+    IsProjectManagerOrAdministratorOrOwnerOrReadOnlyTeam
+)
 from project.serializer import (
     TeamSerializer,
     TeamShowSerializer
@@ -13,3 +19,7 @@ from project.serializer import (
 class TeamBaseGenericView(generics.GenericAPIView):
     serializer_class = TeamSerializer
     queryset = Team.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsProjectManagerOrAdministratorOrOwnerOrReadOnlyTeam
+    ]

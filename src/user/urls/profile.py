@@ -32,4 +32,9 @@ urlpatterns_profile = [
         profile.ProfileImageUploadAPIView.as_view(),
         name='upload-image',
     ),
+    path(
+        'me/',
+        profile.ProfileMeAPIView.as_view(),
+        name='me-profile'
+    )
 ]

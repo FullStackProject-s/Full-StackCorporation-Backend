@@ -15,7 +15,7 @@ urlpatterns_user = [
     path(
         'me/',
         user.UserMeAPIView.as_view(),
-        name='me'
+        name='me-user'
     ),
     path(
         'delete-user/<int:pk>/',
