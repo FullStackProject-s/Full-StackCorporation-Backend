@@ -3,17 +3,19 @@ from datetime import timedelta
 from django.urls import reverse
 from django.utils import timezone
 
+from organization.models import Organization
+
 from project.serializer import ProjectSerializer
 from project.models import Project
 
 from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import (
     make_project,
-    make_organization
+    make_organization,
 )
 
 
-class ProjectTestCase(BaseTestCaseGeneric):
+class BaseProjectTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`project.Project`.
     """
@@ -32,11 +34,14 @@ class ProjectTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class ProjectTestCase(BaseProjectTestCase):
     def test_get_all_projects(self):
         self._test_get_all_objects()
 
     def test_project_retrieve(self):
         proj = self.obj_1
+
         response_json = self._test_retrieve_object().json()
         self.assertEqual(
             response_json['project_name'],
@@ -51,7 +56,12 @@ class ProjectTestCase(BaseTestCaseGeneric):
             "organization": org.pk,
             "deadline": timezone.now().date() + timedelta(days=4)
         }
-        self._test_create_object(json)
+        response_json = self._test_create_object(json).json()
+
+        self.assertIn(
+            Project.objects.get(pk=response_json['pk']),
+            Organization.objects.get(pk=org.pk).projects.all()
+        )
 
     def test_delete_project(self):
         self._test_delete_object()
