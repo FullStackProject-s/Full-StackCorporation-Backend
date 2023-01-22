@@ -17,4 +17,3 @@ class ProfileImageUploadSerializer(BaseProfileSerializer):
         fields = (
             'profile_avatar',
         )
-
