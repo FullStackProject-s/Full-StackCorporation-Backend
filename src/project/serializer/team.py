@@ -11,6 +11,9 @@ from project.serializer.services import (
     create_personal
 )
 from project.serializer.generics import BaseTeamSerializer
+from project.serializer.services.check_organization_member import (
+    CheckUserContainsInOrganizationMixin
+)
 
 
 class TeamShowSerializer(BaseTeamSerializer):
@@ -24,9 +27,15 @@ class TeamShowSerializer(BaseTeamSerializer):
         return None
 
 
-class TeamSerializer(BaseTeamSerializer):
+class TeamSerializer(
+    BaseTeamSerializer,
+    CheckUserContainsInOrganizationMixin
+):
     def to_representation(self, instance):
         return TeamShowSerializer(instance).data
+
+    def validate(self, attrs):
+        return self._validate_user_members(attrs)
 
     def create(self, validated_data):
         instance = super().create(validated_data)
