@@ -1,3 +1,6 @@
+![example workflow](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg)
+
+
 # Full-StackCorporation-Backend
 
 ## SETUP
