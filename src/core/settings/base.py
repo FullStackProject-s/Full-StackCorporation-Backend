@@ -11,12 +11,13 @@ else:
 
 load_dotenv(os.path.join(Path(__file__).resolve().parent.parent, file))
 
-# import third party after load env
-from .additional_settings import *  # noqa
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+os.environ['EXTERNAL_FILE_DIR'] = str(BASE_DIR.parent)
+
+# import third party after load env
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -163,3 +164,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 COOKIE_MAX_AGE = 3600 * 24  # 1 day
 COOKIE_REFRESH_TOKEN_NAME = 'refresh_token'
+
+from .additional_settings import *  # noqa

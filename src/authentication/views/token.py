@@ -1,5 +1,7 @@
 from django.conf import settings
+
 from drf_spectacular.utils import extend_schema
+
 from rest_framework import status
 
 from rest_framework_simplejwt.views import (
@@ -11,6 +13,8 @@ from authentication.serializers import (
     CookieTokenDeleteSerializer
 )
 from authentication.serializers import TokenObtainSerializerSchema
+
+from authentication.views import logger
 
 
 @extend_schema(responses=TokenObtainSerializerSchema)
@@ -24,6 +28,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
                 httponly=True
             )
             del response.data['refresh']
+            logger.info('User: `%s` get refresh token' % request.user)
         return super().finalize_response(request, response, *args, **kwargs)
 
 

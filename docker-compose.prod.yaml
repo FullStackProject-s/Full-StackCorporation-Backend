@@ -1,5 +1,6 @@
 services:
   web-django:
+    working_dir: /backend/src
     container_name: BackendAPI
     restart: always
     build:
@@ -16,8 +17,8 @@ services:
       - postgres
       - redis
     volumes:
-      - static:/app-back/staticfiles
-      - media:/app-back/mediafiles
+      - static:/backend/src/staticfiles
+      - media:/backend/src/mediafiles
   postgres:
     container_name: postgresProduction
     image: postgres:latest
@@ -36,9 +37,10 @@ services:
     depends_on:
       - web-django
     volumes:
-      - static:/app-back/staticfiles
-      - media:/app-back/mediafiles
+      - static:/backend/src/staticfiles
+      - media:/backend/src/mediafiles
   celery:
+    working_dir: /backend/src
     container_name: celeryProduction
     build: .
     command: bash -c
