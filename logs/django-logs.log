@@ -182,3 +182,4 @@ TypeError: Logger.log() missing 1 required positional argument: 'msg'
 2023-01-24 23:14:53,970 django.utils.autoreload INFO Watching for file changes with StatReloader
 2023-01-24 23:14:56,290 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
 2023-01-24 23:15:51,334 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\__init__.py changed, reloading.
+2023-01-24 23:15:52,090 django.utils.autoreload INFO Watching for file changes with StatReloader

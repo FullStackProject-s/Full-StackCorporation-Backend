@@ -1,8 +1,9 @@
+from django.utils.timezone import now
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from django.utils.timezone import now
 from djoser import signals
 from djoser.compat import get_user_email  # noqa
 from djoser.views import UserViewSet
@@ -14,10 +15,15 @@ from authentication.tasks import (
     send_reset_password_confirmation_email
 )
 
+from authentication.views import logger
+
 
 class CustomUserViewSet(UserViewSet):
     def perform_create(self, serializer):
         user = serializer.save()
+
+        logger.info('User created, username: %s' % user.username)
+
         signals.user_registered.send(
             sender=self.__class__, user=user, request=self.request
         )
