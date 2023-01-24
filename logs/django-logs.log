@@ -1,0 +1,184 @@
+2023-01-24 22:35:10,595 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:35:41,018 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:41:18,815 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:41:19,494 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:44:07,736 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\djoser.py changed, reloading.
+2023-01-24 22:44:08,435 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:45:04,464 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:45:05,149 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:45:12,440 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:45:13,147 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:45:32,101 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:45:32,757 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:48:35,896 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:48:36,633 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:48:50,312 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:48:50,974 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:49:56,638 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\djoser.py changed, reloading.
+2023-01-24 22:49:57,371 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:50:43,283 django.server INFO     "POST /auth/users/ HTTP/1.1" 201 141
+2023-01-24 22:51:01,441 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\djoser.py changed, reloading.
+2023-01-24 22:51:02,151 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:51:04,149 django.server WARNING  "POST /auth/users/ HTTP/1.1" 400 119
+2023-01-24 22:51:16,645 django.server INFO     "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 22:51:20,001 django.server INFO     "GET /admin HTTP/1.1" 301 0
+2023-01-24 22:51:20,039 django.server INFO     "GET /admin/ HTTP/1.1" 302 0
+2023-01-24 22:51:20,154 django.server INFO     "GET /admin/login/?next=/admin/ HTTP/1.1" 200 2222
+2023-01-24 22:51:20,518 django.server INFO     "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2619
+2023-01-24 22:51:20,520 django.server INFO     "GET /static/admin/css/responsive.css HTTP/1.1" 200 18854
+2023-01-24 22:51:20,522 django.server INFO     "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 796
+2023-01-24 22:51:20,523 django.server INFO     "GET /static/admin/css/login.css HTTP/1.1" 200 958
+2023-01-24 22:51:20,523 django.server INFO     "GET /static/admin/css/base.css HTTP/1.1" 200 20344
+2023-01-24 22:51:20,526 django.server INFO     "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3763
+2023-01-24 22:51:20,531 django.server INFO     "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+2023-01-24 22:51:20,562 django.server INFO     "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+2023-01-24 22:51:20,564 django.server INFO     "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+2023-01-24 22:51:23,556 django.server INFO     "POST /admin/login/?next=/admin/ HTTP/1.1" 200 2386
+2023-01-24 22:51:23,832 django.server INFO     "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+2023-01-24 22:51:30,602 django.server INFO     "POST /dev/create-super-user/ HTTP/1.1" 200 0
+2023-01-24 22:51:34,442 django.server INFO     "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2023-01-24 22:51:34,502 django.server INFO     "GET /admin/ HTTP/1.1" 200 11346
+2023-01-24 22:51:34,797 django.server INFO     "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+2023-01-24 22:51:34,812 django.server INFO     "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2023-01-24 22:51:34,812 django.server INFO     "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2023-01-24 22:51:39,712 django.server INFO     "GET /admin/user/customuser/ HTTP/1.1" 200 12113
+2023-01-24 22:51:40,007 django.server INFO     "GET /static/admin/css/changelists.css HTTP/1.1" 200 6395
+2023-01-24 22:51:40,011 django.server INFO     "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+2023-01-24 22:51:40,014 django.server INFO     "GET /static/admin/js/core.js HTTP/1.1" 200 5698
+2023-01-24 22:51:40,014 django.server INFO     "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 8985
+2023-01-24 22:51:40,018 django.server INFO     "GET /static/admin/js/actions.js HTTP/1.1" 200 7872
+2023-01-24 22:51:40,021 django.server INFO     "GET /static/admin/js/urlify.js HTTP/1.1" 200 7902
+2023-01-24 22:51:40,025 django.server INFO     "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+2023-01-24 22:51:40,040 django.server INFO     "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 22:51:40,047 django.server INFO     "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 288580
+2023-01-24 22:51:40,060 django.server INFO     "GET /static/admin/js/filters.js HTTP/1.1" 200 966
+2023-01-24 22:51:40,067 django.server INFO     "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+2023-01-24 22:51:40,085 django.server INFO     "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+2023-01-24 22:51:42,894 django.server INFO     "POST /admin/user/customuser/ HTTP/1.1" 200 10914
+2023-01-24 22:51:43,190 django.server INFO     "GET /static/admin/js/cancel.js HTTP/1.1" 200 884
+2023-01-24 22:51:43,802 django.server INFO     "POST /admin/user/customuser/ HTTP/1.1" 302 0
+2023-01-24 22:51:43,826 django.server INFO     "GET /admin/user/customuser/ HTTP/1.1" 200 12041
+2023-01-24 22:51:44,092 django.server INFO     "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 22:51:44,110 django.server INFO     "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+2023-01-24 22:51:51,279 django.server INFO     "POST /auth/users/ HTTP/1.1" 201 141
+2023-01-24 22:52:06,801 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\djoser.py changed, reloading.
+2023-01-24 22:52:07,563 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:57:53,724 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:59:00,513 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:59:01,390 django.server INFO     "GET / HTTP/1.1" 200 4267
+2023-01-24 22:59:01,698 django.server INFO     "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 22:59:20,539 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 22:59:31,360 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:59:48,973 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2023-01-24 22:59:55,239 django.server WARNING  "POST /auth/users/ HTTP/1.1" 400 119
+2023-01-24 22:59:58,828 django.server INFO     "GET /admin/user/customuser/ HTTP/1.1" 200 12113
+2023-01-24 22:59:58,974 django.server INFO     "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 22:59:59,006 django.server INFO     "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-24 22:59:59,050 django.server INFO     "GET /static/images/favicon.ico HTTP/1.1" 200 67646
+2023-01-24 23:00:02,847 django.server INFO     "POST /admin/user/customuser/ HTTP/1.1" 200 10914
+2023-01-24 23:00:03,565 django.server INFO     "POST /admin/user/customuser/ HTTP/1.1" 302 0
+2023-01-24 23:00:03,603 django.server INFO     "GET /admin/user/customuser/ HTTP/1.1" 200 12041
+2023-01-24 23:00:03,770 django.server INFO     "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 23:00:05,081 django.server INFO     "POST /auth/users/ HTTP/1.1" 201 141
+2023-01-24 23:01:02,862 django.utils.autoreload INFO     E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-24 23:01:03,526 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:01:11,325 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-24 23:01:11,628 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 23:02:20,337 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-24 23:02:20,647 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 23:02:20,943 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-24 23:02:21,168 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 23:02:21,467 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-24 23:02:21,713 django.server INFO - Broken pipe from ('127.0.0.1', 64561)
+2023-01-24 23:02:21,716 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 23:02:21,716 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-24 23:02:22,035 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-24 23:02:22,236 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-24 23:03:11,895 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-24 23:04:45,190 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\__init__.py changed, reloading.
+2023-01-24 23:04:45,887 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:05:10,841 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\__init__.py changed, reloading.
+2023-01-24 23:05:11,524 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:05:17,791 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\djoser.py changed, reloading.
+2023-01-24 23:05:18,438 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:05:23,635 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\djoser.py changed, reloading.
+2023-01-24 23:05:24,345 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:05:35,671 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12113
+2023-01-24 23:05:35,818 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 23:05:35,843 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-24 23:05:39,116 django.server INFO "POST /admin/user/customuser/ HTTP/1.1" 200 10914
+2023-01-24 23:05:39,749 django.server INFO "POST /admin/user/customuser/ HTTP/1.1" 302 0
+2023-01-24 23:05:39,772 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12041
+2023-01-24 23:05:39,924 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 23:05:45,237 django.server INFO "POST /auth/users/ HTTP/1.1" 201 141
+2023-01-24 23:06:34,671 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:06:35,370 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:08:59,277 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:08:59,926 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:10:54,224 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:10:54,882 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:11:12,678 django.server WARNING "POST /auth/token/tokens-obtain/ HTTP/1.1" 401 63
+2023-01-24 23:11:16,493 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12113
+2023-01-24 23:11:16,657 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 23:11:16,681 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-24 23:11:18,677 django.server INFO "GET /admin/user/customuser/5/change/ HTTP/1.1" 200 26073
+2023-01-24 23:11:18,838 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 23:11:18,872 django.server INFO "GET /static/admin/css/forms.css HTTP/1.1" 200 8944
+2023-01-24 23:11:18,876 django.server INFO "GET /static/admin/js/calendar.js HTTP/1.1" 200 8466
+2023-01-24 23:11:18,878 django.server INFO "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19379
+2023-01-24 23:11:18,880 django.server INFO "GET /static/admin/css/widgets.css HTTP/1.1" 200 11297
+2023-01-24 23:11:18,887 django.server INFO "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+2023-01-24 23:11:18,895 django.server INFO "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+2023-01-24 23:11:18,897 django.server INFO "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+2023-01-24 23:11:18,924 django.server INFO "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+2023-01-24 23:11:18,925 django.server INFO "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+2023-01-24 23:11:25,631 django.server INFO "POST /admin/user/customuser/5/change/ HTTP/1.1" 302 0
+2023-01-24 23:11:25,672 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12324
+2023-01-24 23:11:25,855 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-24 23:11:30,074 django.request ERROR Internal Server Error: /auth/token/tokens-obtain/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py", line 31, in finalize_response
+    logger.log('User: `%s` get refresh token' % request.user.username)
+TypeError: Logger.log() missing 1 required positional argument: 'msg'
+2023-01-24 23:11:30,074 django.request ERROR Internal Server Error: /auth/token/tokens-obtain/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py", line 31, in finalize_response
+    logger.log('User: `%s` get refresh token' % request.user.username)
+TypeError: Logger.log() missing 1 required positional argument: 'msg'
+2023-01-24 23:11:30,084 django.server ERROR "POST /auth/token/tokens-obtain/ HTTP/1.1" 500 23705
+2023-01-24 23:13:13,563 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:13:14,268 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:13:18,052 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:13:18,845 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:14:13,744 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:14:14,421 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:14:16,713 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:14:22,273 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:14:30,984 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:14:38,964 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:14:39,612 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:14:41,259 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:14:53,292 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\authentication\views\token.py changed, reloading.
+2023-01-24 23:14:53,970 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-24 23:14:56,290 django.server INFO "POST /auth/token/tokens-obtain/ HTTP/1.1" 200 218
+2023-01-24 23:15:51,334 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\additional_settings\__init__.py changed, reloading.
