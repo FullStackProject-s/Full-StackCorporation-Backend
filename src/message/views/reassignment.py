@@ -1,6 +1,13 @@
-from rest_framework import generics
+from rest_framework import (
+    generics,
+    permissions
+)
 
 from message.serializers import ReassignmentUpdateSerializer
+from message.permissions import (
+    IsOwnerOrSuperUserMessagePerms,
+    IsAdministratorOrOwnerOrReadOnlyReassignment
+)
 from .generic import BaseReassignmentViewGeneric
 
 
@@ -22,14 +29,20 @@ class ReassignmentCreateAPIView(
     BaseReassignmentViewGeneric,
     generics.CreateAPIView
 ):
-    pass
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsAdministratorOrOwnerOrReadOnlyReassignment
+    ]
 
 
 class ReassignmentDestroyAPIView(
     BaseReassignmentViewGeneric,
     generics.DestroyAPIView
 ):
-    pass
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsOwnerOrSuperUserMessagePerms
+    ]
 
 
 class ReassignmentUpdateAPIView(
@@ -37,3 +50,7 @@ class ReassignmentUpdateAPIView(
     generics.UpdateAPIView
 ):
     serializer_class = ReassignmentUpdateSerializer
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsAdministratorOrOwnerOrReadOnlyReassignment
+    ]

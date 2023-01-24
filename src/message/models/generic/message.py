@@ -11,6 +11,21 @@ class MessageBase(BaseTimeStampModel):
         max_length=10_000,
 
     )
+    is_active = models.BooleanField(
+        default=True,
+        blank=True
+    )
+
+    class Meta:
+        abstract = True
+
+
+class OrganizationMessageBase(MessageBase):
+    organization = models.ForeignKey(
+        'organization.Organization',
+        on_delete=models.CASCADE,
+        null=True
+    )
 
     class Meta:
         abstract = True

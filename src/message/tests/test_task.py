@@ -7,11 +7,12 @@ from message.models import Task
 
 from general.tests.model_factory import (
     make_user,
-    make_task
+    make_task,
+    make_organization
 )
 
 
-class TaskTestCase(BaseTestCaseGeneric):
+class BaseTaskTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`message.Task`.
     """
@@ -30,6 +31,9 @@ class TaskTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class TaskTestCase(BaseTaskTestCase):
+
     def test_get_all_tasks(self):
         self._test_get_all_objects()
 
@@ -44,8 +48,9 @@ class TaskTestCase(BaseTestCaseGeneric):
 
     def test_task_create(self):
         user = make_user(1)
-
+        org = make_organization(1)
         json = {
+            'organization': org.pk,
             "creator": user.pk,
             "text": 'test_task_create',
         }
@@ -83,6 +88,7 @@ class TaskTestCase(BaseTestCaseGeneric):
 
         json = {
             "text": 'test_patch_task',
+            'completed': True
         }
         response_json = self._test_patch_object(json).json()
 

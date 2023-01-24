@@ -1,8 +1,8 @@
 from django.db import models
-from message.models.generic import MessageBase
+from message.models.generic import OrganizationMessageBase
 
 
-class Reassignment(MessageBase):
+class Reassignment(OrganizationMessageBase):
     from_project = models.ForeignKey(
         'project.Project',
         on_delete=models.CASCADE,

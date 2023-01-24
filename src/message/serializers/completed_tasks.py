@@ -12,9 +12,19 @@ class CompletedTasksShowSerializer(BaseCompletedTasksSerializer):
 
 
 class CompletedTasksSerializer(BaseCompletedTasksSerializer):
+
     def to_representation(self, instance):
         return CompletedTasksShowSerializer(instance).data
 
+    class Meta(BaseCompletedTasksSerializer.Meta):
+        extra_kwargs = {
+            **BaseCompletedTasksSerializer.Meta.extra_kwargs,
+            'organization': {'read_only': False, 'required': True}
+        }
 
-class CompletedTasksUpdateSerializer(CompletedTasksSerializer):
+
+class CompletedTasksUpdateSerializer(CompletedTasksShowSerializer):
     checked = serializers.BooleanField(read_only=False)
+
+    class Meta(BaseCompletedTasksSerializer.Meta):
+        pass

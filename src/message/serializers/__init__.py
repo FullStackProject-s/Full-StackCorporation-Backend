@@ -13,3 +13,8 @@ from .completed_tasks import (
     CompletedTasksUpdateSerializer,
     CompletedTasksShowSerializer
 )
+from .invite import (
+    InviteToOrganizationSerializer,
+    InviteToOrganizationShowSerializer,
+    InviteToOrganizationUpdateSerializer
+)
