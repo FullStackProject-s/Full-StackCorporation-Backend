@@ -48,6 +48,12 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       env:
+          POSTGRES_DB: ${{ matrix.database-name }}
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+          POSTGRES_HOST: ${{ matrix.database-host }}
+          POSTGRES_PORT: ${{ matrix.database-port }}
+
           DEBUG: ${{matrix.debug}}
           CORS_ALLOWED: localhost:3000
           SECRET_KEY: 'hi'
