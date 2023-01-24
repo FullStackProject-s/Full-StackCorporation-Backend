@@ -9,11 +9,12 @@ from general.tests.model_factory import (
     make_user,
     make_project,
     make_team,
-    make_reassignment
+    make_reassignment,
+    make_organization
 )
 
 
-class ReassignmentTestCase(BaseTestCaseGeneric):
+class BaseReassignmentTestCase(BaseTestCaseGeneric):
     """
     Test Cases for :model:`message.Reassignment`.
     """
@@ -32,6 +33,8 @@ class ReassignmentTestCase(BaseTestCaseGeneric):
     def setUpTestData(cls):
         super().setUpTestData()
 
+
+class ReassignmentTestCase(BaseReassignmentTestCase):
     def test_get_all_reassignments(self):
         self._test_get_all_objects()
 
@@ -50,11 +53,13 @@ class ReassignmentTestCase(BaseTestCaseGeneric):
 
     def test_reassignment_create(self):
         user = make_user(1)
+        org = make_organization(1)
         proj_1, proj_2 = make_project(2)
         team_1, team_2 = make_team(2)
 
         json = {
             "creator": user.pk,
+            'organization': org.pk,
             "text": 'test_reassignment_create',
             "from_project": proj_1.pk,
             "to_project": proj_2.pk,

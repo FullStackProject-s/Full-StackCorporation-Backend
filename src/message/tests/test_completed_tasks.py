@@ -11,7 +11,8 @@ from message.models import CompletedTasks
 from general.tests.model_factory import (
     make_completed_tasks,
     make_task,
-    make_user
+    make_user,
+    make_organization
 )
 
 
@@ -53,8 +54,10 @@ class CompletedTasksTestCase(BaseTestCaseGeneric):
     def test_completed_tasks_create(self):
         creator = make_user(1)
         task_1, task_2 = make_task(2)
+        org = make_organization(1)
         json = {
             "creator": creator.pk,
+            'organization': org.pk,
             "text": 'test_completed_tasks_create',
             "tasks": [
                 task_1.pk,
@@ -81,10 +84,8 @@ class CompletedTasksTestCase(BaseTestCaseGeneric):
         self._test_delete_object()
 
     def test_put_completed_tasks(self):
-        creator = make_user(1)
         task_1, task_2 = make_task(2)
         json = {
-            "creator": creator.pk,
             "text": 'test_put_completed_tasks',
             "tasks": [
                 task_1.pk,
