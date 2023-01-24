@@ -49,5 +49,8 @@ jobs:
     - name: Run Tests
       env:
           DEBUG: ${{matrix.debug}}
+          CORS_ALLOWED: localhost:3000
+          SECRET_KEY: 'hi'
+          DJANGO_ALLOWED_HOSTS: 'localhost 127.0.0.1 0.0.0.0 [::1]'
       run: |
         python src/manage.py test src
