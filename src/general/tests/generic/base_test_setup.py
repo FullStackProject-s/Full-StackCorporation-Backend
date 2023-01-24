@@ -1,3 +1,5 @@
+import logging
+
 from typing import Callable
 
 from django.contrib.auth import get_user_model
@@ -10,6 +12,8 @@ from rest_framework.test import APITestCase
 from general.tests.model_factory import make_user
 
 User = get_user_model()
+
+logging.disable(logging.CRITICAL)
 
 
 @override_settings(TESTS_LAUNCHED=True)
