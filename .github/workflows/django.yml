@@ -14,6 +14,8 @@ jobs:
       matrix:
         db: [postgres]
         python-version: ['3.10']
+        debug:
+        - 0
         database-name:
         - Corporation
         database-password:
@@ -24,7 +26,7 @@ jobs:
         - 127.0.0.1
         database-port:
         - 5432
-        
+
     services:
      postgres:
             image: postgres:latest
@@ -45,5 +47,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Tests
+      env:
+          DEBUG: ${{matrix.debug}}
       run: |
         python src/manage.py test src
