@@ -1,7 +1,12 @@
-from rest_framework import generics
+from rest_framework import (
+    generics,
+    permissions
+)
 
 from .generic import BaseTaskViewGeneric
-from ..serializers import TaskUpdateSerializer
+
+from message.permissions import IsAdministratorOrOwnerOrReadOnlyTask
+from message.serializers import TaskUpdateSerializer
 
 
 class TaskListAPIVIew(
@@ -22,14 +27,20 @@ class TaskCreateAPIView(
     BaseTaskViewGeneric,
     generics.CreateAPIView
 ):
-    pass
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsAdministratorOrOwnerOrReadOnlyTask
+    ]
 
 
 class TaskDestroyAPIView(
     BaseTaskViewGeneric,
     generics.DestroyAPIView
 ):
-    pass
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsAdministratorOrOwnerOrReadOnlyTask
+    ]
 
 
 class TaskUpdateAPIView(
@@ -37,3 +48,7 @@ class TaskUpdateAPIView(
     generics.UpdateAPIView
 ):
     serializer_class = TaskUpdateSerializer
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsAdministratorOrOwnerOrReadOnlyTask
+    ]
