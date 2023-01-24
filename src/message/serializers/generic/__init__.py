@@ -2,5 +2,6 @@ from .message import (
     BaseReassignmentSerializer,
     BaseMessageSerializer,
     BaseTaskSerializer,
-    BaseCompletedTasksSerializer
+    BaseCompletedTasksSerializer,
+    BaseInviteToOrganizationSerializer
 )

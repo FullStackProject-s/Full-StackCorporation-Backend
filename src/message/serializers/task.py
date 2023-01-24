@@ -1,22 +1,23 @@
 from message.serializers.generic import BaseTaskSerializer
 
 from user.serializers import CustomUserShowSerializer
+from rest_framework import serializers
 
 
 class TaskShowSerializer(BaseTaskSerializer):
     creator = CustomUserShowSerializer(read_only=True)
-
-    class Meta(BaseTaskSerializer.Meta):
-        fields = (
-            *BaseTaskSerializer.Meta.fields,
-            'completed',
-        )
 
 
 class TaskSerializer(BaseTaskSerializer):
     def to_representation(self, instance):
         return TaskShowSerializer(instance).data
 
+    class Meta(BaseTaskSerializer.Meta):
+        extra_kwargs = {
+            **BaseTaskSerializer.Meta.extra_kwargs,
+            'organization': {'read_only': False, 'required': True}
+        }
+
 
 class TaskUpdateSerializer(TaskShowSerializer):
-    pass
+    completed = serializers.BooleanField(read_only=False)
