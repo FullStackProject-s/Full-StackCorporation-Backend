@@ -1,1 +1,4 @@
-from .message import MessageBase
+from .message import (
+    MessageBase,
+    OrganizationMessageBase
+)
