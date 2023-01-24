@@ -1,3 +1,5 @@
+import os
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -19,13 +21,19 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'file',
-            'filename': '../logs/django-logs.log'
+            'filename': os.path.join(
+                os.getenv('EXTERNAL_FILE_DIR'),
+                'logs/django-logs.log'
+            )
         },
         'auth': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'file',
-            'filename': '../logs/apps/auth-logs.log'
+            'filename': os.path.join(
+                os.getenv('EXTERNAL_FILE_DIR'),
+                'logs/apps/auth-logs.log'
+            )
         },
         'console': {
             'level': 'DEBUG',
