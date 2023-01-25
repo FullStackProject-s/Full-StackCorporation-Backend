@@ -122,3 +122,5 @@
 2023-01-25 23:31:44,242 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12324
 2023-01-25 23:31:44,553 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
 2023-01-25 23:31:47,594 django.server INFO "POST /auth/users/reset_password/ HTTP/1.1" 204 0
+2023-01-26 00:13:16,314 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12113
+2023-01-26 00:13:16,598 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
