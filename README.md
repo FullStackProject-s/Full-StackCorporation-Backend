@@ -1,5 +1,4 @@
-![example workflow](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg)
-
+[![Django CI](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg)](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml)
 
 # Full-StackCorporation-Backend
 
