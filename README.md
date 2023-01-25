@@ -1,16 +1,13 @@
 <p align="center">
-    <a href="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml" alt="Django CI">
-        <img src="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg" />
-    </a>
-    <a href="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml" alt="Django Build">
-        <img src="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml/badge.svg" />
-    </a>
+    <a href="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml" alt="Django Tests">
+        <img src="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg" /></a>
+    <a href="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml" alt="Django Build" alt="Sponsors on Open Collective">
+        <img src="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml/badge.svg" /></a>
     <a href="https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend" alt="codecov">
-        <img src="https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend/branch/main/graph/badge.svg?token=V3IX2JJLC3" />
-    </a>
-    <a href="https://img.shields.io/github/commit-activity/w/MihailGulkin/Full-StackCorporation-Backend?color=%232dba4e&label=Commit%20activity" alt="GitHub commit activity">
+        <img src="https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend/branch/main/graph/badge.svg?token=V3IX2JJLC3" /></a>
+        <a href="https://img.shields.io/github/commit-activity/w/MihailGulkin/Full-StackCorporation-Backend?color=%232dba4e&label=Commit%20activity" alt="GitHub commit activity">
         <img src="https://img.shields.io/github/commit-activity/w/MihailGulkin/Full-StackCorporation-Backend?color=%232dba4e&label=Commit%20activity" />
-    </a>
+    </a>   
 </p>
 
 
