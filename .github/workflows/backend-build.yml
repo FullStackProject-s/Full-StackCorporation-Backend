@@ -23,7 +23,7 @@ jobs:
         database-user:
         - postgres
         database-host:
-        - 127.0.0.1
+        - postgres
         database-port:
         - 5432
         redis-host:
