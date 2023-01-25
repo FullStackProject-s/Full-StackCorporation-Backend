@@ -1,6 +1,7 @@
 [![Django CI](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg)](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml)
-![Activity](https://img.shields.io/github/commit-activity/m/MihailGulkin/Full-StackCorporation-Backend?color=%2332ca55&label=Commit%20activity)
+[![Django Build](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml/badge.svg)](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml)
 [![codecov](https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend/branch/main/graph/badge.svg?token=V3IX2JJLC3)](https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend)
+![Activity](https://img.shields.io/github/commit-activity/m/MihailGulkin/Full-StackCorporation-Backend?color=%2332ca55&label=Commit%20activity)
 
 # Full-StackCorporation-Backend
 
