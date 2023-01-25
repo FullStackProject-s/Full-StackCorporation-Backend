@@ -55,8 +55,8 @@ jobs:
           POSTGRES_PORT: ${{ matrix.database-port }}
 
           DEBUG: ${{matrix.debug}}
-          CORS_ALLOWED: localhost:3000
-          SECRET_KEY: 'hi'
-          DJANGO_ALLOWED_HOSTS: 'localhost 127.0.0.1 0.0.0.0 [::1]'
+          CORS_ALLOWED: ${{ secrets.CORS_ALLOWED }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
       run: |
         python src/manage.py test src
