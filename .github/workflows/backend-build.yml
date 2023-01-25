@@ -14,7 +14,6 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        db: [postgres]
         debug:
         - 0
         database-name:
@@ -34,7 +33,7 @@ jobs:
         
     steps:
     - name: Checkout the repo
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
     - name: Create env file
       run: |
         touch src/core/.env
@@ -60,6 +59,7 @@ jobs:
           FRONT_DOMAIN=${{ secrets.CORS_ALLOWED }}
           SITE_NAME=Hi"
         > src/core/.env
+        
     - name: Build the Docker image
       run: docker-compose -f docker-compose.prod.yaml build
     - name: Run container
