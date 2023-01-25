@@ -2,7 +2,7 @@ from general.tests.generic import BaseTestCaseGeneric
 from general.utils.image_generator import generate_avatar
 
 
-class TestImageGenerateAvatar(BaseTestCaseGeneric):
+class TestImageGenerateAvatarUnit(BaseTestCaseGeneric):
     @classmethod
     def setUpTestData(cls):
         pass
