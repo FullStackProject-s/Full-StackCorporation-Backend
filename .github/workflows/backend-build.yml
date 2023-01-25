@@ -60,4 +60,6 @@ jobs:
     - name: Build the Docker image
       run: docker-compose -f docker-compose.prod.yaml build
     - name: Run container
-      run: docker-compose -f docker-compose.prod.yaml up
+      run: docker-compose -f docker-compose.prod.yaml up -d
+    - name: Delete container
+      run: docker-compose -f docker-compose.prod.yaml down -v
