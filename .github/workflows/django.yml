@@ -24,6 +24,10 @@ jobs:
         - 127.0.0.1
         database-port:
         - 5432
+        redis-host:
+          - redis
+        redis-port:
+          - 6379
 
     services:
      postgres:
@@ -60,6 +64,9 @@ jobs:
           POSTGRES_PASSWORD: ${{ matrix.database-password }}
           POSTGRES_HOST: ${{ matrix.database-host }}
           POSTGRES_PORT: ${{ matrix.database-port }}
+
+          REDIS_HOST: ${{ matrix.redis-host }}
+          REDIS_PORT: ${{ matrix.redis-port }}
 
           DEBUG: ${{matrix.debug}}
           CORS_ALLOWED: ${{ secrets.CORS_ALLOWED }}

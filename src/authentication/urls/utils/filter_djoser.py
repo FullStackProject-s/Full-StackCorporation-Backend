@@ -1,5 +1,5 @@
 def filtered_djoser_urls(urls: list) -> list:
-    resulted_djoser_list = (
+    resulted_djoser_list_name = (
         'customuser-list',
 
         'customuser-activation',
@@ -8,5 +8,5 @@ def filtered_djoser_urls(urls: list) -> list:
         'customuser-reset-password-confirm'
     )
     return list(filter(
-        lambda pattern: pattern.name in resulted_djoser_list, urls
+        lambda pattern: pattern.name in resulted_djoser_list_name, urls
     ))

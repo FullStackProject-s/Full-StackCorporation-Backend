@@ -1,3 +1,7 @@
 2023-01-25 01:09:14,096 authentication.views INFO User: `AnonymousUser` get refresh token
 2023-01-25 01:09:14,212 authentication.views INFO User: `AnonymousUser` get refresh token
 2023-01-25 01:09:14,326 authentication.views INFO User: `AnonymousUser` get refresh token
+2023-01-25 21:21:41,710 authentication.views INFO User created, username: string
+2023-01-25 21:23:32,973 authentication.views INFO User created, username: string
+2023-01-25 21:25:13,092 authentication.views INFO User created, username: string
+2023-01-25 21:36:45,507 authentication.views INFO User created, username: string
