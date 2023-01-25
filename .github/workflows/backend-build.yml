@@ -54,8 +54,7 @@ jobs:
           POSTGRES_PORT=${{ matrix.database-port }}
           
           FRONT_DOMAIN=${{ secrets.CORS_ALLOWED }}
-          SITE_NAME=Hi"
-        > src/core/.env
+          SITE_NAME=Hi" > src/core/.env
         cat src/core/.env
         
     - name: Build the Docker image
