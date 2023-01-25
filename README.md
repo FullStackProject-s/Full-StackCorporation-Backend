@@ -1,7 +1,18 @@
-[![Django CI](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg)](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml)
-[![Django Build](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml/badge.svg)](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml)
-[![codecov](https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend/branch/main/graph/badge.svg?token=V3IX2JJLC3)](https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend)
-![Activity](https://img.shields.io/github/commit-activity/m/MihailGulkin/Full-StackCorporation-Backend?color=%2332ca55&label=Commit%20activity)
+<p align="center">
+    <a href="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml" alt="Django CI">
+        <img src="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg" />
+    </a>
+    <a href="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml" alt="Django Build">
+        <img src="https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/backend-build.yml/badge.svg" />
+    </a>
+    <a href="https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend" alt="codecov">
+        <img src="https://codecov.io/gh/MihailGulkin/Full-StackCorporation-Backend/branch/main/graph/badge.svg?token=V3IX2JJLC3" />
+    </a>
+    <a href="https://img.shields.io/github/commit-activity/w/MihailGulkin/Full-StackCorporation-Backend?color=%232dba4e&label=Commit%20activity" alt="GitHub commit activity">
+        <img src="https://img.shields.io/github/commit-activity/w/MihailGulkin/Full-StackCorporation-Backend?color=%232dba4e&label=Commit%20activity" />
+    </a>
+</p>
+
 
 # Full-StackCorporation-Backend
 
