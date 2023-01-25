@@ -1,4 +1,5 @@
 [![Django CI](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml/badge.svg)](https://github.com/FullStackProject-s/Full-StackCorporation-Backend/actions/workflows/django.yml)
+![Activity](https://img.shields.io/github/commit-activity/m/MihailGulkin/Full-StackCorporation-Backend?color=%2332ca55&label=Commit%20activity)
 
 # Full-StackCorporation-Backend
 
