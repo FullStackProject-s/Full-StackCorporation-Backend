@@ -93,6 +93,6 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: ./coverage.xml
-        gcov_ignore: src/general/views.py
+        gcov_ignore: ./src/general/views.py
         directory: ./coverage/reports/
         fail_ci_if_error: true
