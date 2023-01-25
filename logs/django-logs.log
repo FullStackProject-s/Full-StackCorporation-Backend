@@ -16,3 +16,10 @@
 2023-01-25 01:18:09,886 django.utils.autoreload INFO Watching for file changes with StatReloader
 2023-01-25 01:26:57,329 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\base.py changed, reloading.
 2023-01-25 01:26:58,095 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-25 02:20:22,302 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-25 02:20:24,937 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-25 02:20:25,278 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193534
+2023-01-25 13:26:10,638 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-25 13:26:19,149 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\backend\src\core\settings\base.py changed, reloading.
+2023-01-25 13:26:20,047 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-25 13:26:41,585 django.utils.autoreload INFO Watching for file changes with StatReloader
