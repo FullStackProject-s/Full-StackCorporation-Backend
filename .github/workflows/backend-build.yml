@@ -1,0 +1,66 @@
+name: Django Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        db: [postgres]
+        debug:
+        - 0
+        database-name:
+        - Corporation
+        database-password:
+        - 1234
+        database-user:
+        - postgres
+        database-host:
+        - 127.0.0.1
+        database-port:
+        - 5432
+        redis-host:
+        - redis
+        redis-port:
+        - 6379
+        
+    steps:
+    - name: Checkout the repo
+    - uses: actions/checkout@v3
+    - name: Create env file
+      run: |
+        touch src/core/.env
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }} 
+          DEBUG=${{matrix.debug}}
+          DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}
+          CORS_ALLOWED=${{ secrets.CORS_ALLOWED }}
+          
+          REDIS_HOST=${{ matrix.redis-host }}
+          REDIS_PORT=${{ matrix.redis-port }}
+          
+          EMAIL_PWD=${{ secrets.EMAIL_PWD }}
+          EMAIL_HOST=${{ secrets.EMAIL_HOST }}
+          EMAIL_PORT=${{ secrets.EMAIL_PORT }}
+          EMAIL_NAME=${{ secrets.EMAIL_NAME }}
+          
+          POSTGRES_DB=${{ matrix.database-name }}
+          POSTGRES_USER=${{ matrix.database-user }}
+          POSTGRES_PASSWORD=${{ matrix.database-password }}
+          POSTGRES_HOST=${{ matrix.database-host }}
+          POSTGRES_PORT=${{ matrix.database-port }}
+          
+          FRONT_DOMAIN=${{ secrets.CORS_ALLOWED }}
+          SITE_NAME=Hi"
+        > src/core/.env
+    - name: Build the Docker image
+      run: docker-compose -f docker-compose.prod.yaml build
+    - name: Run container
+      run: docker-compose -f docker-compose.prod.yaml up
