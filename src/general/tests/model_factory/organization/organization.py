@@ -1,12 +1,3 @@
-from organization.models import Organization
-from model_bakery import baker
+from general.tests.model_factory.base_factory import create_model_factory
 
-
-def make_organization(number: int) -> list[Organization] | Organization:
-    organizations = baker.make(
-        'organization.Organization',
-        _quantity=number,
-    )
-    if number == 1:
-        return organizations[0]
-    return organizations
+make_organization = create_model_factory('organization.Organization')
