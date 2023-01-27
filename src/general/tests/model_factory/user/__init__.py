@@ -1,3 +1,5 @@
-from .user import make_user
+from .user import (
+    make_user,
+    make_profile
+)
 from .permission import make_permission
-from .profile import make_profile

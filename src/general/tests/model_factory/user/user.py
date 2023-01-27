@@ -1,15 +1,7 @@
-from django.contrib.auth import get_user_model
-from model_bakery import baker
+from general.tests.model_factory.base_factory import create_model_factory
 
-User = get_user_model()
-
-
-def make_user(number: int) -> list[User] | User:
-    users = baker.make(
-        'user.CustomUser',
-        _quantity=number,
-        is_active=True,
-    )
-    if number == 1:
-        return users[0]
-    return users
+make_user = create_model_factory(
+    'user.CustomUser',
+    is_active=True
+)
+make_profile = create_model_factory('user.Profile')
