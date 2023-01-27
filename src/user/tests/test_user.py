@@ -90,3 +90,20 @@ class CustomUserTestCases(BaseCustomUserTestCase):
             response.json(),
             self.serializer_class(self.base_login_user).data
         )
+
+    def test_create_superuser(self):
+        user = User.objects.create_superuser(
+            username=f'user',
+            email=f'user@example.com',
+            password=f'user_',
+            first_name=f'first_',
+            last_name=f'second_',
+        )
+        self.assertEqual(
+            user.is_active,
+            True
+        )
+        self.assertEqual(
+            user.is_superuser,
+            True
+        )
