@@ -3,12 +3,16 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from rest_framework import status
+
 from general.tests.generic import BaseTestCaseGeneric
 
 User = get_user_model()
 
 
 class CookieJWTTestCase(BaseTestCaseGeneric):
+    """
+    Tests Cases for Token endpoints.
+    """
     token_delete_url = reverse('token-delete')
     token_refresh_url = reverse('token-refresh')
     token_obtain_tokens_url = reverse('token-obtain-pair')
@@ -25,13 +29,18 @@ class CookieJWTTestCase(BaseTestCaseGeneric):
             }
         )
         cls.base_login_user.is_active = True
+
         cls.base_login_user.save()
 
     def setUp(self):
         self.client.force_login(self.base_login_user)
 
     def test_cookie_tokens_obtain(self):
+        """
+        Test POST get obtain tokens.
+        """
         response = self._get_token_obtain_response()
+
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
@@ -46,9 +55,14 @@ class CookieJWTTestCase(BaseTestCaseGeneric):
         )
 
     def test_cookie_token_refresh(self):
+        """
+        Test POST refresh access token.
+        """
+
         self._get_token_obtain_response()
 
         response = self.client.post(self.token_refresh_url)
+
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
@@ -59,6 +73,9 @@ class CookieJWTTestCase(BaseTestCaseGeneric):
         )
 
     def test_cookie_token_delete(self):
+        """
+        Test POST delete refresh token.
+        """
         self._get_token_obtain_response()
 
         response_delete = self.client.post(self.token_delete_url)
@@ -81,8 +98,15 @@ class CookieJWTTestCase(BaseTestCaseGeneric):
             response_again_delete.status_code,
             status.HTTP_400_BAD_REQUEST
         )
+        self.assertEqual(
+            response_again_delete.json()['detail'],
+            'Refresh token already delete'
+        )
 
     def _get_token_obtain_response(self):
+        """
+        Function for return response from POST obtain tokens.
+        """
         json = {
             'username': 'string',
             'password': 'string'

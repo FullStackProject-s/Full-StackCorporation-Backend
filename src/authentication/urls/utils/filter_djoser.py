@@ -1,4 +1,7 @@
 def filtered_djoser_urls(urls: list) -> list:
+    """
+    Function for filter djoser urls, return new list with only need urls.
+    """
     resulted_djoser_list_name = (
         'customuser-list',
 

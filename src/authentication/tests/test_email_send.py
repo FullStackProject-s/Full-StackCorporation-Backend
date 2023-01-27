@@ -17,6 +17,9 @@ User = get_user_model()
 
 
 class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
+    """
+    Tests for overriding djoser viewset endpoints.
+    """
     create_user_url = reverse('customuser-list')
     activate_user_url = reverse('customuser-activation')
     reset_password_url = reverse('customuser-reset-password')
@@ -30,6 +33,10 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
         pass
 
     def test_create_user(self):
+        """
+        Test POST creating user endpoint.
+        """
+
         json = {
             "username": "string",
             "email": "user@example.com",
@@ -52,6 +59,10 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
         )
 
     def test_activate_user(self):
+        """
+        Test POST activate user endpoint.
+        """
+
         user = make_user(1)
         user.is_active = False
         user.save()
@@ -80,6 +91,10 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
         )
 
     def test_reset_password_user(self):
+        """
+        Test POST reset password user endpoint.
+        """
+
         user = make_user(1)
         user.is_active = True
         user.save()
@@ -91,6 +106,7 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
             self.reset_password_url,
             data=json
         )
+
         self.assertEqual(
             response.status_code,
             status.HTTP_204_NO_CONTENT
@@ -102,6 +118,10 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
         )
 
     def test_reset_password_confirmation_user(self):
+        """
+        Test POST reset password confirmation user endpoint.
+        """
+
         user = make_user(1)
         user.is_active = True
         user.save()
@@ -116,6 +136,7 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
             self.reset_password_activate_url,
             data=json
         )
+
         self.assertEqual(
             response.status_code,
             status.HTTP_204_NO_CONTENT
