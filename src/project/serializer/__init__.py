@@ -1,6 +1,6 @@
 from .team import (
     TeamSerializer,
-    TeamShowSerializer
+    TeamShowSerializer,
 )
 from .project import (
     ProjectSerializer,

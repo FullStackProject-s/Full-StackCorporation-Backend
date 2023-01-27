@@ -124,3 +124,923 @@
 2023-01-25 23:31:47,594 django.server INFO "POST /auth/users/reset_password/ HTTP/1.1" 204 0
 2023-01-26 00:13:16,314 django.server INFO "GET /admin/user/customuser/ HTTP/1.1" 200 12113
 2023-01-26 00:13:16,598 django.server INFO "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2023-01-26 21:16:05,475 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:16:19,459 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-26 21:16:19,811 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 192474
+2023-01-26 21:17:24,050 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\organization\serializers\organization.py changed, reloading.
+2023-01-26 21:17:25,783 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:20:36,496 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\message\serializers\invite.py changed, reloading.
+2023-01-26 21:20:38,296 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:23:32,980 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\organization\serializers\organization.py changed, reloading.
+2023-01-26 21:23:33,640 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:24:11,605 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\specialty.py changed, reloading.
+2023-01-26 21:24:12,304 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:25:11,486 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\specialty.py changed, reloading.
+2023-01-26 21:25:12,149 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:25:41,474 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-26 21:25:41,888 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193045
+2023-01-26 21:27:33,336 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\specialty.py changed, reloading.
+2023-01-26 21:27:34,015 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:28:16,197 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\project.py changed, reloading.
+2023-01-26 21:28:16,878 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:28:19,936 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\project.py changed, reloading.
+2023-01-26 21:28:20,644 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:28:34,312 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\project.py changed, reloading.
+2023-01-26 21:28:34,955 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-26 21:28:54,573 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-26 21:28:54,945 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193040
+2023-01-26 21:29:34,519 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-26 21:29:36,204 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:30:10,160 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:30:52,757 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\organization\serializers\__init__.py changed, reloading.
+2023-01-27 02:30:53,370 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:30:58,044 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\__init__.py changed, reloading.
+2023-01-27 02:30:58,697 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:31:01,023 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\__init__.py changed, reloading.
+2023-01-27 02:31:01,680 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:31:03,325 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:31:04,938 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 5 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type OpenApiTypes is not JSON serializable
+2023-01-27 02:31:04,938 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 5 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type OpenApiTypes is not JSON serializable
+2023-01-27 02:31:04,958 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 330871
+2023-01-27 02:31:06,115 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 5 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type OpenApiTypes is not JSON serializable
+2023-01-27 02:31:06,115 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 5 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type OpenApiTypes is not JSON serializable
+2023-01-27 02:31:06,132 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 330871
+2023-01-27 02:31:41,318 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:31:41,992 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:31:43,921 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:31:44,198 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193268
+2023-01-27 02:33:38,459 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:33:39,103 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:35:12,833 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:35:13,464 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:35:15,041 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:35:15,390 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193096
+2023-01-27 02:38:49,410 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:38:50,074 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:41:53,679 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:41:54,311 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:41:57,617 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:41:58,030 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193663
+2023-01-27 02:42:09,280 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:42:09,925 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:42:10,567 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:42:10,997 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193665
+2023-01-27 02:42:19,372 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:42:20,006 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:42:23,091 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:42:23,434 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 193663
+2023-01-27 02:42:56,025 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:42:56,671 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:43:15,989 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:43:16,654 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:43:50,276 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-27 02:43:50,913 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:43:54,994 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-27 02:43:55,628 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:43:58,628 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\logging.py changed, reloading.
+2023-01-27 02:43:59,254 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:46:25,758 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\team.py changed, reloading.
+2023-01-27 02:46:26,386 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:46:55,818 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\project.py changed, reloading.
+2023-01-27 02:46:56,457 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:47:07,939 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\team.py changed, reloading.
+2023-01-27 02:47:08,582 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:47:13,705 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\team.py changed, reloading.
+2023-01-27 02:47:14,339 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:47:16,055 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:47:16,517 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 194255
+2023-01-27 02:47:57,909 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\team.py changed, reloading.
+2023-01-27 02:47:58,556 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:48:10,089 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\team.py changed, reloading.
+2023-01-27 02:48:10,751 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:48:36,999 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\generics\employee.py changed, reloading.
+2023-01-27 02:48:37,627 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:48:53,207 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:48:55,504 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:48:55,957 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 194255
+2023-01-27 02:49:33,579 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\generics\employee.py changed, reloading.
+2023-01-27 02:49:34,345 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:49:50,745 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\project\serializer\team.py changed, reloading.
+2023-01-27 02:49:51,382 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:50:05,041 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:50:07,194 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:50:07,545 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 194255
+2023-01-27 02:50:55,836 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\generics\employee.py changed, reloading.
+2023-01-27 02:50:56,491 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:51:31,299 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:51:31,923 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:51:33,261 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:51:34,589 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:51:34,589 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:51:34,591 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 299673
+2023-01-27 02:51:35,653 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:51:35,653 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:51:35,654 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 299673
+2023-01-27 02:51:57,872 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:51:59,229 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:52:00,568 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:52:00,568 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:52:00,571 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 299611
+2023-01-27 02:52:01,596 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:52:01,596 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+  File "C:\Users\mihai\AppData\Local\Programs\Python\Python310\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type specialties is not JSON serializable
+2023-01-27 02:52:01,597 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 299611
+2023-01-27 02:52:14,793 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:52:15,446 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:52:27,585 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:52:27,935 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 195118
+2023-01-27 02:53:57,062 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:53:57,732 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:56:43,495 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:56:47,643 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:56:47,993 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 194844
+2023-01-27 02:57:38,030 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:57:38,731 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:57:39,389 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:57:39,715 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 194867
+2023-01-27 02:57:47,133 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:57:47,772 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:58:56,282 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:58:56,948 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:58:59,993 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 02:59:00,653 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 02:59:03,562 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 02:59:03,886 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 195306
+2023-01-27 02:59:57,164 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\generics\employee.py changed, reloading.
+2023-01-27 02:59:57,802 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:02:58,305 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 03:02:58,940 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:03:05,962 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:04:22,833 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:04:27,928 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 03:04:28,311 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:04:28,311 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:04:28,313 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 188926
+2023-01-27 03:04:28,390 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:04:28,390 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:04:28,391 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 188926
+2023-01-27 03:05:45,935 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 03:05:46,562 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:05:52,290 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 03:05:52,916 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:05:54,635 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 03:05:55,020 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:05:55,020 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:05:55,023 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 188926
+2023-01-27 03:05:55,098 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:05:55,098 django.request ERROR Internal Server Error: /api-swagger/schema/
+Traceback (most recent call last):
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 83, in get
+    return self._get_schema_response(request)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\views.py", line 91, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 268, in get_schema
+    paths=self.parse(request, public),
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\generators.py", line 239, in parse
+    operation = view.schema.get_operation(
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\utils.py", line 364, in get_operation
+    return super().get_operation(path, path_regex, path_prefix, method, registry)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 94, in get_operation
+    operation['responses'] = self._get_response_bodies()
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1287, in _get_response_bodies
+    return {'200': self._get_response_for_code(response_serializers, '200', direction=direction)}
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1343, in _get_response_for_code
+    component = self.resolve_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 1514, in resolve_serializer
+    component.schema = self._map_serializer(serializer, direction, bypass_extensions)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 896, in _map_serializer
+    schema = self._map_basic_serializer(serializer, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 983, in _map_basic_serializer
+    schema = self._map_serializer_field(field, direction)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\openapi.py", line 820, in _map_serializer_field
+    return append_meta(self._map_response_type_hint(method), meta)
+  File "E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\envCorp\lib\site-packages\drf_spectacular\plumbing.py", line 497, in append_meta
+    return safe_ref({**schema, **meta})
+TypeError: 'NoneType' object is not a mapping
+2023-01-27 03:05:55,099 django.server ERROR "GET /api-swagger/schema/ HTTP/1.1" 500 188926
+2023-01-27 03:08:10,758 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 03:08:11,390 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:08:15,019 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\employee\serializers\developer.py changed, reloading.
+2023-01-27 03:08:15,722 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:08:26,116 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-27 03:08:28,282 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-27 03:08:28,667 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 195557
