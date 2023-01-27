@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema_field
-
+from drf_spectacular.utils import (
+    extend_schema_field,
+    inline_serializer
+)
 from employee.models import (
     ProjectManager,
     Developer,
@@ -30,10 +31,16 @@ class BaseManagerDeveloperSerializer(BaseStaffSerializer):
             'team',
         )
 
-    @extend_schema_field(OpenApiTypes.STR)
+    @extend_schema_field(inline_serializer(
+        name='team',
+        fields={
+            "pk": serializers.IntegerField(),
+            "team_name": serializers.CharField(),
+        }
+    ))
     def get_team(self, obj):
         if obj.team:
-            return obj.team.team_name
+            return {'pk': obj.team.pk, 'team_name': obj.team.team_name}
         return None
 
 

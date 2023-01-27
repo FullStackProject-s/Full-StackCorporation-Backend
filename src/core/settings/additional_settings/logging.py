@@ -43,17 +43,17 @@ LOGGING = {
     },
     'loggers': {
         'authentication': {
-            'handlers': ['auth', 'console'],
+            'handlers': ['auth', ],
             'propagate': True,
             'level': 'INFO',
         },
         'django': {
-            'handlers': ['django-file', 'console'],
+            'handlers': ['django-file', ],
             'propagate': True,
             'level': 'INFO',
         },
         'django.request': {
-            'handlers': ['django-file', 'console'],
+            'handlers': ['django-file', ],
             'level': 'ERROR',
             'propagate': True,
         },

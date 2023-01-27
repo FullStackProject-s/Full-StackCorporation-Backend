@@ -1,20 +1,20 @@
 from rest_framework import serializers
 
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema_field
-
+from organization.serializers import OrganizationShowOthersSerializer
 from project.serializer.generics import BaseProjectSerializer
 
 
 class ProjectShowSerializer(BaseProjectSerializer):
     deadline = serializers.DateField()
-    organization = serializers.SerializerMethodField()
+    organization = OrganizationShowOthersSerializer()
 
-    @extend_schema_field(OpenApiTypes.STR)
-    def get_organization(self, obj):
-        if obj.organization:
-            return obj.organization.organization_name
-        return None
+
+class ProjectShowOthersSerializer(BaseProjectSerializer):
+    class Meta(BaseProjectSerializer.Meta):
+        fields = (
+            'pk',
+            'project_name'
+        )
 
 
 class ProjectSerializer(BaseProjectSerializer):

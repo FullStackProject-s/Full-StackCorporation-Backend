@@ -1,7 +1,5 @@
-from rest_framework import serializers
-
 from general.models.utils import set_image_on_imagefield
-from organization.models import Organization
+
 from organization.serializers.services import (
     update_projects,
 )
@@ -14,6 +12,14 @@ from user.serializers.user import CustomUserShowSerializer
 class OrganizationShowSerializer(BaseOrganizationSerializer):
     owner = CustomUserShowSerializer(read_only=True)
     members = CustomUserShowSerializer(many=True, read_only=True)
+
+
+class OrganizationShowOthersSerializer(BaseOrganizationSerializer):
+    class Meta(BaseOrganizationSerializer.Meta):
+        fields = (
+            'pk',
+            'organization_name'
+        )
 
 
 class OrganizationSerializer(

@@ -1,21 +1,12 @@
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema_field
-from rest_framework import serializers
-
 from employee.serializers import DeveloperSerializer
-
 from employee.serializers.generics import BaseDeveloperOrgSpecialtySerializer
+
+from organization.serializers import OrganizationShowOthersSerializer
 
 
 class DeveloperOrgSpecialtyShowSerializer(BaseDeveloperOrgSpecialtySerializer):
     organization_developer = DeveloperSerializer(read_only=True)
-    organization = serializers.SerializerMethodField()
-
-    @extend_schema_field(OpenApiTypes.STR)
-    def get_organization(self, obj):
-        if obj.organization:
-            return obj.organization.organization_name
-        return None
+    organization = OrganizationShowOthersSerializer()
 
 
 class DeveloperOrgSpecialtySerializer(BaseDeveloperOrgSpecialtySerializer):
