@@ -73,7 +73,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
       run: |
-        . ./.venv/bin/activate
+        source ./.venv/bin/activate
         coverage run src/manage.py test src && coverage report --fail-under=75 && coverage xml
         
     - name: Report coverage to codecov
