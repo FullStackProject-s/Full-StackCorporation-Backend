@@ -34,18 +34,6 @@ class Developer(BaseProjectManagerDeveloperGeneric):
         self.specialties.add(spec)
         self.save()
 
-    def remove_specialties(self, spec):
-        self.specialties.remove(spec)
-        self.save()
-
-    def append_technologies(self, tech: Technologies):
-        self.stack.add(tech)
-        self.save()
-
-    def remove_technologies(self, tech):
-        self.stack.remove(tech)
-        self.save()
-
     def __str__(self):
         return f'{self.profile.user} - {self.pk}'
 
