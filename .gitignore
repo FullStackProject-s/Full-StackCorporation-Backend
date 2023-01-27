@@ -4,4 +4,3 @@ __pycache__
 .dev.env
 *.png
 *.jpg
-*.log
