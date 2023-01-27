@@ -1,2 +1,4 @@
-from .project import make_project
-from .team import make_team
+from .project import (
+    make_project,
+    make_team
+)

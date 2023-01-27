@@ -1,12 +1,4 @@
-from project.models import Project
-from model_bakery import baker
+from general.tests.model_factory.base_factory import create_model_factory
 
-
-def make_project(number: int) -> list[Project] | Project:
-    projects = baker.make(
-        'project.Project',
-        _quantity=number,
-    )
-    if number == 1:
-        return projects[0]
-    return projects
+make_project = create_model_factory('project.Project')
+make_team = create_model_factory('project.Team')
