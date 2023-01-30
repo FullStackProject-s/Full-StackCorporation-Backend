@@ -53,7 +53,6 @@ jobs:
           
           FRONT_DOMAIN=${{ secrets.CORS_ALLOWED }}
           SITE_NAME=Hi" > src/core/.env
-        cat src/core/.env
         
     - name: Build the Docker image
       run: docker-compose -f docker-compose.prod.yaml build
