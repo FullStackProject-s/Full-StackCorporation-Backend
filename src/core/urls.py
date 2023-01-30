@@ -43,8 +43,16 @@ urlpatterns += [
         SpectacularSwaggerView.as_view(),
         name="swagger-ui"
     ),
-    path('redoc/', SpectacularRedocView.as_view(url_name='schema'),
-         name='redoc'),
+    path(
+        'redoc/',
+        SpectacularRedocView.as_view(url_name='schema'),
+        name='redoc'
+    ),
+]
+urlpatterns += [
+    path(
+        '', include('django_prometheus.urls')
+    )
 ]
 urlpatterns += [
     path(

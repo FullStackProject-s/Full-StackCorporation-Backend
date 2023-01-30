@@ -1,0 +1,108 @@
+2023-01-31 00:27:47,704 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:28:03,082 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:28:04,544 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-31 00:28:05,197 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 196071
+2023-01-31 00:29:13,327 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\base.py changed, reloading.
+2023-01-31 00:29:14,037 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:29:24,472 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\base.py changed, reloading.
+2023-01-31 00:29:25,281 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:38:14,998 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\urls.py changed, reloading.
+2023-01-31 00:38:16,920 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:38:32,816 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\urls.py changed, reloading.
+2023-01-31 00:38:33,570 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:38:41,892 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-01-31 00:38:42,323 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 196071
+2023-01-31 00:38:43,868 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 196071
+2023-01-31 00:38:48,955 django.server WARNING "GET /metrics HTTP/1.1" 404 5279
+2023-01-31 00:39:03,276 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5370
+2023-01-31 00:40:58,955 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5370
+2023-01-31 00:41:00,043 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5370
+2023-01-31 00:41:00,260 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 00:41:00,351 django.server INFO "GET /static/images/favicon.ico HTTP/1.1" 200 67646
+2023-01-31 00:41:00,630 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5370
+2023-01-31 00:41:00,844 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 00:41:01,584 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5370
+2023-01-31 00:41:01,811 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 00:41:15,538 django.server INFO "GET /redoc/ HTTP/1.1" 200 723
+2023-01-31 00:41:16,097 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 87744
+2023-01-31 00:41:26,172 django.server WARNING "GET /metrics HTTP/1.1" 404 5279
+2023-01-31 00:41:26,458 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 00:41:26,507 django.server INFO "GET /static/images/favicon.ico HTTP/1.1" 200 67646
+2023-01-31 00:42:03,488 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\urls.py changed, reloading.
+2023-01-31 00:42:04,288 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:43:41,539 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\urls.py changed, reloading.
+2023-01-31 00:43:42,308 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 00:43:44,140 django.server INFO "GET /metrics HTTP/1.1" 200 14006
+2023-01-31 00:43:44,388 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 00:56:57,855 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 00:56:58,394 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 00:56:58,732 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 00:56:58,918 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 00:56:59,053 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:00:59,662 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\cors.py changed, reloading.
+2023-01-31 01:01:01,540 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:01:43,802 django.server INFO "GET /metrics HTTP/1.1" 200 14003
+2023-01-31 01:01:44,083 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:01:44,357 django.server INFO "GET /metrics HTTP/1.1" 200 21034
+2023-01-31 01:01:44,640 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:01:45,366 django.server INFO "GET /metrics HTTP/1.1" 200 21031
+2023-01-31 01:01:45,628 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:02:11,718 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\cors.py changed, reloading.
+2023-01-31 01:02:12,446 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:02:39,778 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\cors.py changed, reloading.
+2023-01-31 01:02:40,477 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:02:51,965 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\cors.py changed, reloading.
+2023-01-31 01:02:52,664 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:03:00,978 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\cors.py changed, reloading.
+2023-01-31 01:03:01,681 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:03:07,043 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:03:26,931 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\cors.py changed, reloading.
+2023-01-31 01:03:27,695 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:04:07,136 django.server INFO "GET /metrics HTTP/1.1" 200 14003
+2023-01-31 01:04:07,395 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:04:07,395 django.server INFO "GET /metrics HTTP/1.1" 200 21031
+2023-01-31 01:04:07,647 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:04:07,648 django.server INFO "GET /metrics HTTP/1.1" 200 21032
+2023-01-31 01:04:07,903 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:04:07,904 django.server INFO "GET /metrics HTTP/1.1" 200 21030
+2023-01-31 01:04:08,159 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:04:08,159 django.server INFO "GET /metrics HTTP/1.1" 200 21030
+2023-01-31 01:04:08,444 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:04:08,444 django.server INFO "GET /metrics HTTP/1.1" 200 21100
+2023-01-31 01:04:08,698 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:04:08,700 django.server INFO "GET /metrics HTTP/1.1" 200 21102
+2023-01-31 01:04:10,850 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:04:11,002 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:04:11,116 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:04:11,498 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:04:12,702 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:04:12,888 django.server WARNING "GET /auth/users/ HTTP/1.1" 401 58
+2023-01-31 01:11:16,514 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5362
+2023-01-31 01:11:16,783 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:11:17,020 django.server WARNING "GET /metrics/ HTTP/1.1" 404 5362
+2023-01-31 01:11:17,271 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:11:24,090 django.server INFO "GET /metrics HTTP/1.1" 200 26842
+2023-01-31 01:15:15,888 django.server INFO "GET /metrics HTTP/1.1" 200 26843
+2023-01-31 01:15:16,142 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:19:10,037 django.server INFO "GET /metrics HTTP/1.1" 200 26844
+2023-01-31 01:55:25,087 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-01-31 01:56:38,663 django.server INFO "GET /metrics HTTP/1.1" 200 14006
+2023-01-31 01:56:38,863 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:56:39,126 django.server INFO "GET /metrics HTTP/1.1" 200 21039
+2023-01-31 01:56:39,327 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:56:39,408 django.server INFO "GET /metrics HTTP/1.1" 200 21040
+2023-01-31 01:56:39,610 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 01:57:21,778 django.server INFO "GET /metrics HTTP/1.1" 200 21039
+2023-01-31 02:01:04,304 django.server INFO "GET /metrics HTTP/1.1" 200 21038
+2023-01-31 02:01:04,527 django.server INFO "GET /favicon.ico HTTP/1.1" 302 0
+2023-01-31 02:06:21,841 django.server INFO "GET /metrics HTTP/1.1" 200 21074
+2023-01-31 02:06:31,530 django.server INFO "GET /metrics HTTP/1.1" 200 21110
+2023-01-31 02:06:41,528 django.server INFO "GET /metrics HTTP/1.1" 200 21110
+2023-01-31 02:06:51,527 django.server INFO "GET /metrics HTTP/1.1" 200 21110
+2023-01-31 02:07:01,527 django.server INFO "GET /metrics HTTP/1.1" 200 21110
+2023-01-31 02:07:11,542 django.server INFO "GET /metrics HTTP/1.1" 200 21130
+2023-01-31 02:07:21,536 django.server INFO "GET /metrics HTTP/1.1" 200 21131
+2023-01-31 02:07:31,541 django.server INFO "GET /metrics HTTP/1.1" 200 21131
+2023-01-31 02:07:41,527 django.server INFO "GET /metrics HTTP/1.1" 200 21129
+2023-01-31 02:07:51,533 django.server INFO "GET /metrics HTTP/1.1" 200 21129
+2023-01-31 02:08:01,535 django.server INFO "GET /metrics HTTP/1.1" 200 21131
