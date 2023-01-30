@@ -19,6 +19,3 @@ COPY ./src ./src
 
 # create dirs for logs
 RUN mkdir logs logs/apps
-
-# collect static files
-RUN python src/manage.py collectstatic --noinput
