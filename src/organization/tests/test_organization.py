@@ -53,9 +53,14 @@ class OrganizationTestCase(BaseOrganizationTestCase):
             "organization_name": "create_org",
         }
         response_json = self._test_create_object(json).json()
+
         self.assertEqual(
             response_json['owner']['pk'],
             self.base_login_user.pk
+        )
+        self.assertIn(
+            self.base_login_user.pk,
+            [user['pk'] for user in response_json['members']]
         )
 
     def test_delete_organization(self):
