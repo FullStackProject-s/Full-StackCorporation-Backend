@@ -43,7 +43,11 @@ class OrganizationSerializer(
 
     def create(self, validated_data):
         instance = super().create(validated_data)
-        instance.owner = self.context['request'].user
+
+        user = self.context['request'].user
+
+        instance.owner = user
+        instance.members.add(user)
         instance.save()
 
         set_image_on_imagefield(
