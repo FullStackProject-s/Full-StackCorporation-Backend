@@ -40,10 +40,10 @@ jobs:
           DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}
           CORS_ALLOWED=${{ secrets.CORS_ALLOWED }}
           
+          ELASTICSEARCH=${{ secrets.ELASTICSEARCH }}
+        
           REDIS_HOST=${{ matrix.redis-host }}
           REDIS_PORT=${{ matrix.redis-port }}
-          
-       
           
           POSTGRES_DB=${{ matrix.database-name }}
           POSTGRES_USER=${{ matrix.database-user }}

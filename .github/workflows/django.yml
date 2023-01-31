@@ -65,6 +65,8 @@ jobs:
           POSTGRES_HOST: ${{ matrix.database-host }}
           POSTGRES_PORT: ${{ matrix.database-port }}
 
+          ELASTICSEARCH: ${{ secrets.ELASTICSEARCH }}
+
           REDIS_HOST: ${{ matrix.redis-host }}
           REDIS_PORT: ${{ matrix.redis-port }}
 
@@ -83,6 +85,7 @@ jobs:
         POSTGRES_PASSWORD: ${{ matrix.database-password }}
         POSTGRES_HOST: ${{ matrix.database-host }}
         POSTGRES_PORT: ${{ matrix.database-port }}
+        ELASTICSEARCH: ${{ secrets.ELASTICSEARCH }}
 
         DEBUG: ${{matrix.debug}}
         CORS_ALLOWED: ${{ secrets.CORS_ALLOWED }}
