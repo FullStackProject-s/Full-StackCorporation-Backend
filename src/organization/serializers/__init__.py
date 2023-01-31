@@ -4,3 +4,6 @@ from organization.serializers.organization import (
     OrganizationImageUploadSerializer,
     OrganizationShowOthersSerializer
 )
+from organization.serializers.document import (
+    OrganizationDocumentSerializer
+)

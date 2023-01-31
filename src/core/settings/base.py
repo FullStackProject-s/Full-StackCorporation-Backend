@@ -48,9 +48,14 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+
     'drf_spectacular',
     'djoser',
-    'django_prometheus'
+    'django_prometheus',
+
+    'elasticsearch_dsl',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf'
 ]
 PROJECT_APPS = [
     'user',
