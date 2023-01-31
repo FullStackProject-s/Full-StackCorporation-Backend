@@ -75,4 +75,4 @@ class OrganizationDocument(Document):
 
     def get_instances_from_related(self, related_instance):
         if isinstance(related_instance, CustomUser):
-            return related_instance.organization_set.all()
+            return related_instance.org_owner.all()
