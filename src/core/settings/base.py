@@ -52,10 +52,6 @@ THIRD_PARTY_APPS = [
     'drf_spectacular',
     'djoser',
     'django_prometheus',
-
-    'elasticsearch_dsl',
-    'django_elasticsearch_dsl',
-    'django_elasticsearch_dsl_drf'
 ]
 PROJECT_APPS = [
     'user',
