@@ -13,7 +13,7 @@ class ListObjectsMixin:
         )
 
         self.assertEqual(
-            len(response.json()),
+            len(self.json_result_from_paginated_response(response)),
             self.number_of_objects
         )
         return response
@@ -69,12 +69,12 @@ class CreateObjectsMixin:
             self.create_object_url,
             data=json
         )
-        response_json = response.json()
 
         self.assertEqual(
             response.status_code,
             status.HTTP_201_CREATED
         )
+        response_json = response.json()
 
         pk = response_json['pk']
 
@@ -137,3 +137,8 @@ class UpdateObjectsMixin:
             ).data,
         )
         return response
+
+
+class ResponseJsonMixin:
+    def json_result_from_paginated_response(self, response):
+        return response.json()['results']

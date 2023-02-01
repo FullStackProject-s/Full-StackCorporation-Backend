@@ -3,7 +3,9 @@ from .base_test_case import (
     RetrieveObjectsMixin,
     DeleteObjectsMixin,
     CreateObjectsMixin,
-    UpdateObjectsMixin
+    UpdateObjectsMixin,
+
+    ResponseJsonMixin
 )
 from .base_test_case_permissions import (
     DeleteObjectsPermsMixin,

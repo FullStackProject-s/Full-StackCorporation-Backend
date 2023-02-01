@@ -3420,3 +3420,6 @@ AttributeError: 'OrganizationDocumentViewSet' object has no attribute 'faceted_s
 2023-02-01 01:27:17,066 django.utils.autoreload INFO Watching for file changes with StatReloader
 2023-02-01 01:27:21,196 django.utils.autoreload INFO E:\PythonProjects\Django-Learn\DRF\Full-StackCorporation\Full-StackCorporation-Backend\src\core\settings\additional_settings\elasticsearch.py changed, reloading.
 2023-02-01 01:27:22,073 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-02-01 11:23:04,412 django.utils.autoreload INFO Watching for file changes with StatReloader
+2023-02-01 11:23:07,388 django.server INFO "GET / HTTP/1.1" 200 4267
+2023-02-01 11:23:07,695 django.server INFO "GET /api-swagger/schema/ HTTP/1.1" 200 222256
