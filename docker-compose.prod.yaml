@@ -17,7 +17,6 @@ services:
     depends_on:
       - postgres
       - redis
-      - elasticsearch
     volumes:
       - static:/backend/src/staticfiles
       - media:/backend/src/mediafiles
