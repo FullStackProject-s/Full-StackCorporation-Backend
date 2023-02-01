@@ -25,7 +25,7 @@ jobs:
         database-port:
         - 5432
         elastic:
-          localhost:9200
+         - localhost:9200
         redis-host:
           - redis
         redis-port:
