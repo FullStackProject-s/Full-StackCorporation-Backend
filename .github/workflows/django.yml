@@ -40,6 +40,10 @@ jobs:
               POSTGRES_PASSWORD: ${{ matrix.database-password }}
             ports:
               - 5432:5432
+     elasticsearch:
+       image: blacktop/elasticsearch:latest
+       ports:
+         - 9200:9200
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
