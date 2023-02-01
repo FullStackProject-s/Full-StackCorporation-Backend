@@ -9,7 +9,6 @@ services:
     command: bash -c
       "python manage.py collectstatic --noinput && 
       python manage.py migrate && 
-      python manage.py search_index --rebuild & 
       gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120"
     expose:
       - 8000
@@ -52,10 +51,6 @@ services:
       - web-django
     env_file:
       - ./src/core/.env
-  elasticsearch:
-    image: blacktop/elasticsearch:latest
-    ports:
-      - 9200:9200
 volumes:
   static:
   media:
