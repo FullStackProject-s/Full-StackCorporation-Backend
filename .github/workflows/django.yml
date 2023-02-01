@@ -10,61 +10,61 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        db: [postgres]
-        python-version: ['3.10']
+        db: [ postgres ]
+        python-version: [ '3.10' ]
         debug:
-        - 0
+          - 0
         database-name:
-        - Corporation
+          - Corporation
         database-password:
-        - 1234
+          - 1234
         database-user:
-        - postgres
+          - postgres
         database-host:
-        - 127.0.0.1
+          - 127.0.0.1
         database-port:
-        - 5432
+          - 5432
         elastic:
-         - localhost:9200
+          - 127.0.0.1:9200
         redis-host:
           - redis
         redis-port:
           - 6379
 
     services:
-     postgres:
-            image: postgres:latest
-            env:
-              POSTGRES_DB: ${{ matrix.database-name }}
-              POSTGRES_USER: ${{ matrix.database-user }}
-              POSTGRES_PASSWORD: ${{ matrix.database-password }}
-            ports:
-              - 5432:5432
-     elasticsearch:
-       image: blacktop/elasticsearch:latest
-       ports:
-         - 9200:9200
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ matrix.database-name }}
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+        ports:
+          - 5432:5432
+      elasticsearch:
+        image: blacktop/elasticsearch:latest
+        ports:
+          - 9200:9200
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-        
-    - name: Install or Cahce Dependencies
-      uses: actions/cache@v2
-      id: cache-venv 
-      with:
-        path: ./.venv/  
-        key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-venv-
-    - run: python -m venv ./.venv && . ./.venv/bin/activate && 
-           pip install -r requirements.txt
-      if: steps.cache-venv.outputs.cache-hit != 'true'
-      
-    - name: Run Tests
-      env:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install or Cahce Dependencies
+        uses: actions/cache@v2
+        id: cache-venv
+        with:
+          path: ./.venv/
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+      - run: python -m venv ./.venv && . ./.venv/bin/activate &&
+          pip install -r requirements.txt
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+
+      - name: Run Tests
+        env:
           POSTGRES_DB: ${{ matrix.database-name }}
           POSTGRES_USER: ${{ matrix.database-user }}
           POSTGRES_PASSWORD: ${{ matrix.database-password }}
@@ -80,27 +80,27 @@ jobs:
           CORS_ALLOWED: ${{ secrets.CORS_ALLOWED }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-      run: |
-        source ./.venv/bin/activate
-        coverage run src/manage.py test src && coverage report --fail-under=75 && coverage xml
-        
-    - name: Report coverage to codecov
-      env: 
-        POSTGRES_DB: ${{ matrix.database-name }}
-        POSTGRES_USER: ${{ matrix.database-user }}
-        POSTGRES_PASSWORD: ${{ matrix.database-password }}
-        POSTGRES_HOST: ${{ matrix.database-host }}
-        POSTGRES_PORT: ${{ matrix.database-port }}
-        ELASTICSEARCH: ${{ secrets.ELASTICSEARCH }}
+        run: |
+          source ./.venv/bin/activate
+          coverage run src/manage.py test src && coverage report --fail-under=75 && coverage xml
 
-        DEBUG: ${{matrix.debug}}
-        CORS_ALLOWED: ${{ secrets.CORS_ALLOWED }}
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+      - name: Report coverage to codecov
+        env:
+          POSTGRES_DB: ${{ matrix.database-name }}
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+          POSTGRES_HOST: ${{ matrix.database-host }}
+          POSTGRES_PORT: ${{ matrix.database-port }}
+          ELASTICSEARCH: ${{ secrets.ELASTICSEARCH }}
 
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./coverage.xml
-        directory: ./coverage/reports/
-        fail_ci_if_error: true
+          DEBUG: ${{matrix.debug}}
+          CORS_ALLOWED: ${{ secrets.CORS_ALLOWED }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          directory: ./coverage/reports/
+          fail_ci_if_error: true
