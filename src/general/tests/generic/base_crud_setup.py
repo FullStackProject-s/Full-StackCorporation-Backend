@@ -5,6 +5,8 @@ from general.tests.mixins import (
     DeleteObjectsMixin,
     UpdateObjectsMixin,
 
+    ResponseJsonMixin,
+
     DeleteObjectsPermsMixin,
     UpdateObjectsPermsMixin,
 
@@ -35,6 +37,7 @@ class BaseUploadFileURLTestCaseGeneric(
 
 class BaseCRUDTestCaseGeneric(
     BaseCRUDURLGeneric,
+    ResponseJsonMixin,
     ListObjectsMixin,
     RetrieveObjectsMixin,
     CreateObjectsMixin,
