@@ -24,6 +24,8 @@ jobs:
         - 127.0.0.1
         database-port:
         - 5432
+        elastic:
+          localhost:9200
         redis-host:
           - redis
         redis-port:
@@ -65,7 +67,7 @@ jobs:
           POSTGRES_HOST: ${{ matrix.database-host }}
           POSTGRES_PORT: ${{ matrix.database-port }}
 
-          ELASTICSEARCH: ${{ secrets.ELASTICSEARCH }}
+          ELASTICSEARCH: ${{ matrix.elastic }}
 
           REDIS_HOST: ${{ matrix.redis-host }}
           REDIS_PORT: ${{ matrix.redis-port }}
