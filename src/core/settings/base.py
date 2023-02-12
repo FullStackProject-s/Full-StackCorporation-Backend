@@ -4,10 +4,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-if bool(int(os.getenv('PROD', 0))):
-    file = '.env'
-else:
-    file = '.dev.env'
+file = '.env' if bool(int(os.getenv('PROD', 0))) else '.dev.env'
 
 load_dotenv(os.path.join(Path(__file__).resolve().parent.parent, file))
 
