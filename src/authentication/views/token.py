@@ -15,7 +15,6 @@ from authentication.serializers import (
 
     TokenObtainSerializerSchema
 )
-from authentication.views import logger
 
 
 @extend_schema(responses=TokenObtainSerializerSchema)
