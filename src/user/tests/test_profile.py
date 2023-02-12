@@ -6,7 +6,10 @@ from general.tests.generic import (
     BaseTestCaseGeneric,
     BaseUploadFileTestCaseGeneric
 )
-from general.tests.model_factory import make_profile, make_user
+from general.tests.model_factory import (
+    make_profile,
+    make_user
+)
 
 from user.models import Profile
 from user.serializers import ProfileSerializer
