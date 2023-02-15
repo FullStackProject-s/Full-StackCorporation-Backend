@@ -65,7 +65,6 @@ class CustomUserTestCases(BaseCustomUserTestCase):
         json = {
             'username': f'user_{name}',
             'email': f'user{name}@example.com',
-            'password': f'user_{name}',
             'first_name': f'first_{name}',
             'last_name': f'second_{name}',
         }

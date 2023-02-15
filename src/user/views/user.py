@@ -1,5 +1,6 @@
 from rest_framework import generics
 
+from user.serializers.user import CustomUserSerializerUpdate
 from user.views.generics import BaseConfigurationUsersViewGeneric
 
 
@@ -44,4 +45,4 @@ class UserUpdateAPIView(
     BaseConfigurationUsersViewGeneric,
     generics.UpdateAPIView
 ):
-    pass
+    serializer_class = CustomUserSerializerUpdate

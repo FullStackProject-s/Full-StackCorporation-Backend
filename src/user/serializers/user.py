@@ -36,3 +36,11 @@ class CustomUserSerializer(BaseCustomUserSerializer):
             *BaseCustomUserSerializer.Meta.fields,
             'password',
         )
+
+
+class CustomUserSerializerUpdate(CustomUserSerializer):
+    class Meta(CustomUserSerializer.Meta):
+        extra_kwargs = {
+            **CustomUserSerializer.Meta.extra_kwargs,
+            **{'password': {'read_only': True}}
+        }
