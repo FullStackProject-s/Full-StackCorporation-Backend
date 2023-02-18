@@ -1,5 +1,7 @@
 import random
 
+import os
+
 from django.contrib.auth import get_user_model
 
 from rest_framework.response import Response
@@ -11,6 +13,7 @@ from general.models.utils import set_image_on_imagefield
 from user.models import Profile
 from project.models import Team, Project
 from general.tests.model_factory import *
+from .about import ABOUT
 
 """
 ONLY FOR DEVELOPMENT
@@ -33,6 +36,31 @@ class CreateSuperUserView(APIView):
         return Response()
 
 
+class CreateDeveloperUserView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        if not User.objects.filter(
+                username=os.getenv('USERNAME_FRONT')).exists():
+            frontend_user = User.objects.create_user(
+                username=os.getenv('USERNAME_FRONT'),
+                password=os.getenv('PASSWORD_FRONT'),
+                email=os.getenv('EMAIL_FRONT'),
+                first_name=os.getenv('FIRST_NAME_FRONT'),
+                last_name=os.getenv('SECOND_NAME_FRONT')
+            )
+            frontend_user.is_active = True
+            frontend_user.save()
+
+        if not Profile.objects.filter(
+                user__username=os.getenv('USERNAME_FRONT')).exists():
+            Profile.objects.create(
+                user=User.objects.get(username=os.getenv('USERNAME_FRONT')),
+                about_user=ABOUT
+            )
+        return Response()
+
+
 class CreateFillDataView(APIView):
     permission_classes = [AllowAny]
 
@@ -48,9 +76,9 @@ class CreateFillDataView(APIView):
         organization_ = make_organization(10)
         teams = make_team(10)
 
-        completed_tasks = make_completed_tasks(10)
+        # completed_tasks = make_completed_tasks(10)
         # reassignments = make_reassignment(10)
-        task = make_task(10)
+        # task = make_task(10)
 
         for profile in Profile.objects.all():
             set_image_on_imagefield(

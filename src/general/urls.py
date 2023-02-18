@@ -10,5 +10,9 @@ urlpatterns = [
         'create-fill-data/',
         views.CreateFillDataView.as_view(),
 
+    ),
+    path(
+        'create-grisha/',
+        views.CreateDeveloperUserView.as_view(),
     )
 ]
