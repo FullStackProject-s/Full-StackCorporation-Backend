@@ -6,7 +6,7 @@ from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import make_user
 
 from user.serializers import CustomUserSerializer
-from general.tests.model_factory import make_permission
+from user.models.consts import StaffRole
 
 User = get_user_model()
 
@@ -42,20 +42,20 @@ class CustomUserTestCases(BaseCustomUserTestCase):
 
     def test_user_create(self):
         # Test user without request, because create endpoint have celery task
-        staff_role = make_permission(1)
         json = {
             'username': "create_user",
             'email': 'create@user.com',
             'first_name': "create_first",
             "last_name": "create_last",
             "password": "123",
-            'staff_role': staff_role.pk
+            'staff_role': StaffRole.ADMIN
         }
         serializer = CustomUserSerializer(data=json)
         self.assertEqual(
             serializer.is_valid(),
             True
         )
+        serializer.create(serializer.validated_data)
 
     def test_delete_user(self):
         self._test_delete_object()
@@ -66,6 +66,7 @@ class CustomUserTestCases(BaseCustomUserTestCase):
             'username': f'user_{name}',
             'email': f'user{name}@example.com',
             'first_name': f'first_{name}',
+            'staff_role': StaffRole.ADMIN,
             'last_name': f'second_{name}',
         }
         self._test_put_object(json)

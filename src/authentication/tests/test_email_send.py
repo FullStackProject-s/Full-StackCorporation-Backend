@@ -13,6 +13,8 @@ from core.celery import app
 from general.tests.generic.base_test_setup import BaseTestCaseSetupGeneric
 from general.tests.model_factory import make_user
 
+from user.models.consts import StaffRole
+
 User = get_user_model()
 
 
@@ -42,6 +44,7 @@ class CeleryDjoserEmailTestCase(BaseTestCaseSetupGeneric):
             "email": "user@example.com",
             "first_name": "string",
             "last_name": "string",
+            'staff_role': StaffRole.DEVELOPER,
             "password": "string"
         }
         response = self.client.post(
