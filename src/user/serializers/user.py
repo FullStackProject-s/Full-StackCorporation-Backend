@@ -5,6 +5,7 @@ from user.models import Profile
 
 from user.serializers.permission import PermissionSerializer
 from user.serializers.generic import BaseCustomUserSerializer
+from user.serializers.services import create_permissions
 
 User = get_user_model()
 
@@ -17,7 +18,11 @@ class CustomUserShowSerializer(BaseCustomUserSerializer):
 
 
 class CustomUserSerializer(BaseCustomUserSerializer):
+
     def create(self, validated_data):
+        validated_data['staff_role'] = create_permissions(
+            validated_data['staff_role']
+        )
         instance = User.objects.create_user(**validated_data)
 
         profile_instance = Profile.objects.create(user=instance)
@@ -26,6 +31,7 @@ class CustomUserSerializer(BaseCustomUserSerializer):
             profile_instance.user.email,
             imagefield=profile_instance.profile_avatar,
         )
+
         return instance
 
     def to_representation(self, data):
@@ -39,8 +45,15 @@ class CustomUserSerializer(BaseCustomUserSerializer):
 
 
 class CustomUserSerializerUpdate(CustomUserSerializer):
+    def update(self, instance, validated_data):
+        if 'staff_role' in validated_data:
+            validated_data['staff_role'] = create_permissions(
+                validated_data['staff_role']
+            )
+
+        return super().update(instance, validated_data)
+
     class Meta(CustomUserSerializer.Meta):
         extra_kwargs = {
-            **CustomUserSerializer.Meta.extra_kwargs,
-            **{'password': {'read_only': True}}
+            **{'password': {'read_only': True}},
         }

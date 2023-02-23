@@ -1,9 +1,14 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-
-from user.admin import User
+from user.models.consts import StaffRole
+User = get_user_model()
 
 
 class BaseCustomUserSerializer(serializers.ModelSerializer):
+    staff_role = serializers.ChoiceField(
+        choices=StaffRole.choices
+    )
+
     class Meta:
         model = User
         fields = (
@@ -16,4 +21,3 @@ class BaseCustomUserSerializer(serializers.ModelSerializer):
             'staff_role'
 
         )
-        extra_kwargs = {'staff_role': {'required': False}}
