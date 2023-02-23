@@ -54,9 +54,14 @@ class CreateDeveloperUserView(APIView):
 
         if not Profile.objects.filter(
                 user__username=os.getenv('USERNAME_FRONT')).exists():
-            Profile.objects.create(
+            profile_ = Profile.objects.create(
                 user=User.objects.get(username=os.getenv('USERNAME_FRONT')),
                 about_user=ABOUT
+            )
+            set_image_on_imagefield(
+                profile_.user.username,
+                profile_.user.email,
+                imagefield=profile_.profile_avatar,
             )
         return Response()
 
