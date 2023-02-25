@@ -1,12 +1,12 @@
 from employee.serializers import DeveloperSerializer
 from employee.serializers.generics import BaseDeveloperOrgSpecialtySerializer
 
-from organization.serializers import OrganizationShowOthersSerializer
+from organization.serializers import OrganizationShowProjectsSerializer
 
 
 class DeveloperOrgSpecialtyShowSerializer(BaseDeveloperOrgSpecialtySerializer):
     organization_developer = DeveloperSerializer(read_only=True)
-    organization = OrganizationShowOthersSerializer()
+    organization = OrganizationShowProjectsSerializer()
 
 
 class DeveloperOrgSpecialtySerializer(BaseDeveloperOrgSpecialtySerializer):
