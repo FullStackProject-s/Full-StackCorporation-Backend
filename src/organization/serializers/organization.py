@@ -14,7 +14,7 @@ class OrganizationShowSerializer(BaseOrganizationSerializer):
     members = CustomUserShowSerializer(many=True, read_only=True)
 
 
-class OrganizationShowOthersSerializer(BaseOrganizationSerializer):
+class OrganizationShowProjectsSerializer(BaseOrganizationSerializer):
     class Meta(BaseOrganizationSerializer.Meta):
         fields = (
             'pk',
