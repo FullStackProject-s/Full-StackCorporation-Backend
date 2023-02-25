@@ -1,5 +1,3 @@
-from model_bakery import baker
-
 from user.models import Permissions
 from user.models.consts import StaffRole
 
