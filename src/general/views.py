@@ -10,6 +10,7 @@ from rest_framework.permissions import AllowAny
 
 from employee.models import ProjectManager, Developer
 from general.models.utils import set_image_on_imagefield
+from organization.models import Organization
 from user.models import Profile
 from project.models import Team, Project
 from general.tests.model_factory import *
@@ -101,10 +102,7 @@ class CreateFillDataView(APIView):
                 org.members.add(proj.profile.user)
 
             org.members.add(admins[index].profile.user)
-            set_image_on_imagefield(
-                org.organization_name,
-                imagefield=org.organization_avatar,
-            )
+
             org.save()
 
         for project in Project.objects.all():
@@ -127,4 +125,11 @@ class CreateFillDataView(APIView):
         for dev in developers:
             dev.specialties.add(*spec)
             dev.save()
+
+        for org in Organization.objects.all():
+            set_image_on_imagefield(
+                org.organization_name,
+                imagefield=org.organization_avatar,
+            )
+            org.save()
         return Response()
