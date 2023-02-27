@@ -10,6 +10,6 @@ REST_FRAMEWORK = {
 
     ),
     'DEFAULT_PAGINATION_CLASS': 'general.pagination.CustomRelatedUrlPagination',
-    'PAGE_SIZE': 1,
+    'PAGE_SIZE': 25,
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
