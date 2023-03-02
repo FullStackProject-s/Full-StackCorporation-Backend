@@ -1,7 +1,7 @@
 name: Django Build
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
