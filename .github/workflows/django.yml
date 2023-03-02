@@ -56,7 +56,7 @@ jobs:
       - run: python -m venv ./.venv && . ./.venv/bin/activate &&
           pip install -r requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
-
+      - run: mkdir -p logs logs/apps
       - name: Run Tests
         env:
           POSTGRES_DB: ${{ matrix.database-name }}

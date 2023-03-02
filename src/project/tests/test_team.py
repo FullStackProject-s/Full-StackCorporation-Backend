@@ -8,7 +8,8 @@ from general.tests.generic import BaseTestCaseGeneric
 from general.tests.model_factory import (
     make_team,
     make_developer,
-    make_project_manager, make_project
+    make_project_manager,
+    make_project
 
 )
 
