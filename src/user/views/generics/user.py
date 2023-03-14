@@ -3,6 +3,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
+from user.filters import CustomUserFilter
 from user.permissions import IsOwnerOrReadOnlyCustomUser
 from user.serializers import (
     CustomUserSerializer,
@@ -16,4 +17,5 @@ User = get_user_model()
 class BaseConfigurationUsersViewGeneric(generics.GenericAPIView):
     serializer_class = CustomUserSerializer
     queryset = User.objects.all()
+    filterset_class = CustomUserFilter
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnlyCustomUser]
