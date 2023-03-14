@@ -6,7 +6,5 @@ SPECTACULAR_SETTINGS = {
     "COMPONENT_SPLIT_REQUEST": True,
 
     'DISABLE_ERRORS_AND_WARNINGS': True,
-    'PREPROCESSING_HOOKS': [
-        'general.schema.exclude_urls.preprocessing_filter_elastic'],
 
 }
