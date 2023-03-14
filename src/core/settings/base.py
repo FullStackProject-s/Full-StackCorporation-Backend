@@ -12,8 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 os.environ['EXTERNAL_FILE_DIR'] = str(BASE_DIR.parent)
 
-# import third party after load env
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -40,12 +38,14 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
 
+    'django_filters',
     'drf_spectacular',
     'djoser',
     'django_prometheus',
